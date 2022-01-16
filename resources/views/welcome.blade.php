@@ -84,7 +84,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                Welcome
+                Welcome To Tires Studio
             </div>
         </div>
     </div>

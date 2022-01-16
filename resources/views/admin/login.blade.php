@@ -23,8 +23,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            {{-- <a href="#"><b>Admin&nbsp;</b>EYEZONE</a> --}}
-            <img src="{{asset('public/images/logo.png')}}" alt="App Logo" class="w-50">
+            <img src="{{asset('public/images/logo.png')}}" alt="App Logo" class="w-100">
         </div>
         <!-- /.login-logo -->
         <div class="card">

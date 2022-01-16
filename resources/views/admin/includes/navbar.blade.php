@@ -10,8 +10,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="{{route('admin.logout')}}" class="btn btn-outline-dark btn-border btn-sm">
-                <i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+            <button class="btn btn-outline-dark btn-border btn-sm mb-1"><b>Login Email:</b>
+                {{Auth::guard('admin')->user()->email}}
+            </button>
+            <a href="{{route('admin.logout')}}" class="btn btn-outline-dark btn-border btn-sm mb-1">
+                <i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
         </li>
     </ul>
 </nav>

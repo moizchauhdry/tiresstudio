@@ -1,24 +1,12 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="javascript:void(0)" class="brand-link">
-        <img src="{{asset('public/admin/dist/img/AdminLTELogo.png')}}" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">{{__('App Name')}}</span>
+    <a href="javascript:void(0)" class="brand-link text-center">
+        <img src="{{asset('public/images/logo-white.png')}}" class="w-75">
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{asset('public/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2">
-            </div>
-            <div class="info">
-                <a href="javascript:void(0)" class="d-block">{{Auth::guard('admin')->user()->name}}</a>
-            </div>
-        </div>
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -38,9 +26,9 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'admins.create' || Route::currentRouteName() == 'admins.index'|| Route::currentRouteName() == 'admins.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
                         class="nav-link {{(Route::currentRouteName() == 'admins.create' || Route::currentRouteName() == 'admins.index' || Route::currentRouteName() == 'admins.edit' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-user-cog"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Admins
+                            Manage Users
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
