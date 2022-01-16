@@ -21,7 +21,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
     });
 
     Route::prefix('admin')->group(function()
-    {   
+    {
         Route::match(['get','post'],'/','AdminController@login')->name('admin.login');
 
         Route::group(['middleware' => ['adminCheckSuspend']],function()
@@ -40,6 +40,17 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                         Route::post('/update/{id}', 'AdminUserController@update')->name('admins.update');
                     });
                 });
+
+                // Route::group(['middleware' => ['permission:manage-products']],function(){
+                    Route::group(['prefix' => 'products'],function(){
+                        Route::get('/', 'ProductController@index')->name('products.index');
+                        Route::get('/create', 'ProductController@create')->name('products.create');
+                        Route::post('/store', 'ProductController@store')->name('products.store');
+                        Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');
+                        Route::post('/update/{id}', 'ProductController@update')->name('products.update');
+                    });
+                // });
+
             });
         });
     });
