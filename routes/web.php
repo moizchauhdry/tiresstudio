@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/getSessions', function () {
+    dd(Session::all());
+});
+
 /**
  *****************************************************************************
  ************************** ADMIN PANEL ROUTES *******************************
@@ -44,6 +48,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                 // Route::group(['middleware' => ['permission:manage-products']],function(){
                     Route::group(['prefix' => 'products'],function(){
                         Route::get('/', 'ProductController@index')->name('products.index');
+                        Route::get('/fetchProducts', 'ProductController@fetchProducts')->name('products.fetch-products');
                         Route::get('/create', 'ProductController@create')->name('products.create');
                         Route::post('/store', 'ProductController@store')->name('products.store');
                         Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');

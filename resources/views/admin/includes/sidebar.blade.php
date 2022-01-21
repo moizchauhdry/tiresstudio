@@ -51,6 +51,28 @@
                 </li>
                 @endif
 
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index'|| Route::currentRouteName() == 'products.index' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                       class="nav-link {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Manage Products
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{route('products.index')}}"
+                               class="nav-link {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Products</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

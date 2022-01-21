@@ -19,6 +19,16 @@ class CreateProductsTable extends Migration
             $table->string('upc');
             $table->string('sku_type');
             $table->string('title');
+            $table->unsignedBigInteger('brand_id')->nullable();
+            // Properties
+            $table->string('model')->nullable();
+            $table->string('offset')->nullable();
+            $table->string('bolt_pattern')->nullable();
+            $table->string('finish_code')->nullable();
+            $table->string('finish')->nullable();
+            $table->string('width')->nullable();
+            $table->string('diameter')->nullable();
+            $table->string('centerbore')->nullable();
             $table->timestamps();
         });
     }
