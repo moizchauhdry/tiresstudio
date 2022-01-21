@@ -60,66 +60,72 @@ class ProductController extends Controller
         $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=5&page=3');
         $data = json_decode($res->getBody()->getContents(), true);
 
-        $products = $data['results'];
+        $dataCount = (int)$data['totalCount'];
+
+        $iteration = round($dataCount/50,1);
 
 
-        foreach ($products as $key => $product) {
+        for($i = 1; $i <= $iteration ; $i++){
+            $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page='.$i);
+            $data = json_decode($res->getBody()->getContents(), true);
+            $products = $data['results'];
+            foreach ($products as $key => $product) {
 
-            $brandData = [
-                'code' => $product['brand']['code'],
-                'description' => $product['brand']['description'],
-                'parent' => $product['brand']['parent'],
-            ];
+                $brandData = [
+                    'code' => $product['brand']['code'],
+                    'description' => $product['brand']['description'],
+                    'parent' => $product['brand']['parent'],
+                ];
 
-            $brand = Brand::firstOrCreate($brandData);
+                $brand = Brand::firstOrCreate($brandData);
 
-            $ProductData = [
-                'sku_type' => $product['skuType'],
-                'title' => $product['title'],
-                'brand_id' => $brand->id,
-                // Properties
-                'model' => $product['properties']['model'],
-                'offset' => $product['properties']['offset'],
-                'bolt_pattern' => $product['properties']['boltPattern'],
-                'finish_code' => $product['properties']['finishCode'],
-                'finish' => $product['properties']['finish'],
-                'width' => $product['properties']['width'],
-                'diameter' => $product['properties']['diameter'],
-                'centerbore' => $product['properties']['centerbore'],
-            ];
+                $ProductData = [
+                    'sku_type' => $product['skuType'],
+                    'title' => $product['title'],
+                    'brand_id' => $brand->id,
+                    // Properties
+                    'model' => $product['properties']['model'],
+                    'offset' => $product['properties']['offset'],
+                    'bolt_pattern' => $product['properties']['boltPattern'],
+                    'finish_code' => $product['properties']['finishCode'],
+                    'finish' => $product['properties']['finish'],
+                    'width' => $product['properties']['width'],
+                    'diameter' => $product['properties']['diameter'],
+                    'centerbore' => $product['properties']['centerbore'],
+                ];
 
-            $product1 = Product::updateOrCreate(['sku' => $product['sku'],
-                'upc' => $product['sku']], $ProductData);
-            $product1->save();
+                $product1 = Product::updateOrCreate(['sku' => $product['sku'],
+                    'upc' => $product['sku']], $ProductData);
+                $product1->save();
 
-            if($product['images'] != NULL){
-                $directory = 'public/' . $product1->id;
-                foreach ($product['images'] as $image) {
-                    $content = file_get_contents($image['imageUrl']);
-                    $name = $image['fileName'];
-                    $path = $directory . '/' . $name;
-                    Storage::put($path, $content);
-                    $productImage = new ProductImage();
-                    $productImage->product_id = $product1->id;
-                    $productImage->image_url = $path;
-                    $productImage->save();
+                if($product['images'] != NULL){
+                    $directory = 'public/' . $product1->id;
+                    foreach ($product['images'] as $image) {
+                        $content = file_get_contents($image['imageUrl']);
+                        $name = $image['fileName'];
+                        $path = $directory . '/' . $name;
+                        Storage::put($path, $content);
+                        $productImage = new ProductImage();
+                        $productImage->product_id = $product1->id;
+                        $productImage->image_url = $path;
+                        $productImage->save();
+                    }
                 }
-            }
 
-            if ($product['prices']['msrp'] != NULL) {
-                foreach ($product['prices']['msrp'] as $productPrice) {
-                    $priceData = [
-                        'product_id' => $product1->id,
-                        'currency_amount' => $productPrice['currencyAmount'],
-                        'currency_code' => $productPrice['currencyCode'],
-                    ];
+                if ($product['prices']['msrp'] != NULL) {
+                    foreach ($product['prices']['msrp'] as $productPrice) {
+                        $priceData = [
+                            'product_id' => $product1->id,
+                            'currency_amount' => $productPrice['currencyAmount'],
+                            'currency_code' => $productPrice['currencyCode'],
+                        ];
 
-                    $price = ProductPrice::firstOrCreate($priceData);
+                        $price = ProductPrice::firstOrCreate($priceData);
 
+                    }
                 }
-            }
 
-            if ($product['inventory'] != NULL) {
+                if ($product['inventory'] != NULL) {
                     $inventoryData = [
                         'product_id' => $product1->id,
                         'type' => $product['inventory']['type'],
@@ -127,8 +133,10 @@ class ProductController extends Controller
                         'global_stock' => $product['inventory']['globalStock'],
                     ];
                     $inventory = ProductInventory::firstOrCreate($inventoryData);
-            }
+                }
 
+            }
+            dump('Iteration = '. ($i) . ' executed.');
         }
 
         dd('success');

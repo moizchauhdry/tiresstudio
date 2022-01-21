@@ -16,8 +16,8 @@ class CreateProductPricesTable extends Migration
         Schema::create('product_prices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->double('currency_amount',10,2);
-            $table->string('currency_code');
+            $table->double('currency_amount',10,2)->nullable();
+            $table->string('currency_code')->nullable();
             $table->timestamps();
         });
     }
