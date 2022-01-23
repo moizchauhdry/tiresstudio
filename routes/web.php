@@ -49,6 +49,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     Route::group(['prefix' => 'products'],function(){
                         Route::get('/', 'ProductController@index')->name('products.index');
                         Route::get('/fetchProducts', 'ProductController@fetchProducts')->name('products.fetch-products');
+                        Route::get('/fetchTireProducts', 'ProductController@fetchTireProducts')->name('products.fetch-tire-products');
                         Route::get('/show/{id}', 'ProductController@show')->name('products.show');
                         Route::get('/create', 'ProductController@create')->name('products.create');
                         Route::post('/store', 'ProductController@store')->name('products.store');

@@ -61,22 +61,28 @@
                                     <th>Model</th>
                                     <td>{{ $product->model ?? "N/A" }}</td>
                                 </tr>
-                                <tr>
-                                    <th>Offset</th>
-                                    <td>{{ $product->offset ?? "N/A" }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Bolt Pattern</th>
-                                    <td>{{ $product->bolt_pattern ?? "N/A" }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Finish Code</th>
-                                    <td>{{ $product->finish_code ?? "N/A" }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Finish</th>
-                                    <td>{{ $product->finish ?? "N/A" }}</td>
-                                </tr>
+                                @if($product->sku_type == 'WHEEL')
+                                    <tr>
+                                        <th>Offset</th>
+                                        <td>{{ $product->offset ?? "N/A" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bolt Pattern</th>
+                                        <td>{{ $product->bolt_pattern ?? "N/A" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Finish Code</th>
+                                        <td>{{ $product->finish_code ?? "N/A" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Finish</th>
+                                        <td>{{ $product->finish ?? "N/A" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Centerbore</th>
+                                        <td>{{ $product->centerbore ?? "N/A" }}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <th>Width</th>
                                     <td>{{ $product->width ?? "N/A" }}</td>
@@ -85,10 +91,13 @@
                                     <th>Diameter</th>
                                     <td>{{ $product->diameter ?? "N/A" }}</td>
                                 </tr>
-                                <tr>
-                                    <th>Centerbore</th>
-                                    <td>{{ $product->centerbore ?? "N/A" }}</td>
-                                </tr>
+                                @if($product->sku_type == 'TIRE')
+                                    <tr>
+                                        <th>Wheel Diameter</th>
+                                        <td>{{ $product->wheel_diameter ?? "N/A" }}</td>
+                                    </tr>
+                                @endif
+
                                 <tr class="table-primary">
                                     <th colspan="2" class="text-center"><strong>INVENTORY</strong></th>
                                 </tr>

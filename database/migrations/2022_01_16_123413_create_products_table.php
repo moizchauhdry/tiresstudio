@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             $table->string('width')->nullable();
             $table->string('diameter')->nullable();
             $table->string('centerbore')->nullable();
+            $table->string('wheel_diameter')->nullable();
             // Status
             $table->boolean('status')->default(true);
             $table->timestamps();
