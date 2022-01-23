@@ -49,11 +49,18 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     Route::group(['prefix' => 'products'],function(){
                         Route::get('/', 'ProductController@index')->name('products.index');
                         Route::get('/fetchProducts', 'ProductController@fetchProducts')->name('products.fetch-products');
+                        Route::get('/show/{id}', 'ProductController@show')->name('products.show');
                         Route::get('/create', 'ProductController@create')->name('products.create');
                         Route::post('/store', 'ProductController@store')->name('products.store');
                         Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');
                         Route::post('/update/{id}', 'ProductController@update')->name('products.update');
                     });
+                // });
+
+                // Route::group(['middleware' => ['permission:manage-brands']],function(){
+                Route::group(['prefix' => 'brands'],function(){
+                    Route::get('/', 'BrandController@index')->name('brands.index');
+                });
                 // });
 
             });

@@ -20,7 +20,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{ $products }}</h3>
                         <p>Total Products</p>
                     </div>
                     <div class="icon">
@@ -32,8 +32,8 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>0</h3>
-                        <p>Total Weels</p>
+                        <h3>{{ $wheels }}</h3>
+                        <p>Total Wheels</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -44,7 +44,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{ $tires }}</h3>
                         <p>Total Tires</p>
                     </div>
                     <div class="icon">

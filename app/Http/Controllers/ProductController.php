@@ -66,6 +66,12 @@ class ProductController extends Controller
 
 
         for($i = 1; $i <= $iteration ; $i++){
+
+            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+                dump('newKey');
+                $authorization = $this->authorizeAPI();
+            }
+
             $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page='.$i);
             $data = json_decode($res->getBody()->getContents(), true);
             $products = $data['results'];
@@ -102,12 +108,17 @@ class ProductController extends Controller
                     $directory = 'public/' . $product1->id;
                     foreach ($product['images'] as $image) {
                         $content = file_get_contents($image['imageUrl']);
+                        $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
                         $name = $image['fileName'];
                         $path = $directory . '/' . $name;
+                        $resizedName = 'resized_'.$name;
+                        $resizedPath = $directory . '/' . $resizedName;
                         Storage::put($path, $content);
+                        Storage::put($resizedPath, $resizedImageUrlContent);
                         $productImage = new ProductImage();
                         $productImage->product_id = $product1->id;
                         $productImage->image_url = $path;
+                        $productImage->resized_image_url = $resizedPath;
                         $productImage->save();
                     }
                 }
@@ -181,9 +192,11 @@ class ProductController extends Controller
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product,$id)
     {
-        //
+        $response['product'] = Product::find($id);
+
+        return view('admin.products.detail')->with($response);
     }
 
     /**

@@ -58,6 +58,14 @@
     </div>
     <!-- ./wrapper -->
 
+    <div class="modal fade" id="imagePopupModal" tabindex="-1" aria-labelledby="imagePopupModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="bg-transparent">
+                    <img src="" alt="" id="popup_image" class="w-100">
+            </div>
+        </div>
+    </div>
+
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
@@ -104,6 +112,11 @@
             $(document).ready(function () {
                 dismiss_alerts();
             });
+
+        $('body').on('click','.img-pop',function(){
+            $('#imagePopupModal').modal('show');
+            $('#popup_image').attr('src', $(this).data('src'));
+        })
     </script>
 
     @yield('scripts')

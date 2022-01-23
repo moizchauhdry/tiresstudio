@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{__('Products')}}</h1>
+                    <h1>{{__('Brands')}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -30,33 +30,33 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Products List (Total Products : {{$products->count()}})
+                                Brands List (Total Brands : {{$brands->count()}})
                             </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="products" class="table table-bordered table-striped">
+                            <table id="brands" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Sr.No.</th>
-                                    <th>SKU</th>
-                                    <th>UPC</th>
-                                    <th>SKU Type</th>
-                                    <th>Title</th>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th>Parent</th>
+                                    <th>Products</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @php $count=1; @endphp
-                                @foreach ($products as $product)
+                                @foreach ($brands as $brand)
                                     <tr>
                                         <td>{{$count++}}</td>
-                                        <td>{{$product->sku}}</td>
-                                        <td>{{$product->upc}}</td>
-                                        <td>{{$product->sku_type}}</td>
-                                        <td>{{$product->title}}</td>
+                                        <td>{{$brand->code}}</td>
+                                        <td>{{$brand->description}}</td>
+                                        <td>{{$brand->parent}}</td>
+                                        <td>{{$brand->products->count()}}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('products.show',$product->id) }}">
+                                            <a href="javascript:void(0)">
                                                 <i class="far fa-eye" aria-hidden="true"></i>
                                             </a>
                                         </td>
@@ -82,7 +82,7 @@
 @section('scripts')
     <script>
         $(function () {
-            $("#products").DataTable({
+            $("#brands").DataTable({
                 "responsive": true,
                 "autoWidth": false,
             });

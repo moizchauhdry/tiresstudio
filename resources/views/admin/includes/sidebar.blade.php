@@ -52,9 +52,9 @@
                 @endif
 
                 <li
-                    class="nav-item has-treeview {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index'|| Route::currentRouteName() == 'products.index' ) ? 'menu-open' : ''}}">
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.show'|| Route::currentRouteName() == 'products.index' ) ? 'menu-open' : ''}}">
                     <a href="#"
-                       class="nav-link {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index' ) ? 'active' : ''}}">
+                       class="nav-link {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.show' || Route::currentRouteName() == 'products.index' ) ? 'active' : ''}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Manage Products
@@ -68,6 +68,28 @@
                                class="nav-link {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.index' ) ? 'active' : ''}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Products</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show'|| Route::currentRouteName() == 'brands.index' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                       class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show' || Route::currentRouteName() == 'brands.index' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Brands
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{route('brands.index')}}"
+                               class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.index' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Brands</p>
                             </a>
                         </li>
                     </ul>

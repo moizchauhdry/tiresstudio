@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -16,7 +17,12 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view ('admin.dashboard');
+        $response = [];
+        $response['products'] = Product::count();
+        $response['wheels'] = Product::where('sku_type','WHEEL')->get()->count();
+        $response['tires'] = Product::where('sku_type','TIRE')->get()->count();
+
+        return view ('admin.dashboard')->with($response);
     }
 
     public function login(Request $request)
@@ -36,7 +42,7 @@ class AdminController extends Controller
         }
         return view('admin.login');
     }
-    
+
     public function logout ()
     {
         Auth::guard('admin')->logout();
