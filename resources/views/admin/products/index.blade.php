@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Products List (Total Products : {{$products->count()}})
+                                Products List (Total Products : <span id="countTotal">0</span>)
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -46,23 +46,7 @@
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                @php $count=1; @endphp
-                                @foreach ($products as $product)
-                                    <tr>
-                                        <td>{{$count++}}</td>
-                                        <td>{{$product->sku}}</td>
-                                        <td>{{$product->upc}}</td>
-                                        <td>{{$product->sku_type}}</td>
-                                        <td>{{$product->title}}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('products.show',$product->id) }}">
-                                                <i class="far fa-eye" aria-hidden="true"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
+
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -81,11 +65,34 @@
 
 @section('scripts')
     <script>
-        $(function () {
-            $("#products").DataTable({
+        var table;
+        $(document).ready(function () {
+            table = $('#products').DataTable({
+                processing: true,
+                serverSide: true,
                 "responsive": true,
                 "autoWidth": false,
+                "searching": true,
+                ajax: {
+                    url: "{{ route('products.index') }}",
+                },
+                order:[[1,"desc"]],
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
+                    {data: 'sku', name: 'sku'},
+                    {data: 'upc', name: 'upc'},
+                    {data: 'sku_type', name: 'sku_type'},
+                    {data: 'title', name: 'title'},
+                    {data: 'action', name: 'action',orderable: false, searchable: false},
+                ],
+                drawCallback: function (response) {
+
+                    $('#countTotal').empty();
+                    $('#countTotal').append(response['json'].recordsTotal);
+                }
             });
+
+
         });
     </script>
 @endsection

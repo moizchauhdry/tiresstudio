@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
@@ -270,11 +271,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        $response['products'] = $products;
-        return view('admin.products.index')->with($response);
+        if ($request->ajax()) {
+            $data = Product::orderBy('id','DESC')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function(Product $data){
+                    $btn1 = '<a href="'.route('products.show', $data->id).'"><i class="fas fa-eye"></i></a>';
+                    return $btn1;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('admin.products.index');
     }
 
     /**
