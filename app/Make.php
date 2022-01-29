@@ -1,0 +1,16 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Make extends Model
+{
+    //
+    protected $guarded = [];
+
+    public function vehicles()
+    {
+        return $this->hasMany(VehicleModel::class);
+    }
+}

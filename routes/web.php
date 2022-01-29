@@ -58,11 +58,27 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 // });
 
+                Route::group(['prefix' => 'vehicle','as'=>'vehicle.'],function(){
+                    Route::get('/', 'VehicleController@index')->name('index');
+                    Route::get('/makes', 'VehicleController@index')->name('index');
+                    Route::get('/show/{id}', 'VehicleController@show')->name('show');
+                });
+
+                Route::get('/makes', 'VehicleController@indexMake')->name('vehicle.indexMake');
+
                 // Route::group(['middleware' => ['permission:manage-brands']],function(){
                 Route::group(['prefix' => 'brands'],function(){
                     Route::get('/', 'BrandController@index')->name('brands.index');
                 });
                 // });
+
+                Route::group(['prefix' => 'fetch','as' => 'fetch.'],function(){
+                    Route::get('/wheels', 'FetchController@fetchProducts')->name('wheels');
+                    Route::get('/tires', 'FetchController@fetchTireProducts')->name('tires');
+                    Route::get('/vehicles', 'FetchController@getVehicles')->name('vehicles');
+                    Route::get('/years', 'FetchController@getYears')->name('years');
+                    Route::get('{year}/makes', 'FetchController@getMakes')->name('makes');
+                });
 
             });
         });

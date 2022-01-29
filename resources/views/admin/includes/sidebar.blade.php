@@ -95,6 +95,50 @@
                     </ul>
                 </li>
 
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'vehicle.indexMake' || Route::currentRouteName() == 'vehicle.showMake'|| Route::currentRouteName() == 'vehicle.indexMake' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                       class="nav-link {{(Route::currentRouteName() == 'vehicle.indexMake' || Route::currentRouteName() == 'vehicle.showMake' || Route::currentRouteName() == 'vehicle.indexMake' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Makes
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{route('vehicle.indexMake')}}"
+                               class="nav-link {{(Route::currentRouteName() == 'vehicle.indexMake' || Route::currentRouteName() == 'vehicle.showMake' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Makes</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'vehicle.index' || Route::currentRouteName() == 'vehicle.show'|| Route::currentRouteName() == 'vehicle.index' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                       class="nav-link {{(Route::currentRouteName() == 'vehicle.index' || Route::currentRouteName() == 'vehicle.show' || Route::currentRouteName() == 'vehicle.index' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Vehicles
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{route('vehicle.index')}}"
+                               class="nav-link {{(Route::currentRouteName() == 'vehicle.index' || Route::currentRouteName() == 'vehicle.show' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Vehicles</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

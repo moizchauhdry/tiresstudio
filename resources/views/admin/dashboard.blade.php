@@ -66,6 +66,29 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Fetch</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <a href="{{ route('fetch.wheels') }}" class="btn btn-outline-primary w-100 mb-2">Fetch Wheels</a>
+                        <a href="{{ route('fetch.tires') }}" class="btn btn-outline-info w-100 mb-2">Fetch Tires</a>
+                        <a href="{{ route('fetch.vehicles') }}" class="btn btn-outline-warning w-100 mb-2">Fetch Vehicles</a>
+                    </div>
+                    <!-- /.card-body -->
+
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @endsection
