@@ -41,7 +41,6 @@
                                     <th>Sr.No.</th>
                                     <th>Name</th>
                                     <th>Vehicles</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
 

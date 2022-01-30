@@ -20,7 +20,7 @@ class VehicleController extends Controller
                     return $btn1;
                 })
                 ->addColumn('action', function(VehicleModel $data){
-                    $btn1 = '<a href="'.route('vehicle.show', $data->id).'"><i class="fas fa-eye"></i></a>';
+                    $btn1 = '<a class="btn btn-sm btn-primary" href="'.route('vehicle.show', $data->id).'">View Detail</a>';
                     return $btn1;
                 })
                 ->rawColumns(['action'])

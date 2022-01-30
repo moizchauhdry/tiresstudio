@@ -55,7 +55,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.show'|| Route::currentRouteName() == 'products.index' ) ? 'menu-open' : ''}}">
                     <a href="#"
                        class="nav-link {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.show' || Route::currentRouteName() == 'products.index' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Manage Products
                             <i class="right fas fa-angle-left"></i>
@@ -77,7 +77,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show'|| Route::currentRouteName() == 'brands.index' ) ? 'menu-open' : ''}}">
                     <a href="#"
                        class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show' || Route::currentRouteName() == 'brands.index' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Brands
                             <i class="right fas fa-angle-left"></i>
@@ -99,7 +99,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'vehicle.indexMake' || Route::currentRouteName() == 'vehicle.showMake'|| Route::currentRouteName() == 'vehicle.indexMake' ) ? 'menu-open' : ''}}">
                     <a href="#"
                        class="nav-link {{(Route::currentRouteName() == 'vehicle.indexMake' || Route::currentRouteName() == 'vehicle.showMake' || Route::currentRouteName() == 'vehicle.indexMake' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Makes
                             <i class="right fas fa-angle-left"></i>
@@ -121,7 +121,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'vehicle.index' || Route::currentRouteName() == 'vehicle.show'|| Route::currentRouteName() == 'vehicle.index' ) ? 'menu-open' : ''}}">
                     <a href="#"
                        class="nav-link {{(Route::currentRouteName() == 'vehicle.index' || Route::currentRouteName() == 'vehicle.show' || Route::currentRouteName() == 'vehicle.index' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Vehicles
                             <i class="right fas fa-angle-left"></i>
@@ -138,6 +138,145 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Order/Sales
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Delivery status
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Promotions
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Payments
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Inquiries
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Configuration
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Banners
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Blog
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Surveys
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Complaints
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Appointments
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage CMS Pages
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Reports
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Top customer
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.dashboard')}}"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Top orders
+                        </p>
+                    </a>
+                </li>
+
+
+
 
             </ul>
         </nav>

@@ -278,7 +278,7 @@ class ProductController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function(Product $data){
-                    $btn1 = '<a href="'.route('products.show', $data->id).'"><i class="fas fa-eye"></i></a>';
+                    $btn1 = '<a class="btn btn-primary btn-sm" href="'.route('products.show', $data->id).'">View Detail</a>';
                     return $btn1;
                 })
                 ->rawColumns(['action'])

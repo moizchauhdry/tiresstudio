@@ -60,8 +60,8 @@
 
     <div class="modal fade" id="imagePopupModal" tabindex="-1" aria-labelledby="imagePopupModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="bg-transparent">
-                    <img src="" alt="" id="popup_image" class="w-100">
+            <div class="bg-transparent text-center">
+                    <img src="" alt="" id="popup_image" class="w-75">
             </div>
         </div>
     </div>
@@ -99,6 +99,9 @@
     <script src="{{asset('public/admin/plugins/select2/js/select2.full.min.js')}}"></script>
 
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="{{asset('public/admin/plugins/chart.js/Chart.bundle.js')}}"></script>
 
     <script>
         // Disable Error & Success Message After 2 Sec's

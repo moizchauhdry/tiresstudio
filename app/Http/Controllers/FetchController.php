@@ -78,7 +78,6 @@ class FetchController extends Controller
             $data = json_decode($res->getBody()->getContents(), true);
             $products = $data['results'];
             foreach ($products as $key => $product) {
-
                 $brandData = [
                     'code' => $product['brand']['code'],
                     'description' => $product['brand']['description'],
@@ -94,8 +93,8 @@ class FetchController extends Controller
                     // Properties
                     'model' => $product['properties']['model'],
                     'offset' => $product['properties']['offset'],
-                    'bolt_pattern' => $product['properties']['boltPattern'],
-                    'finish_code' => $product['properties']['finishCode'],
+                    'boltPattern' => $product['properties']['boltPattern'],
+                    'finishCode' => $product['properties']['finishCode'],
                     'finish' => $product['properties']['finish'],
                     'width' => $product['properties']['width'],
                     'diameter' => $product['properties']['diameter'],
@@ -103,8 +102,11 @@ class FetchController extends Controller
                 ];
 
                 $product1 = Product::updateOrCreate(['sku' => $product['sku'],
-                    'upc' => $product['sku']], $ProductData);
+                    'upc' => $product['upc']], $ProductData);
                 $product1->save();
+
+                $productDetail = $this->getProductDetails($product['sku']);
+                $product1->update($productDetail['properties']);
 
                 if(!empty($product['images'])){
                     $directory = 'public/' . $product1->id;
@@ -211,12 +213,15 @@ class FetchController extends Controller
                     'model' => $product['properties']['model'],
                     'width' => $product['properties']['width'],
                     'diameter' => $product['properties']['diameter'],
-                    'wheel_diameter' => $product['properties']['wheelDiameter'],
+                    'wheelDiameter' => $product['properties']['wheelDiameter'],
                 ];
 
                 $product1 = Product::updateOrCreate(['sku' => $product['sku'],
                     'upc' => $product['sku']], $ProductData);
                 $product1->save();
+
+                $productDetail = $this->getProductDetails($product['sku']);
+                $product1->update($productDetail['properties']);
 
                 /*if(!empty($product['images'])){
                     $directory = 'public/' . $product1->id;
@@ -265,6 +270,32 @@ class FetchController extends Controller
         }
 
         dd('success');
+    }
+
+    public function getProductDetails($sku)
+    {
+        if (Session::has('authorization')) {
+            dump('hasSession');
+            $authorization = Session::get('authorization');
+            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+                $authorization = $this->authorizeAPI();
+            }
+        } else {
+            dump('noSession');
+            $authorization = $this->authorizeAPI();
+        }
+
+
+        $client = new \GuzzleHttp\Client(['headers' => [
+            'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
+            'Content-Type' => 'application/json',
+        ]]);
+        $url = 'https://api.wheelpros.com/products/v1/'.$sku;
+
+        $res = $client->request('GET', $url);
+        $data = json_decode($res->getBody()->getContents(), true);
+
+        return $data;
     }
 
     public function getYears()
