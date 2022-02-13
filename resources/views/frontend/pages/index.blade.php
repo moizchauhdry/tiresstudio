@@ -1,270 +1,11 @@
 @extends('layouts.frontend')
 
 @section('content')
-<!-- ******************************************
-            FIRST SECTION
-            ********************************************** -->
+
 <div class="section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
 
-                <div class="search-tab clearfix">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs search-tab-nav" role="tablist">
-                        <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">Search
-                                Wheels</a></li>
-                        <li role="presentation"><a href="#tab02" role="tab" data-toggle="tab">Search Tires</a></li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="tab01">
-                            <div class="search-wrapper">
-                                <form class="row">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Year</option>
-                                            <option>2022</option>
-                                            <option>2021</option>
-                                            <option>2020</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Make</option>
-                                            <option>Mercedes</option>
-                                            <option>Opel</option>
-                                            <option>Maseratti</option>
-                                            <option>Ferrari</option>
-                                            <option>Porche</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Model</option>
-                                            <option>Mercedes</option>
-                                            <option>Opel</option>
-                                            <option>Maseratti</option>
-                                            <option>Ferrari</option>
-                                            <option>Porche</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Max Price</option>
-                                            <option>$400 - $1000</option>
-                                            <option>$1000 - $10000</option>
-                                            <option>$10000 - $25000</option>
-                                            <option>$25000 - $50000</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Brand</option>
-                                            <option>Los Angelas</option>
-                                            <option>Miami</option>
-                                            <option>Hawai</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <button class="btn btn-primary btn-block">SEARCH</button>
-                                    </div><!-- end col -->
-                                </form><!-- end row -->
-                            </div><!-- end search-wrapper -->
-                        </div><!-- end tab-pane -->
-
-                        <div role="tabpanel" class="tab-pane fade" id="tab02">
-                            <div class="search-wrapper">
-                                <form class="row">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>All Makes</option>
-                                            <option>Select Dropdown 01</option>
-                                            <option>Select Dropdown 02</option>
-                                            <option>Select Dropdown 03</option>
-                                            <option>Select Dropdown 04</option>
-                                            <option>Select Dropdown 05</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>All Models</option>
-                                            <option>Mercedes</option>
-                                            <option>Opel</option>
-                                            <option>Maseratti</option>
-                                            <option>Ferrari</option>
-                                            <option>Porche</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Max Price</option>
-                                            <option>$400 - $1000</option>
-                                            <option>$1000 - $10000</option>
-                                            <option>$10000 - $25000</option>
-                                            <option>$25000 - $50000</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>2000Km</option>
-                                            <option>10000Km</option>
-                                            <option>25000Km</option>
-                                            <option>50000Km</option>
-                                            <option>100000Km</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Newyork Ciry</option>
-                                            <option>Los Angelas</option>
-                                            <option>Miami</option>
-                                            <option>Hawai</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <button class="btn btn-primary btn-block">SEARCH</button>
-                                    </div><!-- end col -->
-                                </form><!-- end row -->
-                            </div><!-- end search-wrapper -->
-                        </div><!-- end tab-pane -->
-
-                        <div role="tabpanel" class="tab-pane fade" id="tab03">
-                            <div class="search-wrapper">
-                                <form class="row">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>All Makes</option>
-                                            <option>Select Dropdown 01</option>
-                                            <option>Select Dropdown 02</option>
-                                            <option>Select Dropdown 03</option>
-                                            <option>Select Dropdown 04</option>
-                                            <option>Select Dropdown 05</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>All Models</option>
-                                            <option>Mercedes</option>
-                                            <option>Opel</option>
-                                            <option>Maseratti</option>
-                                            <option>Ferrari</option>
-                                            <option>Porche</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Max Price</option>
-                                            <option>$400 - $1000</option>
-                                            <option>$1000 - $10000</option>
-                                            <option>$10000 - $25000</option>
-                                            <option>$25000 - $50000</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>2000Km</option>
-                                            <option>10000Km</option>
-                                            <option>25000Km</option>
-                                            <option>50000Km</option>
-                                            <option>100000Km</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Newyork Ciry</option>
-                                            <option>Los Angelas</option>
-                                            <option>Miami</option>
-                                            <option>Hawai</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <button class="btn btn-primary btn-block">SEARCH</button>
-                                    </div><!-- end col -->
-                                </form><!-- end row -->
-                            </div><!-- end search-wrapper -->
-                        </div><!-- end tab-pane -->
-
-                        <div role="tabpanel" class="tab-pane fade" id="tab04">
-                            <div class="search-wrapper">
-                                <form class="row">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>All Makes</option>
-                                            <option>Select Dropdown 01</option>
-                                            <option>Select Dropdown 02</option>
-                                            <option>Select Dropdown 03</option>
-                                            <option>Select Dropdown 04</option>
-                                            <option>Select Dropdown 05</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>All Models</option>
-                                            <option>Mercedes</option>
-                                            <option>Opel</option>
-                                            <option>Maseratti</option>
-                                            <option>Ferrari</option>
-                                            <option>Porche</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Max Price</option>
-                                            <option>$400 - $1000</option>
-                                            <option>$1000 - $10000</option>
-                                            <option>$10000 - $25000</option>
-                                            <option>$25000 - $50000</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>2000Km</option>
-                                            <option>10000Km</option>
-                                            <option>25000Km</option>
-                                            <option>50000Km</option>
-                                            <option>100000Km</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Newyork Ciry</option>
-                                            <option>Los Angelas</option>
-                                            <option>Miami</option>
-                                            <option>Hawai</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <button class="btn btn-primary btn-block">SEARCH</button>
-                                    </div><!-- end col -->
-                                </form><!-- end row -->
-                            </div><!-- end search-wrapper -->
-                        </div><!-- end tab-pane -->
-                    </div><!-- end tab-content -->
-                </div><!-- end tab -->
-            </div><!-- end col -->
-        </div><!-- end row -->
+        @include('frontend.includes.search')
 
         <hr class="invis">
 
@@ -275,13 +16,14 @@
                     <hr class="custom">
                 </div><!-- end section-title -->
             </div><!-- end col -->
-        </div><!-- end row -->
+        </div>
 
         <div class="row">
+            @foreach ($response['popular_wheels'] as $wheel)
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -304,152 +46,10 @@
                         <h4><a href="#">BMW F12 6 Series Midsized Convertible</a></h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
-            </div><!-- end col -->
+            </div>
+            @endforeach
+        </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper clearfix">
-                    <div class="post-media entry">
-                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        <div class="car-price">
-                            <p>$44900</p>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Audi A8 3.0 TDI S12 Quattro Tiptronic</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper clearfix">
-                    <div class="post-media entry">
-                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        <div class="car-price">
-                            <p>$64000</p>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Hyundai Genesis Coupe 2.0FL Turbo Brembo</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-        </div><!-- end row -->
-
-        <hr class="invis">
-
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper clearfix">
-                    <div class="post-media entry">
-                        <img src="{{asset('public/frontend/wheels/4.png')}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        <div class="car-price">
-                            <p>$65000</p>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Ford Fiesta Hatchback Eco Sports Car</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper clearfix">
-                    <div class="post-media entry">
-                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        <div class="car-price">
-                            <p>$74900</p>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Hyndai Grand i10 2010 Model Cross Sport</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper clearfix">
-                    <div class="post-media entry">
-                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        <div class="car-price">
-                            <p>$82000</p>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Audi A4 1.8 TFSI S-Line Upon Multitronic</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-        </div><!-- end row -->
     </div><!-- end container -->
 </div><!-- end section -->
 
@@ -457,7 +57,7 @@
             PARALLAX
             ********************************************** -->
 <div class="parallax section" data-stellar-background-ratio="0.5"
-    style="background-image:url('public/frontend/uploads/parallax_01.jpg');">
+    style="background-image:url('frontend/uploads/parallax_01.jpg');">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-3 col-sm-3 col-xs-12 wow fadeIn">
@@ -510,7 +110,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -522,7 +122,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -534,7 +134,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -545,7 +145,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -557,7 +157,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -569,7 +169,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -584,14 +184,14 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 wow fadeInUp">
                 <div class="post-media">
-                    <a href="#"><img src="{{asset('public/frontend/uploads/banner_01.jpg')}}" alt=""
+                    <a href="#"><img src="{{asset('frontend/uploads/banner_01.jpg')}}" alt=""
                             class="img-responsive"></a>
                 </div><!-- end post-media -->
             </div><!-- end col -->
 
             <div class="col-md-6 col-sm-6 wow fadeInUp">
                 <div class="post-media">
-                    <a href="#"><img src="{{asset('public/frontend/uploads/banner_02.jpg')}}" alt=""
+                    <a href="#"><img src="{{asset('frontend/uploads/banner_02.jpg')}}" alt=""
                             class="img-responsive"></a>
                 </div><!-- end post-media -->
             </div><!-- end col -->
@@ -708,7 +308,7 @@
             PARALLAX LAST
             ********************************************** -->
 <div class="parallax section" data-stellar-background-ratio="0.5"
-    style="background-image:url('public/frontend/uploads/parallax_02.jpg');">
+    style="background-image:url('frontend/uploads/parallax_02.jpg');">
     <div class="container bgcolor">
         <div class="row">
             <div class="col-md-4 col-sm-12">
@@ -734,7 +334,7 @@
                             skilled, well-organized and experienced team of professional team mates how all this
                             mistaken idea of and praising a complete account of the system.</p>
                         <div class="testi-meta">
-                            <img src="{{asset('public/frontend/uploads/testi_01.png')}}" alt=""
+                            <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
                                 class="img-responsive alignleft">
                             <h4>James Fernando <small>- Manager of Racer</small></h4>
                             <div class="rating">
@@ -752,7 +352,7 @@
                             skilled, well-organized and experienced team of professional team mates how all this
                             mistaken idea of and praising a complete account of the system.</p>
                         <div class="testi-meta">
-                            <img src="{{asset('public/frontend/uploads/testi_01.png')}}" alt=""
+                            <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
                                 class="img-responsive alignleft">
                             <h4>James Fernando <small>- Manager of Racer</small></h4>
                             <div class="rating">

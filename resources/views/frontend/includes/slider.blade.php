@@ -11,7 +11,7 @@
                         data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_01.jpg'
                         data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
                         <!-- MAIN IMAGE -->
-                        <img src="{{asset('public/frontend/uploads/slider_01.jpg')}}" alt="image"
+                        <img src="{{asset('frontend/uploads/slider_01.jpg')}}" alt="image"
                             data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
                             class="rev-slidebg">
                         <!-- LAYERS -->
@@ -38,7 +38,7 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1250"
                             data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
                             style="z-index: 5;">
-                            <img src="{{asset('public/frontend/uploads/hrslider.png')}}" alt="">
+                            <img src="{{asset('frontend/uploads/hrslider.png')}}" alt="">
                         </div>
                         <!-- LAYER NR. 2 -->
                         <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
@@ -79,7 +79,7 @@
                         data-thumb='uploads/slider_02.jpg' data-rotate='0' data-saveperformance='off'
                         data-title='Business Solutions' data-description=''>
                         <!-- MAIN IMAGE -->
-                        <img src="{{asset('public/frontend/uploads/slider_02.jpg')}}" alt="image"
+                        <img src="{{asset('frontend/uploads/slider_02.jpg')}}" alt="image"
                             data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
                             class="rev-slidebg">
                         <!-- LAYERS -->
@@ -94,7 +94,7 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1000"
                             data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
                             style="z-index: 5;">
-                            <img src="{{asset('public/frontend/uploads/sliderlogo.png')}}" alt="">
+                            <img src="{{asset('frontend/uploads/sliderlogo.png')}}" alt="">
                         </div>
                         <div class="tp-caption tp-resizeme hidden-xs" data-x="['right','right','right','right']"
                             data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
@@ -106,7 +106,7 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1250"
                             data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
                             style="z-index: 5;">
-                            <img src="{{asset('public/frontend/uploads/hrslider1.png')}}" alt="">
+                            <img src="{{asset('frontend/uploads/hrslider1.png')}}" alt="">
                         </div>
                         <!-- LAYER NR. 2 -->
                         <div class="tp-caption tp-resizeme text-right hidden-xs"
@@ -146,7 +146,7 @@
                         data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_03.jpg'
                         data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
                         <!-- MAIN IMAGE -->
-                        <img src="{{asset('public/frontend/uploads/slider_03.jpg')}}" alt="image"
+                        <img src="{{asset('frontend/uploads/slider_03.jpg')}}" alt="image"
                             data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
                             class="rev-slidebg">
                         <!-- LAYERS -->
@@ -161,7 +161,7 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1000"
                             data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
                             style="z-index: 5;">
-                            <img src="{{asset('public/frontend/uploads/slider_text.png')}}" alt="">
+                            <img src="{{asset('frontend/uploads/slider_text.png')}}" alt="">
                         </div>
                         <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
                             data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
@@ -173,7 +173,7 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1250"
                             data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
                             style="z-index: 5;">
-                            <img src="{{asset('public/frontend/uploads/hrslider.png')}}" alt="">
+                            <img src="{{asset('frontend/uploads/hrslider.png')}}" alt="">
                         </div>
                         <!-- LAYER NR. 2 -->
                         <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"

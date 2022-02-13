@@ -14,9 +14,9 @@ class AdminSeeder extends Seeder
     public function run()
     {
         Admin::insert([
-            [   
+            [
                 'name' =>'Admin',
-                'email' =>'admin@admin.com',
+                'email' =>'admin@tiresstudio.com',
                 'password'=>Hash::make('password'),
                 'phone'=>'03204650584',
                 'created_at'=>Carbon::now(),
