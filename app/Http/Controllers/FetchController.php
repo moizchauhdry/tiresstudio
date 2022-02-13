@@ -44,7 +44,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -69,7 +69,7 @@ class FetchController extends Controller
 
         for($i = 1; $i <= $iteration ; $i++){
 
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 dump('newKey');
                 $authorization = $this->authorizeAPI();
             }
@@ -166,7 +166,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -285,7 +285,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -311,7 +311,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -337,7 +337,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -363,7 +363,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -389,7 +389,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -415,7 +415,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
@@ -441,7 +441,7 @@ class FetchController extends Controller
         if (Session::has('authorization')) {
             dump('hasSession');
             $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] > strtotime(Carbon::now())) {
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
             }
         } else {
