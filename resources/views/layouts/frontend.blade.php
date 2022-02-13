@@ -110,7 +110,7 @@
                             touchenabled: "on", swipe_threshold: 75, swipe_min_touches: 1, swipe_direction: "horizontal", drag_block_vertical: false
                         }
                         , arrows: {
-                            style: "hephaistos", enable: true, hide_onmobile: false, hide_onleave: false, tmp: '<div class="arrow-holder"> </div>', left: {
+                            style: "hephaistos", enable: false, hide_onmobile: false, hide_onleave: false, tmp: '<div class="arrow-holder"> </div>', left: {
                                 h_align: "left", v_align: "center", h_offset: 28, v_offset: 32
                             }
                             , right: {

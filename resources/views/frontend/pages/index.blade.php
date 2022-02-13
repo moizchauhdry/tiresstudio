@@ -12,13 +12,9 @@
                 <div class="search-tab clearfix">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs search-tab-nav" role="tablist">
-                        <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">New
-                                Cars</a></li>
-                        <li role="presentation"><a href="#tab02" role="tab" data-toggle="tab">Used Cars</a></li>
-                        <li role="presentation"><a href="#tab03" role="tab" data-toggle="tab">Read Specs &
-                                Reviews</a></li>
-                        <li role="presentation"><a href="#tab05" role="tab" data-toggle="tab">Service Center &
-                                Dealer</a></li>
+                        <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">Search
+                                Wheels</a></li>
+                        <li role="presentation"><a href="#tab02" role="tab" data-toggle="tab">Search Tires</a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -28,18 +24,27 @@
                                 <form class="row">
                                     <div class="col-md-2 col-sm-6 col-xs-12">
                                         <select name="orderby" class="selectpicker">
-                                            <option>All Makes</option>
-                                            <option>Select Dropdown 01</option>
-                                            <option>Select Dropdown 02</option>
-                                            <option>Select Dropdown 03</option>
-                                            <option>Select Dropdown 04</option>
-                                            <option>Select Dropdown 05</option>
+                                            <option>Year</option>
+                                            <option>2022</option>
+                                            <option>2021</option>
+                                            <option>2020</option>
                                         </select>
                                     </div><!-- end col -->
 
                                     <div class="col-md-2 col-sm-6 col-xs-12">
                                         <select name="orderby" class="selectpicker">
-                                            <option>All Models</option>
+                                            <option>Make</option>
+                                            <option>Mercedes</option>
+                                            <option>Opel</option>
+                                            <option>Maseratti</option>
+                                            <option>Ferrari</option>
+                                            <option>Porche</option>
+                                        </select>
+                                    </div><!-- end col -->
+
+                                    <div class="col-md-2 col-sm-6 col-xs-12">
+                                        <select name="orderby" class="selectpicker">
+                                            <option>Model</option>
                                             <option>Mercedes</option>
                                             <option>Opel</option>
                                             <option>Maseratti</option>
@@ -60,17 +65,7 @@
 
                                     <div class="col-md-2 col-sm-6 col-xs-12">
                                         <select name="orderby" class="selectpicker">
-                                            <option>2000Km</option>
-                                            <option>10000Km</option>
-                                            <option>25000Km</option>
-                                            <option>50000Km</option>
-                                            <option>100000Km</option>
-                                        </select>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select name="orderby" class="selectpicker">
-                                            <option>Newyork Ciry</option>
+                                            <option>Brand</option>
                                             <option>Los Angelas</option>
                                             <option>Miami</option>
                                             <option>Hawai</option>
@@ -276,17 +271,17 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title clearfix">
-                    <h4>Popular Used Cars</h4>
+                    <h4>Popular Wheels</h4>
                     <hr class="custom">
                 </div><!-- end section-title -->
             </div><!-- end col -->
         </div><!-- end row -->
 
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_01.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -311,10 +306,10 @@
                 </div><!-- end clearfix -->
             </div><!-- end col -->
 
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_02.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -339,10 +334,10 @@
                 </div><!-- end clearfix -->
             </div><!-- end col -->
 
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_03.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -366,43 +361,15 @@
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
             </div><!-- end col -->
-
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper clearfix">
-                    <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_04.jpg')}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        <div class="car-price">
-                            <p>$72000</p>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Ford Mustang 2.3 Ecoboost Premium Taurus</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
         </div><!-- end row -->
 
         <hr class="invis">
 
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_05.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/4.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -427,10 +394,10 @@
                 </div><!-- end clearfix -->
             </div><!-- end col -->
 
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_06.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -455,10 +422,10 @@
                 </div><!-- end clearfix -->
             </div><!-- end col -->
 
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_07.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -479,34 +446,6 @@
 
                     <div class="car-title clearfix">
                         <h4><a href="#">Audi A4 1.8 TFSI S-Line Upon Multitronic</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper clearfix">
-                    <div class="post-media entry">
-                        <img src="{{asset('public/frontend/uploads/car_08.jpg')}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        <div class="car-price">
-                            <p>$58900</p>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Caterham 7 Superlight R300 2009 Model</a></h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
             </div><!-- end col -->
@@ -561,7 +500,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title clearfix text-center">
-                    <h4>Special Offers</h4>
+                    <h4>OUR BRANDS</h4>
                     <hr class="custom">
                 </div><!-- end section-title -->
             </div><!-- end col -->
@@ -571,49 +510,71 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/uploads/deal_01.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
                         <h4><a href="#">Hyndai Grand i10 2010 Model Cross Sport</a></h4>
                     </div><!-- end car-title -->
-
-                    <div class="deal-desc">
-                        <a href="#"><i class="fa fa-plus"></i></a>
-                        <p>Hyundai Grand - 5 Years Unlimited KM Warranty +3 Years Free Service... </p>
-                    </div><!-- end deal-desc -->
                 </div><!-- end clearfix -->
             </div><!-- end col -->
 
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/uploads/deal_02.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
                         <h4><a href="#">Ford Mustang 2.3 Ecoboost Premium Taurus</a></h4>
                     </div><!-- end car-title -->
-                    <div class="deal-desc">
-                        <a href="#"><i class="fa fa-plus"></i></a>
-                        <p>2.9% PA, Comparison Rate Finance On Ford and 2015 Build Premium... </p>
-                    </div><!-- end deal-desc -->
                 </div><!-- end clearfix -->
             </div><!-- end col -->
 
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/uploads/deal_03.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
                         <h4><a href="#">BMW F12 6 Series Midsized Manual Convertible</a></h4>
                     </div><!-- end car-title -->
-                    <div class="deal-desc">
-                        <a href="#"><i class="fa fa-plus"></i></a>
-                        <p>Hyundai Gets - 2 Years Unlimited KM Warranty +1 Years Free Service...</p>
-                    </div><!-- end deal-desc -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
+                <div class="car-wrapper deal-wrapper clearfix">
+                    <div class="post-media">
+                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                    </div><!-- end post-media -->
+
+                    <div class="car-title clearfix">
+                        <h4><a href="#">Hyndai Grand i10 2010 Model Cross Sport</a></h4>
+                    </div><!-- end car-title -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
+                <div class="car-wrapper deal-wrapper clearfix">
+                    <div class="post-media">
+                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
+                    </div><!-- end post-media -->
+
+                    <div class="car-title clearfix">
+                        <h4><a href="#">Ford Mustang 2.3 Ecoboost Premium Taurus</a></h4>
+                    </div><!-- end car-title -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
+                <div class="car-wrapper deal-wrapper clearfix">
+                    <div class="post-media">
+                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
+                    </div><!-- end post-media -->
+
+                    <div class="car-title clearfix">
+                        <h4><a href="#">BMW F12 6 Series Midsized Manual Convertible</a></h4>
+                    </div><!-- end car-title -->
                 </div><!-- end clearfix -->
             </div><!-- end col -->
         </div><!-- end row -->

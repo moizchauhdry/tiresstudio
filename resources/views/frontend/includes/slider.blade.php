@@ -26,7 +26,7 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1000"
                             data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
                             style="z-index: 5;">
-                            <h1>Buy New and Used<br>Car at Engines</h1>
+                            <h1>Buy Wheels & Tires<br> at Tiresstudio</h1>
                         </div>
                         <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
                             data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
@@ -74,9 +74,10 @@
                             <a href="#" class="btn btn-default our_service">Our Services</a>
                         </div>
                     </li>
-                    <li data-index='rs-376' data-transition='curtain-1' data-slotamount='default' data-easein='default'
-                        data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_02.jpg'
-                        data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
+                    {{-- <li data-index='rs-376' data-transition='curtain-1' data-slotamount='default'
+                        data-easein='default' data-easeout='default' data-masterspeed='default'
+                        data-thumb='uploads/slider_02.jpg' data-rotate='0' data-saveperformance='off'
+                        data-title='Business Solutions' data-description=''>
                         <!-- MAIN IMAGE -->
                         <img src="{{asset('public/frontend/uploads/slider_02.jpg')}}" alt="image"
                             data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
@@ -207,7 +208,7 @@
                             data-splitin="none" data-splitout="none" data-responsive_offset="on">
                             <a href="#" class="btn btn-default our_service">Our Services</a>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

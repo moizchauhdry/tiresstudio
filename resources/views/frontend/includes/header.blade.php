@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="logo-wrapper clearfix">
-                    <a class="navbar-brand" href="index.html"><img
+                    <a class="navbar-brand" href="{{route('frontend.pages.index')}}"><img
                             src="{{asset('public/frontend/images/logo-white.png')}}" alt="" class="img-responsive"></a>
                 </div><!-- end logo -->
             </div><!-- end col -->
@@ -53,71 +53,40 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Wheels</a></li>
+                    <li><a href="#">Tires</a></li>
+                    <li><a href="#">Accessories</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">Home <span class="fa fa-angle-down"></span></a>
+                            aria-expanded="false">Brands <span class="fa fa-angle-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="index-01.html">Home Style 01</a></li>
-                            <li><a href="index-02.html">Home Style 02</a></li>
-                            <li><a href="index-03.html">Home Style 03</a></li>
-                            <li><a href="index-04.html">Home Style 04</a></li>
+                            <li><a href="#">Brand 1</a></li>
+                            <li><a href="#">Brand 2</a></li>
+                            <li><a href="#">Brand 3</a></li>
+                            <li><a href="#">Brand 4</a></li>
                         </ul>
                     </li>
-                    <li><a href="page-services.html">Services</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Gallery</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">Inventory <span class="fa fa-angle-down"></span></a>
+                            aria-expanded="false">About <span class="fa fa-angle-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="inventory-01.html">Inventory Standard Style 01</a></li>
-                            <li><a href="inventory-02.html">Inventory Standard Style 02</a></li>
-                            <li><a href="inventory-03.html">Inventory List Style 01</a></li>
-                            <li><a href="inventory-04.html">Inventory List Style 02</a></li>
-                            <li><a href="inventory-single.html">Inventory Single Page</a></li>
+                            <li><a href="#">About Tiresstudio</a></li>
+                            <li><a href="#">News & Blogs</a></li>
+                            <li><a href="#">Warranty</a></li>
+                            <li><a href="#">FAQ's</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown hasmenu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">News <span class="fa fa-angle-down"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="blog.html">Blog Grid Fullwidth</a></li>
-                            <li><a href="blog-sidebar.html">Blog With Sidebar</a></li>
-                            <li><a href="blog-list.html">Blog List View</a></li>
-                            <li><a href="blog-single.html">Blog Single Post Image</a></li>
-                            <li><a href="blog-single-alt.html">Blog Single Post Slider</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown hasmenu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">Pages <span class="fa fa-angle-down"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="page-about.html">About Us</a></li>
-                            <li><a href="page-loan-calculator.html">Auto Loan Calculater</a></li>
-                            <li><a href="page-vehicle.html">Vehicle Comparison</a></li>
-                            <li><a href="page-sell-car.html">Sell a Car</a></li>
-                            <li><a href="page-faqs.html">FAQ's</a></li>
-                            <li><a href="page-404.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown hasmenu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">Shop <span class="fa fa-angle-down"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="shop.html">Shop Fullwidth</a></li>
-                            <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                            <li><a href="shop-single.html">Single Shop</a></li>
-                            <li><a href="shop-cart.html">Shopping Cart</a></li>
-                            <li><a href="shop-checkout.html">Checkout</a></li>
-                            <li><a href="shop-account.html">My Account</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="page-contact.html">Contact</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="social-header"><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-skype"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li class="navbar-cart"><a href="shop-cart.html">Cart <i class="fa fa-shopping-cart"></i>
+                    <li class="navbar-cart"><a href="#">Cart <i class="fa fa-shopping-cart"></i>
                             <small>0</small></a></li>
                 </ul>
             </div>
