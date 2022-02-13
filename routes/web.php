@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Frontend\FrontendController@index')->name('frontend.pages.index');
 
 Route::get('/getSessions', function () {
     dd(Session::all());

@@ -1,0 +1,216 @@
+<!-- ******************************************
+        START SLIDER
+        ********************************************** -->
+<div class="slider-section">
+    <div id="banner">
+        <div class="rev_slider_wrapper">
+            <!-- START REVOLUTION SLIDER 5.0 auto mode -->
+            <div id="main_slider" class="rev_slider" data-version="5.0">
+                <ul>
+                    <li data-index='rs-377' data-transition='curtain-1' data-slotamount='default' data-easein='default'
+                        data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_01.jpg'
+                        data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
+                        <!-- MAIN IMAGE -->
+                        <img src="{{asset('public/frontend/uploads/slider_01.jpg')}}" alt="image"
+                            data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
+                            class="rev-slidebg">
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['-2','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['-82','-82','-82','-82']" data-width="none" data-height="none"
+                            data-transform_idle="o:1;"
+                            data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1000"
+                            data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
+                            style="z-index: 5;">
+                            <h1>Buy New and Used<br>Car at Engines</h1>
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['22','22','22','22']" data-width="none" data-height="none"
+                            data-transform_idle="o:1;"
+                            data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1250"
+                            data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
+                            style="z-index: 5;">
+                            <img src="{{asset('public/frontend/uploads/hrslider.png')}}" alt="">
+                        </div>
+                        <!-- LAYER NR. 2 -->
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['96','96','96','65']" data-width="none" data-height="none"
+                            data-whitespace="nowrap" data-transform_idle="o:1;"
+                            data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:[100%];" data-mask_out="x:inherit;y:inherit;" data-start="1500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                            style="z-index: 6; white-space: nowrap;">
+                            <p>We’re here to offer the best support, to help<br> you troubleshoot any business
+                                issues.</p>
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['199','199','199','169']" data-transform_idle="o:1;"
+                            data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
+                            data-style_hover="c:rgba(0, 154, 238, 1.00);bc:rgba(0, 154, 238, 1.00);cursor:pointer;"
+                            data-transform_in="x:[-100%];z:0;rX:0deg;rY:0deg;rZ:0deg;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2500;e:Power3.easeInOut;"
+                            data-transform_out="auto:auto;s:1000;e:Power2.easeInOut;" data-start="2500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on">
+                            <a href="#" class="contact_us btn btn-default">Contact us</a>
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['193','193','228','193']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['199','199','199','169']" data-transform_idle="o:1;"
+                            data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
+                            data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(114, 168, 0, 1.00);cursor:pointer;"
+                            data-transform_in="x:[100%];z:0;rX:0deg;rY:0deg;rZ:0deg;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2500;e:Power3.easeInOut;"
+                            data-transform_out="auto:auto;s:1000;e:Power2.easeInOut;" data-start="2500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on">
+                            <a href="#" class="btn btn-default our_service">Our Services</a>
+                        </div>
+                    </li>
+                    <li data-index='rs-376' data-transition='curtain-1' data-slotamount='default' data-easein='default'
+                        data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_02.jpg'
+                        data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
+                        <!-- MAIN IMAGE -->
+                        <img src="{{asset('public/frontend/uploads/slider_02.jpg')}}" alt="image"
+                            data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
+                            class="rev-slidebg">
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['right','right','right','right']"
+                            data-hoffset="['-2','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['-82','-82','-82','-82']" data-width="none" data-height="none"
+                            data-transform_idle="o:1;"
+                            data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1000"
+                            data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
+                            style="z-index: 5;">
+                            <img src="{{asset('public/frontend/uploads/sliderlogo.png')}}" alt="">
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['right','right','right','right']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['22','22','22','22']" data-width="none" data-height="none"
+                            data-transform_idle="o:1;"
+                            data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1250"
+                            data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
+                            style="z-index: 5;">
+                            <img src="{{asset('public/frontend/uploads/hrslider1.png')}}" alt="">
+                        </div>
+                        <!-- LAYER NR. 2 -->
+                        <div class="tp-caption tp-resizeme text-right hidden-xs"
+                            data-x="['right','right','right','right']" data-hoffset="['0','0','35','0']"
+                            data-y="['middle','middle','middle','middle']" data-voffset="['96','96','96','65']"
+                            data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                            data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:[100%];" data-mask_out="x:inherit;y:inherit;" data-start="1500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                            style="z-index: 6; white-space: nowrap;">
+                            <p>We’re here to offer the best support, to help<br> you troubleshoot any business
+                                issues. </p>
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['right','right','right','right']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['199','199','199','169']" data-transform_idle="o:1;"
+                            data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
+                            data-style_hover="c:rgba(0, 154, 238, 1.00);bc:rgba(0, 154, 238, 1.00);cursor:pointer;"
+                            data-transform_in="x:[-100%];z:0;rX:0deg;rY:0deg;rZ:0deg;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2500;e:Power3.easeInOut;"
+                            data-transform_out="auto:auto;s:1000;e:Power2.easeInOut;" data-start="2500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on">
+                            <a href="#" class="btn btn-default our_service">Our Services</a>
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['right','right','right','right']"
+                            data-hoffset="['193','193','228','193']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['199','199','199','169']" data-transform_idle="o:1;"
+                            data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
+                            data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(114, 168, 0, 1.00);cursor:pointer;"
+                            data-transform_in="x:[100%];z:0;rX:0deg;rY:0deg;rZ:0deg;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2500;e:Power3.easeInOut;"
+                            data-transform_out="auto:auto;s:1000;e:Power2.easeInOut;" data-start="2500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on">
+                            <a href="#" class="contact_us btn btn-default">Contact us</a>
+                        </div>
+                    </li>
+                    <li data-index='rs-379' data-transition='curtain-1' data-slotamount='default' data-easein='default'
+                        data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_03.jpg'
+                        data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
+                        <!-- MAIN IMAGE -->
+                        <img src="{{asset('public/frontend/uploads/slider_03.jpg')}}" alt="image"
+                            data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
+                            class="rev-slidebg">
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['-2','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['-92','-92','-92','-92']" data-width="none" data-height="none"
+                            data-transform_idle="o:1;"
+                            data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1000"
+                            data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
+                            style="z-index: 5;">
+                            <img src="{{asset('public/frontend/uploads/slider_text.png')}}" alt="">
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['22','22','22','22']" data-width="none" data-height="none"
+                            data-transform_idle="o:1;"
+                            data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="1250"
+                            data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05"
+                            style="z-index: 5;">
+                            <img src="{{asset('public/frontend/uploads/hrslider.png')}}" alt="">
+                        </div>
+                        <!-- LAYER NR. 2 -->
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['96','96','96','65']" data-width="none" data-height="none"
+                            data-whitespace="nowrap" data-transform_idle="o:1;"
+                            data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
+                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                            data-mask_in="x:0px;y:[100%];" data-mask_out="x:inherit;y:inherit;" data-start="1500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                            style="z-index: 6; white-space: nowrap;">
+                            <p>We’re here to offer the best support, to help<br> you troubleshoot any business
+                                issues.</p>
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['0','0','35','0']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['199','199','199','169']" data-transform_idle="o:1;"
+                            data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
+                            data-style_hover="c:rgba(0, 154, 238, 1.00);bc:rgba(0, 154, 238, 1.00);cursor:pointer;"
+                            data-transform_in="x:[-100%];z:0;rX:0deg;rY:0deg;rZ:0deg;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2500;e:Power3.easeInOut;"
+                            data-transform_out="auto:auto;s:1000;e:Power2.easeInOut;" data-start="2500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on">
+                            <a href="#" class="contact_us btn btn-default">Contact us</a>
+                        </div>
+                        <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
+                            data-hoffset="['193','193','228','193']" data-y="['middle','middle','middle','middle']"
+                            data-voffset="['199','199','199','169']" data-transform_idle="o:1;"
+                            data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
+                            data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(114, 168, 0, 1.00);cursor:pointer;"
+                            data-transform_in="x:[100%];z:0;rX:0deg;rY:0deg;rZ:0deg;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2500;e:Power3.easeInOut;"
+                            data-transform_out="auto:auto;s:1000;e:Power2.easeInOut;" data-start="2500"
+                            data-splitin="none" data-splitout="none" data-responsive_offset="on">
+                            <a href="#" class="btn btn-default our_service">Our Services</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END REVOLUTION SLIDER -->
+    </div> <!-- End of #banner -->
+</div><!-- end slider section -->
