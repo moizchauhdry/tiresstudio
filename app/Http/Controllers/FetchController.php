@@ -105,8 +105,12 @@ class FetchController extends Controller
                     'upc' => $product['upc']], $ProductData);
                 $product1->save();
 
-                $productDetail = $this->getProductDetails($product['sku']);
-                $product1->update($productDetail['properties']);
+                try {
+                    $productDetail = $this->getProductDetails($product['sku']);
+                    $product1->update($productDetail['properties']);
+                }catch(\Throwable  $e){
+                    \Log::info($e);
+                }
 
                 if(!empty($product['images'])){
                     $directory = 'public/' . $product1->id;
@@ -220,8 +224,12 @@ class FetchController extends Controller
                     'upc' => $product['sku']], $ProductData);
                 $product1->save();
 
-                $productDetail = $this->getProductDetails($product['sku']);
-                $product1->update($productDetail['properties']);
+                try {
+                    $productDetail = $this->getProductDetails($product['sku']);
+                    $product1->update($productDetail['properties']);
+                }catch(\Throwable  $e){
+                    \Log::info($e);
+                }
 
                 /*if(!empty($product['images'])){
                     $directory = 'public/' . $product1->id;
