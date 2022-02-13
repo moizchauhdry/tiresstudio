@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- SITE META -->
-    <title>TIRESSTUDIO - WE TAKES CARE</title>
+    <title>Tiresstudio - We Takes Care</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">

@@ -15,7 +15,7 @@ Route::get('/getSessions', function () {
 */
 Route::group(['middleware' => 'prevent-back-history'], function()
 {
-    Route::get('/dashboard', function () {
+    Route::get('/admin/dashboard', function () {
         if(Auth::guard('admin')->check()){
             return redirect()->route('admin.dashboard');
         }
@@ -24,7 +24,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
 
     Route::prefix('admin')->group(function()
     {
-        Route::match(['get','post'],'/','AdminController@login')->name('admin.login');
+        Route::match(['get','post'],'/login','AdminController@login')->name('admin.login');
 
         Route::group(['middleware' => ['adminCheckSuspend']],function()
         {
