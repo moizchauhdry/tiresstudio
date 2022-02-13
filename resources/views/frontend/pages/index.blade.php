@@ -26,9 +26,9 @@
                         <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
-                        <div class="car-price">
+                        {{-- <div class="car-price">
                             <p>$78900</p>
-                        </div>
+                        </div> --}}
                         <ul class="list-inline">
                             <li class="car-km">
                                 <p><i class="fa fa-road"></i> 26000</p>
@@ -43,7 +43,7 @@
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
-                        <h4><a href="#">BMW F12 6 Series Midsized Convertible</a></h4>
+                        <h4><a href="#">{{$wheel->title}}</a></h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
             </div>
