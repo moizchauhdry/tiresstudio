@@ -39,6 +39,16 @@ class FetchController extends Controller
         return $authorization;
     }
 
+    public function setClient($authorization)
+    {
+        $client = new \GuzzleHttp\Client(['headers' => [
+            'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
+            'Content-Type' => 'application/json',
+        ]]);
+
+        return $client;
+    }
+
     public function fetchProducts()
     {
         if (Session::has('authorization')) {
@@ -46,10 +56,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -72,6 +86,8 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 dump('newKey');
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
 
             $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page='.$i);
@@ -112,24 +128,9 @@ class FetchController extends Controller
                     \Log::info($e);
                 }
 
-                if(!empty($product['images'])){
-                    $directory = 'public/' . $product1->id;
-                    foreach ($product['images'] as $image) {
-                        $content = file_get_contents($image['imageUrl']);
-                        $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
-                        $name = $image['fileName'];
-                        $path = $directory . '/' . $name;
-                        $resizedName = 'resized_'.$name;
-                        $resizedPath = $directory . '/' . $resizedName;
-                        Storage::put($path, $content);
-                        Storage::put($resizedPath, $resizedImageUrlContent);
-                        $productImage = new ProductImage();
-                        $productImage->product_id = $product1->id;
-                        $productImage->image_url = $path;
-                        $productImage->resized_image_url = $resizedPath;
-                        $productImage->save();
-                    }
-                }
+                /*if(!empty($product['images'])){
+                    $this->uploadImage($product,$product1->id,'products/wheels/'.$product1->id);
+                }*/
 
                 if ($product['prices']['msrp'] != NULL) {
                     foreach ($product['prices']['msrp'] as $productPrice) {
@@ -168,10 +169,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -194,6 +199,8 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] < strtotime(Carbon::now())) {
                 dump('newKey');
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
 
             $res = $client->request('GET', $url.'?pageSize=50&page='.$i);
@@ -232,22 +239,7 @@ class FetchController extends Controller
                 }
 
                 /*if(!empty($product['images'])){
-                    $directory = 'public/' . $product1->id;
-                    foreach ($product['images'] as $image) {
-                        $content = file_get_contents($image['imageUrl']);
-                        $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
-                        $name = $image['fileName'];
-                        $path = $directory . '/' . $name;
-                        $resizedName = 'resized_'.$name;
-                        $resizedPath = $directory . '/' . $resizedName;
-                        Storage::put($path, $content);
-                        Storage::put($resizedPath, $resizedImageUrlContent);
-                        $productImage = new ProductImage();
-                        $productImage->product_id = $product1->id;
-                        $productImage->image_url = $path;
-                        $productImage->resized_image_url = $resizedPath;
-                        $productImage->save();
-                    }
+                    $this->uploadImage($product,$product1->id,'products/tires/'.$product1->id);
                 }*/
 
                 if ($product['prices']['msrp'] != NULL) {
@@ -280,6 +272,27 @@ class FetchController extends Controller
         dd('success');
     }
 
+    public function uploadImage($product,$id,$directory)
+    {
+        if(!empty($product['images'])){
+            foreach ($product['images'] as $image) {
+                $content = file_get_contents($image['imageUrl']);
+                $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
+                $name = $image['fileName'];
+                $path = $directory . '/' . $name;
+                $resizedName = 'resized_'.$name;
+                $resizedPath = $directory . '/' . $resizedName;
+                Storage::put($path, $content);
+                Storage::put($resizedPath, $resizedImageUrlContent);
+                $productImage = new ProductImage();
+                $productImage->product_id = $id;
+                $productImage->image_url = $path;
+                $productImage->resized_image_url = $resizedPath;
+                $productImage->save();
+            }
+        }
+    }
+
     public function getProductDetails($sku)
     {
         if (Session::has('authorization')) {
@@ -287,10 +300,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -298,10 +315,12 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/products/v1/'.$sku;
+        $url = 'https://api.wheelpros.com/products/v1/details/'.$sku;
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
+
+        dump($data);
 
         return $data;
     }
@@ -313,10 +332,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -339,10 +362,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -365,10 +392,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -391,10 +422,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -417,10 +452,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
@@ -443,10 +482,14 @@ class FetchController extends Controller
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
         }
 
 
