@@ -14,34 +14,30 @@
     <meta name="keywords" content="">
 
     <!-- FAVICONS -->
-    <link rel="shortcut icon" href="{{asset('public/frontend/images/favicon.ico" type="image/x-icon')}}">
-    <link rel="apple-touch-icon" href="{{asset('public/frontend/images/apple-touch-icon.png')}}">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('public/frontend/images/apple-touch-icon-57x57.png')}}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('public/frontend/images/apple-touch-icon-72x72.png')}}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('public/frontend/images/apple-touch-icon-76x76.png')}}">
-    <link rel="apple-touch-icon" sizes="114x114"
-        href="{{asset('public/frontend/images/apple-touch-icon-114x114.png')}}">
-    <link rel="apple-touch-icon" sizes="120x120"
-        href="{{asset('public/frontend/images/apple-touch-icon-120x120.png')}}">
-    <link rel="apple-touch-icon" sizes="144x144"
-        href="{{asset('public/frontend/images/apple-touch-icon-144x144.png')}}">
-    <link rel="apple-touch-icon" sizes="152x152"
-        href="{{asset('public/frontend/images/apple-touch-icon-152x152.png')}}">
+    <link rel="shortcut icon" href="{{asset('frontend/images/favicon.ico" type="image/x-icon')}}">
+    <link rel="apple-touch-icon" href="{{asset('frontend/images/apple-touch-icon.png')}}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('frontend/images/apple-touch-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('frontend/images/apple-touch-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('frontend/images/apple-touch-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('frontend/images/apple-touch-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('frontend/images/apple-touch-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('frontend/images/apple-touch-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('frontend/images/apple-touch-icon-152x152.png')}}">
 
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/revolution/settings.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/revolution/layers.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/revolution/navigation.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/revolution/settings.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/revolution/layers.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/revolution/navigation.css')}}">
 
     <!-- BOOTSTRAP STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/bootstrap.min.css')}}">
     <!-- TEMPLATE STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/style.css')}}">
     <!-- RESPONSIVE STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/css/responsive.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/responsive.css')}}">
     <!-- COLORS -->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/css/colors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/colors.css')}}">
     <!-- CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/css/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/custom.css')}}">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -66,32 +62,32 @@
     <!-- ******************************************
     DEFAULT JAVASCRIPT FILES
     ********************************************** -->
-    <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
-    <script src="{{asset('public/frontend/js/bootstrap.js')}}"></script>
-    <script src="{{asset('public/frontend/js/bootstrap-select.js')}}"></script>
-    <script src="{{asset('public/frontend/js/retina.js')}}"></script>
-    <script src="{{asset('public/frontend/js/animate.js')}}"></script>
-    <script src="{{asset('public/frontend/js/device.js')}}"></script>
-    <script src="{{asset('public/frontend/js/parallax.js')}}"></script>
-    <script src="{{asset('public/frontend/js/fitvid.js')}}"></script>
-    <script src="{{asset('public/frontend/js/owl-carousel.js')}}"></script>
-    <script src="{{asset('public/frontend/js/custom.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.js')}}"></script>
+    <script src="{{asset('frontend/js/bootstrap.js')}}"></script>
+    <script src="{{asset('frontend/js/bootstrap-select.js')}}"></script>
+    <script src="{{asset('frontend/js/retina.js')}}"></script>
+    <script src="{{asset('frontend/js/animate.js')}}"></script>
+    <script src="{{asset('frontend/js/device.js')}}"></script>
+    <script src="{{asset('frontend/js/parallax.js')}}"></script>
+    <script src="{{asset('frontend/js/fitvid.js')}}"></script>
+    <script src="{{asset('frontend/js/owl-carousel.js')}}"></script>
+    <script src="{{asset('frontend/js/custom.js')}}"></script>
     <!-- revolution -->
-    <script src="{{asset('public/frontend/revolution/jquery.themepunch.tools.min.js')}}"></script>
-    <script src="{{asset('public/frontend/revolution/jquery.themepunch.revolution.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('public/frontend/revolution/revolution.extension.slideanims.min.js')}}">
+    <script src="{{asset('frontend/revolution/jquery.themepunch.tools.min.js')}}"></script>
+    <script src="{{asset('frontend/revolution/jquery.themepunch.revolution.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.slideanims.min.js')}}">
     </script>
-    <script type="text/javascript"
-        src="{{asset('public/frontend/revolution/revolution.extension.layeranimation.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('public/frontend/revolution/revolution.extension.navigation.min.js')}}">
+    <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.layeranimation.min.js')}}">
     </script>
-    <script type="text/javascript" src="{{asset('public/frontend/revolution/revolution.extension.kenburn.min.js')}}">
+    <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.navigation.min.js')}}">
     </script>
-    <script type="text/javascript" src="{{asset('public/frontend/revolution/revolution.extension.actions.min.js')}}">
+    <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.kenburn.min.js')}}">
     </script>
-    <script type="text/javascript" src="{{asset('public/frontend/revolution/revolution.extension.parallax.min.js')}}">
+    <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.actions.min.js')}}">
     </script>
-    <script type="text/javascript" src="{{asset('public/frontend/revolution/revolution.extension.migration.min.js')}}">
+    <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.parallax.min.js')}}">
+    </script>
+    <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.migration.min.js')}}">
     </script>
     <script type="text/javascript">
         /* ==============================================

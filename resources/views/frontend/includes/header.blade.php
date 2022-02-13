@@ -7,7 +7,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="logo-wrapper clearfix">
                     <a class="navbar-brand" href="{{route('frontend.pages.index')}}"><img
-                            src="{{asset('public/frontend/images/logo-white.png')}}" alt="" class="img-responsive"></a>
+                            src="{{asset('frontend/images/logo-white.png')}}" alt="" class="img-responsive"></a>
                 </div><!-- end logo -->
             </div><!-- end col -->
 

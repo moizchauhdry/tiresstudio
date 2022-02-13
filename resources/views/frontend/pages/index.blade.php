@@ -23,7 +23,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         <div class="car-price">
@@ -57,7 +57,7 @@
             PARALLAX
             ********************************************** -->
 <div class="parallax section" data-stellar-background-ratio="0.5"
-    style="background-image:url('public/frontend/uploads/parallax_01.jpg');">
+    style="background-image:url('frontend/uploads/parallax_01.jpg');">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-3 col-sm-3 col-xs-12 wow fadeIn">
@@ -110,7 +110,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -122,7 +122,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -134,7 +134,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -145,7 +145,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -157,7 +157,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/2.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -169,7 +169,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('public/frontend/wheels/3.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix">
@@ -184,14 +184,14 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 wow fadeInUp">
                 <div class="post-media">
-                    <a href="#"><img src="{{asset('public/frontend/uploads/banner_01.jpg')}}" alt=""
+                    <a href="#"><img src="{{asset('frontend/uploads/banner_01.jpg')}}" alt=""
                             class="img-responsive"></a>
                 </div><!-- end post-media -->
             </div><!-- end col -->
 
             <div class="col-md-6 col-sm-6 wow fadeInUp">
                 <div class="post-media">
-                    <a href="#"><img src="{{asset('public/frontend/uploads/banner_02.jpg')}}" alt=""
+                    <a href="#"><img src="{{asset('frontend/uploads/banner_02.jpg')}}" alt=""
                             class="img-responsive"></a>
                 </div><!-- end post-media -->
             </div><!-- end col -->
@@ -308,7 +308,7 @@
             PARALLAX LAST
             ********************************************** -->
 <div class="parallax section" data-stellar-background-ratio="0.5"
-    style="background-image:url('public/frontend/uploads/parallax_02.jpg');">
+    style="background-image:url('frontend/uploads/parallax_02.jpg');">
     <div class="container bgcolor">
         <div class="row">
             <div class="col-md-4 col-sm-12">
@@ -334,7 +334,7 @@
                             skilled, well-organized and experienced team of professional team mates how all this
                             mistaken idea of and praising a complete account of the system.</p>
                         <div class="testi-meta">
-                            <img src="{{asset('public/frontend/uploads/testi_01.png')}}" alt=""
+                            <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
                                 class="img-responsive alignleft">
                             <h4>James Fernando <small>- Manager of Racer</small></h4>
                             <div class="rating">
@@ -352,7 +352,7 @@
                             skilled, well-organized and experienced team of professional team mates how all this
                             mistaken idea of and praising a complete account of the system.</p>
                         <div class="testi-meta">
-                            <img src="{{asset('public/frontend/uploads/testi_01.png')}}" alt=""
+                            <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
                                 class="img-responsive alignleft">
                             <h4>James Fernando <small>- Manager of Racer</small></h4>
                             <div class="rating">
