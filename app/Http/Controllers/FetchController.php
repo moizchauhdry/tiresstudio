@@ -128,9 +128,9 @@ class FetchController extends Controller
                     \Log::info($e);
                 }
 
-                /*if(!empty($product['images'])){
+                if(!empty($product['images'])){
                     $this->uploadImage($product,$product1->id,'products/wheels/'.$product1->id);
-                }*/
+                }
 
                 if ($product['prices']['msrp'] != NULL) {
                     foreach ($product['prices']['msrp'] as $productPrice) {
@@ -159,7 +159,6 @@ class FetchController extends Controller
             dump('Iteration = '. ($i) . ' executed.');
         }
 
-        dd('success');
     }
 
     public function fetchTireProducts()
@@ -238,9 +237,9 @@ class FetchController extends Controller
                     \Log::info($e);
                 }
 
-                /*if(!empty($product['images'])){
+                if(!empty($product['images'])){
                     $this->uploadImage($product,$product1->id,'products/tires/'.$product1->id);
-                }*/
+                }
 
                 if ($product['prices']['msrp'] != NULL) {
                     foreach ($product['prices']['msrp'] as $productPrice) {
@@ -269,7 +268,6 @@ class FetchController extends Controller
             dump('Iteration = '. ($i) . ' executed.');
         }
 
-        dd('success');
     }
 
     public function uploadImage($product,$id,$directory)
@@ -319,8 +317,6 @@ class FetchController extends Controller
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
-
-        dump($data);
 
         return $data;
     }
