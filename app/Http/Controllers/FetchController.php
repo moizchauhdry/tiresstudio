@@ -12,6 +12,7 @@ use App\VehicleModel;
 use App\VehicleModelAxle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -274,19 +275,24 @@ class FetchController extends Controller
     {
         if(!empty($product['images'])){
             foreach ($product['images'] as $image) {
-                $content = file_get_contents($image['imageUrl']);
-                $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
-                $name = $image['fileName'];
-                $path = $directory . '/' . $name;
-                $resizedName = 'resized_'.$name;
-                $resizedPath = $directory . '/' . $resizedName;
-                Storage::put($path, $content);
-                Storage::put($resizedPath, $resizedImageUrlContent);
-                $productImage = new ProductImage();
-                $productImage->product_id = $id;
-                $productImage->image_url = $path;
-                $productImage->resized_image_url = $resizedPath;
-                $productImage->save();
+                try {
+                    $content = file_get_contents($image['imageUrl']);
+                    $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
+                    $name = $image['fileName'];
+                    $path = $directory . '/' . $name;
+                    $resizedName = 'resized_'.$name;
+                    $resizedPath = $directory . '/' . $resizedName;
+                    Storage::put($path, $content);
+                    Storage::put($resizedPath, $resizedImageUrlContent);
+                    $productImage = new ProductImage();
+                    $productImage->product_id = $id;
+                    $productImage->image_url = $path;
+                    $productImage->resized_image_url = $resizedPath;
+                    $productImage->save();
+                }catch(\Throwable $e){
+                    Log::info('Error Logged at '.Carbon::now(). ' from images loop');
+                    Log::info($e);
+                }
             }
         }
     }
