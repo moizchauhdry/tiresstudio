@@ -24,9 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('fetch:wheels')->daily()->withoutOverlapping();
-        $schedule->command('fetch:tires')->daily()->withoutOverlapping();
-        $schedule->command('fetch:vehicles')->daily()->withoutOverlapping();
+        $schedule->command('fetch:wheels')->dailyAt('22:30')->withoutOverlapping();
+        $schedule->command('fetch:tires')->dailyAt('22:30')->withoutOverlapping();
+        $schedule->command('fetch:vehicles')->dailyAt('22:30')->withoutOverlapping();
     }
 
     /**
