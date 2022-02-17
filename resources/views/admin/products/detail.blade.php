@@ -281,8 +281,8 @@
                             <div class="row">
                                 @foreach($product->images as $image)
                                 <div class="col-6 col-md-2">
-                                    <img src="{{ '/storage/app/public/'.$image->resized_image_url}}"
-                                        data-src="{{ '/storage/app/public/'.$image->image_url}}" alt="..."
+                                    <img src="{{ '../../../storage/'.$image->resized_image_url}}"
+                                        data-src="{{ '../../../storage/'.$image->image_url}}" alt="..."
                                         class="img-thumbnail img-pop">
                                 </div>
                                 @endforeach
