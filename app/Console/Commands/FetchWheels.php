@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\FetchController;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class FetchWheels extends Command
 {
@@ -38,6 +40,7 @@ class FetchWheels extends Command
      */
     public function handle()
     {
+        Log::info('Cron Job Fetch Wheels at  '.Carbon::now());
         $controller = new FetchController();
         $controller->fetchProducts();
 
