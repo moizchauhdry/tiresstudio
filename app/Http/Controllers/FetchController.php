@@ -130,7 +130,7 @@ class FetchController extends Controller
                 }
 
                 if(!empty($product['images'])){
-                    $this->uploadImage($product,$product1->id,'public/products/wheels/'.$product1->id);
+                    $this->uploadImage($product,$product1->id,'public/products/wheels/'.$brand->code);
                 }
 
                 if ($product['prices']['msrp'] != NULL) {
