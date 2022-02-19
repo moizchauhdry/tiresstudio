@@ -274,7 +274,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Product::orderBy('id','DESC')->get();
+            $data = Product::select('id','sku','upc','sku_type','title')->orderBy('id','DESC')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function(Product $data){
