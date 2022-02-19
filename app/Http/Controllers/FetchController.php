@@ -130,7 +130,7 @@ class FetchController extends Controller
                 }
 
                 if(!empty($product['images'])){
-                    $this->uploadImage($product,$product1->id,'products/wheels/'.$product1->id);
+                    $this->uploadImage($product,$product1->id,'public/products/wheels/'.$product1->id);
                 }
 
                 if ($product['prices']['msrp'] != NULL) {
@@ -239,7 +239,7 @@ class FetchController extends Controller
                 }
 
                 if(!empty($product['images'])){
-                    $this->uploadImage($product,$product1->id,'products/tires/'.$product1->id);
+                    $this->uploadImage($product,$product1->id,'public/products/tires/'.$product1->id);
                 }
 
                 if ($product['prices']['msrp'] != NULL) {
