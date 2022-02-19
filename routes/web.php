@@ -85,3 +85,13 @@ Route::group(['middleware' => 'prevent-back-history'], function()
 
 // Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ *****************************************************************************
+ ************************** DEVELOPMENT ROUTES *******************************
+ *****************************************************************************
+ */
+
+Route::group(['prefix' => 'development'],function (){
+    Route::get('/deleteTires','DevelopmentController@removeTires');
+});
