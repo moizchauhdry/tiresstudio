@@ -276,6 +276,10 @@ class FetchController extends Controller
         if(!empty($product['images'])){
             foreach ($product['images'] as $image) {
                 try {
+                    $productImage = ProductImage::where('product_id',$id)->where('filename',$image['fileName'])->first();
+                    if($productImage != null){
+                        return true;
+                    }
                     $content = file_get_contents($image['imageUrl']);
                     $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
                     $name = $image['fileName'];
@@ -295,6 +299,7 @@ class FetchController extends Controller
                 }
             }
         }
+        return true;
     }
 
     public function getProductDetails($sku)
