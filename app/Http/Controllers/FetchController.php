@@ -228,7 +228,7 @@ class FetchController extends Controller
                 ];
 
                 $product1 = Product::updateOrCreate(['sku' => $product['sku'],
-                    'upc' => $product['sku']], $ProductData);
+                    'upc' => $product['upc']], $ProductData);
                 $product1->save();
 
                 try {
