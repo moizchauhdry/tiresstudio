@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,9 +26,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('fetch:wheels')->dailyAt('07:00')->withoutOverlapping();
-        $schedule->command('fetch:tires')->dailyAt('07:00')->withoutOverlapping();
-        $schedule->command('fetch:vehicles')->dailyAt('07:00')->withoutOverlapping();
+        Log::info('A Hit by CRONJOB at '.Carbon::now());
+        $schedule->command('fetch:wheels')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:wheels Successes');})->onFailure(function (){ \Log::info('fetch:wheels Faileddaily');});
+        $schedule->command('fetch:tires')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:tires Successes');})->onFailure(function (){ \Log::info('fetch:tires Faileddaily');});
+        $schedule->command('fetch:vehicles')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:vehicles Successes');})->onFailure(function (){ \Log::info('fetch:vehicles Faileddaily');});
     }
 
     /**

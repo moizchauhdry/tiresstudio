@@ -20,8 +20,8 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-info">
                     <div class="inner">
-                        {{--<h3>{{ $products ?? '0' }}</h3>--}}
-                        <h3>12000</h3>
+                        <h3>{{ $products ?? '0' }}</h3>
+                        {{--<h3>12000</h3>--}}
                         <p>Total Products</p>
                     </div>
                     <div class="icon">
@@ -32,8 +32,8 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-success">
                     <div class="inner">
-                        {{--<h3>{{ $wheels ?? '0' }}</h3>--}}
-                        <h3>10000</h3>
+                        <h3>{{ $wheels ?? '0' }}</h3>
+                        {{--<h3>10000</h3>--}}
                         <p>Total Wheels</p>
                     </div>
                     <div class="icon">
@@ -44,8 +44,8 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-warning">
                     <div class="inner">
-                        {{--<h3>{{ $tires ?? '0' }}</h3>--}}
-                        <h3>2000</h3>
+                        <h3>{{ $tires ?? '0' }}</h3>
+                        {{--<h3>2000</h3>--}}
                         <p>Total Tires</p>
                     </div>
                     <div class="icon">
