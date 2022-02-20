@@ -290,6 +290,7 @@ class FetchController extends Controller
                     Storage::put($resizedPath, $resizedImageUrlContent);
                     $productImage = new ProductImage();
                     $productImage->product_id = $id;
+                    $productImage->filename = $name;
                     $productImage->image_url = $path;
                     $productImage->resized_image_url = $resizedPath;
                     $productImage->save();

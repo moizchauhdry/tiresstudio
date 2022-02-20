@@ -147,22 +147,22 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Delivery status
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li>--}}
+                {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Promotions
                         </p>
                     </a>
-                </li>
+                </li>--}}
                 <li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
@@ -203,14 +203,14 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Manage Surveys
                         </p>
                     </a>
-                </li>
+                </li>--}}
                 <li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
@@ -219,14 +219,14 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Manage Appointments
                         </p>
                     </a>
-                </li>
+                </li>--}}
                 <li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
@@ -243,7 +243,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
@@ -258,7 +258,7 @@
                             Top orders
                         </p>
                     </a>
-                </li>
+                </li>--}}
 
 
 
