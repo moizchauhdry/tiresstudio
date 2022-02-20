@@ -11,7 +11,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $response['popular_wheels'] = Product::take(9)->get();
+        $response['popular_wheels'] = Product::take(9)->where('sku_type','Wheel')->get();
         return view('frontend.pages.index',compact('response'));
     }
 }
