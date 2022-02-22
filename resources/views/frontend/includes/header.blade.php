@@ -61,10 +61,9 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">Brands <span class="fa fa-angle-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Brand 1</a></li>
-                            <li><a href="#">Brand 2</a></li>
-                            <li><a href="#">Brand 3</a></li>
-                            <li><a href="#">Brand 4</a></li>
+                            @foreach ($brands as $brand)
+                            <li><a href="#">{{$brand->parent}}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li><a href="{{route('frontend.pages.shop')}}">Shop</a></li>
