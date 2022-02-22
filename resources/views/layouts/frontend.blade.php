@@ -50,7 +50,6 @@
 
     <div id="wrapper">
         @include('frontend.includes.header')
-        @include('frontend.includes.slider')
         @yield('content')
         @include('frontend.includes.footer')
     </div><!-- end wrapper -->

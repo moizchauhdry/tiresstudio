@@ -2,17 +2,26 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'Frontend\FrontendController@index')->name('frontend.pages.index');
+/**
+ *****************************************************************************
+ ************************** FRONTEND ROUTES *******************************
+ *****************************************************************************
+*/
 
-Route::get('/getSessions', function () {
-    dd(Session::all());
-});
+Route::get('/', 'Frontend\FrontendController@index')->name('frontend.pages.index');
+Route::get('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
+Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('frontend.pages.product');
 
 /**
  *****************************************************************************
  ************************** ADMIN PANEL ROUTES *******************************
  *****************************************************************************
 */
+
+Route::get('/getSessions', function () {
+    dd(Session::all());
+});
+
 Route::group(['middleware' => 'prevent-back-history'], function()
 {
     Route::get('/admin/dashboard', function () {

@@ -14,4 +14,16 @@ class FrontendController extends Controller
         $response['popular_wheels'] = Product::take(9)->get();
         return view('frontend.pages.index',compact('response'));
     }
+
+    public function shop()
+    {
+        $response['products'] = Product::paginate(12);
+        return view('frontend.pages.shop',compact('response'));
+    }
+
+    public function product($id)
+    {
+        $response['product'] = Product::find($id);
+        return view('frontend.pages.product',compact('response'));
+    }
 }

@@ -39,7 +39,7 @@
     </div><!-- end container -->
 </div><!-- end header -->
 
-<div class="transparent-header">
+<div class="{{Route::currentRouteName() == 'frontend.pages.index' ? '' : 'normal-header'}} transparent-header">
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
@@ -54,9 +54,9 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Wheels</a></li>
-                    <li><a href="#">Tires</a></li>
-                    <li><a href="#">Accessories</a></li>
+                    <li><a href="{{route('frontend.pages.shop')}}">Wheels</a></li>
+                    <li><a href="{{route('frontend.pages.shop')}}">Tires</a></li>
+                    <li><a href="{{route('frontend.pages.shop')}}">Accessories</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">Brands <span class="fa fa-angle-down"></span></a>
@@ -67,7 +67,7 @@
                             <li><a href="#">Brand 4</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Shop</a></li>
+                    <li><a href="{{route('frontend.pages.shop')}}">Shop</a></li>
                     <li><a href="#">Gallery</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

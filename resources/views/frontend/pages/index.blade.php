@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('frontend.includes.slider')
+
 <div class="section">
     <div class="container">
 
