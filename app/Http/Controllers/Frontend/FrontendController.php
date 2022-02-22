@@ -26,4 +26,29 @@ class FrontendController extends Controller
         $response['product'] = Product::find($id);
         return view('frontend.pages.product',compact('response'));
     }
+
+    public function cart()
+    {
+        return view('frontend.pages.cart');
+    }
+
+    public function checkout()
+    {
+        return view('frontend.pages.checkout');
+    }
+
+    public function contact()
+    {
+        return view('frontend.pages.contact');
+    }
+
+    public function about()
+    {
+        return view('frontend.pages.about');
+    }
+
+    public function gallery()
+    {
+        return view('frontend.pages.gallery');
+    }
 }

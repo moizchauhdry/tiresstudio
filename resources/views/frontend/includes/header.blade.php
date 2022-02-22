@@ -53,10 +53,10 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{route('frontend.pages.index')}}">Home</a></li>
                     <li><a href="{{route('frontend.pages.shop')}}">Wheels</a></li>
-                    <li><a href="{{route('frontend.pages.shop')}}">Tires</a></li>
-                    <li><a href="{{route('frontend.pages.shop')}}">Accessories</a></li>
+                    <li><a href="#">Tires</a></li>
+                    <li><a href="#">Accessories</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">Brands <span class="fa fa-angle-down"></span></a>
@@ -68,25 +68,26 @@
                         </ul>
                     </li>
                     <li><a href="{{route('frontend.pages.shop')}}">Shop</a></li>
-                    <li><a href="#">Gallery</a></li>
+                    <li><a href="{{route('frontend.pages.gallery')}}">Gallery</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">About <span class="fa fa-angle-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">About Tiresstudio</a></li>
+                            <li><a href="{{route('frontend.pages.about')}}">About Tiresstudio</a></li>
                             <li><a href="#">News & Blogs</a></li>
                             <li><a href="#">Warranty</a></li>
                             <li><a href="#">FAQ's</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="social-header"><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-skype"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li class="navbar-cart"><a href="#">Cart <i class="fa fa-shopping-cart"></i>
+                    <li class="navbar-cart"><a href="{{route('frontend.pages.cart')}}">Cart <i
+                                class="fa fa-shopping-cart"></i>
                             <small>0</small></a></li>
                 </ul>
             </div>

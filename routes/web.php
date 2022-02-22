@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.pages.index');
 Route::get('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
 Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('frontend.pages.product');
+Route::get('/cart', 'Frontend\FrontendController@cart')->name('frontend.pages.cart');
+Route::get('/checkout', 'Frontend\FrontendController@checkout')->name('frontend.pages.checkout');
+Route::get('/contact', 'Frontend\FrontendController@contact')->name('frontend.pages.contact');
+Route::get('/about', 'Frontend\FrontendController@about')->name('frontend.pages.about');
+Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pages.gallery');
 
 /**
  *****************************************************************************

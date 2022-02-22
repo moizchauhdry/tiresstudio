@@ -46,7 +46,7 @@
 
 </head>
 
-<body>
+<body class="{{Route::currentRouteName()=='frontend.pages.cart' ? 'cart' : '' }}">
 
     <div id="wrapper">
         @include('frontend.includes.header')
@@ -127,6 +127,8 @@
     );
     /*ready*/
     </script>
+
+    @yield('scripts')
 
 </body>
 
