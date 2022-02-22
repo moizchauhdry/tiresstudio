@@ -35,6 +35,16 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-4 form-group">
+                                    <label for="sku_type">Type</label>
+                                    <select class="form-control" name="sku_type" id="sku_type">
+                                        <option value="">Choose ..</option>
+                                        <option value="WHEEL">Wheel</option>
+                                        <option value="TIRE">Tire</option>
+                                    </select>
+                                </div>
+                            </div>
                             <table id="products" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -75,6 +85,10 @@
                 "searching": true,
                 ajax: {
                     url: "{{ route('products.index') }}",
+                    data: function (d) {
+                        d.sku_type = $('#sku_type').val(),
+                        d.search = $('input[type="search"]').val()
+                    }
                 },
                 order:[[1,"desc"]],
                 columns: [
@@ -90,6 +104,11 @@
                     $('#countTotal').empty();
                     $('#countTotal').append(response['json'].recordsTotal);
                 }
+            });
+
+            $('#sku_type').change(function(){
+                table.draw();
+                $("#sku_type").val($(this).val());
             });
 
 

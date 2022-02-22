@@ -131,7 +131,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-6">
+{{--            <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-olive">
                     <div class="inner">
                         <h3>{{ $appointments ?? '0' }}</h3>
@@ -141,7 +141,7 @@
                         <i class="ion ion-bag"></i>
                     </div>
                 </div>
-            </div>
+            </div>--}}
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-teal">
                     <div class="inner">
@@ -154,7 +154,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{--<div class="row">
             <div class="col-12 col-md-6">
                 <div class="card">
                     <div class="card-header border-0">
@@ -255,7 +255,7 @@
 
                 </div>
             </div>
-        </div>
+        </div>--}}
 
     </div>
 </section>

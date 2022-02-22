@@ -27,4 +27,13 @@ class Product extends Model
     {
         return $this->hasOne(ProductInventory::class);
     }
+
+    public function getProductImageAttribute()
+    {
+        $image = $this->images()->first();
+        if($image != null){
+            return $image->image_url;
+        }
+        return '';
+    }
 }

@@ -25,7 +25,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('storage/'.$wheel->product_image)}}" alt="" class="img-responsive">
                         <div class="magnifier">
                         </div><!-- end magnifier -->
                         {{-- <div class="car-price">

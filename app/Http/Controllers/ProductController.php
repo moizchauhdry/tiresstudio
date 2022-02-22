@@ -274,12 +274,30 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Product::select('id','sku','upc','sku_type','title')->orderBy('id','DESC')->get();
+            $data = Product::select('id','sku','upc','sku_type','title');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function(Product $data){
                     $btn1 = '<a class="btn btn-primary btn-sm" href="'.route('products.show', $data->id).'">View Detail</a>';
                     return $btn1;
+                })
+                ->filter(function ($instance) use ($request) {
+
+                    if ($request->get('sku_type')) {
+                        $instance->where('sku_type', $request->get('sku_type'));
+                    }
+
+
+                    if (!empty($request->get('search'))) {
+                        $instance->where(function($query) use($request){
+                            $search = $request->get('search');
+                            $query->orWhere('id', 'LIKE', "%$search%")
+                                ->orWhere('sku', 'LIKE', "%$search%")
+                                ->orWhere('upc', 'LIKE', "%$search%")
+                                ->orWhere('sku_type', 'LIKE', "%$search%")
+                                ->orWhere('title', 'LIKE', "%$search%");
+                        });
+                    }
                 })
                 ->rawColumns(['action'])
                 ->make(true);
