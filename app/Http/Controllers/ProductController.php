@@ -273,6 +273,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $brands = Brand::all();
         if ($request->ajax()) {
             $data = Product::select('id','sku','upc','sku_type','title');
             return Datatables::of($data)
@@ -285,6 +286,10 @@ class ProductController extends Controller
 
                     if ($request->get('sku_type')) {
                         $instance->where('sku_type', $request->get('sku_type'));
+                    }
+
+                    if ($request->get('brand_id')) {
+                        $instance->where('brand_id', $request->get('brand_id'));
                     }
 
 
@@ -302,7 +307,7 @@ class ProductController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.products.index');
+        return view('admin.products.index',compact('brands'));
     }
 
     /**
