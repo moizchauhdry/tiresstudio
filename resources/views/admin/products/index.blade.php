@@ -44,6 +44,15 @@
                                         <option value="TIRE">Tire</option>
                                     </select>
                                 </div>
+                                <div class="col-12 col-md-4 form-group">
+                                    <label for="sku_type">Brands</label>
+                                    <select class="form-control" name="brand_id" id="brand_id">
+                                        <option value="">Choose ..</option>
+                                        @foreach($brands as $brand)
+                                            <option value="{{ $brand->id }}">{{ $brand->description }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <table id="products" class="table table-bordered table-striped">
                                 <thead>
@@ -87,6 +96,7 @@
                     url: "{{ route('products.index') }}",
                     data: function (d) {
                         d.sku_type = $('#sku_type').val(),
+                        d.brand_id = $('#brand_id').val(),
                         d.search = $('input[type="search"]').val()
                     }
                 },
@@ -106,9 +116,8 @@
                 }
             });
 
-            $('#sku_type').change(function(){
+            $('#sku_type,#brand_id').change(function(){
                 table.draw();
-                $("#sku_type").val($(this).val());
             });
 
 
