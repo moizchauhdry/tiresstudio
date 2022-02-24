@@ -52,4 +52,9 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.gallery');
     }
+
+    public function register()
+    {
+        return view('frontend.pages.register');
+    }
 }

@@ -16,6 +16,7 @@ Route::get('/checkout', 'Frontend\FrontendController@checkout')->name('frontend.
 Route::get('/contact', 'Frontend\FrontendController@contact')->name('frontend.pages.contact');
 Route::get('/about', 'Frontend\FrontendController@about')->name('frontend.pages.about');
 Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pages.gallery');
+Route::get('/register', 'Frontend\FrontendController@register')->name('frontend.pages.register');
 
 /**
  *****************************************************************************

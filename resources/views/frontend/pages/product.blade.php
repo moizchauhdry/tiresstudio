@@ -25,7 +25,7 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-sm-12">
+            <div class="col-md-8 col-sm-12">
                 <div class="single-car-wrapper clearfix">
                     <!-- main slider carousel -->
                     <div class="row">
@@ -35,24 +35,19 @@
                                     <!-- main slider carousel items -->
                                     <div class="carousel-inner">
                                         <div class="active item" data-slide-number="0">
-                                            <img src="{{asset('frontend/uploads/single_car_01.png')}}" alt=""
-                                                class="img-responsive">
+                                            <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                                         </div>
                                         <div class="item" data-slide-number="1">
-                                            <img src="{{asset('frontend/uploads/single_car_02.png')}}" alt=""
-                                                class="img-responsive">
+                                            <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
                                         </div>
                                         <div class="item" data-slide-number="2">
-                                            <img src="{{asset('frontend/uploads/single_car_03.png')}}" alt=""
-                                                class="img-responsive">
+                                            <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
                                         </div>
                                         <div class="item" data-slide-number="3">
-                                            <img src="{{asset('frontend/uploads/single_car_04.png')}}" alt=""
-                                                class="img-responsive">
+                                            <img src="{{asset('frontend/wheels/4.png')}}" alt="" class="img-responsive">
                                         </div>
                                         <div class="item" data-slide-number="4">
-                                            <img src="{{asset('frontend/uploads/single_car_05.png')}}" alt=""
-                                                class="img-responsive">
+                                            <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                                         </div>
                                     </div>
                                     <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
@@ -69,32 +64,27 @@
                         <ul class="list-inline">
                             <li class="col-md-15 col-sm-15 col-xs-6">
                                 <a id="carousel-selector-0" class="selected">
-                                    <img src="{{asset('frontend/uploads/single_car_01.png')}}" alt=""
-                                        class="img-responsive">
+                                    <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                                 </a>
                             </li>
                             <li class="col-md-15 col-sm-15 col-xs-6">
                                 <a id="carousel-selector-1">
-                                    <img src="{{asset('frontend/uploads/single_car_02.png')}}" alt=""
-                                        class="img-responsive">
+                                    <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
                                 </a>
                             </li>
                             <li class="col-md-15 col-sm-15 col-xs-6">
                                 <a id="carousel-selector-2">
-                                    <img src="{{asset('frontend/uploads/single_car_03.png')}}" alt=""
-                                        class="img-responsive">
+                                    <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
                                 </a>
                             </li>
                             <li class="col-md-15 col-sm-15 col-xs-6">
                                 <a id="carousel-selector-3">
-                                    <img src="{{asset('frontend/uploads/single_car_04.png')}}" alt=""
-                                        class="img-responsive">
+                                    <img src="{{asset('frontend/wheels/4.png')}}" alt="" class="img-responsive">
                                 </a>
                             </li>
                             <li class="col-md-15 col-sm-15 col-xs-6">
                                 <a id="carousel-selector-4">
-                                    <img src="{{asset('frontend/uploads/single_car_05.png')}}" alt=""
-                                        class="img-responsive">
+                                    <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
                                 </a>
                             </li>
                         </ul>
@@ -119,42 +109,6 @@
                             <img src="{{asset('frontend/uploads/car_custom_01.png')}}" alt="" class="img-responsive">
                         </div>
                     </div><!-- end desc -->
-
-                    <div class="car-table clearfix">
-                        <p><strong>Key Features</strong> of Audi A8 3.0 TDI S12 Quattro Tiptronic </p>
-                        <i class="fa fa-angle-down"></i>
-                    </div><!-- end car-table -->
-
-                    <div class="table-responsive">
-                        <table class="table car-table-wrapper">
-                            <tbody>
-                                <tr>
-                                    <td>Body</td>
-                                    <td><strong>Convirtible</strong></td>
-                                    <td>Transmission</td>
-                                    <td><strong>Semi Automatic</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Total Kilometres</td>
-                                    <td><strong>2090Km’s</strong></td>
-                                    <td>Engine</td>
-                                    <td><strong>3.7L V-L cyl</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Fuel Type</td>
-                                    <td><strong>Diesel</strong></td>
-                                    <td>Fuel Economy</td>
-                                    <td><strong>14.55 kmpl</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Reg.Year</td>
-                                    <td><strong>2013, Aug</strong></td>
-                                    <td>Color</td>
-                                    <td><strong>TitaniumMetalic</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div><!-- end table-responsive -->
 
                     <div class="car-table clearfix">
                         <p><strong>Technical Details</strong> of Audi A8 3.0 TDI S12 Quattro Tiptronic </p>
@@ -561,295 +515,7 @@
                 </div><!-- end single-car-wrapper -->
             </div><!-- end col -->
 
-            <div class="custom-sidebar col-md-3 col-sm-12">
-                <div class="widget light-widget clearfix">
-                    <div class="inner-addon right-addon">
-                        <i class="glyphicon glyphicon-search"></i>
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                </div><!-- end widget -->
-
-                <div class="widget clearfix">
-                    <div class="search-tab light-tab clearfix">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs search-tab-nav" role="tablist">
-                            <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">New
-                                    Cars</a></li>
-                            <li role="presentation"><a href="#tab02" role="tab" data-toggle="tab">Used Cars</a></li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane in active" id="tab01">
-                                <div class="search-wrapper">
-                                    <form class="row">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Make:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>All Makes</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Models:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>All Models</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Body:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>Convertible:</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Year:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>2012 - 2013</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Min Price:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>$30.000</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Max Price:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>$130.000</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Transmission:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>Semi Automatic</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Color:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>Titanium Metalic</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-12 col-xs-12">
-                                            <button class="btn btn-primary btn-block">FIND A CAR</button>
-                                            <a href="#" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
-                                        </div><!-- end col -->
-                                    </form><!-- end row -->
-                                </div><!-- end search-wrapper -->
-                            </div><!-- end tab-pane -->
-
-                            <div role="tabpanel" class="tab-pane" id="tab02">
-                                <div class="search-wrapper">
-                                    <form class="row">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Make:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>All Makes</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Models:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>All Models</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Body:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>Convertible:</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Year:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>2012 - 2013</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Min Price:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>$30.000</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Max Price:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>$130.000</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-input">
-                                                <label>Transmission:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>Semi Automatic</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-
-                                            <div class="form-input">
-                                                <label>Color:</label>
-                                                <select name="orderby" class="selectpicker">
-                                                    <option>Titanium Metalic</option>
-                                                    <option>Select Dropdown 01</option>
-                                                    <option>Select Dropdown 02</option>
-                                                    <option>Select Dropdown 03</option>
-                                                    <option>Select Dropdown 04</option>
-                                                    <option>Select Dropdown 05</option>
-                                                </select>
-                                            </div><!-- end form-input -->
-                                        </div><!-- end col -->
-
-                                        <div class="col-md-12 col-xs-12">
-                                            <button class="btn btn-primary btn-block">FIND A CAR</button>
-                                        </div><!-- end col -->
-                                    </form><!-- end row -->
-                                </div><!-- end search-wrapper -->
-                            </div><!-- end tab-pane -->
-                        </div><!-- end tab content -->
-                    </div>
-                </div><!-- end widget -->
-
-                <div class="widget custom-widget clearfix">
-                    <div class="section-title clearfix">
-                        <h5>Customers Reviews</h5>
-                        <hr class="custom">
-                    </div><!-- end section-title -->
-                    <div class="sidebar-testimonial">
-                        <div class="testimonial clearfix">
-                            <p class="lead">They have got my project on time with competition well-organized and very
-                                experienced team of professional engineers.</p>
-                            <div class="testi-meta">
-                                <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
-                                    class="img-responsive alignleft">
-                                <h4>James Fernando <small>- Manager of Racer</small></h4>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div><!-- end rating -->
-                            </div><!-- end testi-meta -->
-                        </div><!-- end testimonial -->
-                    </div><!-- end sidebar-testimonial -->
-                </div><!-- end widget -->
-
-                <div class="widget custom-widget clearfix">
-                    <div class="section-title clearfix">
-                        <h5>Engines Brochure</h5>
-                        <hr class="custom">
-                    </div><!-- end section-title -->
-
-                    <div class="brochures">
-                        <a href="#"><i class="fa fa-file-pdf-o"></i> Car Manual Book.pdf</a>
-                        <hr class="invis2">
-                        <a href="#"><i class="fa fa-file-pdf-o"></i> Engines Profile.pdf</a>
-                    </div><!-- end brochures -->
-                </div><!-- end widget -->
-
+            <div class="custom-sidebar col-md-4 col-sm-12">
                 <div class="widget custom-widget clearfix">
                     <div class="calculator">
                         <div class="calculator-title">
@@ -915,13 +581,40 @@
                                         <h5>Total Amount:</h5>
                                         <label class="totalpay">$525759.84</label>
                                         <hr class="invis2">
-                                        <a href="#" class="btn btn-default btn-block">CALCULATE</a>
+                                        <a href="#" class="btn btn-default btn-block">ADD TO CART</a>
                                     </div><!-- end col -->
                                 </form>
                             </div><!-- end search wrapper -->
                         </div><!-- end body -->
                     </div><!-- end calculator -->
                 </div><!-- d widget -->
+
+                <div class="widget custom-widget clearfix">
+                    <div class="section-title clearfix">
+                        <h5>Customers Reviews</h5>
+                        <hr class="custom">
+                    </div><!-- end section-title -->
+                    <div class="sidebar-testimonial">
+                        <div class="testimonial clearfix">
+                            <p class="lead">They have got my project on time with competition well-organized and very
+                                experienced team of professional engineers.</p>
+                            <div class="testi-meta">
+                                <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
+                                    class="img-responsive alignleft">
+                                <h4>James Fernando <small>- Manager of Racer</small></h4>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div><!-- end rating -->
+                            </div><!-- end testi-meta -->
+                        </div><!-- end testimonial -->
+                    </div><!-- end sidebar-testimonial -->
+                </div><!-- end widget -->
+
+
             </div><!-- end col -->
         </div><!-- end row -->
     </div><!-- end container -->
