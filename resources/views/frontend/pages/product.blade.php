@@ -581,7 +581,8 @@
                                         <h5>Total Amount:</h5>
                                         <label class="totalpay">$525759.84</label>
                                         <hr class="invis2">
-                                        <a href="#" class="btn btn-default btn-block">ADD TO CART</a>
+                                        <button class="btn btn-default btn-block" type="button"
+                                            onclick="addToCart('{{$product->id}}')">ADD TO CART</button>
                                     </div><!-- end col -->
                                 </form>
                             </div><!-- end search wrapper -->
@@ -619,4 +620,27 @@
         </div><!-- end row -->
     </div><!-- end container -->
 </div><!-- end section -->
+@endsection
+
+@section('scripts')
+<script>
+    function addToCart(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('frontend.pages.cart')}}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                'product_id': product_id,
+            },
+            success: function (response) {
+                // alert('success');
+                $('#add_to_cart_'+product_id).addClass('hidden');
+                $('#success_'+product_id).removeClass('hidden');
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(1);
+                $("#cart_items_count").html(response);
+            }
+        });
+    }
+</script>
 @endsection
