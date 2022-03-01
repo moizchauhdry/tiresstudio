@@ -28,6 +28,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="shop_cart_table">
                     <div class="row">
+                        {{-- {{$products}} --}}
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="table-responsive">
                                 <table class="table table-1">
@@ -40,11 +41,12 @@
                                         <th><span>Remove</span></th>
                                     </tr>
 
+                                    @foreach ($products as $product)
                                     <tr>
                                         <td class="flex_item clear_fix">
                                             <img src="{{asset('frontend/uploads/shop_01.jpg')}}" alt="images"
                                                 class="alignleft img-responsive">
-                                            <h6 class="float_left">Start From The Art</h6>
+                                            <h6 class="float_left">{{$product->title}}</h6>
                                         </td>
                                         <td>
                                             <input type="number" name="quantity" min="0" value="1">
@@ -58,59 +60,12 @@
                                         <td><span>$ 25.99</span></td>
                                         <td><span class="">$ 25.99</span></td>
                                         <td>
-                                            <input type="checkbox" style="vertical-align:-2px;"> <span
+                                            <input type="checkbox" style="vertical-align:-2px;"
+                                                onclick="removeItemFromCart('{{$product->id}}')"> <span
                                                 style="padding-left:7px;">Remove</span>
                                         </td>
                                     </tr>
-                                    <!-- /tr -->
-
-                                    <tr>
-                                        <td class="flex_item clear_fix">
-                                            <img src="{{asset('frontend/uploads/shop_02.jpg')}}" alt="images"
-                                                class="alignleft img-responsive">
-                                            <h6 class="float_left">Lords Of Strategy</h6>
-                                        </td>
-                                        <td>
-                                            <input type="number" name="quantity" min="0" value="2">
-                                        </td>
-                                        <td>
-                                            <div class="icon_holder border_round">
-                                                <i class="fa fa-check"></i>
-                                            </div>
-                                            <span class="item">Item(s) <br>Avilable Now</span>
-                                        </td>
-                                        <td><span>$ 34.99</span></td>
-                                        <td><span class="">$ 69.98</span></td>
-                                        <td>
-                                            <input type="checkbox" style="vertical-align:-2px;"> <span
-                                                style="padding-left:7px;">Remove</span>
-                                        </td>
-                                    </tr>
-                                    <!-- /tr -->
-
-                                    <tr>
-                                        <td class="flex_item clear_fix">
-                                            <img src="{{asset('frontend/uploads/shop_03.jpg')}}" alt="images"
-                                                class="alignleft img-responsive">
-                                            <h6 class="float_left">Start From The Art</h6>
-                                        </td>
-                                        <td>
-                                            <input type="number" name="quantity" min="0" value="1">
-                                        </td>
-                                        <td>
-                                            <div class="icon_holder border_round">
-                                                <i class="fa fa-check"></i>
-                                            </div>
-                                            <span class="item">Item(s) <br>Avilable Now</span>
-                                        </td>
-                                        <td><span>$ 29.00</span></td>
-                                        <td><span class="">$ 29.00</span></td>
-                                        <td>
-                                            <input type="checkbox" style="vertical-align:-2px;"> <span
-                                                style="padding-left:7px;">Remove</span>
-                                        </td>
-                                    </tr>
-                                    <!-- /tr -->
+                                    @endforeach
 
                                 </table>
                             </div>
@@ -158,7 +113,8 @@
                                     <tbody>
                                         <tr>
                                             <td><span>Cart Subtotal</span></td>
-                                            <td><span>$146.00</span></td>
+                                            <td><span>${{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td><span>Shipping and Handling</span></td>
@@ -166,7 +122,8 @@
                                         </tr>
                                         <tr>
                                             <td><span>Order Total</span></td>
-                                            <td><span>$146.00</span></td>
+                                            <td><span>${{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -180,4 +137,22 @@
         </div>
     </div><!-- end container -->
 </div><!-- end section -->
+@endsection
+
+@section('scripts')
+<script>
+    function removeItemFromCart(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('frontend.pages.cart.destroy')}}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                'product_id': product_id,
+            },
+            success: function (response) {
+                location.reload();
+            }
+        });
+    }
+</script>
 @endsection
