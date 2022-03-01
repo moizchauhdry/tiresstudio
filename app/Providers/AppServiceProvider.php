@@ -28,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $brands = Brand::select('*')->groupBy('parent')->get();
-        View::share(['brands' => $brands]);
+        if(Schema::hasTable('brands')){
+            $brands = Brand::select('*')->groupBy('parent')->get();
+            View::share(['brands' => $brands]);
+        }
     }
 }
