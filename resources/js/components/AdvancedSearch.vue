@@ -36,7 +36,7 @@
 
                                         <div class="form-input">
                                             <label>Wheels By Bolt Pattern:</label>
-                                            <select name="boltPattern" v-model="search.boltPattern" @change="searchProducts" class="selectpicker">
+                                            <select name="boltPattern" v-model="search.boltPattern" class="selectpicker">
                                                 <option value="">All </option>
                                                 <option v-for="boltPattern in sidebar.boltPatterns">{{ boltPattern }}</option>
                                             </select>
@@ -44,53 +44,49 @@
 
                                         <div class="form-input">
                                             <label>Wheels By Finish:</label>
-                                            <select name="finish" v-model="search.finish" @change="searchProducts" class="selectpicker">
+                                            <select name="finish" v-model="search.finish" class="selectpicker">
                                                 <option value="">All Colors</option>
                                                 <option v-for="finish in sidebar.finishes">{{ finish }}</option>
                                             </select>
                                         </div><!-- end form-input -->
 
-                                        <div class="form-input">
-                                            <label>Wheels By Design:</label>
-                                            <select name="orderby" class="selectpicker">
-                                                <option>All Designs</option>
-                                                <option>Select Dropdown 01</option>
-                                                <option>Select Dropdown 02</option>
-                                                <option>Select Dropdown 03</option>
-                                                <option>Select Dropdown 04</option>
-                                                <option>Select Dropdown 05</option>
-                                            </select>
-                                        </div><!-- end form-input -->
+                                      <div class="form-input">
+                                          <label>Wheels By Diameter:</label>
+                                          <select name="diameter" v-model="search.diameter" class="selectpicker">
+                                              <option value="">All Diameters</option>
+                                              <option v-for="diameter in sidebar.diameter">{{ diameter }}</option>
+                                          </select>
+                                      </div>
                                     </div><!-- end col -->
 
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-input">
-                                            <label>Wheels By Construction:</label>
-                                            <select name="orderby" class="selectpicker">
-                                                <option>All Construction</option>
-                                                <option>Select Dropdown 01</option>
-                                                <option>Select Dropdown 02</option>
-                                                <option>Select Dropdown 03</option>
-                                                <option>Select Dropdown 04</option>
-                                                <option>Select Dropdown 05</option>
+                                            <label>Wheels By Brand:</label>
+                                            <select name="offset" v-model="search.brand_id" class="selectpicker">
+                                                <option value="">All Brands</option>
+                                                <option v-for="brand in sidebar.brands" :value="brand.id">{{ brand.description }}</option>
                                             </select>
-                                        </div><!-- end form-input -->
+                                        </div>
 
                                         <div class="form-input">
-                                            <label>Wheels By Vehicle:</label>
-                                            <select name="orderby" class="selectpicker">
-                                                <option>All Vehicles</option>
-                                                <option>Select Dropdown 01</option>
-                                                <option>Select Dropdown 02</option>
-                                                <option>Select Dropdown 03</option>
-                                                <option>Select Dropdown 04</option>
-                                                <option>Select Dropdown 05</option>
+                                            <label>Wheels By Offset:</label>
+                                            <select name="offset" v-model="search.offset" class="selectpicker">
+                                                <option value="">All Offset</option>
+                                                <option v-for="offset in sidebar.offset">{{ offset }}</option>
                                             </select>
-                                        </div><!-- end form-input -->
+                                        </div>
+
+                                        <div class="form-input">
+                                            <label>Wheels By Size:</label>
+                                            <select name="sizeDesc" v-model="search.sizeDesc" class="selectpicker">
+                                                <option value="">All Size</option>
+                                                <option v-for="sizeDesc in sidebar.sizeDesc">{{ sizeDesc }}</option>
+                                            </select>
+                                        </div>
                                     </div><!-- end col -->
 
                                     <div class="col-md-12 col-xs-12">
-                                        <button class="btn btn-primary btn-block">FILTER WHEELS</button>
+                                        <button class="btn btn-primary btn-block" type="submit">FILTER WHEELS</button>
                                         <a href="#" class="customa" @click="resetSearch()"><i class="fa fa-refresh"></i> Reset all</a>
                                     </div><!-- end col -->
                                 </form><!-- end row -->
@@ -262,6 +258,9 @@
                 </div><!-- end list-top -->
 
                 <div class="row grid-wrapper">
+<!--                    <div>
+                        <div class="triple-spinner"></div>
+                    </div>-->
                     <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn" v-for="product in products">
                         <div class="car-wrapper clearfix">
                             <div class="post-media entry">
@@ -284,7 +283,7 @@
 
                             <div class="car-title clearfix">
                                 <h4 style="height: 50px"><a
-                                    href="">{{ product.title }}</a>
+                                    :href="product.detail_route">{{ product.title }}</a>
                                 </h4>
                             </div><!-- end car-title -->
                         </div><!-- end clearfix -->
@@ -324,12 +323,20 @@ export default {
             products : [],
             links : [],
             sidebar : {
+                brands: {},
                 finishes: {},
-                boltPatterns: {}
+                boltPatterns: {},
+                diameter: {},
+                offset: {},
+                sizeDesc: {},
             },
             search:{
+                brand_id:null,
                 finish:null,
                 boltPattern:null,
+                diameter:null,
+                offset:null,
+                sizeDesc:null,
             }
         }
     },
@@ -361,8 +368,12 @@ export default {
         },
         resetSearch(){
             this.search = {
-                finish:null,
-                boltPattern:null,
+                brand_id: '',
+                finish:'',
+                boltPattern:'',
+                diameter:'',
+                offset:'',
+                sizeDesc:'',
             };
             this.searchProducts();
         }
@@ -371,5 +382,43 @@ export default {
 </script>
 
 <style scoped>
+/* TRIPLE SPINNER */
+.triple-spinner {
+    display: block;
+    position: relative;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top: 4px solid #FF5722;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+.triple-spinner::before,
+.triple-spinner::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 4px solid transparent;
+}
+.triple-spinner::before {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-top-color: #FF9800;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3.5s linear infinite;
+}
+.triple-spinner::after {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-top-color: #FFC107;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.75s linear infinite;
+}
 
 </style>

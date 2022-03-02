@@ -110,4 +110,5 @@ Route::group(['middleware' => 'prevent-back-history'], function()
 
 Route::group(['prefix' => 'development'],function (){
     Route::get('/deleteTires','DevelopmentController@removeTires');
+    Route::get('/products','DevelopmentController@products');
 });

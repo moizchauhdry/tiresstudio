@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class Product extends Model
 {
     protected $guarded = [];
-    protected $appends = ['product_image','price'];
+    protected $appends = ['product_image','price','detail_route'];
 
     public function brand()
     {
@@ -45,5 +46,10 @@ class Product extends Model
             return $price->currency_code.' '.$price->currency_amount;
         }
         return '';
+    }
+
+    public function getDetailRouteAttribute()
+    {
+        return URL::route('frontend.pages.product',$this->id);
     }
 }
