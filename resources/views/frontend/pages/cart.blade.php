@@ -25,10 +25,10 @@
 <div class="section">
     <div class="container">
         <div class="row">
+            @if (count($products) > 0)
             <div class="col-md-12 col-sm-12">
                 <div class="shop_cart_table">
                     <div class="row">
-                        {{-- {{$products}} --}}
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="table-responsive">
                                 <table class="table table-1">
@@ -84,26 +84,6 @@
 
                     <div class="row shipping_address">
                         <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12 submit_form wow fadeInUp">
-                            <h4>Calculate Shipping</h4>
-                            <div class="row" style="margin-top:33px;">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <select name="orderby" class="selectpicker">
-                                        <option>United States</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 space-fix-right">
-                                    <input type="text" placeholder="State / Country" required>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 space-fix-left">
-                                    <input type="text" placeholder="Zip Code" required>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary">update Totals</button>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12 wow fadeInUp m30">
@@ -134,6 +114,16 @@
                     </div>
                 </div><!-- /cart_table -->
             </div>
+            @else
+            <div class="col-md-12">
+                <div class="text-center">
+                    <img src="{{asset('frontend/images/logo.png')}}" style="width:300px;margin:25px" alt="">
+                    <h4>There are no items in the cart.</h4>
+                    <a href="{{route('frontend.pages.shop')}}" class="btn btn-default">SHOP NOW</a>
+                </div>
+            </div>
+            @endif
+
         </div>
     </div><!-- end container -->
 </div><!-- end section -->
