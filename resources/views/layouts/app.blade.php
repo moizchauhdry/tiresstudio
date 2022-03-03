@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
 </head>
 
 <body>
@@ -80,6 +81,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ url(mix('js/app.js')) }}" defer></script>
 </body>
 
 </html>

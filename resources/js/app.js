@@ -26,7 +26,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import SideBar from "./components/SideBar";
+import AdvancedSearch from "./components/AdvancedSearch";
 
-const app = new Vue({
+import axios from 'axios';
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios)
+
+Vue.component('side-bar', SideBar);
+Vue.component('advanced-search', AdvancedSearch);
+
+var app = new Vue({
     el: '#app',
 });

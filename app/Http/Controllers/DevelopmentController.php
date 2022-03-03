@@ -19,4 +19,11 @@ class DevelopmentController extends Controller
 
 
     }
+
+    public function products()
+    {
+        $product = Product::paginate(15);
+
+        dd($product->links());
+    }
 }

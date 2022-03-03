@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group(['prefix' => 'products'],function (){
+    Route::get('/',[\App\Http\Controllers\API\ProductController::class,'index']);
+    Route::get('/sidebar-data',[\App\Http\Controllers\API\ProductController::class,'sideBarData']);
+    Route::post('/search',[\App\Http\Controllers\API\ProductController::class,'searchProducts']);
+});
