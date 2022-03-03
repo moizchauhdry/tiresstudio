@@ -4,18 +4,33 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Hash;
 use App\User;
+use Hash;
+use Validator;
 
 class RegisterController extends Controller
 {
     public function register(Request $request)
     {
         if ($request->isMethod('post') && $request->ajax()) {
-            // dd($request->all());
+
+             $rules = [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'phone' => ['required','unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed','max:32'],
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => $validator->errors(),
+                ],400);
+            }
 
             $data = [
-                'name' => $request->username,
+                'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'password' => Hash::make($request->password),
@@ -23,9 +38,71 @@ class RegisterController extends Controller
 
             $user = User::create($data);
 
-            return response()->json(['status' => 1, 'message' => 'success']);
+            return response()->json([
+                'status' => 1,
+                'title' => 'Register Successfully',
+                'icon' => 'success',
+                'message' => 'Thankyou, Your Tiresstudio account have been register successfully.',
+            ]);
         }
 
         return view('frontend.pages.register');
+    }
+
+    public function login(Request $request)
+    {
+        if ($request->isMethod('post') && $request->ajax()) {
+
+            $rules = [
+                'login_email' => ['required', 'email', 'max:50'],
+                'login_password' => ['required', 'string', 'min:8', 'max:32'],
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => $validator->errors(),
+                ],400);
+            }
+
+            $user = User::where('email', $request->login_email)->first();
+
+            if (isset($user)) {
+                $checkPassword = Hash::check(request('login_password'), $user->password);
+
+                if ($checkPassword == TRUE) {
+                    return response()->json([
+                        'status' => true,
+                        'title' => 'Login Successfully',
+                        'icon' => 'success',
+                        'message' => 'Thankyou, Your Tiresstudio account have been login successfully.',
+                    ]);
+
+                } else {
+                    $errors = [
+                        'login_password' => [
+                            '0' => 'The password you entered is incorrect.',
+                        ],
+                    ];
+                    return response()->json([
+                        'errors' => $errors,
+                    ], 400);
+                }
+
+            } else {
+
+                $errors = [
+                    'login_email' => [
+                        '0' => 'The email address is not valid.',
+                    ],
+                ];
+
+                return response()->json([
+                    'errors' => $errors,
+                ], 400);
+            }
+
+        }
     }
 }

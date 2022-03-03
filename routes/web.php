@@ -19,6 +19,7 @@ Route::get('/about', 'Frontend\FrontendController@about')->name('frontend.pages.
 Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pages.gallery');
 
 Route::any('/register', 'Frontend\RegisterController@register')->name('frontend.pages.register');
+Route::any('/login', 'Frontend\RegisterController@login')->name('frontend.pages.login');
 
 /**
  *****************************************************************************

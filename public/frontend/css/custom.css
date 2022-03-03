@@ -9,3 +9,7 @@
 /******************************************/
 
 /** ADD YOUR CSS CODES HERE **/
+
+.hidden {
+    display: none;
+}

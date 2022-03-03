@@ -38,10 +38,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/colors.css')}}">
     <!-- CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/custom.css')}}">
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -70,7 +66,6 @@
     <script src="{{asset('frontend/js/fitvid.js')}}"></script>
     <script src="{{asset('frontend/js/owl-carousel.js')}}"></script>
     <script src="{{asset('frontend/js/custom.js')}}"></script>
-    <script src="{{ url(mix('js/app.js')) }}" defer></script>
 
     <!-- revolution -->
     <script src="{{asset('frontend/revolution/jquery.themepunch.tools.min.js')}}"></script>
@@ -128,6 +123,18 @@
     );
     /*ready*/
     </script>
+
+    <script src="{{asset('js/errors.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+    <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('js/notification.js')}}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+        });
+    </script>
+
+    {{-- <script src="{{ url(mix('js/app.js')) }}" defer></script> --}}
 
     @yield('scripts')
 

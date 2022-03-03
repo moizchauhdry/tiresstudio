@@ -35,11 +35,11 @@
                                 <h5>Login Now</h5>
                                 <hr class="custom">
                             </div>
-                            <form action="#">
+                            <form action="#" id="login_form" method="post"> @csrf
                                 <div class="form_group">
-                                    <label>Username or Email</label>
+                                    <label>Email</label>
                                     <div class="input_group">
-                                        <input type="text" placeholder="iamsteelthemes@gmail.com">
+                                        <input type="text" name="login_email">
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                 <div class="form_group">
                                     <label>Password</label>
                                     <div class="input_group">
-                                        <input type="password" placeholder="********">
+                                        <input type="password" name="login_password">
                                         <i class="fa fa-lock" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -58,7 +58,11 @@
                                         <label for="remember">Remember me</label>
                                     </div> <!-- End .single_checkbox -->
                                 </div>
-                                <button class="btn btn-primary">Login now</button>
+                                <button type="submit" class="btn btn-primary" id="login_btn">Login now</button>
+                                <button class="btn btn-primary hidden" id="login_loading_btn" type="button" disabled>
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
                             </form>
                         </div> <!-- End of .login_form -->
 
@@ -67,13 +71,13 @@
                                 <h5>Register Here</h5>
                                 <hr class="custom">
                             </div>
-                            <form action="#" id="register" method="post"> @csrf
+                            <form action="#" id="register_form" method="post"> @csrf
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                         <div class="form_group">
-                                            <label>Username</label>
+                                            <label>Name</label>
                                             <div class="input_group">
-                                                <input type="text" name="username">
+                                                <input type="text" name="name">
                                                 <i class="fa fa-user" aria-hidden="true"></i>
                                             </div>
                                         </div>
@@ -107,7 +111,7 @@
                                         <div class="form_group">
                                             <label>Confirm Password</label>
                                             <div class="input_group">
-                                                <input type="password" name="confirm_password">
+                                                <input type="password" name="password_confirmation">
                                                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                             </div>
                                         </div>
@@ -128,7 +132,11 @@
                                         <label for="terms">I agree the term’s & conditions</label>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary">Create Account</button>
+                                <button class="btn btn-primary" id="register_btn">Create Account</button>
+                                <button class="btn btn-primary hidden" id="register_loading_btn" type="button" disabled>
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -142,11 +150,12 @@
 @endsection
 
 @section('scripts')
+
 <script>
-    $("#register").on("submit", function(event){
+    $("#register_form").on("submit", function(event){
         event.preventDefault();
         $('span.text-success').remove();
-        $('span.invalid-feedback').remove();
+        $('span.text-danger').remove();
         $('input.is-invalid').removeClass('is-invalid');
         var formData = new FormData(this);
         $.ajax({
@@ -157,19 +166,54 @@
             contentType: false,
             cache: false,
             beforeSend: function(){
-                $(".register_btn").addClass('hidden');
-                $(".loading_btn").removeClass('hidden');
-                $(".errors").addClass('hidden');
+                $("#register_btn").addClass('hidden');
+                $("#register_loading_btn").removeClass('hidden');
             },
             success: function (response) {
                 if (response.status == 1) {
-                    alert('success');
+                   Swal.fire( response.title, response.message, response.icon );
+                    $("#register_form")[0].reset();
+                    $("#register_btn").removeClass('hidden');
+                    $("#register_loading_btn").addClass('hidden');
                 }
             },
             error : function (errors) {
                 errorsGet(errors.responseJSON.errors)
-                $(".register_btn").removeClass('hidden');
-                $(".loading_btn").addClass('hidden');
+                $("#register_btn").removeClass('hidden');
+                $("#register_loading_btn").addClass('hidden');
+            }
+        });
+    });
+
+    $("#login_form").on("submit", function(event){
+        event.preventDefault();
+        $('span.text-success').remove();
+        $('span.text-danger').remove();
+        $('input.is-invalid').removeClass('is-invalid');
+        var formData = new FormData(this);
+        $.ajax({
+            method: "POST",
+            data: formData,
+            url: '{{route('frontend.pages.login')}}',
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function(){
+                $("#login_btn").addClass('hidden');
+                $("#login_loading_btn").removeClass('hidden');
+            },
+            success: function (response) {
+                if (response.status == 1) {
+                   Swal.fire( response.title, response.message, response.icon );
+                    $("#login_form")[0].reset();
+                    $("#login_btn").removeClass('hidden');
+                    $("#login_loading_btn").addClass('hidden');
+                }
+            },
+            error : function (errors) {
+                errorsGet(errors.responseJSON.errors)
+                $("#login_btn").removeClass('hidden');
+                $("#login_loading_btn").addClass('hidden');
             }
         });
     });
