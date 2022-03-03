@@ -13,3 +13,100 @@
 .hidden {
     display: none;
 }
+
+.nav > li.dropdown.uber_menu {
+    position: static;
+}
+.nav > li.dropdown.uber_menu .dropdown-menu {
+    display: table;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+}
+.dropdown-menu.uber_wrap li {
+    display: block;
+}
+
+.dropdown-menu.uber_wrap .col-md-3 {
+    position: relative;
+}
+.dropdown-menu.uber_wrap .col-md-3:after {
+    position: absolute;
+    content: "";
+    height: 89%;
+    width: 1px;
+    background: #fd6502;
+    top: 5%;
+    right: 0;
+    z-index: -1111;
+}
+
+.dropdown-menu.uber_wrap .col-md-3:last-child:after {
+    position: inherit;
+}
+
+.dropdown-menu.uber_wrap li a {
+    clear: both;
+    color: #1e2126 !important;
+    display: block;
+    font-size: 14px;
+    line-height: 40px !important;
+    padding: 4px 20px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    font-family: "Montserrat-SemiBold" !important;
+    text-align: left;
+    position: relative;
+    z-index: 111111;
+}
+
+.navbar-inverse .navbar-nav .dropdown-menu.uber_wrap li a:hover {
+    color: #fff !important;
+    background-color: #fd6502;
+}
+
+.search-tab .nav-tabs {
+    display: flex;
+}
+.search-tab .nav-tabs li {
+    flex: 1;
+}
+
+.carousel.slide .img-responsive {
+    margin: 0px auto;
+    display: block;
+}
+.login_sty ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+.login_sty ul li {
+    margin-right: 5px;
+    padding-right: 5px;
+    color: #fff;
+    font-family: "Montserrat-SemiBold" !important;
+}
+.login_sty ul li:last-child {
+    margin-right: 0px;
+}
+.login_sty ul li a {
+    color: #fff;
+    font-family: "Montserrat-SemiBold" !important;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .nav > li.dropdown.uber_menu .dropdown-menu {
+        display: none;
+    }
+    .nav > li.dropdown.hasmenu.uber_menu.open .dropdown-menu.uber_wrap {
+        display: block;
+    }
+
+    .dropdown-menu.uber_wrap .col-md-3:nth-child(2n):after {
+        position: inherit;
+    }
+}

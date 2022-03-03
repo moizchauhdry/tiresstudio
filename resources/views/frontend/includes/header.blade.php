@@ -33,8 +33,18 @@
                             <span class="fa fa-search form-control-feedback"></span>
                         </div>
                     </form> --}}
-                    <a href="{{route('frontend.pages.register')}}" class="btn btn-default btn-block">Login/Register</a>
+                    {{-- <a href="{{route('frontend.pages.register')}}"
+                        class="btn btn-default btn-block">Login/Register</a> --}}
                 </div><!-- end header-contact -->
+
+                <div class="header-search login_sty clearfix text-right">
+                    <ul>
+                        <li><a href="{{route('frontend.pages.register')}}">Login</a></li>
+                        <li>/</li>
+                        <li><a href="{{route('frontend.pages.register')}}">Register</a></li>
+                    </ul>
+                </div><!-- end header-contact -->
+
             </div><!-- end col -->
         </div><!-- end row -->
     </div><!-- end container -->
@@ -58,13 +68,43 @@
                     <li><a href="{{route('frontend.pages.shop')}}">Wheels</a></li>
                     <li><a href="#">Tires</a></li>
                     <li><a href="#">Accessories</a></li>
-                    <li class="dropdown hasmenu">
+                    {{-- <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">Brands <span class="fa fa-angle-down"></span></a>
                         <ul class="dropdown-menu">
                             @foreach ($brands as $brand)
                             <li><a href="#">{{$brand->parent}}</a></li>
                             @endforeach
+                        </ul>
+                    </li> --}}
+                    <li class="dropdown hasmenu uber_menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Brands <span class="fa fa-angle-down"></span></a>
+                        <ul class="dropdown-menu uber_wrap">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        @foreach ($brands->slice(0,5) as $brand)
+                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        @foreach ($brands->slice(5,5) as $brand)
+                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        @foreach ($brands->slice(10,5) as $brand)
+                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        @foreach ($brands->slice(15,5) as $brand)
+                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </ul>
                     </li>
                     <li><a href="{{route('frontend.pages.shop')}}">Shop</a></li>
