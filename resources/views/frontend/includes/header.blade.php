@@ -25,14 +25,15 @@
                 </div><!-- end header-contact -->
 
                 <div class="hidden-xs header-search clearfix text-right">
-                    <form class="search-form">
+                    {{-- <form class="search-form">
                         <div class="form-group has-feedback">
                             <label for="search" class="sr-only">Search on this site..</label>
                             <input type="text" class="form-control" name="search" id="search"
                                 placeholder="Search on this site..">
                             <span class="fa fa-search form-control-feedback"></span>
                         </div>
-                    </form>
+                    </form> --}}
+                    <a href="{{route('frontend.pages.register')}}" class="btn btn-default btn-block">Login/Register</a>
                 </div><!-- end header-contact -->
             </div><!-- end col -->
         </div><!-- end row -->

@@ -34,23 +34,23 @@
                             <div class="section-title clearfix">
                                 <h5>Login Now</h5>
                                 <hr class="custom">
-                            </div><!-- end section-title -->
+                            </div>
                             <form action="#">
                                 <div class="form_group">
                                     <label>Username or Email</label>
                                     <div class="input_group">
                                         <input type="text" placeholder="iamsteelthemes@gmail.com">
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                    </div> <!-- End of .input_group -->
-                                </div> <!-- End of .form_group -->
+                                    </div>
+                                </div>
 
                                 <div class="form_group">
                                     <label>Password</label>
                                     <div class="input_group">
                                         <input type="password" placeholder="********">
                                         <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </div> <!-- End of .input_group -->
-                                </div> <!-- End of .form_group -->
+                                    </div>
+                                </div>
 
                                 <div class="clear_fix">
                                     <div class="single_checkbox float_left">
@@ -66,77 +66,112 @@
                             <div class="section-title clearfix">
                                 <h5>Register Here</h5>
                                 <hr class="custom">
-                            </div><!-- end section-title -->
-                            <form action="#">
+                            </div>
+                            <form action="#" id="register" method="post"> @csrf
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                         <div class="form_group">
                                             <label>Username</label>
                                             <div class="input_group">
-                                                <input type="text">
+                                                <input type="text" name="username">
                                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                            </div> <!-- End of .input_group -->
-                                        </div> <!-- End of .form_group -->
+                                            </div>
+                                        </div>
 
                                         <div class="form_group">
                                             <label>Password</label>
                                             <div class="input_group">
-                                                <input type="password">
+                                                <input type="password" name="password">
                                                 <i class="fa fa-lock" aria-hidden="true"></i>
-                                            </div> <!-- End of .input_group -->
-                                        </div> <!-- End of .form_group -->
+                                            </div>
+                                        </div>
 
                                         <div class="form_group">
                                             <label>Phone Number</label>
                                             <div class="input_group">
-                                                <input type="text">
+                                                <input type="text" name="phone">
                                                 <i class="fa fa-phone" aria-hidden="true"></i>
-                                            </div> <!-- End of .input_group -->
-                                        </div> <!-- End of .form_group -->
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                         <div class="form_group">
                                             <label>Email Address</label>
                                             <div class="input_group">
-                                                <input type="email">
+                                                <input type="email" name="email">
                                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                            </div> <!-- End of .input_group -->
-                                        </div> <!-- End of .form_group -->
+                                            </div>
+                                        </div>
 
                                         <div class="form_group">
                                             <label>Confirm Password</label>
                                             <div class="input_group">
-                                                <input type="password">
+                                                <input type="password" name="confirm_password">
                                                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-                                            </div> <!-- End of .input_group -->
-                                        </div> <!-- End of .form_group -->
+                                            </div>
+                                        </div>
 
-                                        <div class="form_group">
+                                        {{-- <div class="form_group">
                                             <label>Location</label>
                                             <div class="input_group">
-                                                <input type="text">
+                                                <input type="text" name="location">
                                                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                                            </div> <!-- End of .input_group -->
-                                        </div> <!-- End of .form_group -->
+                                            </div>
+                                        </div> --}}
                                     </div>
-                                </div> <!-- End of .row -->
+                                </div>
 
                                 <div class="clear_fix">
                                     <div class="single_checkbox float_left">
                                         <input type="checkbox" id="terms">
                                         <label for="terms">I agree the term’s & conditions</label>
-                                    </div> <!-- End .single_checkbox -->
+                                    </div>
                                 </div>
                                 <button class="btn btn-primary">Create Account</button>
                             </form>
-                        </div> <!-- End of .register_form -->
-                    </div> <!-- End of .row -->
+                        </div>
+                    </div>
 
-                </div> <!-- End of .account_page -->
-            </div><!-- end col -->
-        </div><!-- end row -->
-    </div><!-- end container -->
-</div><!-- end section -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+@endsection
+
+@section('scripts')
+<script>
+    $("#register").on("submit", function(event){
+        event.preventDefault();
+        $('span.text-success').remove();
+        $('span.invalid-feedback').remove();
+        $('input.is-invalid').removeClass('is-invalid');
+        var formData = new FormData(this);
+        $.ajax({
+            method: "POST",
+            data: formData,
+            url: '{{route('frontend.pages.register')}}',
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function(){
+                $(".register_btn").addClass('hidden');
+                $(".loading_btn").removeClass('hidden');
+                $(".errors").addClass('hidden');
+            },
+            success: function (response) {
+                if (response.status == 1) {
+                    alert('success');
+                }
+            },
+            error : function (errors) {
+                errorsGet(errors.responseJSON.errors)
+                $(".register_btn").removeClass('hidden');
+                $(".loading_btn").addClass('hidden');
+            }
+        });
+    });
+</script>
 @endsection
