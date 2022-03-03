@@ -11,8 +11,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.pages.index');
 Route::get('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
 Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('frontend.pages.product');
-Route::any('/cart', 'Frontend\FrontendController@cart')->name('frontend.pages.cart');
-Route::post('/cart/destroy', 'Frontend\FrontendController@destroyCart')->name('frontend.pages.cart.destroy');
+
+Route::prefix('cart')->group(function () {
+    Route::any('/', 'Frontend\CartController@cart')->name('frontend.cart');
+    Route::post('/decrement','Frontend\CartController@decrement')->name('frontend.cart.decrement');
+    Route::post('/increment','Frontend\CartController@increment')->name('frontend.cart.increment');
+    Route::post('/destroy', 'Frontend\CartController@destroy')->name('frontend.cart.destroy');
+});
+
 Route::get('/checkout', 'Frontend\FrontendController@checkout')->name('frontend.pages.checkout');
 Route::get('/contact', 'Frontend\FrontendController@contact')->name('frontend.pages.contact');
 Route::get('/about', 'Frontend\FrontendController@about')->name('frontend.pages.about');

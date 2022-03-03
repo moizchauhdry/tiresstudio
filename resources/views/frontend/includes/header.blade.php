@@ -126,7 +126,7 @@
                     <li class="social-header"><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-skype"></i></a></li>
                     <li class="social-header"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li class="navbar-cart"><a href="{{route('frontend.pages.cart')}}">Cart <i
+                    <li class="navbar-cart"><a href="{{route('frontend.cart')}}">Cart <i
                                 class="fa fa-shopping-cart"></i>
                             <small>0</small></a></li>
                 </ul>

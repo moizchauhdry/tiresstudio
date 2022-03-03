@@ -44,12 +44,13 @@
                                     @foreach ($products as $product)
                                     <tr>
                                         <td class="flex_item clear_fix">
-                                            <img src="{{asset('frontend/uploads/shop_01.jpg')}}" alt="images"
+                                            <img src="{{asset('storage/'.$product->product_image)}}" alt="images"
                                                 class="alignleft img-responsive">
                                             <h6 class="float_left">{{$product->title}}</h6>
                                         </td>
                                         <td>
-                                            <input type="number" name="quantity" min="0" value="1">
+                                            <input type="number" name="quantity" min="0"
+                                                value="{{Cart::get($product->id)->quantity}}">
                                         </td>
                                         <td>
                                             <div class="icon_holder border_round">
@@ -57,8 +58,12 @@
                                             </div>
                                             <span class="item">Item(s) <br>Avilable Now</span>
                                         </td>
-                                        <td><span>$ 25.99</span></td>
-                                        <td><span class="">$ 25.99</span></td>
+                                        <td><span>${{$product->price}}</span></td>
+                                        <td>
+                                            <span class="">
+                                                ${{$product->price * Cart::get($product->id)->quantity}}
+                                            </span>
+                                        </td>
                                         <td>
                                             <input type="checkbox" style="vertical-align:-2px;"
                                                 onclick="removeItemFromCart('{{$product->id}}')"> <span
@@ -134,7 +139,7 @@
     function removeItemFromCart(product_id) {
         $.ajax({
             method: "POST",
-            url: '{{route('frontend.pages.cart.destroy')}}',
+            url: '{{route('frontend.cart.destroy')}}',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 'product_id': product_id,

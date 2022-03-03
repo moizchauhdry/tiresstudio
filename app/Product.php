@@ -43,7 +43,8 @@ class Product extends Model
     {
         $price = $this->prices()->first();
         if($price != null){
-            return $price->currency_code.' '.$price->currency_amount;
+            // return $price->currency_code.' '.$price->currency_amount;
+            return $price->currency_amount;
         }
         return '';
     }

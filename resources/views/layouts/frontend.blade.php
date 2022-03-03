@@ -41,7 +41,7 @@
 
 </head>
 
-<body class="{{Route::currentRouteName()=='frontend.pages.cart' ? 'cart' : '' }}">
+<body class="{{Route::currentRouteName()=='frontend.cart' ? 'cart' : '' }}">
 
     <div id="wrapper">
         @include('frontend.includes.header')
@@ -134,7 +134,7 @@
         });
     </script>
 
-    {{-- <script src="{{ url(mix('js/app.js')) }}" defer></script> --}}
+    <script src="{{ url(mix('js/app.js')) }}" defer></script>
 
     @yield('scripts')
 

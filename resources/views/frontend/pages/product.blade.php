@@ -581,8 +581,7 @@
                                         <h5>Total Amount:</h5>
                                         <label class="totalpay">$525759.84</label>
                                         <hr class="invis2">
-                                        <button class="btn btn-default btn-block" type="button"
-                                            onclick="addToCart('{{$product->id}}')">ADD TO CART</button>
+                                        @include('frontend.includes.cart')
                                     </div><!-- end col -->
                                 </form>
                             </div><!-- end search wrapper -->
@@ -627,18 +626,47 @@
     function addToCart(product_id) {
         $.ajax({
             method: "POST",
-            url: '{{route('frontend.pages.cart')}}',
+            url: '{{route('frontend.cart')}}',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 'product_id': product_id,
             },
             success: function (response) {
-                // alert('success');
                 $('#add_to_cart_'+product_id).addClass('hidden');
                 $('#success_'+product_id).removeClass('hidden');
                 $("#qty_"+product_id).empty();
                 $("#qty_"+product_id).append(1);
                 $("#cart_items_count").html(response);
+            }
+        });
+    }
+
+    function cartIncrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('frontend.cart.increment')}}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                'product_id': product_id,
+            },
+                success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
+            }
+        });
+    }
+
+    function cartDecrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('frontend.cart.decrement')}}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
             }
         });
     }
