@@ -110,3 +110,7 @@
         position: inherit;
     }
 }
+
+#slider-thumbs img {
+    cursor: pointer;
+}
