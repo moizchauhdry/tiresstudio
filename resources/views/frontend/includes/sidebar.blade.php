@@ -2,7 +2,7 @@
     <div class="widget dark-widget clearfix">
         <div class="inner-addon right-addon">
             <i class="glyphicon glyphicon-search"></i>
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" id="search" placeholder="Search">
         </div>
     </div><!-- end widget -->
 
@@ -18,86 +18,75 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane in active" id="tab01">
                     <div class="search-wrapper">
-                        <form class="row">
+                        <form class="row" action="" id="sidebarForm">
+                            @csrf
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-input">
-                                    <label>Wheels By Style:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Styles</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
-                                    </select>
-                                </div><!-- end form-input -->
-
-                                <div class="form-input">
-                                    <label>Wheels By Size:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Sizes</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Wheels By Brand:</label>
+                                    <select name="brands" id="brands">
+                                        <option value="" >All Brand</option>
+                                        @foreach($response['brands'] as $item)
+                                            <option value="{{$item->id}}">{{$item->description}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
                                     <label>Wheels By Finish:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Colors</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <select name="finishes" id="finishes">
+                                        <option value="">All Finish</option>
+                                        @foreach($response['finishes'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
-                                    <label>Wheels By Design:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Designs</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Wheels By Bolt Pattern:</label>
+                                    <select name="boltPatterns" id="boltPatterns">
+                                        <option value="">All Bolt Pattern</option>
+                                        @foreach($response['boltPatterns'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
+                                    </select>
+                                </div><!-- end form-input -->
+
+                                <div class="form-input">
+                                    <label>Wheels By Diameter:</label>
+                                    <select name="diameter" id="diameter">
+                                        <option value="">All Diameter</option>
+                                        @foreach($response['diameter'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
                             </div><!-- end col -->
 
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-input">
-                                    <label>Wheels By Construction:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Construction</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Wheels By Offset:</label>
+                                    <select name="offset" id="offset">
+                                        <option value="">All Offset</option>
+                                        @foreach($response['offset'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
-                                    <label>Wheels By Vehicle:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Vehicles</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Wheels By Size:</label>
+                                    <select name="sizeDesc" id="sizeDesc">
+                                        <option value="">All Size</option>
+                                        @foreach($response['sizeDesc'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
                             </div><!-- end col -->
 
                             <div class="col-md-12 col-xs-12">
-                                <button class="btn btn-primary btn-block">FILTER WHEELS</button>
-                                <a href="#" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
+                                <a class="btn btn-primary btn-block thisPage" href="javascript:void(0)"  onclick="getResults('{{ route('frontend.pages.shop') }}')">FILTER WHEELS</a>
+                                <a href="javascript:void(0)" onclick="resetAll()" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->

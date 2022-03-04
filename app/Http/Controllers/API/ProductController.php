@@ -35,8 +35,6 @@ class ProductController extends Controller
 
     public function searchProducts(Request $request){
         $products = Product::select('id','title','boltPattern','finishCode')->where('sku_type','Wheel');
-
-
         if($request->has('brand_id') && !empty($request->get('brand_id'))){
             $products->where('brand_id',$request->brand_id);
         }

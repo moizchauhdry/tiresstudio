@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.pages.index');
-Route::get('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
+Route::any('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
 Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('frontend.pages.product');
 
 Route::prefix('cart')->group(function () {

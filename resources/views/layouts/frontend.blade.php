@@ -39,6 +39,7 @@
     <!-- CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/custom.css')}}">
 
+    @yield('styles')
 </head>
 
 <body class="{{Route::currentRouteName()=='frontend.cart' ? 'cart' : '' }}">
@@ -134,7 +135,7 @@
         });
     </script>
 
-    <script src="{{ url(mix('js/app.js')) }}" defer></script>
+    {{--<script src="{{ url(mix('js/app.js')) }}" defer></script>--}}
 
     @yield('scripts')
 
