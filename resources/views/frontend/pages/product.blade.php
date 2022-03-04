@@ -636,7 +636,7 @@
                 $('#success_'+product_id).removeClass('hidden');
                 $("#qty_"+product_id).empty();
                 $("#qty_"+product_id).append(1);
-                $("#cart_items_count").html(response);
+                $("#cart_items_count").html(response.cart_count);
             }
         });
     }
