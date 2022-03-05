@@ -40,7 +40,22 @@ class FrontendController extends Controller
                 $products->where('boltPattern',$request->boltPattern);
             }
 
-            $response['products'] = $products->paginate(12);
+            if($request->has('search') && !empty($request->get('search'))){
+                $search = $request->get('search');
+                $products->where(function ($query) use($search){
+                    $query->where('id', 'LIKE', "%$search%")
+                        ->orWhere('finish', 'LIKE', "%$search%")
+                        ->orWhere('diameter', 'LIKE', "%$search%")
+                        ->orWhere('offset', 'LIKE', "%$search%")
+                        ->orWhere('sizeDesc', 'LIKE', "%$search%")
+                        ->orWhere('boltPattern', 'LIKE', "%$search%")
+                        ->orWhereHas('brand', function ($qry) use($search){
+                            $qry->where('description', 'LIKE', "%$search%");
+                        });
+                });
+            }
+
+            $response['products'] = $products->paginate(9);
 
             $html = view('frontend.includes.products', compact('response'))->render();
 
@@ -56,7 +71,7 @@ class FrontendController extends Controller
         $response['offset'] = array_unique(Product::select('offset')->where('sku_type','Wheel')->pluck('offset')->toArray());
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type','Wheel')->pluck('sizeDesc')->toArray());
         $response['brands'] = Brand::all();
-        $response['products'] = Product::paginate(12);
+        $response['products'] = Product::paginate(9);
         return view('frontend.pages.shop',compact('response'));
     }
 

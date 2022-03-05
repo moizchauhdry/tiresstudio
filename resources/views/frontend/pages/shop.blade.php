@@ -39,6 +39,9 @@
 
             <div class="col-md-9 col-sm-12">
                 <div class="car-list-wrapper clearfix">
+                    <div class="overlay">
+                        <div class="loader"></div>
+                    </div>
                     <div class="list-top clearfix">
                         <div class="pull-left">
                             <div class="form-input">

@@ -1,8 +1,8 @@
 <div class="custom-sidebar col-md-3 col-sm-12">
     <div class="widget dark-widget clearfix">
         <div class="inner-addon right-addon">
-            <i class="glyphicon glyphicon-search"></i>
-            <input type="text" class="form-control" id="search" placeholder="Search">
+            <i class="glyphicon glyphicon-search" ></i>
+            <input type="text" class="form-control" id="search" placeholder="Search" onkeyup="getResults('{{ route('frontend.pages.shop') }}')">
         </div>
     </div><!-- end widget -->
 
@@ -11,7 +11,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs search-tab-nav" role="tablist">
                 <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">Wheels</a></li>
-                <li role="presentation"><a href="#tab02" role="tab" data-toggle="tab">Tires</a></li>
+                {{--<li role="presentation"><a href="#tab02" role="tab" data-toggle="tab">Tires</a></li>--}}
             </ul>
 
             <!-- Tab panes -->
@@ -92,7 +92,7 @@
                     </div><!-- end search-wrapper -->
                 </div><!-- end tab-pane -->
 
-                <div role="tabpanel" class="tab-pane" id="tab02">
+                {{--<div role="tabpanel" class="tab-pane" id="tab02">
                     <div class="search-wrapper">
                         <form class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -204,7 +204,7 @@
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->
-                </div><!-- end tab-pane -->
+                </div>--}}<!-- end tab-pane -->
             </div><!-- end tab content -->
         </div>
     </div><!-- end widget -->

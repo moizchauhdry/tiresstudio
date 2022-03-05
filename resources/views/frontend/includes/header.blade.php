@@ -134,7 +134,7 @@
                     <li class="social-header"><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     <li class="navbar-cart"><a href="{{route('frontend.cart')}}">Cart <i
                                 class="fa fa-shopping-cart"></i>
-                            <small id="cart_items_count">{{Cart::getContent()->count()}}</small></a></li>
+                            {{--<small id="cart_items_count">{{Cart::getContent()->count()}}</small>--}}</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
