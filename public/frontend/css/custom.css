@@ -114,3 +114,33 @@
 #slider-thumbs img {
     cursor: pointer;
 }
+
+.dashboard {
+    padding: 15px 0;
+}
+.dashboard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.dashboard ul li a {
+    margin: 0;
+    padding: 12px 10px !important;
+    display: block;
+    font-weight: normal;
+    padding-bottom: 10px;
+    line-height: 1;
+    font-size: 16px;
+    font-family: "Montserrat-Regular" !important;
+}
+.dashboard ul li a:hover {
+    color: #fff !important;
+    background: #fd6502;
+}
+.dashboard ul li a.active {
+    color: #fff !important;
+    background: #fd6502;
+}
+.dashboard ul li a i {
+    margin-right: 9px;
+}

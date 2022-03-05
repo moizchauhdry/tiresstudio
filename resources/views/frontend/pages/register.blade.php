@@ -128,7 +128,7 @@
 
                                 <div class="clear_fix">
                                     <div class="single_checkbox float_left">
-                                        <input type="checkbox" id="terms">
+                                        <input type="checkbox" name="terms" id="terms">
                                         <label for="terms">I agree the term’s & conditions</label>
                                     </div>
                                 </div>
@@ -204,10 +204,11 @@
             },
             success: function (response) {
                 if (response.status == 1) {
-                   Swal.fire( response.title, response.message, response.icon );
-                    $("#login_form")[0].reset();
+                    // Swal.fire( response.title, response.message, response.icon );
+                    // $("#login_form")[0].reset();
                     $("#login_btn").removeClass('hidden');
                     $("#login_loading_btn").addClass('hidden');
+                    window.location.href = '{{route('frontend.customer.dashboard')}}';
                 }
             },
             error : function (errors) {
