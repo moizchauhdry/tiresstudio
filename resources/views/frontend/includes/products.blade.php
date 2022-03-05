@@ -3,7 +3,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12 ">
             <div class="car-wrapper clearfix">
                 <div class="post-media entry">
-                    <img src="{{ asset('storage/'.$product->product_image) }}" alt="" class="img-responsive">
+                    <img src="{{ imageURL($product->product_image) }}" alt="" class="img-responsive">
                     <div class="magnifier">
                     </div><!-- end magnifier -->
                     <div class="car-price">

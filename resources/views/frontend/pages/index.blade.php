@@ -446,5 +446,27 @@
                 }
             });
         });
+
+        function searchResults(){
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    home:{
+                        year : $('.year').selectpicker('val'),
+                        make : $('.make').selectpicker('val'),
+                        model : $('.model').selectpicker('val'),
+                    }
+                },
+                beforeSend:function(){
+                    $('.overlay-products').show();
+                },
+                success: function (response) {
+                    $('#viewProducts').html(response.view);
+                    $('.overlay-products').hide();
+                }
+            });
+        }
     </script>
 @endsection

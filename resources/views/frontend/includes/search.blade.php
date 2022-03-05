@@ -13,9 +13,10 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="tab01">
                     <div class="search-wrapper">
-                        <form class="row">
+                        <form class="row" action="{{ route('frontend.pages.wheels') }}" method="post">
+                            @csrf
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <select name="orderby" class="year" id="year">
+                                <select name="year" class="year" id="year">
                                     <option value="">Year</option>
                                     @isset($response['years'])
                                         @foreach($response['years'] as $year)
@@ -26,13 +27,13 @@
                             </div><!-- end col -->
 
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <select name="orderby" class="make" disabled>
+                                <select name="make" class="make" disabled>
                                     <option value="">Make</option>
                                 </select>
                             </div><!-- end col -->
 
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <select name="orderby" class="model" disabled>
+                                <select name="model" class="model" disabled>
                                     <option>Model</option>
                                 </select>
                             </div><!-- end col -->
@@ -57,7 +58,7 @@
                             </div><!-- end col -->--}}
 
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <button class="btn btn-primary btn-block">SEARCH</button>
+                                <button class="btn btn-primary btn-block" >SEARCH</button>
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->
@@ -65,7 +66,8 @@
 
                 <div role="tabpanel" class="tab-pane fade" id="tab02">
                     <div class="search-wrapper">
-                        <form class="row">
+                        <form class="row" action="{{ route('frontend.pages.tires') }}" method="post">
+                            @csrf
                             <div class="col-md-2 col-sm-6 col-xs-12">
                                 <select name="orderby" class="selectpicker">
                                     <option>All Makes</option>
@@ -118,7 +120,7 @@
                             </div><!-- end col -->
 
                             <div class="col-md-2 col-sm-6 col-xs-12">
-                                <button class="btn btn-primary btn-block">SEARCH</button>
+                                <button type="submit" class="btn btn-primary btn-block">SEARCH</button>
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->

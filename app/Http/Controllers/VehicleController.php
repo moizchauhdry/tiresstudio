@@ -12,7 +12,7 @@ class VehicleController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = VehicleModel::orderBy('id','DESC')->get();
+            $data = VehicleModel::orderBy('id','DESC');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('make_id', function(VehicleModel $data){
