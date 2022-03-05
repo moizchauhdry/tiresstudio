@@ -124,7 +124,7 @@
                 <div class="text-center">
                     <img src="{{asset('frontend/images/logo.png')}}" style="width:300px;margin:25px" alt="">
                     <h4>There are no items in the cart.</h4>
-                    <a href="{{route('frontend.pages.shop')}}" class="btn btn-default">SHOP NOW</a>
+                    <a href="{{route('frontend.pages.wheels')}}" class="btn btn-default">SHOP NOW</a>
                 </div>
             </div>
             @endif

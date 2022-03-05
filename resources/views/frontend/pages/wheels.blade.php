@@ -39,8 +39,12 @@
 
             <div class="col-md-9 col-sm-12">
                 <div class="car-list-wrapper clearfix">
-                    <div class="overlay">
-                        <div class="loader"></div>
+                    <div class="overlay-products" style="display: none">
+                        <div class="loader">
+                            <div class="overlay-content">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="list-top clearfix">
                         <div class="pull-left">
@@ -100,8 +104,12 @@
                     sizeDesc : $('#sizeDesc').selectpicker('val'),
                     boltPattern : $('#boltPatterns').selectpicker('val'),
                 },
+                beforeSend:function(){
+                  $('.overlay-products').show();
+                },
                 success: function (response) {
                     $('#viewProducts').html(response.view);
+                    $('.overlay-products').hide();
                 }
             });
         }
@@ -115,7 +123,7 @@
             $('#offset').selectpicker('val','');
             $('#sizeDesc').selectpicker('val','');
             $('#boltPatterns').selectpicker('val','');
-            getResults('{{route('frontend.pages.shop')}}');
+            getResults('{{route('frontend.pages.wheels')}}');
         }
     </script>
 @endsection

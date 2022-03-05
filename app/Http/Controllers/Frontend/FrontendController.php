@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Make;
 use Illuminate\Http\Request;
 use App\Product;
 use App\VehicleModel;
@@ -13,10 +14,11 @@ class FrontendController extends Controller
     public function index()
     {
         $response['popular_wheels'] = Product::take(9)->where('sku_type','Wheel')->get();
+        $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year','asc')->pluck('year')->toArray());
         return view('frontend.pages.index',compact('response'));
     }
 
-    public function shop(Request $request)
+    public function wheels(Request $request)
     {
         if($request->ajax()){
 
@@ -72,7 +74,17 @@ class FrontendController extends Controller
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type','Wheel')->pluck('sizeDesc')->toArray());
         $response['brands'] = Brand::all();
         $response['products'] = Product::paginate(9);
-        return view('frontend.pages.shop',compact('response'));
+        return view('frontend.pages.wheels',compact('response'));
+    }
+
+    public function tires(Request $request)
+    {
+        return view('frontend.pages.under-construction');
+    }
+
+    public function accessories(Request $request)
+    {
+        return view('frontend.pages.under-construction');
     }
 
     public function product($id)
@@ -99,5 +111,23 @@ class FrontendController extends Controller
     public function gallery()
     {
         return view('frontend.pages.gallery');
+    }
+
+    public function getMakesByYear(Request $request)
+    {
+        $year = $request->year;
+        $makes = Make::whereHas('vehicles',function ($query) use ($year){
+          $query->where('year',$year);
+        })->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $makes,
+        ]);
+    }
+
+    public function getModelsByMakes(Request $request)
+    {
+
     }
 }

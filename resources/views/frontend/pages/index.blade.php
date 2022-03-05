@@ -372,3 +372,79 @@
     </div><!-- end container -->
 </div><!-- end section -->
 @endsection
+
+@section('scripts')
+    <script>
+
+        $('.year,.model,.make').selectpicker();
+
+        $('.year').on('changed.bs.select', function () {
+            $.ajax({
+                method: "POST",
+                url: '{{ route('get.makes-by-year') }}',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    year : $('.year').selectpicker('val'),
+                },
+                beforeSend:function(){
+                },
+                success: function (response) {
+                    if( $.isArray(response.data) &&  response.data.length ) {
+                        $('.make select').prop('disabled',false);
+                        $('.make').removeClass('disabled');
+                        $('.make option').remove();
+                        $('.make select').append(' <option value=""  >Select Make</option>');
+
+                        response.data.forEach(function (item, index) {
+                            option = "<option value='" + item.id + "'>" + item.name + "</option>"
+                            $('.make select').append(option);
+                        });
+                    }
+                    else{
+                        $('.make select').prop('disabled', true);
+                        $('.make').addClass('disabled');
+                        $('.make option').remove();
+                        $('.make select').append(' <option value="" selected >Select Make</option>');
+                    }
+
+                    $('.make').selectpicker('refresh');
+                }
+            });
+        });
+
+        $('.model').on('changed.bs.select', function () {
+            $.ajax({
+                method: "POST",
+                url: '{{ route('get.model-by-makes') }}',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    year : $('.year').selectpicker('val'),
+                    model : $('.model').selectpicker('val'),
+                },
+                beforeSend:function(){
+                },
+                success: function (response) {
+                    if( $.isArray(response.data) &&  response.data.length ) {
+                        $('.model select').prop('disabled',false);
+                        $('.model').removeClass('disabled');
+                        $('.model option').remove();
+                        $('.model select').append(' <option value=""  >Select Make</option>');
+
+                        response.data.forEach(function (item, index) {
+                            option = "<option value='" + item.id + "'>" + item.name + "</option>"
+                            $('.model select').append(option);
+                        });
+                    }
+                    else{
+                        $('.model select').prop('disabled', true);
+                        $('.model').addClass('disabled');
+                        $('.model option').remove();
+                        $('.model select').append(' <option value="" selected >Select Make</option>');
+                    }
+
+                    $('.model').selectpicker('refresh');
+                }
+            });
+        });
+    </script>
+@endsection

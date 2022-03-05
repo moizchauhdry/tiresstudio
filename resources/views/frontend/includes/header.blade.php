@@ -65,9 +65,9 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{route('frontend.pages.index')}}">Home</a></li>
-                    <li><a href="{{route('frontend.pages.shop')}}">Wheels</a></li>
-                    <li><a href="#">Tires</a></li>
-                    <li><a href="#">Accessories</a></li>
+                    <li><a href="{{route('frontend.pages.wheels')}}">Wheels</a></li>
+                    <li><a href="{{route('frontend.pages.tires')}}">Tires</a></li>
+                    <li><a href="{{route('frontend.pages.accessories')}}">Accessories</a></li>
                     {{-- <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">Brands <span class="fa fa-angle-down"></span></a>
@@ -107,7 +107,7 @@
                             </div>
                         </ul>
                     </li>
-                    <li><a href="{{route('frontend.pages.shop')}}">Shop</a></li>
+                    <li><a href="javascript:void(0)">Shop</a></li>
                     <li><a href="{{route('frontend.pages.gallery')}}">Gallery</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

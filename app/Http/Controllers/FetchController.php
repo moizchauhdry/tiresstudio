@@ -527,11 +527,9 @@ class FetchController extends Controller
                         $subModels = $this->getSubModels($year,$make,$model);
                         foreach ($subModels as $subModel){
                             $info = $this->getSubModelInfo($year,$make,$model,$subModel);
-                            dump($info);
                         }
                     }catch (\Throwable $error){
                         $infoModel = $this->getModelInfo($year,$make,$model);
-                        dump($infoModel);
                         $modelData = VehicleModel::updateOrCreate(
                             [
                             'pro_id' => $infoModel['id'],

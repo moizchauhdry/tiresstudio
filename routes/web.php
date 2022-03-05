@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.pages.index');
-Route::any('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
+Route::any('/wheels', 'Frontend\FrontendController@wheels')->name('frontend.pages.wheels');
+Route::any('/tires', 'Frontend\FrontendController@tires')->name('frontend.pages.tires');
+Route::any('/accessories', 'Frontend\FrontendController@accessories')->name('frontend.pages.accessories');
 Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('frontend.pages.product');
 
 Route::prefix('cart')->group(function () {
@@ -26,6 +28,11 @@ Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pa
 
 Route::any('/register', 'Frontend\RegisterController@register')->name('frontend.pages.register');
 Route::any('/login', 'Frontend\RegisterController@login')->name('frontend.pages.login');
+
+Route::group(['prefix' => 'get','as' => 'get.'],function(){
+    Route::post('/makesByYear','Frontend\FrontendController@getMakesByYear')->name("makes-by-year");
+    Route::post('/modelByMakes','Frontend\FrontendController@getmodelByMakes')->name("model-by-makes");
+});
 
 /**
  *****************************************************************************

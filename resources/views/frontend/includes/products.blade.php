@@ -1,13 +1,13 @@
 <div class="row grid-wrapper">
-    @foreach ($response['products'] as $product)
-        <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
+    @forelse($response['products'] as $product)
+        <div class="col-md-4 col-sm-6 col-xs-12 ">
             <div class="car-wrapper clearfix">
                 <div class="post-media entry">
                     <img src="{{ asset('storage/'.$product->product_image) }}" alt="" class="img-responsive">
                     <div class="magnifier">
                     </div><!-- end magnifier -->
                     <div class="car-price">
-                        <p>{{ $product->price }}</p>
+                        <p>{{ getCurrency().$product->price }}</p>
                     </div>
                     <ul class="list-inline">
                         <li class="car-km">
@@ -27,7 +27,12 @@
                 </div><!-- end car-title -->
             </div><!-- end clearfix -->
         </div><!-- end col -->
-    @endforeach
-</div><!-- end row -->
+    @empty
+            <div class="text-center">
+                <img src="{{asset('frontend/images/logo.png')}}" alt="" class="img-responsive text-center" style="max-width: 300px;margin: 50px auto;">
+                <h3>No Product Found</h3>
+            </div>
+    @endforelse
+</div>
 
 {{ $response['products']->onEachSide(2)->links('vendor.pagination.theme-default') }}

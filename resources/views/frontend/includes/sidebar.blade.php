@@ -2,7 +2,7 @@
     <div class="widget dark-widget clearfix">
         <div class="inner-addon right-addon">
             <i class="glyphicon glyphicon-search" ></i>
-            <input type="text" class="form-control" id="search" placeholder="Search" onkeyup="getResults('{{ route('frontend.pages.shop') }}')">
+            <input type="text" class="form-control" id="search" placeholder="Search" onkeyup="getResults('{{ route('frontend.pages.wheels') }}')">
         </div>
     </div><!-- end widget -->
 
@@ -85,7 +85,7 @@
                             </div><!-- end col -->
 
                             <div class="col-md-12 col-xs-12">
-                                <a class="btn btn-primary btn-block thisPage" href="javascript:void(0)"  onclick="getResults('{{ route('frontend.pages.shop') }}')">FILTER WHEELS</a>
+                                <a class="btn btn-primary btn-block thisPage" href="javascript:void(0)"  onclick="getResults('{{ route('frontend.pages.wheels') }}')">FILTER WHEELS</a>
                                 <a href="javascript:void(0)" onclick="resetAll()" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
                             </div><!-- end col -->
                         </form><!-- end row -->
