@@ -29,6 +29,12 @@ Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pa
 Route::any('/register', 'Frontend\RegisterController@register')->name('frontend.pages.register');
 Route::any('/login', 'Frontend\RegisterController@login')->name('frontend.pages.login');
 
+Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
+    Route::get('/dashboard', 'Frontend\CustomerController@dashboard')->name('frontend.customer.dashboard');
+    Route::any('/profile', 'Frontend\CustomerController@profile')->name('frontend.customer.profile');
+    Route::post('/logout', 'Frontend\CustomerController@logout')->name('frontend.customer.logout');
+});
+
 Route::group(['prefix' => 'get','as' => 'get.'],function(){
     Route::post('/makesByYear','Frontend\FrontendController@getMakesByYear')->name("makes-by-year");
     Route::post('/modelByMakes','Frontend\FrontendController@getmodelByMakes')->name("model-by-makes");

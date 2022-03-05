@@ -39,9 +39,15 @@
 
                 <div class="header-search login_sty clearfix text-right">
                     <ul>
+                        @if (!Auth::guard('customer')->check())
                         <li><a href="{{route('frontend.pages.register')}}">Login</a></li>
                         <li>/</li>
                         <li><a href="{{route('frontend.pages.register')}}">Register</a></li>
+                        @else
+                        <li><a
+                                href="{{route('frontend.customer.dashboard')}}">{{Auth::guard('customer')->user()->name}}</a>
+                        </li>
+                        @endif
                     </ul>
                 </div><!-- end header-contact -->
 

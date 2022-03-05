@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use Hash;
 use Validator;
+use Hash;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -72,6 +73,9 @@ class RegisterController extends Controller
                 $checkPassword = Hash::check(request('login_password'), $user->password);
 
                 if ($checkPassword == TRUE) {
+
+                    Auth::guard('customer')->login($user);
+
                     return response()->json([
                         'status' => true,
                         'title' => 'Login Successfully',
