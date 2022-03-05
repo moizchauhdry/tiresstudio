@@ -128,6 +128,11 @@ class FrontendController extends Controller
 
     public function getModelsByMakes(Request $request)
     {
+        $models = VehicleModel::where('make_id',$request->make)->where('year',$request->year)->get();
 
+        return response()->json([
+            'status' => true,
+            'data' => $models,
+        ]);
     }
 }

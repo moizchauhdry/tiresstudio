@@ -37,7 +37,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
 
 Route::group(['prefix' => 'get','as' => 'get.'],function(){
     Route::post('/makesByYear','Frontend\FrontendController@getMakesByYear')->name("makes-by-year");
-    Route::post('/modelByMakes','Frontend\FrontendController@getmodelByMakes')->name("model-by-makes");
+    Route::post('/modelByMakes','Frontend\FrontendController@getModelsByMakes')->name("model-by-makes");
 });
 
 /**
