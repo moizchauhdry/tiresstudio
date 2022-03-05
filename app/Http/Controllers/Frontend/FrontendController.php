@@ -13,7 +13,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $response['popular_wheels'] = Product::take(9)->where('sku_type','Wheel')->get();
+        $response['popular_wheels'] = Product::groupBy('model')->take(9)->where('sku_type','Wheel')->get();
         $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year','asc')->pluck('year')->toArray());
         return view('frontend.pages.index',compact('response'));
     }
@@ -57,7 +57,7 @@ class FrontendController extends Controller
                 });
             }
 
-            $response['products'] = $products->paginate(9);
+            $response['products'] = $products->groupBy('model')->paginate(9);
 
             $html = view('frontend.includes.products', compact('response'))->render();
 
@@ -73,7 +73,7 @@ class FrontendController extends Controller
         $response['offset'] = array_unique(Product::select('offset')->where('sku_type','Wheel')->pluck('offset')->toArray());
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type','Wheel')->pluck('sizeDesc')->toArray());
         $response['brands'] = Brand::all();
-        $response['products'] = Product::paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type','Wheel')->paginate(9);
         return view('frontend.pages.wheels',compact('response'));
     }
 
