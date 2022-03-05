@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Make;
+use App\VehicleModelAxle;
 use Illuminate\Http\Request;
 use App\Product;
 use App\VehicleModel;
@@ -20,6 +21,9 @@ class FrontendController extends Controller
 
     public function wheels(Request $request)
     {
+
+        $response['products'] = Product::groupBy('model')->where('sku_type','Wheel')->paginate(9);
+
         if($request->ajax()){
 
             $products = Product::select('id','title','boltPattern','finishCode')->where('sku_type','Wheel');
@@ -68,13 +72,37 @@ class FrontendController extends Controller
 
         }
 
+        if(!$request->ajax() && $request->isMethod('POST')){
+
+            $vehicles = VehicleModel::select('*');
+
+            if($request->has('year') && !empty($request->get('year'))){
+                $vehicles->where('year',$request->year);
+            }
+
+            if($request->has('make') && !empty($request->get('make'))){
+                $vehicles->where('make_id',$request->make);
+            }
+
+            if($request->has('model') && !empty($request->get('model'))){
+                $vehicles->where('id',$request->model);
+            }
+
+            $ids = $vehicles->pluck('id')->toArray();
+            $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
+            $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
+            $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
+            $response['products'] = Product::groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)->where('diameter','<=', $maxDiameter->minDiameterIn)->paginate(9);
+
+        }
+
         $response['finishes'] = array_unique(Product::select('finishCode')->where('sku_type','Wheel')->pluck('finishCode')->toArray());
         $response['boltPatterns'] = array_unique(Product::select('boltPattern')->where('sku_type','Wheel')->pluck('boltPattern')->toArray());
         $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type','Wheel')->pluck('diameter')->toArray());
         $response['offset'] = array_unique(Product::select('offset')->where('sku_type','Wheel')->pluck('offset')->toArray());
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type','Wheel')->pluck('sizeDesc')->toArray());
         $response['brands'] = Brand::all();
-        $response['products'] = Product::groupBy('model')->where('sku_type','Wheel')->paginate(9);
+
         return view('frontend.pages.wheels',compact('response'));
     }
 
