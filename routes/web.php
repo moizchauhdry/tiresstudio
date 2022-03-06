@@ -21,7 +21,6 @@ Route::prefix('cart')->group(function () {
     Route::post('/destroy', 'Frontend\CartController@destroy')->name('frontend.cart.destroy');
 });
 
-Route::get('/checkout', 'Frontend\FrontendController@checkout')->name('frontend.pages.checkout');
 Route::get('/contact', 'Frontend\FrontendController@contact')->name('frontend.pages.contact');
 Route::get('/about', 'Frontend\FrontendController@about')->name('frontend.pages.about');
 Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pages.gallery');
@@ -33,6 +32,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
     Route::get('/dashboard', 'Frontend\CustomerController@dashboard')->name('frontend.customer.dashboard');
     Route::any('/profile', 'Frontend\CustomerController@profile')->name('frontend.customer.profile');
     Route::post('/logout', 'Frontend\CustomerController@logout')->name('frontend.customer.logout');
+    Route::get('/checkout', 'Frontend\FrontendController@checkout')->name('frontend.pages.checkout');
 });
 
 Route::group(['prefix' => 'get','as' => 'get.'],function(){
