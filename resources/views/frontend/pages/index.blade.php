@@ -412,14 +412,14 @@
             });
         });
 
-        $('.model').on('changed.bs.select', function () {
+        $('.make').on('changed.bs.select', function () {
             $.ajax({
                 method: "POST",
                 url: '{{ route('get.model-by-makes') }}',
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     year : $('.year').selectpicker('val'),
-                    model : $('.model').selectpicker('val'),
+                    make : $('.make').selectpicker('val'),
                 },
                 beforeSend:function(){
                 },
@@ -431,7 +431,7 @@
                         $('.model select').append(' <option value=""  >Select Make</option>');
 
                         response.data.forEach(function (item, index) {
-                            option = "<option value='" + item.id + "'>" + item.name + "</option>"
+                            option = "<option value='" + item.id + "'>" + item.model + "</option>"
                             $('.model select').append(option);
                         });
                     }
@@ -446,5 +446,27 @@
                 }
             });
         });
+
+        function searchResults(){
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    home:{
+                        year : $('.year').selectpicker('val'),
+                        make : $('.make').selectpicker('val'),
+                        model : $('.model').selectpicker('val'),
+                    }
+                },
+                beforeSend:function(){
+                    $('.overlay-products').show();
+                },
+                success: function (response) {
+                    $('#viewProducts').html(response.view);
+                    $('.overlay-products').hide();
+                }
+            });
+        }
     </script>
 @endsection

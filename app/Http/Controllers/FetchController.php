@@ -527,71 +527,82 @@ class FetchController extends Controller
                         $subModels = $this->getSubModels($year,$make,$model);
                         foreach ($subModels as $subModel){
                             $info = $this->getSubModelInfo($year,$make,$model,$subModel);
+                            $this->saveAxleData($info,$makeData);
                         }
                     }catch (\Throwable $error){
-                        $infoModel = $this->getModelInfo($year,$make,$model);
-                        $modelData = VehicleModel::updateOrCreate(
-                            [
-                            'pro_id' => $infoModel['id'],
-                            'model' => $infoModel['model'],
-                            ],
-                            [
-                                'make_id' => $makeData->id,
-                                'year' => $infoModel['year'],
-                                'staggered' => $infoModel['properties']['staggered'],
-                            ]
-                        );
-
-                        foreach ($infoModel['axles'] as $key => $axle){
-                            $axleData = VehicleModelAxle::updateOrCreate(
-                                [
-                                    'placement' => $key,
-                                    'code' => $axle['code'],
-                                    'vehicle_model_id' => $modelData->id,
-                                ],
-                                [
-                                    'vehiclePressureSensor' => $axle['vehiclePressureSensor'],
-                                    'boltPatternMm' => $axle['boltPatternMm'],
-                                    'oeWidthIn' => $axle['oeWidthIn'],
-                                    'maxWidthIn' => $axle['maxWidthIn'],
-                                    'oeTireTx' => $axle['oeTireTx'],
-                                    'oeHexTx' => $axle['oeHexTx'],
-                                    'nutBolt' => $axle['nutBolt'],
-                                    'centerBoreMm' => $axle['centerBoreMm'],
-                                    'minWheelLoad' => $axle['minWheelLoad'],
-                                    'sensorPartNumberOe' => $axle['sensorPartNumberOe'],
-                                    'hubCode' => $axle['hubCode'],
-                                    'maxBs' => $axle['maxBs'],
-                                    'maxFs' => $axle['maxFs'],
-                                    'hubClearanceMm' => $axle['hubClearanceMm'],
-                                    'yFactor' => $axle['yFactor'],
-                                    'yFactor25' => $axle['yFactor25'],
-                                    'yFactor50' => $axle['yFactor50'],
-                                    'oeDiameterIn' => $axle['diameter']['oeDiameterIn'],
-                                    'minDiameterIn' => $axle['diameter']['minDiameterIn'],
-                                    'maxDiameterIn' => $axle['diameter']['maxDiameterIn'],
-                                    'peakDepth' => $axle['caliper']['peakDepth'],
-                                    'depth100mm' => $axle['caliper']['depth100mm'],
-                                    'depth106mm' => $axle['caliper']['depth106mm'],
-                                    'depth119mm' => $axle['caliper']['depth119mm'],
-                                    'depth134mm' => $axle['caliper']['depth134mm'],
-                                    'depth160mm' => $axle['caliper']['depth160mm'],
-                                    'depth90mm' => $axle['caliper']['depth90mm'],
-                                    'oeOffset' => $axle['offset']['oeOffset'],
-                                    'offsetMaxMm' => $axle['offset']['offsetMaxMm'],
-                                    'offsetMinMm' => $axle['offset']['offsetMinMm'],
-                                    'liftOffsetMaxMm' => $axle['offset']['liftOffsetMaxMm'],
-                                    'liftOffsetMinMm' => $axle['offset']['liftOffsetMinMm'],
-                                    'amLugStyle' => $axle['lug']['amLugStyle'],
-                                    'lugNutSizeTx' => $axle['lug']['lugNutSizeTx'],
-                                    'lugCnt' => $axle['lug']['lugCnt']
-                                ]
-                            );
+                        try {
+                            $infoModel = $this->getModelInfo($year,$make,$model);
+                            $this->saveAxleData($infoModel,$makeData);
+                        }catch(\Throwable $error){
+                            Log::info('No Data On Both Info');
                         }
+
                     }
 
                 }
             }
+        }
+    }
+
+    public function saveAxleData($infoModel,$makeData)
+    {
+        $modelData = VehicleModel::updateOrCreate(
+            [
+                'pro_id' => $infoModel['id'],
+                'model' => $infoModel['model'],
+            ],
+            [
+                'make_id' => $makeData->id,
+                'year' => $infoModel['year'],
+                'staggered' => $infoModel['properties']['staggered'],
+            ]
+        );
+
+        foreach ($infoModel['axles'] as $key => $axle){
+            $axleData = VehicleModelAxle::updateOrCreate(
+                [
+                    'placement' => $key,
+                    'code' => $axle['code'],
+                    'vehicle_model_id' => $modelData->id,
+                ],
+                [
+                    'vehiclePressureSensor' => $axle['vehiclePressureSensor'],
+                    'boltPatternMm' => $axle['boltPatternMm'],
+                    'oeWidthIn' => $axle['oeWidthIn'],
+                    'maxWidthIn' => $axle['maxWidthIn'],
+                    'oeTireTx' => $axle['oeTireTx'],
+                    'oeHexTx' => $axle['oeHexTx'],
+                    'nutBolt' => $axle['nutBolt'],
+                    'centerBoreMm' => $axle['centerBoreMm'],
+                    'minWheelLoad' => $axle['minWheelLoad'],
+                    'sensorPartNumberOe' => $axle['sensorPartNumberOe'],
+                    'hubCode' => $axle['hubCode'],
+                    'maxBs' => $axle['maxBs'],
+                    'maxFs' => $axle['maxFs'],
+                    'hubClearanceMm' => $axle['hubClearanceMm'],
+                    'yFactor' => $axle['yFactor'],
+                    'yFactor25' => $axle['yFactor25'],
+                    'yFactor50' => $axle['yFactor50'],
+                    'oeDiameterIn' => $axle['diameter']['oeDiameterIn'],
+                    'minDiameterIn' => $axle['diameter']['minDiameterIn'],
+                    'maxDiameterIn' => $axle['diameter']['maxDiameterIn'],
+                    'peakDepth' => $axle['caliper']['peakDepth'],
+                    'depth100mm' => $axle['caliper']['depth100mm'],
+                    'depth106mm' => $axle['caliper']['depth106mm'],
+                    'depth119mm' => $axle['caliper']['depth119mm'],
+                    'depth134mm' => $axle['caliper']['depth134mm'],
+                    'depth160mm' => $axle['caliper']['depth160mm'],
+                    'depth90mm' => $axle['caliper']['depth90mm'],
+                    'oeOffset' => $axle['offset']['oeOffset'],
+                    'offsetMaxMm' => $axle['offset']['offsetMaxMm'],
+                    'offsetMinMm' => $axle['offset']['offsetMinMm'],
+                    'liftOffsetMaxMm' => $axle['offset']['liftOffsetMaxMm'],
+                    'liftOffsetMinMm' => $axle['offset']['liftOffsetMinMm'],
+                    'amLugStyle' => $axle['lug']['amLugStyle'],
+                    'lugNutSizeTx' => $axle['lug']['lugNutSizeTx'],
+                    'lugCnt' => $axle['lug']['lugCnt']
+                ]
+            );
         }
     }
 
