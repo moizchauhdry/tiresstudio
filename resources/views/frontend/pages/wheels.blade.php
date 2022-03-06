@@ -97,6 +97,9 @@
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     search: $('#search').val(),
+                    year : $('#year').val(),
+                    make : $('#make').val(),
+                    model : $('#model').val(),
                     brand_id : $('#brands').selectpicker('val'),
                     finish : $('#finishes').selectpicker('val'),
                     diameter : $('#diameter').selectpicker('val'),

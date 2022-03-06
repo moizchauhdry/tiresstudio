@@ -18,7 +18,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane in active" id="tab01">
                     <div class="search-wrapper">
-                        <form class="row" action="" id="sidebarForm">
+                        <form class="row" action="" id="sidebarForm" onsubmit="this.preventDefault()">
                             @csrf
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-input">
@@ -84,8 +84,12 @@
                                 </div><!-- end form-input -->
                             </div><!-- end col -->
 
+                            <input type="text" hidden name="year" id="year" value="{{ isset($response['filter']['year']) ? $response['filter']['year'] : '' }}">
+                            <input type="text" hidden name="make" id="make" value="{{ isset($response['filter']['make']) ? $response['filter']['make'] : '' }}">
+                            <input type="text" hidden name="model" id="model" value="{{ isset($response['filter']['model']) ? $response['filter']['model'] : '' }}">
+
                             <div class="col-md-12 col-xs-12">
-                                <a class="btn btn-primary btn-block thisPage" href="javascript:void(0)"  onclick="getResults('{{ route('frontend.pages.wheels') }}')">FILTER WHEELS</a>
+                                <button class="btn btn-primary btn-block" type="button"   onclick="getResults('{{ route('frontend.pages.wheels') }}')">FILTER WHEELS</button>
                                 <a href="javascript:void(0)" onclick="resetAll()" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
                             </div><!-- end col -->
                         </form><!-- end row -->

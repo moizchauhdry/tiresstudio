@@ -1,3 +1,55 @@
+
+<div style="display: inline-flex">
+    @if(isset($response['filter']['search'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ $response['filter']['search'] }}
+            <a href="javascript:void(0)" >X</a>
+        </span></h3>
+    @endif
+    @if(isset($response['filter']['year'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ $response['filter']['year'] }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['make'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ getMakeNameById($response['filter']['make']) }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['model'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ getModelNameById($response['filter']['model']) }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['brand_id'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ getBrandNameById($response['filter']['brand_id']) }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['finishCode'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ $response['filter']['finishCode'] }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['diameter'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ $response['filter']['diameter'] }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['offset'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ $response['filter']['offset'] }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['sizeDesc'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ $response['filter']['sizeDesc'] }}
+                <a href="javascript:void(0)" >X</a>
+            </span></h3>
+        @endif
+    @if(isset($response['filter']['boltPattern'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+                {{ $response['filter']['boltPattern'] }}   </span></h3>
+        @endif
+
+</div>
 <div class="row grid-wrapper">
     @forelse($response['products'] as $product)
         <div class="col-md-4 col-sm-6 col-xs-12 ">

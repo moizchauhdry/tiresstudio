@@ -22,3 +22,18 @@ function imageURL($url){
     }
 
 }
+
+function getBrandNameById($id){
+    $brand = \App\Brand::find($id);
+    return $brand->description;
+}
+
+function getModelNameById($id){
+    $model = \App\VehicleModel::find($id);
+    return $model->model;
+}
+
+function getMakeNameById($id){
+    $make = \App\Make::find($id);
+    return $make->name;
+}

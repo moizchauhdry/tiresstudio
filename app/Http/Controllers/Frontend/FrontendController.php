@@ -23,28 +23,40 @@ class FrontendController extends Controller
     {
 
         $response['products'] = Product::groupBy('model')->where('sku_type','Wheel')->paginate(9);
-
+        $filter = array();
         if($request->ajax()){
 
             $products = Product::select('id','title','boltPattern','finishCode')->where('sku_type','Wheel');
             if($request->has('brand_id') && !empty($request->get('brand_id'))){
                 $products->where('brand_id',$request->brand_id);
+                $filter['brand_id'] = $request->brand_id;
             }
+
             if($request->has('finish') && !empty($request->get('finish'))){
                 $products->where('finishCode',$request->finish);
+                $filter['finishCode'] = $request->finishCode;
             }
+
             if($request->has('diameter') && !empty($request->get('diameter'))){
                 $products->where('diameter',$request->diameter);
+                $filter['diameter'] = $request->diameter;
             }
+
             if($request->has('offset') && !empty($request->get('offset'))){
                 $products->where('offset',$request->offset);
+                $filter['offset'] = $request->offset;
             }
+
             if($request->has('sizeDesc') && !empty($request->get('sizeDesc'))){
                 $products->where('sizeDesc',$request->sizeDesc);
+                $filter['sizeDesc'] = $request->sizeDesc;
             }
+
             if($request->has('boltPattern') && !empty($request->get('boltPattern'))){
                 $products->where('boltPattern',$request->boltPattern);
+                $filter['boltPattern'] = $request->boltPattern;
             }
+
 
             if($request->has('search') && !empty($request->get('search'))){
                 $search = $request->get('search');
@@ -59,17 +71,44 @@ class FrontendController extends Controller
                             $qry->where('description', 'LIKE', "%$search%");
                         });
                 });
+                $filter['search'] = $search;
             }
 
-            $response['products'] = $products->groupBy('model')->paginate(9);
+            if($request->hasAny(['year','model','make'])){
+                $vehicles = VehicleModel::select('*');
 
+                if($request->has('year') && !empty($request->get('year'))){
+                    $vehicles->where('year',$request->year);
+                    $filter['year'] = $request->year;
+                }
+
+                if($request->has('make') && !empty($request->get('make'))){
+                    $vehicles->where('make_id',$request->make);
+                    $filter['make'] = $request->make;
+                }
+
+                if($request->has('model') && !empty($request->get('model'))){
+                    $vehicles->where('id',$request->model);
+                    $filter['model'] = $request->model;
+                }
+
+                $ids = $vehicles->pluck('id')->toArray();
+                $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
+                $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
+                $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
+                $products->where('diameter','>=', $minDiameter->minDiameterIn)->where('diameter','<=', $maxDiameter->minDiameterIn);
+
+            }
+
+
+            $response['filter'] = $filter;
+            $response['products'] = $products->groupBy('model')->paginate(9);
             $html = view('frontend.includes.products', compact('response'))->render();
 
             return response()->json([
                 'status' => true,
-                'view' => $html
+                'view' => $html,
             ]);
-
         }
 
         if(!$request->ajax() && $request->isMethod('POST')){
@@ -78,14 +117,17 @@ class FrontendController extends Controller
 
             if($request->has('year') && !empty($request->get('year'))){
                 $vehicles->where('year',$request->year);
+                $filter['year'] = $request->year;
             }
 
             if($request->has('make') && !empty($request->get('make'))){
                 $vehicles->where('make_id',$request->make);
+                $filter['make'] = $request->make;
             }
 
             if($request->has('model') && !empty($request->get('model'))){
                 $vehicles->where('id',$request->model);
+                $filter['model'] = $request->model;
             }
 
             $ids = $vehicles->pluck('id')->toArray();
@@ -102,6 +144,7 @@ class FrontendController extends Controller
         $response['offset'] = array_unique(Product::select('offset')->where('sku_type','Wheel')->pluck('offset')->toArray());
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type','Wheel')->pluck('sizeDesc')->toArray());
         $response['brands'] = Brand::all();
+        $response['filter'] = $filter;
 
         return view('frontend.pages.wheels',compact('response'));
     }
