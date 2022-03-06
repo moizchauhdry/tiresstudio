@@ -74,7 +74,7 @@ class FrontendController extends Controller
                 $filter['search'] = $search;
             }
 
-            if($request->hasAny(['year','model','make'])){
+            if($request->hasAny(['year','model','make']) && (!empty($request->get('year')) || !empty($request->get('model'))  || !empty($request->get('make')))){
                 $vehicles = VehicleModel::select('*');
 
                 if($request->has('year') && !empty($request->get('year'))){
@@ -96,8 +96,12 @@ class FrontendController extends Controller
                 $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
                 $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
                 $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
-                $products->where('diameter','>=', $minDiameter->minDiameterIn)->where('diameter','<=', $maxDiameter->minDiameterIn);
-
+                $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+                $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+                $products->where('diameter','>=', $minDiameter->minDiameterIn)
+                    ->where('diameter','<=', $maxDiameter->minDiameterIn)
+                    ->where('offset','>=', $offsetMinMm->offsetMinMm)
+                    ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
             }
 
 
@@ -134,7 +138,13 @@ class FrontendController extends Controller
             $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
             $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
             $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
-            $response['products'] = Product::groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)->where('diameter','<=', $maxDiameter->minDiameterIn)->paginate(9);
+            $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+            $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+            $products = Product::groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)
+                ->where('diameter','<=', $maxDiameter->minDiameterIn)
+                ->where('offset','>=', $offsetMinMm->offsetMinMm)
+                ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
+            $response['products'] = $products->paginate(9);
 
         }
 

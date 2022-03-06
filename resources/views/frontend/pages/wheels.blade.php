@@ -128,5 +128,19 @@
             $('#boltPatterns').selectpicker('val','');
             getResults('{{route('frontend.pages.wheels')}}');
         }
+
+        function removeFromFilter(event){
+            let target = event.dataset.target;
+            if(target == '#year' || target == '#search' || target == '#model'  || target == '#make'){
+                $(target).val('');
+                getResults('{{route('frontend.pages.wheels')}}');
+            }else{
+                $(target).selectpicker('val','');
+                $(target).selectpicker('refresh');
+                getResults('{{route('frontend.pages.wheels')}}');
+            }
+
+
+        }
     </script>
 @endsection
