@@ -379,7 +379,7 @@
 
         $('#btn_search').on('click',function(){
             if($('.year').selectpicker('val') != '' && $('.make').selectpicker('val') != '' && $('.model').selectpicker('val') != ''){
-                $('#search_home').trigger('submit');
+                $('#home_search').trigger('submit');
             }
         })
 
