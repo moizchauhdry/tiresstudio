@@ -376,6 +376,15 @@
 @section('scripts')
     <script>
 
+
+        $('#btn_search').on('click',function(){
+            if($('.year').selectpicker('val') != '' && $('.make').selectpicker('val') != '' && $('.model').selectpicker('val') != ''){
+                $('#search_home').trigger('submit');
+            }
+        })
+
+
+
         $('.year,.model,.make').selectpicker();
 
         $('.year').on('changed.bs.select', function () {

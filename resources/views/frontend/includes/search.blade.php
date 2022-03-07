@@ -13,7 +13,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="tab01">
                     <div class="search-wrapper">
-                        <form class="row" action="{{ route('frontend.pages.wheels') }}" method="post">
+                        <form id="home_search" class="row" action="{{ route('frontend.pages.wheels') }}" method="post">
                             @csrf
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <select name="year" class="year" id="year">
@@ -58,7 +58,7 @@
                             </div><!-- end col -->--}}
 
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <button class="btn btn-primary btn-block" >SEARCH</button>
+                                <button type="button" id="btn_search" class="btn btn-primary btn-block">SEARCH</button>
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->
@@ -66,10 +66,10 @@
 
                 <div role="tabpanel" class="tab-pane fade" id="tab02">
                     <div class="search-wrapper">
-                        <form class="row" action="{{ route('frontend.pages.tires') }}" method="post">
+                        <form  class="row" action="{{ route('frontend.pages.tires') }}" method="post">
                             @csrf
                             <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
+                                <select name="orderby" class="selectpicker" required>
                                     <option>All Makes</option>
                                     <option>Select Dropdown 01</option>
                                     <option>Select Dropdown 02</option>
@@ -80,7 +80,7 @@
                             </div><!-- end col -->
 
                             <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
+                                <select name="orderby" class="selectpicker" required>
                                     <option>All Models</option>
                                     <option>Mercedes</option>
                                     <option>Opel</option>
@@ -91,7 +91,7 @@
                             </div><!-- end col -->
 
                             <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
+                                <select name="orderby" class="selectpicker" required>
                                     <option>Max Price</option>
                                     <option>$400 - $1000</option>
                                     <option>$1000 - $10000</option>
@@ -120,7 +120,7 @@
                             </div><!-- end col -->
 
                             <div class="col-md-2 col-sm-6 col-xs-12">
-                                <button type="submit" class="btn btn-primary btn-block">SEARCH</button>
+                                <button type="button"  class="btn btn-primary btn-block">SEARCH</button>
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->
