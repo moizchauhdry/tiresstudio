@@ -54,6 +54,18 @@
                 </div>
             </div>
             <div class="col-lg-3 col-6">
+                <div class="small-box bg-gradient-orange">
+                    <div class="inner">
+                        <h3>{{ $accessories ?? '0' }}</h3>
+                        {{--<h3>2000</h3>--}}
+                        <p>Total Accessories</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-purple">
                     <div class="inner">
                         <h3>{{ $makes ?? '10' }}</h3>

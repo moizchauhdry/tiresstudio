@@ -22,6 +22,7 @@ class AdminController extends Controller
         $response['products'] = Product::count();
         $response['wheels'] = Product::where('sku_type','WHEEL')->get()->count();
         $response['tires'] = Product::where('sku_type','TIRE')->get()->count();
+        $response['accessories'] = Product::where('sku_type','ACC')->get()->count();
         $response['vehicles'] = VehicleModel::all()->count();
 
         return view ('admin.dashboard')->with($response);

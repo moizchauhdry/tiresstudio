@@ -42,6 +42,7 @@
                                         <option value="">Choose ..</option>
                                         <option value="WHEEL">Wheel</option>
                                         <option value="TIRE">Tire</option>
+                                        <option value="ACC">Accessory</option>
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-4 form-group">

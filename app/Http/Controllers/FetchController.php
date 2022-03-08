@@ -271,6 +271,110 @@ class FetchController extends Controller
 
     }
 
+    public function fetchAccessories()
+
+    {
+        if (Session::has('authorization')) {
+            dump('hasSession');
+            $authorization = Session::get('authorization');
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
+                $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
+            }
+        } else {
+            dump('noSession');
+            $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
+
+        }
+
+
+        $client = new \GuzzleHttp\Client(['headers' => [
+            'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
+            'Content-Type' => 'application/json',
+        ]]);
+        $url = 'https://api.wheelpros.com/products/v1/search/accessory';
+
+        $res = $client->request('GET', $url);
+        $data = json_decode($res->getBody()->getContents(), true);
+
+        $dataCount = (int)$data['totalCount'];
+
+        $iteration = round($dataCount/50,1);
+
+
+        for($i = 1; $i <= $iteration ; $i++){
+
+            if ($authorization['expiryTime'] < strtotime(Carbon::now())) {
+                dump('newKey');
+                $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+
+            }
+
+            $res = $client->request('GET', $url.'?pageSize=50&page='.$i);
+            $data = json_decode($res->getBody()->getContents(), true);
+            $products = $data['results'];
+            foreach ($products as $key => $product) {
+
+                $brandData = [
+                    'code' => $product['brand']['code'],
+                    'description' => $product['brand']['description'],
+                    'parent' => $product['brand']['parent'],
+                ];
+
+                $brand = Brand::firstOrCreate($brandData);
+
+                $ProductData = [
+                    'sku_type' => $product['skuType'],
+                    'title' => $product['title'],
+                    'brand_id' => $brand->id,
+                ];
+
+                $product1 = Product::updateOrCreate(['sku' => $product['sku'],
+                    'upc' => $product['upc']], $ProductData);
+                $product1->save();
+
+                try {
+                    $productDetail = $this->getProductDetails($product['sku']);
+                    $product1->update($productDetail['properties']);
+                }catch(\Throwable  $e){
+                    \Log::info('No Entry');
+                }
+
+                /*if(!empty($product['images'])){
+                    $this->uploadImage($product,$product1->id,'products/tires/'.$product1->id);
+                }*/
+
+                if ($product['prices']['msrp'] != NULL) {
+                    foreach ($product['prices']['msrp'] as $productPrice) {
+                        $priceData = [
+                            'product_id' => $product1->id,
+                            'currency_amount' => $productPrice['currencyAmount'],
+                            'currency_code' => $productPrice['currencyCode'],
+                        ];
+
+                        $price = ProductPrice::firstOrCreate($priceData);
+
+                    }
+                }
+
+                if ($product['inventory'] != NULL) {
+                    $inventoryData = [
+                        'product_id' => $product1->id,
+                        'type' => $product['inventory']['type'],
+                    ];
+                    $inventory = ProductInventory::firstOrCreate($inventoryData);
+                }
+
+            }
+            dump('Iteration = '. ($i) . ' executed.');
+        }
+
+    }
+
+
     public function uploadImage($product,$id,$directory)
     {
         if(!empty($product['images'])){
