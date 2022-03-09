@@ -1,4 +1,5 @@
 <?php
+use App\Product;
 
 function getCurrency(){
     return '$ ';
@@ -28,4 +29,11 @@ function getModelNameById($id){
 function getMakeNameById($id){
     $make = \App\Make::find($id);
     return $make->name;
+}
+
+function getProductName($id)
+{
+    $product = Product::find($id);
+    $name = $product->brand->description.' '.$product->model;
+    return $name;
 }

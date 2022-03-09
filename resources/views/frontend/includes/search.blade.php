@@ -19,9 +19,9 @@
                                 <select name="year" class="year" id="year">
                                     <option value="">Year</option>
                                     @isset($response['years'])
-                                        @foreach($response['years'] as $year)
-                                            <option value="{{ $year }}">{{ $year }}</option>
-                                        @endforeach
+                                    @foreach($response['years'] as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                    @endforeach
                                     @endisset
                                 </select>
                             </div><!-- end col -->
@@ -66,183 +66,28 @@
 
                 <div role="tabpanel" class="tab-pane fade" id="tab02">
                     <div class="search-wrapper">
-                        <form  class="row" action="{{ route('frontend.pages.tires') }}" method="post">
+                        <form class="row" action="{{ route('frontend.pages.tires') }}" method="post">
                             @csrf
-                            <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <select name="orderby" class="selectpicker" required>
+                                    <option>All Years</option>
+                                </select>
+                            </div><!-- end col -->
+
+                            <div class="col-md-3 col-sm-6 col-xs-12">
                                 <select name="orderby" class="selectpicker" required>
                                     <option>All Makes</option>
-                                    <option>Select Dropdown 01</option>
-                                    <option>Select Dropdown 02</option>
-                                    <option>Select Dropdown 03</option>
-                                    <option>Select Dropdown 04</option>
-                                    <option>Select Dropdown 05</option>
                                 </select>
                             </div><!-- end col -->
 
-                            <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
                                 <select name="orderby" class="selectpicker" required>
                                     <option>All Models</option>
-                                    <option>Mercedes</option>
-                                    <option>Opel</option>
-                                    <option>Maseratti</option>
-                                    <option>Ferrari</option>
-                                    <option>Porche</option>
                                 </select>
                             </div><!-- end col -->
 
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker" required>
-                                    <option>Max Price</option>
-                                    <option>$400 - $1000</option>
-                                    <option>$1000 - $10000</option>
-                                    <option>$10000 - $25000</option>
-                                    <option>$25000 - $50000</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>2000Km</option>
-                                    <option>10000Km</option>
-                                    <option>25000Km</option>
-                                    <option>50000Km</option>
-                                    <option>100000Km</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>Newyork Ciry</option>
-                                    <option>Los Angelas</option>
-                                    <option>Miami</option>
-                                    <option>Hawai</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <button type="button"  class="btn btn-primary btn-block">SEARCH</button>
-                            </div><!-- end col -->
-                        </form><!-- end row -->
-                    </div><!-- end search-wrapper -->
-                </div><!-- end tab-pane -->
-
-                <div role="tabpanel" class="tab-pane fade" id="tab03">
-                    <div class="search-wrapper">
-                        <form class="row">
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>All Makes</option>
-                                    <option>Select Dropdown 01</option>
-                                    <option>Select Dropdown 02</option>
-                                    <option>Select Dropdown 03</option>
-                                    <option>Select Dropdown 04</option>
-                                    <option>Select Dropdown 05</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>All Models</option>
-                                    <option>Mercedes</option>
-                                    <option>Opel</option>
-                                    <option>Maseratti</option>
-                                    <option>Ferrari</option>
-                                    <option>Porche</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>Max Price</option>
-                                    <option>$400 - $1000</option>
-                                    <option>$1000 - $10000</option>
-                                    <option>$10000 - $25000</option>
-                                    <option>$25000 - $50000</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>2000Km</option>
-                                    <option>10000Km</option>
-                                    <option>25000Km</option>
-                                    <option>50000Km</option>
-                                    <option>100000Km</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>Newyork Ciry</option>
-                                    <option>Los Angelas</option>
-                                    <option>Miami</option>
-                                    <option>Hawai</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <button class="btn btn-primary btn-block">SEARCH</button>
-                            </div><!-- end col -->
-                        </form><!-- end row -->
-                    </div><!-- end search-wrapper -->
-                </div><!-- end tab-pane -->
-
-                <div role="tabpanel" class="tab-pane fade" id="tab04">
-                    <div class="search-wrapper">
-                        <form class="row">
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>All Makes</option>
-                                    <option>Select Dropdown 01</option>
-                                    <option>Select Dropdown 02</option>
-                                    <option>Select Dropdown 03</option>
-                                    <option>Select Dropdown 04</option>
-                                    <option>Select Dropdown 05</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>All Models</option>
-                                    <option>Mercedes</option>
-                                    <option>Opel</option>
-                                    <option>Maseratti</option>
-                                    <option>Ferrari</option>
-                                    <option>Porche</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>Max Price</option>
-                                    <option>$400 - $1000</option>
-                                    <option>$1000 - $10000</option>
-                                    <option>$10000 - $25000</option>
-                                    <option>$25000 - $50000</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>2000Km</option>
-                                    <option>10000Km</option>
-                                    <option>25000Km</option>
-                                    <option>50000Km</option>
-                                    <option>100000Km</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>Newyork Ciry</option>
-                                    <option>Los Angelas</option>
-                                    <option>Miami</option>
-                                    <option>Hawai</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <button class="btn btn-primary btn-block">SEARCH</button>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <button type="button" class="btn btn-primary btn-block">SEARCH</button>
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->

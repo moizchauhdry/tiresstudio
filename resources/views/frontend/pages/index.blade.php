@@ -12,13 +12,20 @@
         <hr class="invis">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="section-title clearfix">
                     <h4>Popular Wheels</h4>
                     <hr class="custom">
                 </div><!-- end section-title -->
             </div><!-- end col -->
-        </div>
+            <div class="col-md-6">
+                <div class="section-title clearfix ">
+                    <a href="{{route('frontend.pages.wheels')}}"
+                        style="float: right; margin-top: 11px; font-size:16px; font-weight: bold;">VIEW ALL
+                        WHEELS <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div><!-- end row -->
 
         <div class="row">
             @foreach ($response['popular_wheels'] as $wheel)
@@ -26,26 +33,10 @@
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
                         <img src="{{asset('storage/'.$wheel->product_image)}}" alt="" class="img-responsive">
-                        <div class="magnifier">
-                        </div><!-- end magnifier -->
-                        {{-- <div class="car-price">
-                            <p>$78900</p>
-                        </div> --}}
-                        <ul class="list-inline">
-                            <li class="car-km">
-                                <p><i class="fa fa-road"></i> 26000</p>
-                            </li>
-                            <li class="car-oil">
-                                <p><i class="fa fa-car"></i> Diesel</p>
-                            </li>
-                            <li class="car-date">
-                                <p><i class="fa fa-clock-o"></i> 2014</p>
-                            </li>
-                        </ul>
                     </div><!-- end post-media -->
 
-                    <div class="car-title clearfix">
-                        <h4><a href="#">{{$wheel->title}}</a></h4>
+                    <div class="car-title clearfix text-center">
+                        <h4><a href="#">{{getProductName($wheel->id)}}</a></h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
             </div>
@@ -100,85 +91,35 @@
 <div class="section lb">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="section-title clearfix text-center">
-                    <h4>OUR BRANDS</h4>
+            <div class="col-md-6">
+                <div class="section-title clearfix">
+                    <h4>Our Brands</h4>
                     <hr class="custom">
                 </div><!-- end section-title -->
             </div><!-- end col -->
+            <div class="col-md-6">
+                <div class="section-title clearfix ">
+                    <a href="{{route('frontend.pages.wheels')}}"
+                        style="float: right; margin-top: 11px; font-size:16px; font-weight: bold;">VIEW ALL
+                        BRANDS <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
         </div><!-- end row -->
 
         <div class="row">
+            @foreach ($response['brands'] as $brand)
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('storage/'.$brand->product->product_image)}}" alt="" class="img-responsive">
                     </div><!-- end post-media -->
 
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Hyndai Grand i10 2010 Model Cross Sport</a></h4>
+                    <div class="car-title clearfix text-center">
+                        <h4><a href="#">{{$brand->description}}</a></h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper deal-wrapper clearfix">
-                    <div class="post-media">
-                        <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Ford Mustang 2.3 Ecoboost Premium Taurus</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper deal-wrapper clearfix">
-                    <div class="post-media">
-                        <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">BMW F12 6 Series Midsized Manual Convertible</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper deal-wrapper clearfix">
-                    <div class="post-media">
-                        <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Hyndai Grand i10 2010 Model Cross Sport</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper deal-wrapper clearfix">
-                    <div class="post-media">
-                        <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">Ford Mustang 2.3 Ecoboost Premium Taurus</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper deal-wrapper clearfix">
-                    <div class="post-media">
-                        <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
-                    </div><!-- end post-media -->
-
-                    <div class="car-title clearfix">
-                        <h4><a href="#">BMW F12 6 Series Midsized Manual Convertible</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
+            </div>
+            @endforeach
         </div><!-- end row -->
 
         <hr class="invis">
@@ -374,10 +315,8 @@
 @endsection
 
 @section('scripts')
-    <script>
-
-
-        $('#btn_search').on('click',function(){
+<script>
+    $('#btn_search').on('click',function(){
             if($('.year').selectpicker('val') != '' && $('.make').selectpicker('val') != '' && $('.model').selectpicker('val') != ''){
                 $('#home_search').trigger('submit');
             }
@@ -477,5 +416,5 @@
                 }
             });
         }
-    </script>
+</script>
 @endsection
