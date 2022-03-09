@@ -115,6 +115,10 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     Route::get('{year}/makes', 'FetchController@getMakes')->name('makes');
                 });
 
+                Route::group(['prefix' => 'import'],function(){
+                    Route::any('/products','ImportController@importProducts')->name('import.importProducts');
+                });
+
             });
         });
     });
