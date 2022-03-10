@@ -2,7 +2,7 @@
     <div class="widget dark-widget clearfix">
         <div class="inner-addon right-addon">
             <i class="glyphicon glyphicon-search" ></i>
-            <input type="text" class="form-control" id="search" placeholder="Search" onkeyup="getResults('{{ route('frontend.pages.wheels') }}')">
+            <input type="text" class="form-control" id="search" placeholder="Search" onkeyup="getResults('{{ URL::current() }}')">
         </div>
     </div><!-- end widget -->
 
@@ -10,13 +10,15 @@
         <div class="search-tab clearfix">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs search-tab-nav" role="tablist">
-                <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">Wheels</a></li>
-                {{--<li role="presentation"><a href="#tab02" role="tab" data-toggle="tab">Tires</a></li>--}}
+                @if($response['type'] == 'Wheel') <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">Wheels</a></li> @endif
+                @if($response['type'] == 'Tire') <li role="presentation" class="active"><a href="#tab02" role="tab" data-toggle="tab">Tires</a></li> @endif
+                @if($response['type'] == 'ACC') <li role="presentation" class="active"><a href="#tab03" role="tab" data-toggle="tab">Accessories</a></li> @endif
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane in active" id="tab01">
+                @if($response['type'] == 'Wheel')
+                    <div role="tabpanel" class="tab-pane in active" id="tab01">
                     <div class="search-wrapper">
                         <form class="row" action="" id="sidebarForm" onsubmit="this.preventDefault()">
                             @csrf
@@ -94,121 +96,118 @@
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->
-                </div><!-- end tab-pane -->
-
-                {{--<div role="tabpanel" class="tab-pane" id="tab02">
+                </div>
+                @endif<!-- end tab-pane -->
+                @if($response['type'] == 'Tire')
+                    <div role="tabpanel" class="tab-pane in active" id="tab02">
                     <div class="search-wrapper">
-                        <form class="row">
+                        <form class="row" action="" id="sidebarForm" onsubmit="this.preventDefault()">
+                            @csrf
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-input">
-                                    <label>Make:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Makes</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Tires By Brand:</label>
+                                    <select name="brands" id="brands">
+                                        <option value="" >All Brand</option>
+                                        @foreach($response['brands'] as $item)
+                                            <option value="{{$item->id}}">{{$item->description}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
-                                    <label>Models:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>All Models</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Tires By Width:</label>
+                                    <select name="width" id="width">
+                                        <option value="">All Width</option>
+                                        @foreach($response['width'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
-                                    <label>Body:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>Convertible:</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Tires By Wheel Diameter:</label>
+                                    <select name="wheelDiameter" id="wheelDiameter">
+                                        <option value="">All Wheel Diameter</option>
+                                        @foreach($response['wheelDiameter'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
-                                    <label>Year:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>2012 - 2013</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
-                                    </select>
-                                </div><!-- end form-input -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-input">
-                                    <label>Min Price:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>$30.000</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
-                                    </select>
-                                </div><!-- end form-input -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-input">
-                                    <label>Max Price:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>$130.000</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Tires By Diameter:</label>
+                                    <select name="diameter" id="diameter">
+                                        <option value="">All Diameter</option>
+                                        @foreach($response['diameter'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
                             </div><!-- end col -->
 
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-input">
-                                    <label>Transmission:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>Semi Automatic</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Tires By Rim Diameter:</label>
+                                    <select name="rimDiameter" id="rimDiameter">
+                                        <option value="">All Rim Diameter</option>
+                                        @foreach($response['rimDiameter'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
-                                    <label>Color:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>Titanium Metalic</option>
-                                        <option>Select Dropdown 01</option>
-                                        <option>Select Dropdown 02</option>
-                                        <option>Select Dropdown 03</option>
-                                        <option>Select Dropdown 04</option>
-                                        <option>Select Dropdown 05</option>
+                                    <label>Tires By Speed Rating:</label>
+                                    <select name="speedRating" id="speedRating">
+                                        <option value="">All Speed Rating</option>
+                                        @foreach($response['speedRating'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
                                     </select>
                                 </div><!-- end form-input -->
                             </div><!-- end col -->
+
+                            <input type="text" hidden name="year" id="year" value="{{ isset($response['filter']['year']) ? $response['filter']['year'] : '' }}">
+                            <input type="text" hidden name="make" id="make" value="{{ isset($response['filter']['make']) ? $response['filter']['make'] : '' }}">
+                            <input type="text" hidden name="model" id="model" value="{{ isset($response['filter']['model']) ? $response['filter']['model'] : '' }}">
 
                             <div class="col-md-12 col-xs-12">
-                                <button class="btn btn-primary btn-block">FILTER TIRES</button>
+                                <button class="btn btn-primary btn-block" type="button"   onclick="getResults('{{ route('frontend.pages.tires') }}')">FILTER TIRES</button>
+                                <a href="javascript:void(0)" onclick="resetAll()" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
                             </div><!-- end col -->
-                        </form><!-- end row -->
+                        </form>
                     </div><!-- end search-wrapper -->
-                </div>--}}<!-- end tab-pane -->
+                </div>
+                @endif<!-- end tab-pane -->
+                    @if($response['type'] == 'ACC')
+                    <div role="tabpanel" class="tab-pane in active" id="tab03">
+                    <div class="search-wrapper">
+                        <form class="row" action="" id="sidebarForm" onsubmit="this.preventDefault()">
+                            @csrf
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-input">
+                                    <label>Tires By Brand:</label>
+                                    <select name="brands" id="brands">
+                                        <option value="" >All Brand</option>
+                                        @foreach($response['brands'] as $item)
+                                            <option value="{{$item->id}}">{{$item->description}}</option>
+                                        @endforeach
+                                    </select>
+                                </div><!-- end form-input -->
+                            </div><!-- end col -->
+
+                            <input type="text" hidden name="year" id="year" value="{{ isset($response['filter']['year']) ? $response['filter']['year'] : '' }}">
+                            <input type="text" hidden name="make" id="make" value="{{ isset($response['filter']['make']) ? $response['filter']['make'] : '' }}">
+                            <input type="text" hidden name="model" id="model" value="{{ isset($response['filter']['model']) ? $response['filter']['model'] : '' }}">
+
+                            <div class="col-md-12 col-xs-12">
+                                <button class="btn btn-primary btn-block" type="button"   onclick="getResults('{{ route('frontend.pages.accessories') }}')">FILTER TIRES</button>
+                                <a href="javascript:void(0)" onclick="resetAll()" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
+                            </div><!-- end col -->
+                        </form>
+                    </div><!-- end search-wrapper -->
+                </div>
+                @endif<!-- end tab-pane -->
             </div><!-- end tab content -->
         </div>
     </div><!-- end widget -->

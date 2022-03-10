@@ -34,7 +34,11 @@ class Product extends Model
     {
         $image = $this->images()->first();
         if($image != null){
-            return $image->image_url;
+            if($image->resized_image_url){
+                return $image->image_url;
+            }else{
+                return $image->image_url;
+            }
         }
         return '';
     }

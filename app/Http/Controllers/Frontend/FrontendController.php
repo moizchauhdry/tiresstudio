@@ -22,7 +22,7 @@ class FrontendController extends Controller
 
     public function wheels(Request $request)
     {
-
+        $response['type'] = 'Wheel';
         $response['products'] = Product::groupBy('model')->where('sku_type','Wheel')->inRandomOrder()->paginate(9);
         $filter = array();
         if($request->ajax()){
@@ -154,7 +154,9 @@ class FrontendController extends Controller
         $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type','Wheel')->pluck('diameter')->toArray());
         $response['offset'] = array_unique(Product::select('offset')->where('sku_type','Wheel')->pluck('offset')->toArray());
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type','Wheel')->pluck('sizeDesc')->toArray());
-        $response['brands'] = Brand::all();
+        $response['brands'] = Brand::whereHas('products',function ($query){
+            $query->where('sku_type','Wheel');
+        })->get();
         $response['filter'] = $filter;
 
         return view('frontend.pages.wheels',compact('response'));
@@ -162,12 +164,250 @@ class FrontendController extends Controller
 
     public function tires(Request $request)
     {
-        return view('frontend.pages.under-construction');
+        $response['type'] = 'Tire';
+        $response['products'] = Product::groupBy('model')->where('sku_type','TIRE')->paginate(9);
+        $filter = array();
+        if($request->ajax()){
+
+            $products = Product::select('id','title')->where('sku_type','TIRE');
+            if($request->has('brand_id') && !empty($request->get('brand_id'))){
+                $products->where('brand_id',$request->brand_id);
+                $filter['brand_id'] = $request->brand_id;
+            }
+
+            if($request->has('width') && !empty($request->get('width'))){
+                $products->where('width',$request->width);
+                $filter['width'] = $request->width;
+            }
+
+            if($request->has('wheelDiameter') && !empty($request->get('wheelDiameter'))){
+                $products->where('wheelDiameter',$request->wheelDiameter);
+                $filter['wheelDiameter'] = $request->wheelDiameter;
+            }
+
+            if($request->has('diameter') && !empty($request->get('diameter'))){
+                $products->where('diameter',$request->diameter);
+                $filter['diameter'] = $request->diameter;
+            }
+
+            if($request->has('rimDiameter') && !empty($request->get('rimDiameter'))){
+                $products->where('rimDiameter',$request->rimDiameter);
+                $filter['rimDiameter'] = $request->rimDiameter;
+            }
+
+            if($request->has('speedRating') && !empty($request->get('speedRating'))){
+                $products->where('speedRating',$request->speedRating);
+                $filter['speedRating'] = $request->speedRating;
+            }
+
+
+            if($request->has('search') && !empty($request->get('search'))){
+                $search = $request->get('search');
+                $products->where(function ($query) use($search){
+                    $query->where('id', 'LIKE', "%$search%")
+                        ->orWhere('width', 'LIKE', "%$search%")
+                        ->orWhere('wheelDiameter', 'LIKE', "%$search%")
+                        ->orWhere('diameter', 'LIKE', "%$search%")
+                        ->orWhere('rimDiameter', 'LIKE', "%$search%")
+                        ->orWhere('speedRating', 'LIKE', "%$search%")
+                        ->orWhereHas('brand', function ($qry) use($search){
+                            $qry->where('description', 'LIKE', "%$search%");
+                        });
+                });
+                $filter['search'] = $search;
+            }
+
+            /*if($request->hasAny(['year','model','make']) && (!empty($request->get('year')) || !empty($request->get('model'))  || !empty($request->get('make')))){
+                $vehicles = VehicleModel::select('*');
+
+                if($request->has('year') && !empty($request->get('year'))){
+                    $vehicles->where('year',$request->year);
+                    $filter['year'] = $request->year;
+                }
+
+                if($request->has('make') && !empty($request->get('make'))){
+                    $vehicles->where('make_id',$request->make);
+                    $filter['make'] = $request->make;
+                }
+
+                if($request->has('model') && !empty($request->get('model'))){
+                    $vehicles->where('id',$request->model);
+                    $filter['model'] = $request->model;
+                }
+
+                $ids = $vehicles->pluck('id')->toArray();
+                $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
+                $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
+                $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
+                $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+                $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+                $products->where('diameter','>=', $minDiameter->minDiameterIn)
+                    ->where('diameter','<=', $maxDiameter->minDiameterIn)
+                    ->where('offset','>=', $offsetMinMm->offsetMinMm)
+                    ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
+            }*/
+
+
+            $response['filter'] = $filter;
+            $response['products'] = $products->groupBy('model')->paginate(9);
+            $html = view('frontend.includes.products', compact('response'))->render();
+
+            return response()->json([
+                'status' => true,
+                'view' => $html,
+            ]);
+        }
+
+        /*if(!$request->ajax() && $request->isMethod('POST')){
+
+            $vehicles = VehicleModel::select('*');
+
+            if($request->has('year') && !empty($request->get('year'))){
+                $vehicles->where('year',$request->year);
+                $filter['year'] = $request->year;
+            }
+
+            if($request->has('make') && !empty($request->get('make'))){
+                $vehicles->where('make_id',$request->make);
+                $filter['make'] = $request->make;
+            }
+
+            if($request->has('model') && !empty($request->get('model'))){
+                $vehicles->where('id',$request->model);
+                $filter['model'] = $request->model;
+            }
+
+            $ids = $vehicles->pluck('id')->toArray();
+            $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
+            $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
+            $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
+            $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+            $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+            $products = Product::groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)
+                ->where('diameter','<=', $maxDiameter->minDiameterIn)
+                ->where('offset','>=', $offsetMinMm->offsetMinMm)
+                ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
+            $response['products'] = $products->paginate(9);
+
+        }*/
+
+        $response['width'] = array_unique(Product::select('width')->where('sku_type','Tire')->pluck('width')->toArray());
+        $response['wheelDiameter'] = array_unique(Product::select('wheelDiameter')->where('sku_type','Tire')->pluck('wheelDiameter')->toArray());
+        $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type','Tire')->pluck('diameter')->toArray());
+        $response['rimDiameter'] = array_unique(Product::select('rimDiameter')->where('sku_type','Tire')->pluck('rimDiameter')->toArray());
+        $response['speedRating'] = array_unique(Product::select('speedRating')->where('sku_type','Tire')->pluck('speedRating')->toArray());
+        $response['brands'] = Brand::whereHas('products',function ($query){
+            $query->where('sku_type','Tire');
+        })->get();
+        $response['filter'] = $filter;
+
+        return view('frontend.pages.tires',compact('response'));
     }
 
     public function accessories(Request $request)
     {
-        return view('frontend.pages.under-construction');
+        $response['type'] = 'ACC';
+        $response['products'] = Product::where('sku_type','ACC')->paginate(9);
+        $filter = array();
+        if($request->ajax()){
+
+            $products = Product::select('id','title')->where('sku_type','ACC');
+            if($request->has('brand_id') && !empty($request->get('brand_id'))){
+                $products->where('brand_id',$request->brand_id);
+                $filter['brand_id'] = $request->brand_id;
+            }
+
+            if($request->has('search') && !empty($request->get('search'))){
+                $search = $request->get('search');
+                $products->where(function ($query) use($search){
+                    $query->where('id', 'LIKE', "%$search%")
+                        ->orWhereHas('brand', function ($qry) use($search){
+                            $qry->where('description', 'LIKE', "%$search%");
+                        });
+                });
+                $filter['search'] = $search;
+            }
+
+            /*if($request->hasAny(['year','model','make']) && (!empty($request->get('year')) || !empty($request->get('model'))  || !empty($request->get('make')))){
+                $vehicles = VehicleModel::select('*');
+
+                if($request->has('year') && !empty($request->get('year'))){
+                    $vehicles->where('year',$request->year);
+                    $filter['year'] = $request->year;
+                }
+
+                if($request->has('make') && !empty($request->get('make'))){
+                    $vehicles->where('make_id',$request->make);
+                    $filter['make'] = $request->make;
+                }
+
+                if($request->has('model') && !empty($request->get('model'))){
+                    $vehicles->where('id',$request->model);
+                    $filter['model'] = $request->model;
+                }
+
+                $ids = $vehicles->pluck('id')->toArray();
+                $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
+                $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
+                $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
+                $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+                $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+                $products->where('diameter','>=', $minDiameter->minDiameterIn)
+                    ->where('diameter','<=', $maxDiameter->minDiameterIn)
+                    ->where('offset','>=', $offsetMinMm->offsetMinMm)
+                    ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
+            }*/
+
+
+            $response['filter'] = $filter;
+            $response['products'] = $products->paginate(9);
+            $html = view('frontend.includes.products', compact('response'))->render();
+
+            return response()->json([
+                'status' => true,
+                'view' => $html,
+            ]);
+        }
+
+        /*if(!$request->ajax() && $request->isMethod('POST')){
+
+            $vehicles = VehicleModel::select('*');
+
+            if($request->has('year') && !empty($request->get('year'))){
+                $vehicles->where('year',$request->year);
+                $filter['year'] = $request->year;
+            }
+
+            if($request->has('make') && !empty($request->get('make'))){
+                $vehicles->where('make_id',$request->make);
+                $filter['make'] = $request->make;
+            }
+
+            if($request->has('model') && !empty($request->get('model'))){
+                $vehicles->where('id',$request->model);
+                $filter['model'] = $request->model;
+            }
+
+            $ids = $vehicles->pluck('id')->toArray();
+            $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
+            $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
+            $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
+            $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+            $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+            $products = Product::groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)
+                ->where('diameter','<=', $maxDiameter->minDiameterIn)
+                ->where('offset','>=', $offsetMinMm->offsetMinMm)
+                ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
+            $response['products'] = $products->paginate(9);
+
+        }*/
+
+        $response['brands'] = Brand::whereHas('products',function ($query){
+            $query->where('sku_type','ACC');
+        })->get();
+        $response['filter'] = $filter;
+
+        return view('frontend.pages.accessories',compact('response'));
     }
 
     public function product($id)
