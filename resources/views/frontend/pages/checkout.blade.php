@@ -35,77 +35,86 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="check_out_form">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form">
-                            <div class="section-title clearfix">
-                                <h5>Billing Address</h5>
-                                <hr class="custom">
-                            </div><!-- end section-title -->
-                            <form action="#" class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Country *</span>
-                                    <input type="text">
+                    <form action="#" method="post" id="checkout_form"> @csrf
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form">
+                                <div class="section-title clearfix">
+                                    <h5>Billing Address</h5>
+                                    <hr class="custom">
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <span>First Name *</span>
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <span>Last Name *</span>
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Address</span>
-                                    <input type="text" placeholder="">
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Town / City *</span>
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Contact Info *</span>
-                                    <input type="email" placeholder="Email Address">
-                                    <input type="text" placeholder="Phone Number">
-                                </div>
-                            </form>
-                        </div> <!-- /submit_form -->
+                                {{-- <form action="#" class="row"> --}}
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Country *</span>
+                                        <input type="text" name="billing_country"
+                                            value="{{isset($user->billing->country) ? $user->billing->country: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                                        <span>Name *</span>
+                                        <input type="text" name="billing_name"
+                                            value="{{isset($user->name) ? $user->name: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Address</span>
+                                        <input type="text" name="billing_address_1"
+                                            value="{{isset($user->billing->address_1) ? $user->billing->address_1: ''}}">
+                                        <input type="text" name="billing_address_2"
+                                            value="{{isset($user->billing->address_2) ? $user->billing->address_2: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Town / City *</span>
+                                        <input type="text" name="billing_city"
+                                            value="{{isset($user->billing->city) ? $user->billing->city: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Contact Info *</span>
+                                        <input type="email" name="billing_email"
+                                            value="{{isset($user->email) ? $user->email: ''}}">
+                                        <input type="text" name="billing_phone"
+                                            value="{{isset($user->phone) ? $user->phone: ''}}">
+                                    </div>
+                                    {{--
+                                </form> --}}
+                            </div>
 
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form shipping_address">
-                            <div class="section-title clearfix">
-                                <h5>Shipping Address</h5>
-                                <hr class="custom">
-                            </div><!-- end section-title -->
-                            <form action="#" class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Country *</span>
-                                    <input type="text">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form shipping_address">
+                                <div class="section-title clearfix">
+                                    <h5>Shipping Address</h5>
+                                    <hr class="custom">
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <span>First Name *</span>
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <span>Last Name *</span>
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Address</span>
-                                    <input type="text" placeholder="">
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Town / City *</span>
-                                    <input type="text" placeholder="">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Other Notes</span>
-                                    <textarea></textarea>
-                                </div>
-                            </form>
-                        </div> <!-- /submit_form -->
-                    </div> <!-- /row -->
-                </div> <!-- /check_out_form -->
+                                {{-- <form action="#" class="row"> --}}
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Country *</span>
+                                        <input type="text" name="shipping_country"
+                                            value="{{isset($user->shipping->country) ? $user->shipping->country: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                        <span>Name *</span>
+                                        <input type="text" name="shipping_name"
+                                            value="{{isset($user->name) ? $user->name: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Address</span>
+                                        <input type="text" name="shipping_address_1"
+                                            value="{{isset($user->shipping->address_1) ? $user->shipping->address_1: ''}}">
+                                        <input type="text" name="shipping_address_2"
+                                            value="{{isset($user->shipping->address_2) ? $user->shipping->address_2: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Town / City *</span>
+                                        <input type="text" name="shipping_city"
+                                            value="{{isset($user->shipping->city) ? $user->shipping->city: ''}}">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span>Other Notes</span>
+                                        <textarea name="notes"></textarea>
+                                    </div>
+                                    {{--
+                                </form> --}}
+                            </div>
+                        </div>
+                        <button type="submit">place order</button>
+                    </form>
+                </div>
 
                 <div class="cart_table">
                     <div class="row">
@@ -196,13 +205,50 @@
                                     <span>Paypal</span>
                                     <img src="{{asset('frontend/images/2.jpg')}}" alt="image" class="hidden-xs">
                                 </div>
-                                <a href="#" class="btn btn-primary">Place Order</a>
+                                <a href="#" class="btn btn-primary" onclick="placeOrder()">Place Order</a>
                             </div>
                         </div>
                     </div>
-                </div> <!-- /cart_table -->
+                </div>
             </div>
         </div>
     </div><!-- end container -->
 </div><!-- end section -->
+@endsection
+
+@section('scripts')
+<script>
+    $("#checkout_form").on("submit", function(event){
+        event.preventDefault();
+        $('span.text-success').remove();
+        $('span.text-danger').remove();
+        $('input.is-invalid').removeClass('is-invalid');
+        var formData = new FormData(this);
+        $.ajax({
+            method: "POST",
+            data: formData,
+            url: '{{route('frontend.customer.order')}}',
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function(){
+                $("#order_btn").addClass('hidden');
+                $("#loading_btn").removeClass('hidden');
+            },
+            success: function (response) {
+                if (response.status == 1) {
+                    Swal.fire( response.title, response.message, response.icon );
+                    $("#checkout_form")[0].reset();
+                    $("#order_btn").removeClass('hidden');
+                    $("#loading_btn").addClass('hidden');
+                }
+            },
+            error : function (errors) {
+                errorsGet(errors.responseJSON.errors)
+                $("#order_btn").removeClass('hidden');
+                $("#loading_btn").addClass('hidden');
+            }
+        });
+    });
+</script>
 @endsection

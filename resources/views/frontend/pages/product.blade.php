@@ -6,7 +6,7 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="title-area pull-left">
-                    <h2>Inventory Single</h2>
+                    <h2>{{getProductName($product->id)}} - {{$product->title}}</h2>
                 </div><!-- /.pull-right -->
                 <div class="pull-right hidden-xs">
                     <div class="bread">
@@ -34,21 +34,12 @@
                                 <div id="myCarousel" class="carousel slide">
                                     <!-- main slider carousel items -->
                                     <div class="carousel-inner">
-                                        <div class="active item" data-slide-number="0">
-                                            <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                                        @foreach ($product->images as $key => $image)
+                                        <div class="{{$key == 0 ? 'active' : ''}} item" data-slide-number="{{$key}}">
+                                            <img src="{{asset('storage/'.$image->image_url)}}" alt=""
+                                                class="img-responsive">
                                         </div>
-                                        <div class="item" data-slide-number="1">
-                                            <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
-                                        </div>
-                                        <div class="item" data-slide-number="2">
-                                            <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
-                                        </div>
-                                        <div class="item" data-slide-number="3">
-                                            <img src="{{asset('frontend/wheels/4.png')}}" alt="" class="img-responsive">
-                                        </div>
-                                        <div class="item" data-slide-number="4">
-                                            <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
-                                        </div>
+                                        @endforeach
                                     </div>
                                     <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
                                     <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
@@ -62,31 +53,14 @@
                     <div class="row-fluid" id="slider-thumbs">
                         <!-- thumb navigation carousel items -->
                         <ul class="list-inline">
+                            @foreach ($product->images as $key => $image)
                             <li class="col-md-15 col-sm-15 col-xs-6">
-                                <a id="carousel-selector-0" class="selected">
-                                    <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
+                                <a id="carousel-selector-{{$key}}" class="selected">
+                                    <img src="{{asset('storage/'.$image->resized_image_url)}}" alt=""
+                                        class="img-responsive">
                                 </a>
                             </li>
-                            <li class="col-md-15 col-sm-15 col-xs-6">
-                                <a id="carousel-selector-1">
-                                    <img src="{{asset('frontend/wheels/2.png')}}" alt="" class="img-responsive">
-                                </a>
-                            </li>
-                            <li class="col-md-15 col-sm-15 col-xs-6">
-                                <a id="carousel-selector-2">
-                                    <img src="{{asset('frontend/wheels/3.png')}}" alt="" class="img-responsive">
-                                </a>
-                            </li>
-                            <li class="col-md-15 col-sm-15 col-xs-6">
-                                <a id="carousel-selector-3">
-                                    <img src="{{asset('frontend/wheels/4.png')}}" alt="" class="img-responsive">
-                                </a>
-                            </li>
-                            <li class="col-md-15 col-sm-15 col-xs-6">
-                                <a id="carousel-selector-4">
-                                    <img src="{{asset('frontend/wheels/1.png')}}" alt="" class="img-responsive">
-                                </a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
 
@@ -519,18 +493,14 @@
                 <div class="widget custom-widget clearfix">
                     <div class="calculator">
                         <div class="calculator-title">
-                            <h4>Payment Calculator</h4>
+                            <h4>{{getProductName($product->id)}}</h4>
                         </div><!-- end title -->
                         <div class="search-tab light-tab calculator-body">
                             <div class="search-wrapper">
                                 <form class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-input">
-                                            <label>Vehicle Price ($)</label>
-                                            <input class="form-control" placeholder="500000" type="text">
-                                        </div><!-- end form-input -->
-                                        <div class="form-input">
-                                            <label>Down Price ($)</label>
+                                            <label>DIAMETER</label>
                                             <select name="orderby" class="selectpicker">
                                                 <option>20000</option>
                                                 <option>Select Dropdown 01</option>
@@ -544,7 +514,7 @@
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-input">
-                                            <label>Term (Month)</label>
+                                            <label>BOLT PATTERN</label>
                                             <select name="orderby" class="selectpicker">
                                                 <option>24</option>
                                                 <option>Select Dropdown 01</option>
@@ -558,7 +528,7 @@
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-input">
-                                            <label>Interest Rate</label>
+                                            <label>SIZE & OFFSET</label>
                                             <select name="orderby" class="selectpicker">
                                                 <option>8.97%</option>
                                                 <option>Select Dropdown 01</option>

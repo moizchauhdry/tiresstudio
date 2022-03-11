@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\VehicleModel;
 use App\Brand;
+use Auth;
 
 class FrontendController extends Controller
 {
@@ -174,11 +175,6 @@ class FrontendController extends Controller
     {
         $product = Product::find($id);
         return view('frontend.pages.product',compact('product'));
-    }
-
-    public function checkout()
-    {
-        return view('frontend.pages.checkout');
     }
 
     public function contact()
