@@ -260,22 +260,21 @@ class FrontendController extends Controller
         }
 
         if(!$request->ajax() && $request->isMethod('POST')){
-
             $vehicles = VehicleModel::select('*');
 
-            if($request->has('year') && !empty($request->get('year'))){
-                $vehicles->where('year',$request->year);
-                $filter['year'] = $request->year;
+            if($request->has('yearTire') && !empty($request->get('yearTire'))){
+                $vehicles->where('year',$request->yearTire);
+                $filter['year'] = $request->yearTire;
             }
 
-            if($request->has('make') && !empty($request->get('make'))){
-                $vehicles->where('make_id',$request->make);
-                $filter['make'] = $request->make;
+            if($request->has('makeTire') && !empty($request->get('makeTire'))){
+                $vehicles->where('make_id',$request->makeTire);
+                $filter['make'] = $request->makeTire;
             }
 
-            if($request->has('model') && !empty($request->get('model'))){
-                $vehicles->where('id',$request->model);
-                $filter['model'] = $request->model;
+            if($request->has('modelTire') && !empty($request->get('modelTire'))){
+                $vehicles->where('id',$request->modelTire);
+                $filter['model'] = $request->modelTire;
             }
 
             $ids = $vehicles->pluck('id')->toArray();
@@ -284,7 +283,7 @@ class FrontendController extends Controller
             $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
             /*$offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
             $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();*/
-            $products = Product::groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)
+            $products = Product::where('sku_type','TIRE')->groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)
                 ->where('diameter','<=', $maxDiameter->minDiameterIn);
                 /*->where('offset','>=', $offsetMinMm->offsetMinMm)
                 ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
@@ -301,7 +300,6 @@ class FrontendController extends Controller
             $query->where('sku_type','Tire');
         })->get();
         $response['filter'] = $filter;
-
         return view('frontend.pages.tires',compact('response'));
     }
 

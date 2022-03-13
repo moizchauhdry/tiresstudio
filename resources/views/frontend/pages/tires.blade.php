@@ -100,9 +100,9 @@
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     search: $('#search').val(),
-                    /*year : $('#year').val(),
+                    year : $('#year').val(),
                     make : $('#make').val(),
-                    model : $('#model').val(),*/
+                    model : $('#model').val(),
                     brand_id : $('#brands').selectpicker('val'),
                     width : $('#width').selectpicker('val'),
                     wheelDiameter : $('#wheelDiameter').selectpicker('val'),
