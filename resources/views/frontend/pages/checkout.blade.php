@@ -34,8 +34,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <div class="check_out_form">
-                    <form action="#" method="post" id="checkout_form"> @csrf
+                <form action="#" method="post" id="checkout_form"> @csrf
+                    <div class="check_out_form">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form">
                                 <div class="section-title clearfix">
@@ -106,110 +106,103 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <span>Other Notes</span>
-                                        <textarea name="notes"></textarea>
+                                        <textarea name="order_notes"></textarea>
                                     </div>
                                     {{--
                                 </form> --}}
                             </div>
                         </div>
-                        <button type="submit">place order</button>
-                    </form>
-                </div>
+                        {{-- <button type="submit">place order</button> --}}
+                    </div>
 
-                <div class="cart_table">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <div class="table-responsive">
-                                <table class="table table-1">
-                                    <thead>
-                                        <tr>
-                                            <th><span>Product</span></th>
-                                            <th style="padding-left:0"><span>Quantity</span></th>
-                                            <th><span style="margin-left: 9px;">Total</span></th>
-                                        </tr>
-                                    </thead> <!-- /thead -->
-                                    <tbody>
+                    <div class="cart_table">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table table-1">
+                                        <thead>
+                                            <tr>
+                                                <th><span>Product</span></th>
+                                                <th style="padding-left:0"><span>Quantity</span></th>
+                                                <th><span style="margin-left: 9px;">Total</span></th>
+                                            </tr>
+                                        </thead> <!-- /thead -->
+                                        <tbody>
 
-                                        <tr>
-                                            <td class="flex_item clear_fix">
-                                                <img src="{{asset('frontend/uploads/shop_01.jpg')}}" alt="images"
-                                                    class="alignleft img-responsive">
-                                                <h6 class="float_left">Start From The Art</h6>
-                                            </td>
-                                            <td><input type="number" name="quantity" min="0" value="1"></td>
-                                            <td><span>$25.00</span></td>
-                                        </tr> <!-- /tr -->
+                                            @foreach ($products as $product)
+                                            <tr>
+                                                <td class="flex_item clear_fix">
+                                                    <img src="{{asset('storage/'.$product->product_image)}}"
+                                                        alt="images" class="alignleft img-responsive">
+                                                    <h6 class="float_left">{{$product->title}}</h6>
+                                                </td>
+                                                <td><input type="number" name="quantity" min="0"
+                                                        value="{{Cart::get($product->id)->quantity}}"></td>
+                                                <td><span>${{$product->price}}</span></td>
+                                            </tr>
+                                            @endforeach
 
-                                        <tr>
-                                            <td class="flex_item clear_fix">
-                                                <img src="{{asset('frontend/uploads/shop_02.jpg')}}" alt="images"
-                                                    class="alignleft img-responsive">
-                                                <h6 class="float_left">Lords Of Strategy</h6>
-                                            </td>
-                                            <td><input type="number" name="quantity" min="0" value="3"></td>
-                                            <td><span>$69.00</span></td>
-                                        </tr> <!-- /tr -->
-
-                                        <tr>
-                                            <td class="flex_item clear_fix">
-                                                <img src="{{asset('frontend/uploads/shop_03.jpg')}}" alt="images"
-                                                    class="alignleft img-responsive">
-                                                <h6 class="float_left">Start From The Art</h6>
-                                            </td>
-                                            <td><input type="number" name="quantity" min="0" value="2"></td>
-                                            <td><span>$29.00</span></td>
-                                        </tr> <!-- /tr -->
-
-                                    </tbody> <!-- /tbody -->
-                                </table>
-                            </div> <!-- /table-responsive -->
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <h3>Cart Totals</h3>
-                            <div class="table-responsive">
-                                <table class="table table-2">
-                                    <tbody>
-                                        <tr>
-                                            <td><span>Cart Subtotal</span></td>
-                                            <td><span>$146.00</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span>Shipping and Handling</span></td>
-                                            <td><span>Free Shipping</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span>Order Total</span></td>
-                                            <td><span>$146.00</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> <!-- /table-responsive -->
-                            <div class="payment_system">
-                                <div class="pay1">
-                                    <input type="checkbox">
-                                    <span>Direct Bank Transfer</span>
-                                    <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                        payment reference.order won’t be shipped until the funds have cleared.</p>
+                                        </tbody> <!-- /tbody -->
+                                    </table>
+                                </div> <!-- /table-responsive -->
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <h3>Cart Totals</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-2">
+                                        <tbody>
+                                            <tr>
+                                                <td><span>Cart Subtotal</span></td>
+                                                <td><span>${{ number_format((float)Cart::getSubTotal(), 2, '.',
+                                                        '')}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Shipping and Handling</span></td>
+                                                <td><span>Free Shipping</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Order Total</span></td>
+                                                <td><span>${{ number_format((float)Cart::getTotal(), 2, '.',
+                                                        '')}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> <!-- /table-responsive -->
+                                <div class="payment_system">
+                                    <div class="pay1">
+                                        <input type="checkbox" name="payment_method" value="1">
+                                        <span>Direct Bank Transfer</span>
+                                        <p>Make your payment directly into our bank account. Please use your Order ID as
+                                            the
+                                            payment reference.order won’t be shipped until the funds have cleared.</p>
+                                    </div>
+                                    <div class="pay1">
+                                        <input type="checkbox" name="payment_method" value="2">
+                                        <span>Cheque Payment</span>
+                                    </div>
+                                    <div class="pay1">
+                                        <input type="checkbox" name="payment_method" value="3">
+                                        <span>Credit Card</span>
+                                        {{-- <img src="{{asset('frontend/images/1.jpg')}}" alt="image"
+                                            class="hidden-xs">
+                                        --}}
+                                    </div>
+                                    <div class="pay1">
+                                        <input type="checkbox">
+                                        <span>Paypal</span>
+                                        {{-- <img src="{{asset('frontend/images/2.jpg')}}" alt="image"
+                                            class="hidden-xs">
+                                        --}}
+                                    </div>
+                                    {{-- <a href="#" class="btn btn-primary">Place Order</a> --}}
+                                    <button type="submit" class="btn btn-primary">Place Order</button>
                                 </div>
-                                <div class="pay1">
-                                    <input type="checkbox">
-                                    <span>Cheque Payment</span>
-                                </div>
-                                <div class="pay1">
-                                    <input type="checkbox">
-                                    <span>Credit Card</span>
-                                    <img src="{{asset('frontend/images/1.jpg')}}" alt="image" class="hidden-xs">
-                                </div>
-                                <div class="pay1">
-                                    <input type="checkbox">
-                                    <span>Paypal</span>
-                                    <img src="{{asset('frontend/images/2.jpg')}}" alt="image" class="hidden-xs">
-                                </div>
-                                <a href="#" class="btn btn-primary" onclick="placeOrder()">Place Order</a>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div><!-- end container -->

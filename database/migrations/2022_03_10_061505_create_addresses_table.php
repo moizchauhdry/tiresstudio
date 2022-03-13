@@ -15,8 +15,7 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->enum('type', ['BILLING', 'SHIPPING'])->nullable();
             $table->string('name', 100)->nullable();
             $table->string('email', 100)->nullable();
@@ -25,7 +24,6 @@ class CreateAddressesTable extends Migration
             $table->string('city', 100)->nullable();
             $table->string('address_1', 100)->nullable();
             $table->string('address_2', 100)->nullable();
-            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

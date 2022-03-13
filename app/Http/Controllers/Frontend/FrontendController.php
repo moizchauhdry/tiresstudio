@@ -15,7 +15,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $response['popular_wheels'] = Product::groupBy('model')->take(12)->where('sku_type','Wheel')->inRandomOrder()->get();
+        $response['popular_wheels'] = Product::groupBy('model')->take(12)->skip(1)->where('sku_type','Wheel')->get();
         $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year','asc')->pluck('year')->toArray());
         $response['brands'] = Brand::orderBy('description','asc')->take(6)->get();
         return view('frontend.pages.index',compact('response'));
@@ -24,7 +24,7 @@ class FrontendController extends Controller
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->where('sku_type','Wheel')->inRandomOrder()->paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type','Wheel')->paginate(9);
         $filter = array();
         if($request->ajax()){
 
