@@ -88,6 +88,9 @@
 
 @section('scripts')
     <script>
+        $('.car-wrapper img').lazy({
+            placeholder:"{{ asset('images/placeholder.gif') }}"
+        })
         $('#brands,#width,#wheelDiameter,#diameter,#rimDiameter,#speedRating').selectpicker();
 
         function getResults(url){
@@ -112,6 +115,14 @@
                 },
                 success: function (response) {
                     $('#viewProducts').html(response.view);
+                    $('.car-wrapper img').lazy({
+                        placeholder:"{{ asset('images/placeholder.gif') }}"
+                    })
+                    $('.overlay-products').hide();
+                },
+                error: function (error) {
+                    console.log(error.response);
+                    alert('something went wrong');
                     $('.overlay-products').hide();
                 }
             });

@@ -217,7 +217,7 @@ class FrontendController extends Controller
                 $filter['search'] = $search;
             }
 
-            /*if($request->hasAny(['year','model','make']) && (!empty($request->get('year')) || !empty($request->get('model'))  || !empty($request->get('make')))){
+            if($request->hasAny(['year','model','make']) && (!empty($request->get('year')) || !empty($request->get('model'))  || !empty($request->get('make')))){
                 $vehicles = VehicleModel::select('*');
 
                 if($request->has('year') && !empty($request->get('year'))){
@@ -239,13 +239,13 @@ class FrontendController extends Controller
                 $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
                 $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
                 $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
-                $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
-                $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+                /*$offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+                $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();*/
                 $products->where('diameter','>=', $minDiameter->minDiameterIn)
-                    ->where('diameter','<=', $maxDiameter->minDiameterIn)
-                    ->where('offset','>=', $offsetMinMm->offsetMinMm)
-                    ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
-            }*/
+                    ->where('diameter','<=', $maxDiameter->minDiameterIn);
+                    /*->where('offset','>=', $offsetMinMm->offsetMinMm)
+                    ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
+            }
 
 
             $response['filter'] = $filter;
@@ -258,7 +258,7 @@ class FrontendController extends Controller
             ]);
         }
 
-        /*if(!$request->ajax() && $request->isMethod('POST')){
+        if(!$request->ajax() && $request->isMethod('POST')){
 
             $vehicles = VehicleModel::select('*');
 
@@ -281,15 +281,15 @@ class FrontendController extends Controller
             $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
             $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
             $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
-            $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
-            $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+            /*$offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+            $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();*/
             $products = Product::groupBy('model')->where('diameter','>=', $minDiameter->minDiameterIn)
-                ->where('diameter','<=', $maxDiameter->minDiameterIn)
-                ->where('offset','>=', $offsetMinMm->offsetMinMm)
-                ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
+                ->where('diameter','<=', $maxDiameter->minDiameterIn);
+                /*->where('offset','>=', $offsetMinMm->offsetMinMm)
+                ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
             $response['products'] = $products->paginate(9);
 
-        }*/
+        }
 
         $response['width'] = array_unique(Product::select('width')->where('sku_type','Tire')->pluck('width')->toArray());
         $response['wheelDiameter'] = array_unique(Product::select('wheelDiameter')->where('sku_type','Tire')->pluck('wheelDiameter')->toArray());

@@ -178,6 +178,33 @@
     border-style: solid;
 }
 
+.select-overlay-content {
+    /* left: 50%; */
+    right: 2%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.select-spinner {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-width: 3px;
+    border-color: rgb(255 255 255);
+    border-top-color: #c70000;
+    animation: spin 1s infinite linear;
+    border-radius: 100%;
+    border-style: solid;
+    vertical-align: middle;
+}
+
+.car-wrapper img{
+    height:100%;
+    width:100%;
+}
+
+
 @keyframes spin {
     100% {
         transform: rotate(360deg);

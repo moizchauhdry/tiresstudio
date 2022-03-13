@@ -316,15 +316,19 @@
 
 @section('scripts')
 <script>
-    $('#btn_search').on('click',function(){
+        $('#btn_search').on('click',function(){
             if($('.year').selectpicker('val') != '' && $('.make').selectpicker('val') != '' && $('.model').selectpicker('val') != ''){
                 $('#home_search').trigger('submit');
             }
         })
 
+        $('#tire_btn_search').on('click',function(){
+            if($('.yearTire').selectpicker('val') != '' && $('.makeTire').selectpicker('val') != '' && $('.modelTire').selectpicker('val') != ''){
+                $('#tire_search').trigger('submit');
+            }
+        })
 
-
-        $('.year,.model,.make').selectpicker();
+        $('.year,.model,.make,.yearTire,.modelTire,.makeTire').selectpicker();
 
         $('.year').on('changed.bs.select', function () {
             $.ajax({
@@ -335,6 +339,8 @@
                     year : $('.year').selectpicker('val'),
                 },
                 beforeSend:function(){
+                    $('#yearLoader').show();
+                    $('#makeLoader').show();
                 },
                 success: function (response) {
                     if( $.isArray(response.data) &&  response.data.length ) {
@@ -356,6 +362,8 @@
                     }
 
                     $('.make').selectpicker('refresh');
+                    $('#yearLoader').hide();
+                    $('#makeLoader').hide();
                 }
             });
         });
@@ -370,6 +378,8 @@
                     make : $('.make').selectpicker('val'),
                 },
                 beforeSend:function(){
+                    $('#makeLoader').show();
+                    $('#modelLoader').show();
                 },
                 success: function (response) {
                     if( $.isArray(response.data) &&  response.data.length ) {
@@ -391,9 +401,88 @@
                     }
 
                     $('.model').selectpicker('refresh');
+                    $('#makeLoader').hide();
+                    $('#modelLoader').hide();
                 }
             });
         });
+
+        $('.yearTire').on('changed.bs.select', function () {
+        $.ajax({
+            method: "POST",
+            url: '{{ route('get.makes-by-year') }}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                year : $('.yearTire').selectpicker('val'),
+            },
+            beforeSend:function(){
+                $('#yearTireLoader').show();
+                $('#makeTireLoader').show();
+            },
+            success: function (response) {
+                if( $.isArray(response.data) &&  response.data.length ) {
+                    $('.makeTire select').prop('disabled',false);
+                    $('.makeTire').removeClass('disabled');
+                    $('.makeTire option').remove();
+                    $('.makeTire select').append(' <option value=""  >Select Make</option>');
+
+                    response.data.forEach(function (item, index) {
+                        option = "<option value='" + item.id + "'>" + item.name + "</option>"
+                        $('.makeTire select').append(option);
+                    });
+                }
+                else{
+                    $('.makeTire select').prop('disabled', true);
+                    $('.makeTire').addClass('disabled');
+                    $('.makeTire option').remove();
+                    $('.makeTire select').append(' <option value="" selected >Select Make</option>');
+                }
+
+                $('.makeTire').selectpicker('refresh');
+                $('#yearTireLoader').hide();
+                $('#makeTireLoader').hide();
+            }
+        });
+    });
+
+        $('.makeTire').on('changed.bs.select', function () {
+        $.ajax({
+            method: "POST",
+            url: '{{ route('get.model-by-makes') }}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                year : $('.yearTire').selectpicker('val'),
+                make : $('.makeTire').selectpicker('val'),
+            },
+            beforeSend:function(){
+                $('#makeTireLoader').show();
+                $('#modelTireLoader').show();
+            },
+            success: function (response) {
+                if( $.isArray(response.data) &&  response.data.length ) {
+                    $('.modelTire select').prop('disabled',false);
+                    $('.modelTire').removeClass('disabled');
+                    $('.modelTire option').remove();
+                    $('.modelTire select').append(' <option value=""  >Select Make</option>');
+
+                    response.data.forEach(function (item, index) {
+                        option = "<option value='" + item.id + "'>" + item.model + "</option>"
+                        $('.modelTire select').append(option);
+                    });
+                }
+                else{
+                    $('.modelTire select').prop('disabled', true);
+                    $('.modelTire').addClass('disabled');
+                    $('.modelTire option').remove();
+                    $('.modelTire select').append(' <option value="" selected >Select Make</option>');
+                }
+
+                $('.modelTire').selectpicker('refresh');
+                $('#makeTireLoader').hide();
+                $('#modelTireLoader').hide();
+            }
+        });
+    });
 
         function searchResults(){
             $.ajax({
@@ -416,5 +505,27 @@
                 }
             });
         }
+
+        function searchResultsTire(){
+        $.ajax({
+            method: "POST",
+            url: url,
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                home:{
+                    year : $('.yearTire').selectpicker('val'),
+                    make : $('.makeTire').selectpicker('val'),
+                    model : $('.modelTire').selectpicker('val'),
+                }
+            },
+            beforeSend:function(){
+                $('.overlay-products').show();
+            },
+            success: function (response) {
+                $('#viewProducts').html(response.view);
+                $('.overlay-products').hide();
+            }
+        });
+    }
 </script>
 @endsection
