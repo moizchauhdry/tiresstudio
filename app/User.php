@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function billing()
+    {
+        return $this->hasOne(Address::class)->where('type','BILLING');
+    }
+
+    public function shipping()
+    {
+        return $this->hasOne(Address::class)->where('type','SHIPPING');
+    }
 }

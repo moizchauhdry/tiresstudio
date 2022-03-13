@@ -32,7 +32,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
     Route::get('/dashboard', 'Frontend\CustomerController@dashboard')->name('frontend.customer.dashboard');
     Route::any('/profile', 'Frontend\CustomerController@profile')->name('frontend.customer.profile');
     Route::post('/logout', 'Frontend\CustomerController@logout')->name('frontend.customer.logout');
-    Route::get('/checkout', 'Frontend\FrontendController@checkout')->name('frontend.pages.checkout');
+    Route::get('/checkout', 'Frontend\OrderController@checkout')->name('frontend.pages.checkout');
+    Route::post('/order', 'Frontend\OrderController@order')->name('frontend.customer.order');
 });
 
 Route::group(['prefix' => 'get','as' => 'get.'],function(){
