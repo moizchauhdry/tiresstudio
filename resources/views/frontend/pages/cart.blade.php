@@ -76,14 +76,14 @@
                             </div>
                             <!-- /table-responsive -->
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        {{-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <input type="text" placeholder="Enter Coupon Code..." class="coupon">
                             <button class="btn btn-primary">Apply Coupon</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cart_update m30" style="text-align:right;">
                             <button class="btn btn-primary">Update Cart</button>
                             <button class="btn btn-primary">Proceed to Checkout</button>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- /row -->
 
@@ -114,7 +114,8 @@
                                 </table>
                             </div>
                             <!-- /table-responsive -->
-                            <button class="btn btn-primary">Proceed to Checkout</button>
+                            <a href="{{route('frontend.pages.checkout')}}" class="btn btn-default">Proceed to
+                                Checkout</a>
                         </div>
                     </div>
                 </div><!-- /cart_table -->

@@ -542,14 +542,14 @@
 
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <hr class="invis2">
-                                        <h5>Monthly Payment:</h5>
+                                        {{-- <h5>Monthly Payment:</h5>
                                         <label>$21906.66</label>
                                         <hr class="invis2">
                                         <h5>Total Interest to Pay:</h5>
                                         <label>$25759.84</label>
-                                        <hr class="invis2">
+                                        <hr class="invis2"> --}}
                                         <h5>Total Amount:</h5>
-                                        <label class="totalpay">$525759.84</label>
+                                        <label class="totalpay"><b>${{$product->price}}</b></label>
                                         <hr class="invis2">
                                         @include('frontend.includes.cart')
                                     </div><!-- end col -->
