@@ -32,7 +32,7 @@ class Product extends Model
 
     public function getProductImageAttribute()
     {
-        $image = $this->images()->first();
+        $image = $this->images->whereNotNull('image_url')->first();
         if($image != null){
             if($image->resized_image_url){
                 return $image->image_url;
