@@ -20,6 +20,11 @@ class Product extends Model
         return $this->hasMany(ProductPrice::class);
     }
 
+    public function price()
+    {
+        return $this->hasOne(ProductPrice::class)->where('currency_code','USD');
+    }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);

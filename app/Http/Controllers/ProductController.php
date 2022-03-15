@@ -278,7 +278,7 @@ class ProductController extends Controller
     {
         $brands = Brand::all();
         if ($request->ajax()) {
-            $data = Product::select('id','sku','upc','sku_type','title');
+            $data = Product::select('id','sku','upc','sku_type','title','created_at');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function(Product $data){
@@ -409,17 +409,24 @@ class ProductController extends Controller
         $product->sku = 'TS'.sprintf("%05d", $product->id);
         $product->save();
 
-        foreach ($request->images as $image){
-            $imageDirectory = 'customProducts';
-            if ($request->hasFile('image_url')) {
+        $price = ProductPrice::create([
+            'product_id' => $product->id,
+            'currency_amount' => $request->currency_amount,
+            'currency_code' => getCurrencyCode(),
+        ]);
 
-                $fileName = $request->file('image_url')->getClientOriginalName();
+        foreach ($request->file('images') as $image){
+            $imageDirectory = 'customProducts';
+            if ($image) {
+
+                $fileName = $image->getClientOriginalName();
 
                 if(!Storage::disk('public')->exists($imageDirectory)){
                     Storage::disk('public')->makeDirectory($imageDirectory);
                 }
-                $imageUrl = Storage::disk('public')->putFile($imageDirectory, new File($request->file('image_url')));
+                $imageUrl = Storage::disk('public')->putFile($imageDirectory, new File($image));
                 ProductImage::create([
+                    'product_id' => $product->id,
                     'filename' => $fileName,
                     'image_url' => $imageUrl,
                 ]);
@@ -464,9 +471,111 @@ class ProductController extends Controller
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product,$id)
     {
-        //
+
+        $product = Product::find($id);
+
+        if($product == null){
+            return redirect()->back()->with('error','product not found');
+        }
+
+        $rules = [
+            'sku_type' => 'required',
+            'title' => 'required',
+            'brand_id' => 'required',
+            'images.*' => 'nullable|mimes:jpeg,jpg,png',
+        ];
+
+        $validator = Validator::make($request->all(), $rules , $message = [
+            'images.*.mimes' => 'Images must be a file of type: jpeg, jpg, png.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+
+
+        if($product->submitted_by != null){
+            $product->sku = $request->sku ?? null;
+            $product->upc = $request->upc ?? null;
+            $product->sku_type = $request->sku_type ?? null;
+            $product->title = $request->title ?? null;
+            $product->brand_id = $request->brand_id ?? null;
+            $product->model = $request->model ?? null;
+            $product->offset = $request->offset ?? null;
+            $product->boltPattern = $request->boltPattern ?? null;
+            $product->finishCode = $request->finishCode ?? null;
+            $product->finish = $request->finish ?? null;
+            $product->width = $request->width ?? null;
+            $product->diameter = $request->diameter ?? null;
+            $product->centerbore = $request->centerbore ?? null;
+            $product->wheelDiameter = $request->wheelDiameter ?? null;
+            $product->tireSize = $request->tireSize ?? null;
+            $product->terrain = $request->terrain ?? null;
+            $product->utqg = $request->utqg ?? null;
+            $product->mileageWarranty = $request->mileageWarranty ?? null;
+            $product->series = $request->series ?? null;
+            $product->sectionWidth = $request->sectionWidth ?? null;
+            $product->weight = $request->weight ?? null;
+            $product->speedRating = $request->speedRating ?? null;
+            $product->rimDiameter = $request->rimDiameter ?? null;
+            $product->minWidthIn = $request->minWidthIn ?? null;
+            $product->maxWidthIn = $request->maxWidthIn ?? null;
+            $product->loadIndex = $request->loadIndex ?? null;
+            $product->treadDepth = $request->treadDepth ?? null;
+            $product->load_pounds = $request->load_pounds ?? null;
+            $product->overall_diameter = $request->overall_diameter ?? null;
+            $product->productDesc = $request->productDesc ?? null;
+            $product->imageCode = $request->imageCode ?? null;
+            $product->backspacing = $request->backspacing ?? null;
+            $product->wheelWeight = $request->wheelWeight ?? null;
+            $product->capPartNo = $request->capPartNo ?? null;
+            $product->rivetPartNo = $request->rivetPartNo ?? null;
+            $product->tpmsCompatible = $request->tpmsCompatible ?? null;
+            $product->lipDepth = $request->lipDepth ?? null;
+            $product->certification = $request->certification ?? null;
+            $product->structuralWarranty = $request->structuralWarranty ?? null;
+            $product->finishWarranty = $request->finishWarranty ?? null;
+            $product->openEndCap = $request->openEndCap ?? null;
+            $product->capScrewNo = $request->capScrewNo ?? null;
+            $product->otherAccessories = $request->otherAccessories ?? null;
+            $product->additionalAccessories = $request->additionalAccessories ?? null;
+            $product->catalogPage = $request->catalogPage ?? null;
+            $product->loadRating = $request->loadRating ?? null;
+            $product->sizeDesc = $request->sizeDesc ?? null;
+            $product->submitted_by = Auth::guard('admin')->user()->id;
+            $product->save();
+
+            $product->sku = 'TS'.sprintf("%05d", $product->id);
+            $product->save();
+        }
+
+        $price = ProductPrice::updateOrCreate([
+            'product_id' => $product->id,
+            'currency_code' => getCurrencyCode(),
+        ],['currency_amount' => $request->currency_amount,]);
+
+        foreach ($request->file('images') as $image){
+            $imageDirectory = 'customProducts';
+            if ($image) {
+
+                $fileName = $image->getClientOriginalName();
+
+                if(!Storage::disk('public')->exists($imageDirectory)){
+                    Storage::disk('public')->makeDirectory($imageDirectory);
+                }
+                $imageUrl = Storage::disk('public')->putFile($imageDirectory, new File($image));
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'filename' => $fileName,
+                    'image_url' => $imageUrl,
+                ]);
+            }
+        }
+
+        return redirect()->route('products.index')->with('success','Product Updated Successfully');
     }
 
     /**
@@ -478,5 +587,17 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function destroyImage(Request $request)
+    {
+        $id =  $request->id;
+        $image = ProductImage::find($id);
+        if($image != null){
+            $image->delete();
+            return response()->json(['status' => 1,'message' => 'Product image deleted successfully']);
+        }else{
+            return response()->json(['status' => 0,'message' => 'Product image error']);
+        }
     }
 }

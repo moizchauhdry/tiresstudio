@@ -91,6 +91,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                         Route::post('/store', 'ProductController@store')->name('products.store');
                         Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');
                         Route::post('/update/{id}', 'ProductController@update')->name('products.update');
+                        Route::post('/destroyImage/', 'ProductController@destroyImage')->name('products.destroyImage');
                     });
                 // });
 
