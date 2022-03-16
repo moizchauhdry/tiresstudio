@@ -20,6 +20,11 @@ class Product extends Model
         return $this->hasMany(ProductPrice::class);
     }
 
+    public function price()
+    {
+        return $this->hasOne(ProductPrice::class)->where('currency_code','USD');
+    }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);
@@ -32,7 +37,7 @@ class Product extends Model
 
     public function getProductImageAttribute()
     {
-        $image = $this->images()->first();
+        $image = $this->images->whereNotNull('image_url')->first();
         if($image != null){
             if($image->resized_image_url){
                 return $image->image_url;

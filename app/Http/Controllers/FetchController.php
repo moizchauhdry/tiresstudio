@@ -96,6 +96,7 @@ class FetchController extends Controller
             $products = $data['results'];
             foreach ($products as $key => $product) {
                 $brandData = [
+                    'type' => 'WHEEL',
                     'code' => $product['brand']['code'],
                     'description' => $product['brand']['description'],
                     'parent' => $product['brand']['parent'],
@@ -209,6 +210,7 @@ class FetchController extends Controller
             foreach ($products as $key => $product) {
 
                 $brandData = [
+                    'type' => 'TIRE',
                     'code' => $product['brand']['code'],
                     'description' => $product['brand']['description'],
                     'parent' => $product['brand']['parent'],
@@ -319,6 +321,7 @@ class FetchController extends Controller
             foreach ($products as $key => $product) {
 
                 $brandData = [
+                    'type' => 'ACC',
                     'code' => $product['brand']['code'],
                     'description' => $product['brand']['description'],
                     'parent' => $product['brand']['parent'],

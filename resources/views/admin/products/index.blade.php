@@ -12,9 +12,9 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            {{--<a href="{{route('admins.create')}}" class="btn btn-success">
-                                Add Admin
-                            </a>--}}
+                            <a href="{{route('products.create')}}" class="btn btn-success">
+                                Add Product
+                            </a>
                         </li>
                     </ol>
                 </div>
@@ -63,6 +63,7 @@
                                     <th>UPC</th>
                                     <th>SKU Type</th>
                                     <th>Title</th>
+                                    <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -101,13 +102,14 @@
                         d.search = $('input[type="search"]').val()
                     }
                 },
-                order:[[1,"desc"]],
+                order:[[0,"desc"]],
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
                     {data: 'sku', name: 'sku'},
                     {data: 'upc', name: 'upc'},
                     {data: 'sku_type', name: 'sku_type'},
                     {data: 'title', name: 'title'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action',orderable: false, searchable: false},
                 ],
                 drawCallback: function (response) {

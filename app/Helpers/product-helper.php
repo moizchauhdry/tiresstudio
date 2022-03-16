@@ -5,6 +5,10 @@ function getCurrency(){
     return '$ ';
 }
 
+function getCurrencyCode(){
+    return 'USD';
+}
+
 function imageURL($url){
 
     if(!empty($url)){
