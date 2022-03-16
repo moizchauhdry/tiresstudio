@@ -219,3 +219,8 @@
 .car-wrapper .post-media img:hover {
     transform: scale(1.1);
 }
+
+.cart_table .payment_system input[type="checkbox"] {
+    width: auto;
+    height: auto;
+}

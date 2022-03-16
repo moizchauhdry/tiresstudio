@@ -29,13 +29,12 @@
 <!-- ******************************************
         PAGE WRAPPER
         ********************************************** -->
-
-<div class="section">
+<div class="section check_out_form">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <form action="#" method="post" id="checkout_form"> @csrf
-                    <div class="check_out_form">
+                    <div class="">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form">
                                 <div class="section-title clearfix">
