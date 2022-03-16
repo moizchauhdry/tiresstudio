@@ -557,21 +557,23 @@ class ProductController extends Controller
             'currency_code' => getCurrencyCode(),
         ],['currency_amount' => $request->currency_amount,]);
 
-        foreach ($request->file('images') as $image){
-            $imageDirectory = 'customProducts';
-            if ($image) {
+        if($request->has('images')){
+            foreach ($request->file('images') as $image){
+                $imageDirectory = 'customProducts';
+                if ($image) {
 
-                $fileName = $image->getClientOriginalName();
+                    $fileName = $image->getClientOriginalName();
 
-                if(!Storage::disk('public')->exists($imageDirectory)){
-                    Storage::disk('public')->makeDirectory($imageDirectory);
+                    if(!Storage::disk('public')->exists($imageDirectory)){
+                        Storage::disk('public')->makeDirectory($imageDirectory);
+                    }
+                    $imageUrl = Storage::disk('public')->putFile($imageDirectory, new File($image));
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'filename' => $fileName,
+                        'image_url' => $imageUrl,
+                    ]);
                 }
-                $imageUrl = Storage::disk('public')->putFile($imageDirectory, new File($image));
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'filename' => $fileName,
-                    'image_url' => $imageUrl,
-                ]);
             }
         }
 

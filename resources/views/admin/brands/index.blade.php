@@ -42,6 +42,7 @@
                                     <th>Code</th>
                                     <th>Description</th>
                                     <th>Parent</th>
+                                    <th>Type</th>
                                     <th>Products</th>
                                     <th>Action</th>
                                 </tr>
@@ -54,10 +55,11 @@
                                         <td>{{$brand->code}}</td>
                                         <td>{{$brand->description}}</td>
                                         <td>{{$brand->parent}}</td>
+                                        <td>{{$brand->type}}</td>
                                         <td>{{$brand->products->count()}}</td>
                                         <td class="text-center">
-                                            <a href="javascript:void(0)">
-                                                <i class="far fa-eye" aria-hidden="true"></i>
+                                            <a class="btn btn-outline-primary btn-sm" href="{{ route('brands.edit',$brand->id) }}">
+                                                <i class="far fa-edit" aria-hidden="true"></i> Edit
                                             </a>
                                         </td>
                                     </tr>

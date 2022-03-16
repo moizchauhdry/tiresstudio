@@ -106,6 +106,10 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                 // Route::group(['middleware' => ['permission:manage-brands']],function(){
                 Route::group(['prefix' => 'brands'],function(){
                     Route::get('/', 'BrandController@index')->name('brands.index');
+                    Route::get('/create', 'BrandController@create')->name('brands.create');
+                    Route::post('/store', 'BrandController@store')->name('brands.store');
+                    Route::get('/edit/{id}', 'BrandController@edit')->name('brands.edit');
+                    Route::post('/update/{id}', 'BrandController@update')->name('brands.update');
                 });
                 // });
 

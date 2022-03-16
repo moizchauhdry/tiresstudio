@@ -74,9 +74,9 @@
                 </li>
 
                 <li
-                    class="nav-item has-treeview {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show'|| Route::currentRouteName() == 'brands.index' ) ? 'menu-open' : ''}}">
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show'|| Route::currentRouteName() == 'brands.create'|| Route::currentRouteName() == 'brands.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
-                        class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show' || Route::currentRouteName() == 'brands.index' ) ? 'active' : ''}}">
+                        class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show' || Route::currentRouteName() == 'brands.create'|| Route::currentRouteName() == 'brands.edit' ) ? 'active' : ''}}">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Brands
@@ -92,6 +92,14 @@
                                 <p>List Brands</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('brands.create')}}"
+                               class="nav-link {{(Route::currentRouteName() == 'brands.create' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Brand</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 

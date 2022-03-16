@@ -399,10 +399,11 @@
                                     @foreach($product->images as $image)
                                         <div class="col-sm-12 col-md-3" id="image-{{$image->id}}">
                                             <div class="card">
+                                                <button type="button" class="btn btn-tool position-absolute float-right" onclick="removeImage({{ $image->id }})" style="top:9px;right:0px">
+                                                    <i class="text-danger fas fa-times"></i>
+                                                </button>
                                                 <div class="card-body">
-                                                        <button type="button" class="btn btn-tool position-relative float-right" onclick="removeImage({{ $image->id }})">
-                                                            <i class="text-danger fas fa-times"></i>
-                                                        </button>
+
                                                     <img class="img-fluid img-responsive" src="{{ asset('storage/'.$image->image_url) }}" alt="">
                                                 </div>
                                             </div>
