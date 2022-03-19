@@ -35,7 +35,7 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="welcome-widget clearfix">
                     <div class="section-title clearfix">
-                        <h4>Welcome to the Engines</h4>
+                        <h4>Welcome to the Tiresstudio</h4>
                         <hr class="custom">
                     </div><!-- end section-title -->
 

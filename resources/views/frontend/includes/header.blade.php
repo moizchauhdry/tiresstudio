@@ -91,22 +91,30 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(0,5) as $brand)
-                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
+                                        <li><a
+                                                href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a>
+                                        </li>
                                         @endforeach
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(5,5) as $brand)
-                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
+                                        <li><a
+                                                href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a>
+                                        </li>
                                         @endforeach
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(10,5) as $brand)
-                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
+                                        <li><a
+                                                href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a>
+                                        </li>
                                         @endforeach
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(15,5) as $brand)
-                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
+                                        <li><a
+                                                href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a>
+                                        </li>
                                         @endforeach
                                     </div>
                                 </div>
@@ -114,7 +122,7 @@
                         </ul>
                     </li>
                     <li><a href="javascript:void(0)">Shop</a></li>
-                    <li><a href="{{route('frontend.pages.gallery')}}">Gallery</a></li>
+                    <li><a href="#">Gallery</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">About <span class="fa fa-angle-down"></span></a>

@@ -7,7 +7,7 @@
             <div class="col-md-4 col-sm-12">
                 <div class="widget clearfix">
                     <div class="widget-title">
-                        <h4>About Engines</h4>
+                        <h4>About Tiresstudio</h4>
                     </div><!-- end widget-title -->
                     <div class="about-widget">
                         <p>It is a long established fact that a reader will be distracted by the readable.</p>
@@ -84,9 +84,9 @@
                     <ul class="tags list-inline">
                         <li><a href="#">New</a></li>
                         <li><a href="#">Used</a></li>
-                        <li><a href="#">Auto Loan</a></li>
-                        <li><a href="#">Spares</a></li>
-                        <li><a href="#">Abous us</a></li>
+                        <li><a href="#">Wheels</a></li>
+                        <li><a href="#">Tires</a></li>
+                        <li><a href="#">Tiresstudio</a></li>
                     </ul><!-- end tags -->
                 </div><!-- end widget -->
 
@@ -139,18 +139,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-xs-12 text-left">
-                <p>Copyrights <small>© 2016</small> All Rights Reserved by <a href="http://psdconveryhtml.com">PSD to
-                        HTML</a>.</p>
+                <p>Copyrights <small>© 2022</small> All Rights Reserved by <a
+                        href="{{route('frontend.pages.index')}}">Tiresstudio.com</a>.</p>
             </div><!-- end col -->
 
             <div class="col-md-6 col-sm-6 col-xs-12 text-right">
                 <ul class="list-inline">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Policies</a></li>
-                    <li><a href="#">Buy</a></li>
-                    <li><a href="#">Sell</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{route('frontend.pages.index')}}">Home</a></li>
+                    <li><a href="{{route('frontend.pages.about')}}">About</a></li>
+                    <li><a href="{{route('frontend.pages.about')}}">Policies</a></li>
+                    <li><a href="{{route('frontend.pages.wheels')}}">Wheels</a></li>
+                    <li><a href="{{route('frontend.pages.tires')}}">Tires</a></li>
+                    <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>
                 </ul>
             </div><!-- end col -->
         </div><!-- end row -->
