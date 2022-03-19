@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="" class="btn btn-dark">Back</a>
+                            <a href="{{ route('products.index') }}" class="btn btn-dark">Back</a>
                         </li>
                     </ol>
                 </div>

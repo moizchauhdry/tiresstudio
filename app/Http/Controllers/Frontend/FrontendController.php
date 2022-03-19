@@ -416,7 +416,26 @@ class FrontendController extends Controller
         return view('frontend.pages.product',compact('product'));
     }
 
-    public function brand(Request $request,$id)
+    public function brand(Request $request)
+    {
+        if($request->ajax()){
+            $brands = Brand::paginate(9);
+            $response['brands'] = $brands;
+            $html = view('frontend.includes.brands')->with($response)->render();
+
+            return response()->json([
+                'status' => true,
+                'view' => $html,
+            ]);
+        }
+
+
+        $brands = Brand::paginate(9);
+        $response['brands'] = $brands;
+        return view('frontend.pages.brands')->with($response);
+    }
+
+    public function brandProducts(Request $request,$id)
     {
 
         if($request->ajax()){
@@ -433,7 +452,7 @@ class FrontendController extends Controller
 
         $brand = Brand::findOrFail($id);
         $response['brand'] = $brand;
-        $response['products'] = Product::where('brand_id',$id)->groupBy('model')->paginate();
+        $response['products'] = Product::where('brand_id',$id)->groupBy('model')->paginate(9);
         return view('frontend.pages.brand')->with($response);
     }
 
@@ -454,6 +473,7 @@ class FrontendController extends Controller
                 $search = $request->get('search');
                 $products->where(function ($query) use($search){
                     $query->where('id', 'LIKE', "%$search%")
+                        ->orWhere('title', 'LIKE', "%$search%")
                         ->orWhereHas('brand', function ($qry) use($search){
                             $qry->where('description', 'LIKE', "%$search%");
                         });

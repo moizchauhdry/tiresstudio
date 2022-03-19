@@ -282,8 +282,8 @@ class ProductController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function(Product $data){
-                    $btn1 = '<a class="btn btn-primary btn-sm mr-2" href="'.route('products.show', $data->id).'">View Detail</a>';
-                    $btn1 .= '<a class="btn btn-warning btn-sm" href="'.route('products.edit', $data->id).'">Edit</a>';
+                    $btn1 = '<a class="btn btn-primary btn-sm mr-2 mb-1" href="'.route('products.show', $data->id).'">View Detail</a>';
+                    $btn1 .= '<a class="btn btn-warning btn-sm mb-1" href="'.route('products.edit', $data->id).'">Edit</a>';
                     return $btn1;
                 })
                 ->filter(function ($instance) use ($request) {

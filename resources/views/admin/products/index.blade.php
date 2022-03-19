@@ -63,7 +63,6 @@
                                     <th>UPC</th>
                                     <th>SKU Type</th>
                                     <th>Title</th>
-                                    <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -109,7 +108,6 @@
                     {data: 'upc', name: 'upc'},
                     {data: 'sku_type', name: 'sku_type'},
                     {data: 'title', name: 'title'},
-                    {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action',orderable: false, searchable: false},
                 ],
                 drawCallback: function (response) {

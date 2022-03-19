@@ -13,7 +13,8 @@ Route::any('/wheels', 'Frontend\FrontendController@wheels')->name('frontend.page
 Route::any('/tires', 'Frontend\FrontendController@tires')->name('frontend.pages.tires');
 Route::any('/accessories', 'Frontend\FrontendController@accessories')->name('frontend.pages.accessories');
 Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('frontend.pages.product');
-Route::any('/brands/{id}', 'Frontend\FrontendController@brand')->name('frontend.pages.brand');
+Route::any('/brands', 'Frontend\FrontendController@brand')->name('frontend.pages.brands');
+Route::any('/brands/{id}', 'Frontend\FrontendController@brandProducts')->name('frontend.pages.brand-products');
 Route::any('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
 
 
