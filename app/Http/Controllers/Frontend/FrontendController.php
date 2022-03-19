@@ -541,7 +541,8 @@ class FrontendController extends Controller
 
     public function gallery()
     {
-        return view('frontend.pages.gallery');
+        // return view('frontend.pages.gallery');
+        return view('frontend.pages.under-construction');
     }
 
     public function getMakesByYear(Request $request)
