@@ -34,7 +34,7 @@
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
                         <a href="{{ route('frontend.pages.product',$wheel->id) }}"><img
-                                src="{{imageURL($wheel->product_image)}}" alt="" class="img-responsive"></a>
+                                src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($wheel->product_image)}}" alt="" class="img-responsive"></a>
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix text-center">
@@ -116,7 +116,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <a href="{{ route('frontend.pages.brand-products',$brand->id) }}"><img src="{{imageURL($brand->product->product_image)}}" alt="" class="img-responsive"></a>
+                        <a href="{{ route('frontend.pages.brand-products',$brand->id) }}"><img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($brand->product->product_image)}}" alt="" class="img-responsive"></a>
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix text-center">
@@ -320,6 +320,9 @@
 
 @section('scripts')
 <script>
+    $('.car-wrapper img').lazy({
+        placeholder:"{{ asset('images/placeholder.gif') }}"
+    })
     $('#btn_search').on('click',function(){
             if($('.year').selectpicker('val') != '' && $('.make').selectpicker('val') != '' && $('.model').selectpicker('val') != ''){
                 $('#home_search').trigger('submit');
