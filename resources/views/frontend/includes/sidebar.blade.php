@@ -13,6 +13,7 @@
                 @if($response['type'] == 'Wheel') <li role="presentation" class="active"><a href="#tab01" role="tab" data-toggle="tab">Wheels</a></li> @endif
                 @if($response['type'] == 'Tire') <li role="presentation" class="active"><a href="#tab02" role="tab" data-toggle="tab">Tires</a></li> @endif
                 @if($response['type'] == 'ACC') <li role="presentation" class="active"><a href="#tab03" role="tab" data-toggle="tab">Accessories</a></li> @endif
+                @if($response['type'] == 'SHOP') <li role="presentation" class="active"><a href="#tab03" role="tab" data-toggle="tab">Shop</a></li> @endif
             </ul>
 
             <!-- Tab panes -->
@@ -179,14 +180,14 @@
                     </div><!-- end search-wrapper -->
                 </div>
                 @endif<!-- end tab-pane -->
-                    @if($response['type'] == 'ACC')
+                @if($response['type'] == 'ACC')
                     <div role="tabpanel" class="tab-pane in active" id="tab03">
                     <div class="search-wrapper">
                         <form class="row" action="" id="sidebarForm" onsubmit="this.preventDefault()">
                             @csrf
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-input">
-                                    <label>Tires By Brand:</label>
+                                    <label>Accessories By Brand:</label>
                                     <select name="brands" id="brands">
                                         <option value="" >All Brand</option>
                                         @foreach($response['brands'] as $item)
@@ -201,12 +202,41 @@
                             <input type="text" hidden name="model" id="model" value="{{ isset($response['filter']['model']) ? $response['filter']['model'] : '' }}">
 
                             <div class="col-md-12 col-xs-12">
-                                <button class="btn btn-primary btn-block" type="button"   onclick="getResults('{{ route('frontend.pages.accessories') }}')">FILTER TIRES</button>
+                                <button class="btn btn-primary btn-block" type="button"   onclick="getResults('{{ route('frontend.pages.accessories') }}')">FILTER ACCESSORIES</button>
                                 <a href="javascript:void(0)" onclick="resetAll()" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
                             </div><!-- end col -->
                         </form>
                     </div><!-- end search-wrapper -->
                 </div>
+                @endif
+                @if($response['type'] == 'SHOP')
+                        <div role="tabpanel" class="tab-pane in active" id="tab03">
+                            <div class="search-wrapper">
+                                <form class="row" action="" id="sidebarForm" onsubmit="this.preventDefault()">
+                                    @csrf
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-input">
+                                            <label>Shop By Brand:</label>
+                                            <select name="brands" id="brands">
+                                                <option value="" >All Brand</option>
+                                                @foreach($response['brands'] as $item)
+                                                    <option value="{{$item->id}}">{{$item->description}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div><!-- end form-input -->
+                                    </div><!-- end col -->
+
+                                    <input type="text" hidden name="year" id="year" value="{{ isset($response['filter']['year']) ? $response['filter']['year'] : '' }}">
+                                    <input type="text" hidden name="make" id="make" value="{{ isset($response['filter']['make']) ? $response['filter']['make'] : '' }}">
+                                    <input type="text" hidden name="model" id="model" value="{{ isset($response['filter']['model']) ? $response['filter']['model'] : '' }}">
+
+                                    <div class="col-md-12 col-xs-12">
+                                        <button class="btn btn-primary btn-block" type="button"   onclick="getResults('{{ route('frontend.pages.shop') }}')">FILTER SHOP</button>
+                                        <a href="javascript:void(0)" onclick="resetAll()" class="customa"><i class="fa fa-refresh"></i> Reset all</a>
+                                    </div><!-- end col -->
+                                </form>
+                            </div><!-- end search-wrapper -->
+                        </div>
                 @endif<!-- end tab-pane -->
             </div><!-- end tab content -->
         </div>

@@ -91,22 +91,22 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(0,5) as $brand)
-                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
                                         @endforeach
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(5,5) as $brand)
-                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
                                         @endforeach
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(10,5) as $brand)
-                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
                                         @endforeach
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-3">
                                         @foreach ($brands->slice(15,5) as $brand)
-                                        <li><a href="#">{{$brand->parent}}</a></li>
+                                        <li><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->parent}}</a></li>
                                         @endforeach
                                     </div>
                                 </div>

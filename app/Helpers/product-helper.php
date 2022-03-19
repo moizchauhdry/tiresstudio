@@ -11,7 +11,7 @@ function getCurrencyCode(){
 
 function imageURL($url){
 
-    if(!empty($url)){
+    if(Storage::disk('public')->exists($url)){
         $url = URL::asset('storage/'.$url);
         return $url;
     }else{

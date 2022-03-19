@@ -30,15 +30,17 @@
         <div class="row">
             @foreach ($response['popular_wheels'] as $wheel)
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
+
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <img src="{{asset('storage/'.$wheel->product_image)}}" alt="" class="img-responsive">
+                        <a href="{{ route('frontend.pages.product',$wheel->id) }}"><img src="{{imageURL($wheel->product_image)}}" alt="" class="img-responsive"></a>
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix text-center">
-                        <h4><a href="#">{{getProductName($wheel->id)}}</a></h4>
+                        <h4><a href="{{ route('frontend.pages.product',$wheel->id) }}">{{getProductName($wheel->id)}}</a></h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
+
             </div>
             @endforeach
         </div>
@@ -111,11 +113,11 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <img src="{{asset('storage/'.$brand->product->product_image)}}" alt="" class="img-responsive">
+                        <a href="{{ route('frontend.pages.brand',$brand->id) }}"><img src="{{imageURL($brand->product->product_image)}}" alt="" class="img-responsive"></a>
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix text-center">
-                        <h4><a href="#">{{$brand->description}}</a></h4>
+                        <h4><a href="{{ route('frontend.pages.brand',$brand->id) }}">{{$brand->description}}</a></h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
             </div>
