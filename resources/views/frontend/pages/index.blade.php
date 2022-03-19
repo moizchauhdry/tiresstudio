@@ -104,7 +104,7 @@
             </div><!-- end col -->
             <div class="col-md-6">
                 <div class="section-title clearfix ">
-                    <a href="{{route('frontend.pages.wheels')}}"
+                    <a href="{{route('frontend.pages.brands')}}"
                         style="float: right; margin-top: 11px; font-size:16px; font-weight: bold;">VIEW ALL
                         BRANDS <i class="fa fa-arrow-right"></i></a>
                 </div>

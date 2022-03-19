@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Product;
+use App\User;
 use App\VehicleModel;
 use Illuminate\Http\Request;
 
@@ -24,6 +26,8 @@ class AdminController extends Controller
         $response['tires'] = Product::where('sku_type','TIRE')->get()->count();
         $response['accessories'] = Product::where('sku_type','ACC')->get()->count();
         $response['vehicles'] = VehicleModel::all()->count();
+        $response['orders'] = Order::all()->count();
+        $response['customers'] = User::all()->count();
 
         return view ('admin.dashboard')->with($response);
     }
