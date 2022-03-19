@@ -94,7 +94,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('brands.create')}}"
-                               class="nav-link {{(Route::currentRouteName() == 'brands.create' ) ? 'active' : ''}}">
+                                class="nav-link {{(Route::currentRouteName() == 'brands.create' ) ? 'active' : ''}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Brand</p>
                             </a>
@@ -148,38 +148,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
+                    <a href="{{route('orders.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
-                            Order/Sales
+                            Manage Orders
                         </p>
                     </a>
                 </li>
-                {{--<li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Delivery status
-                        </p>
-                    </a>
-                </li>--}}
-                {{--<li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Promotions
-                        </p>
-                    </a>
-                </li>--}}
-                <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Payments
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
@@ -210,7 +186,7 @@
                             Manage Blog
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
@@ -219,14 +195,14 @@
                         </p>
                     </a>
                 </li>--}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Manage Complaints
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
@@ -235,7 +211,7 @@
                         </p>
                     </a>
                 </li>--}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
@@ -250,7 +226,7 @@
                             Manage Reports
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 {{--<li class="nav-item">
                     <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>

@@ -33,11 +33,14 @@
 
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
-                        <a href="{{ route('frontend.pages.product',$wheel->id) }}"><img src="{{imageURL($wheel->product_image)}}" alt="" class="img-responsive"></a>
+                        <a href="{{ route('frontend.pages.product',$wheel->id) }}"><img
+                                src="{{imageURL($wheel->product_image)}}" alt="" class="img-responsive"></a>
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix text-center">
-                        <h4><a href="{{ route('frontend.pages.product',$wheel->id) }}">{{getProductName($wheel->id)}}</a></h4>
+                        <h4><a
+                                href="{{ route('frontend.pages.product',$wheel->id) }}">{{getProductName($wheel->id)}}</a>
+                        </h4>
                     </div><!-- end car-title -->
                 </div><!-- end clearfix -->
 
@@ -156,12 +159,12 @@
                         <i class="flaticon-transport"></i>
                     </div><!-- end col -->
                     <div class="col-md-10">
-                        <h3>Looking For Buy a Car?</h3>
-                        <p>Now is a good time to buy a car, Engines provide you new and used car in good
-                            conditions, after full car checkup only we deleiverd your car to you with fully
-                            completed documentations. </p>
+                        <h3>Looking For Buy a Wheel?</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem expedita consequuntur
+                            asperiores. Eveniet, magni delectus enim est nihil mollitia! Libero dignissimos impedit
+                            autem et id, ipsum quam! </p>
 
-                        <a href="#" class="btn btn-default">BUY A CAR</a>
+                        <a href="{{route('frontend.pages.wheels')}}" class="btn btn-default">BUY A WHEEL</a>
                     </div><!-- end col -->
                 </div><!-- end messahe box -->
             </div><!-- emd col -->
@@ -169,15 +172,15 @@
             <div class="col-md-4 col-sm-6 color2">
                 <div class="message-box row clearfix">
                     <div class="col-md-2 text-center">
-                        <i class="flaticon-vehicle-1"></i>
+                        <i class="flaticon-vehicle"></i>
                     </div><!-- end col -->
                     <div class="col-md-10">
-                        <h3>Do You Want to Sell a Car?</h3>
+                        <h3>Looking For Buy a Tire?</h3>
                         <p>Now is a good time to buy a car, Engines provide you new and used car in good
                             conditions, after full car checkup only we deleiverd your car to you with fully
                             completed documentations. </p>
 
-                        <a href="#" class="btn btn-default">SELL A CAR</a>
+                        <a href="{{route('frontend.pages.tires')}}" class="btn btn-default">BUY A TIRE</a>
                     </div><!-- end col -->
                 </div><!-- end messahe box -->
             </div><!-- emd col -->
@@ -188,11 +191,10 @@
                         <i class="flaticon-two"></i>
                     </div><!-- end col -->
                     <div class="col-md-10">
-                        <h3>Kids Grill the Car Experts</h3>
-                        <p>Now is a good time to buy a car, Engines provide you new and used car in good
-                            conditions, after full car checkup only we deleiverd your car to you with fully
-                            completed documentations. </p>
-
+                        <h3>Lorem ipsum dolor sit amet.</h3>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque recusandae veritatis cum
+                            nobis maxime ad accusantium, libero iste ex officiis nisi officia reiciendis quidem quo quam
+                            adipisci sed voluptatibus omnis! </p>
                         <a href="#" class="btn btn-default">KNOW MORE</a>
                     </div><!-- end col -->
                 </div><!-- end messahe box -->
@@ -318,7 +320,7 @@
 
 @section('scripts')
 <script>
-        $('#btn_search').on('click',function(){
+    $('#btn_search').on('click',function(){
             if($('.year').selectpicker('val') != '' && $('.make').selectpicker('val') != '' && $('.model').selectpicker('val') != ''){
                 $('#home_search').trigger('submit');
             }

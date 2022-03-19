@@ -46,10 +46,10 @@
                                         <td class="flex_item clear_fix">
                                             <img src="{{asset('storage/'.$product->product_image)}}" alt="images"
                                                 class="alignleft img-responsive">
-                                            <h6 class="float_left">{{$product->title}}</h6>
+                                            <h6 class="float_left">{{getProductName($product->id)}}</h6>
                                         </td>
                                         <td>
-                                            <input type="number" name="quantity" min="0"
+                                            <input type="number" name="quantity" min="0" disabled
                                                 value="{{Cart::get($product->id)->quantity}}">
                                         </td>
                                         <td>

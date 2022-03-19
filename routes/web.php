@@ -125,6 +125,15 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     Route::get('{year}/makes', 'FetchController@getMakes')->name('makes');
                 });
 
+                // Route::group(['middleware' => ['permission:manage-orders']],function(){
+                    Route::group(['prefix' => 'orders'],function(){
+                        Route::get('/', 'OrderController@index')->name('orders.index');
+                        Route::get('/detail/{id}', 'OrderController@detail')->name('orders.detail');
+                        Route::post('/updateOrderStatus/{id}', 'OrderController@updateOrderStatus')->name('updateOrderStatus');
+                        Route::get('/check', 'OrderController@check')->name('orders.check');
+                    });
+                // });
+
                 Route::group(['prefix' => 'import'],function(){
                     Route::any('/products','ImportController@importProducts')->name('import.importProducts');
                 });

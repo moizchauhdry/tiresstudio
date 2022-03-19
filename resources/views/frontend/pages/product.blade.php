@@ -66,7 +66,7 @@
 
                     <div class="clearfix"></div>
 
-                    <div class="car-description clearfix">
+                    {{-- <div class="car-description clearfix">
                         <h3>Audi A8 3.0 TDI S12 Quattro Tiptronic</h3>
 
                         <p>It is a long established fact that a reader will be distracted by the readable content of a
@@ -382,9 +382,9 @@
                                 <li><i class="fa fa-check"></i> <strong>Rear Traffic Alert</strong></li>
                             </ul><!-- end ul -->
                         </div><!-- end col -->
-                    </div><!-- end row -->
+                    </div><!-- end row --> --}}
 
-                    <div class="banner-wrapper clearfix">
+                    {{-- <div class="banner-wrapper clearfix">
                         <div class="row">
                             <div class="col-md-7 col-sm-7">
                                 <div class="banner-message">
@@ -411,7 +411,7 @@
                                         class="img-responsive"></a>
                             </div><!-- end col -->
                         </div><!-- end row -->
-                    </div><!-- end banner-wrapper -->
+                    </div><!-- end banner-wrapper --> --}}
 
                     <hr class="invis">
                     <div class="row">
@@ -502,12 +502,7 @@
                                         <div class="form-input">
                                             <label>DIAMETER</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>20000</option>
-                                                <option>Select Dropdown 01</option>
-                                                <option>Select Dropdown 02</option>
-                                                <option>Select Dropdown 03</option>
-                                                <option>Select Dropdown 04</option>
-                                                <option>Select Dropdown 05</option>
+                                                <option>{{$product->diameter}}</option>
                                             </select>
                                         </div><!-- end form-input -->
                                     </div>
@@ -516,12 +511,7 @@
                                         <div class="form-input">
                                             <label>BOLT PATTERN</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>24</option>
-                                                <option>Select Dropdown 01</option>
-                                                <option>Select Dropdown 02</option>
-                                                <option>Select Dropdown 03</option>
-                                                <option>Select Dropdown 04</option>
-                                                <option>Select Dropdown 05</option>
+                                                <option>{{$product->boltPattern}}</option>
                                             </select>
                                         </div><!-- end form-input -->
                                     </div><!-- end col -->
@@ -530,12 +520,7 @@
                                         <div class="form-input">
                                             <label>SIZE & OFFSET</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>8.97%</option>
-                                                <option>Select Dropdown 01</option>
-                                                <option>Select Dropdown 02</option>
-                                                <option>Select Dropdown 03</option>
-                                                <option>Select Dropdown 04</option>
-                                                <option>Select Dropdown 05</option>
+                                                <option>{{$product->sizeDesc}}</option>
                                             </select>
                                         </div><!-- end form-input -->
                                     </div><!-- end col -->
