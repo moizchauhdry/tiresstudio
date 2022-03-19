@@ -17,6 +17,7 @@ class FrontendController extends Controller
     {
         $response['popular_wheels'] = Product::groupBy('model')->take(12)->skip(1)->where('sku_type','Wheel')->get();
         $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year','asc')->pluck('year')->toArray());
+        rsort($response['years']);
         $response['brands'] = Brand::orderBy('description','asc')->take(6)->get();
         return view('frontend.pages.index',compact('response'));
     }
@@ -415,6 +416,99 @@ class FrontendController extends Controller
         return view('frontend.pages.product',compact('product'));
     }
 
+    public function brand(Request $request,$id)
+    {
+
+        if($request->ajax()){
+            $products = Product::where('brand_id',$id)->groupBy('model');
+            $response['products'] = $products->paginate(9);
+            $html = view('frontend.includes.products', compact('response'))->render();
+
+            return response()->json([
+                'status' => true,
+                'view' => $html,
+            ]);
+        }
+
+
+        $brand = Brand::findOrFail($id);
+        $response['brand'] = $brand;
+        $response['products'] = Product::where('brand_id',$id)->groupBy('model')->paginate();
+        return view('frontend.pages.brand')->with($response);
+    }
+
+    public function shop(Request $request)
+    {
+        $response['type'] = 'SHOP';
+        $response['products'] = Product::groupBy('model')->paginate(9);
+        $filter = array();
+        if($request->ajax()){
+
+            $products = Product::groupBy('model');
+            if($request->has('brand_id') && !empty($request->get('brand_id'))){
+                $products->where('brand_id',$request->brand_id);
+                $filter['brand_id'] = $request->brand_id;
+            }
+
+            if($request->has('search') && !empty($request->get('search'))){
+                $search = $request->get('search');
+                $products->where(function ($query) use($search){
+                    $query->where('id', 'LIKE', "%$search%")
+                        ->orWhereHas('brand', function ($qry) use($search){
+                            $qry->where('description', 'LIKE', "%$search%");
+                        });
+                });
+                $filter['search'] = $search;
+            }
+
+            /*if($request->hasAny(['year','model','make']) && (!empty($request->get('year')) || !empty($request->get('model'))  || !empty($request->get('make')))){
+                $vehicles = VehicleModel::select('*');
+
+                if($request->has('year') && !empty($request->get('year'))){
+                    $vehicles->where('year',$request->year);
+                    $filter['year'] = $request->year;
+                }
+
+                if($request->has('make') && !empty($request->get('make'))){
+                    $vehicles->where('make_id',$request->make);
+                    $filter['make'] = $request->make;
+                }
+
+                if($request->has('model') && !empty($request->get('model'))){
+                    $vehicles->where('id',$request->model);
+                    $filter['model'] = $request->model;
+                }
+
+                $ids = $vehicles->pluck('id')->toArray();
+                $axles = VehicleModelAxle::whereIn('vehicle_model_id',$ids);
+                $minDiameter = $axles->orderBy('minDiameterIn','asc')->first();
+                $maxDiameter = $axles->orderBy('maxDiameterIn','asc')->first();
+                $offsetMinMm = $axles->orderBy('offsetMinMm','asc')->first();
+                $offsetMaxMm = $axles->orderBy('offsetMaxMm','asc')->first();
+                $products->where('diameter','>=', $minDiameter->minDiameterIn)
+                    ->where('diameter','<=', $maxDiameter->minDiameterIn)
+                    ->where('offset','>=', $offsetMinMm->offsetMinMm)
+                    ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
+            }*/
+
+
+            $response['filter'] = $filter;
+            $response['products'] = $products->paginate(9);
+            $html = view('frontend.includes.products', compact('response'))->render();
+
+            return response()->json([
+                'status' => true,
+                'view' => $html,
+            ]);
+        }
+
+
+        $response['brands'] = Brand::orderBy('description','asc')->get();
+        $response['filter'] = $filter;
+
+        return view('frontend.pages.accessories',compact('response'));
+    }
+
     public function contact()
     {
         return view('frontend.pages.contact');
@@ -435,7 +529,7 @@ class FrontendController extends Controller
         $year = $request->year;
         $makes = Make::whereHas('vehicles',function ($query) use ($year){
           $query->where('year',$year);
-        })->get();
+        })->orderBy('name','asc')->get();
 
         return response()->json([
             'status' => true,
@@ -445,7 +539,7 @@ class FrontendController extends Controller
 
     public function getModelsByMakes(Request $request)
     {
-        $models = VehicleModel::where('make_id',$request->make)->where('year',$request->year)->get();
+        $models = VehicleModel::where('make_id',$request->make)->where('year',$request->year)->orderBy('model','asc')->get();
 
         return response()->json([
             'status' => true,

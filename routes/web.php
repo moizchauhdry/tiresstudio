@@ -13,6 +13,9 @@ Route::any('/wheels', 'Frontend\FrontendController@wheels')->name('frontend.page
 Route::any('/tires', 'Frontend\FrontendController@tires')->name('frontend.pages.tires');
 Route::any('/accessories', 'Frontend\FrontendController@accessories')->name('frontend.pages.accessories');
 Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('frontend.pages.product');
+Route::any('/brands/{id}', 'Frontend\FrontendController@brand')->name('frontend.pages.brand');
+Route::any('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
+
 
 Route::prefix('cart')->group(function () {
     Route::any('/', 'Frontend\CartController@cart')->name('frontend.cart');

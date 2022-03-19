@@ -52,11 +52,14 @@
 
 </div>
 <div class="row grid-wrapper">
-    @forelse($response['products'] as $product)
+    @php
+        $products = $products ?? $response['products'];
+    @endphp
+    @forelse($products as $product)
     <div class="col-md-4 col-sm-6 col-xs-12 ">
         <div class="car-wrapper clearfix">
             <div class="post-media entry">
-                <img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($product->product_image) }}" alt="" class="img-responsive">
+                <a href="{{route('frontend.pages.product', $product->id)}}"><img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($product->product_image) }}" alt="" class="img-responsive"></a>
             </div><!-- end post-media -->
 
             <div class="car-title clearfix">
@@ -74,4 +77,4 @@
     @endforelse
 </div>
 
-{{ $response['products']->onEachSide(2)->links('vendor.pagination.theme-default') }}
+{{ $products->onEachSide(2)->links('vendor.pagination.theme-default') }}
