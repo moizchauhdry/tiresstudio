@@ -116,7 +116,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
                 <div class="car-wrapper deal-wrapper clearfix">
                     <div class="post-media">
-                        <a href="{{ route('frontend.pages.brand-products',$brand->id) }}"><img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($brand->product->product_image)}}" alt="" class="img-responsive"></a>
+                        <a href="{{ route('frontend.pages.brand-products',$brand->id) }}"><img src="{{ asset('images/placeholder.gif') }}" data-src="{{ isset($brand->product->product_image) ? imageURL($brand->product->product_image) :  asset('images/placeholder.png') }}" alt="" class="img-responsive"></a>
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix text-center">

@@ -312,7 +312,6 @@ class FetchController extends Controller
                 dump('newKey');
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
 
             $res = $client->request('GET', $url.'?pageSize=50&page='.$i);
@@ -563,7 +562,7 @@ class FetchController extends Controller
     public function getSubModels($year,$make,$model)
     {
         if (Session::has('authorization')) {
-            dump('hasSession');
+            dump('hasSession  sub models');
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
@@ -582,8 +581,7 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/vehicles/v1/'.$year.'/makes/'.$make.'/models/'.$model.'/submodels';
-
+        $url = 'https://api.wheelpros.com/vehicles/v1/years/'.$year.'/makes/'.$make.'/models/'.str_replace(' ','%20',$model).'/submodels';
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
 
@@ -612,7 +610,7 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/vehicles/v1/'.$year.'/makes/'.$make.'/models/'.$model.'/submodels/'.$subModel;
+        $url = 'https://api.wheelpros.com/vehicles/v1/years/'.$year.'/makes/'.$make.'/models/'.$model.'/submodels/'.$subModel;
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
@@ -623,15 +621,18 @@ class FetchController extends Controller
     public function getVehicles()
     {
         $years = $this->getYears();
-
+        rsort($years);
         foreach ($years as $year){
             $makes = $this->getMakes($year);
             foreach ($makes as $make){
+                dump($make);
                 $makeData = Make::updateOrCreate(['name' => $make]);
                 $models = $this->getModels($year,$make);
                 foreach ($models as $model){
+                    dump($model);
                     try {
                         $subModels = $this->getSubModels($year,$make,$model);
+                        dump($subModels);
                         foreach ($subModels as $subModel){
                             $info = $this->getSubModelInfo($year,$make,$model,$subModel);
                             $this->saveAxleData($info,$makeData);
@@ -642,6 +643,7 @@ class FetchController extends Controller
                             $this->saveAxleData($infoModel,$makeData);
                         }catch(\Throwable $error){
                             Log::info('No Data On Both Info');
+                            Log::info($error);
                         }
 
                     }
@@ -657,6 +659,7 @@ class FetchController extends Controller
             [
                 'pro_id' => $infoModel['id'],
                 'model' => $infoModel['model'],
+                'subModel' => $infoModel['subModel'] ?? null,
             ],
             [
                 'make_id' => $makeData->id,

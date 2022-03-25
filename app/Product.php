@@ -45,7 +45,7 @@ class Product extends Model
                 return $image->image_url;
             }
         }
-        return '';
+        return 'images/placeholder.png';
     }
 
     public function getPriceAttribute()

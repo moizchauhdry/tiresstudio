@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <form action="" id="importForm">
+                        <form action="{{route('import.importProducts')}}" method="post" {{--id="importForm"--}} enctype="multipart/form-data">
                         <div class="card-header">
                             <h3 class="card-title">
                                 Products List (Total Products : <span id="countTotal">0</span>)
@@ -77,7 +77,7 @@
 @section('scripts')
     <script>
         $("#importForm").on("submit", function(event){
-            event.preventDefault();
+            // event.preventDefault();
             $('input.is-invalid').removeClass('is-invalid');
             var formData = new FormData(this);
             $.ajax({
