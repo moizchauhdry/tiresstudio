@@ -107,7 +107,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
 
                 $data = [
                     'upc' => $row['upc'] ?? '',
-                    'sku_type' => 'Wheel',
+                    'sku_type' => 'WHEEL',
                     'title' => $row['product_desc'],
                     'brand_id' => $brand->id,
                     'model' => $row['product_desc'],
