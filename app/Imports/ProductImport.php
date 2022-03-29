@@ -29,6 +29,8 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,WithBatch
     */
     public function model(array $row)
     {
+        dump($row);
+
         if($this->total == 0){
             if($this->type == "TYRE"){
                 $directory = 'products/tires/';
@@ -85,80 +87,87 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,WithBatch
             }
         }else{
 
-            $brand = Brand::firstOrCreate([
-                'code' => $row['brand_cd'],
-                'description' => $row['brand_desc'],
-                'parent' => $row['brand_desc'],
-            ]);
+            try {
+                $brand = Brand::firstOrCreate([
+                    'code' => $row['brand_cd'],
+                    'description' => $row['brand_desc'],
+                    'parent' => $row['brand_desc'],
+                ]);
 
-            $directory = 'products/wheels/'.$brand->code;
+                $directory = 'products/wheels/'.$brand->code;
 
-            if(!Storage::disk('public')->exists($directory)){
-                Storage::disk('public')->makeDirectory($directory);
-            }
+                if(!Storage::disk('public')->exists($directory)){
+                    Storage::disk('public')->makeDirectory($directory);
+                }
 
-            $check = [
-                'sku' => $row['sku'],
-            ];
-
-            $data = [
-                'upc' => $row['upc'],
-                'sku_type' => 'Wheel',
-                'title' => $row['product_desc'],
-                'brand_id' => $brand->id,
-                'model' => $row['product_desc'],
-                'offset' => $row['offset'],
-                'boltPattern' => $row['bolt_pattern_metric'],
-                'finishCode' => $row['fancy_finish_desc'],
-                'finish' => $row['fancy_finish_desc'],
-                'width' => $row['width'],
-                'diameter' => $row['diameter'],
-                'centerbore' => $row['centerbore'],
-                'backspacing' => $row['backspacing'],
-                'wheelWeight' => $row['wheel_weight'],
-                'capPartNo' => $row['cap_part_no'] ?? null,
-                'rivetPartNo' => $row['rivet_part_no'] ?? null,
-                'tpmsCompatible' => $row['tpms_compatible'] ?? null,
-                'lipDepth' => $row['lip_depth'] ?? null,
-                'certification' => $row['certification'] ?? null,
-                'structuralWarranty' => $row['structural_warranty'] ?? null,
-                'finishWarranty' => $row['finish_warranty'] ?? null,
-                'openEndCap' => $row['open_end_cap'] ?? null,
-                'capScrewNo' => null,
-                'otherAccessories' => $row['other_accessories'] ?? null,
-                'loadRating' => $row['load_rating_standard'] ?? null,
-                'sizeDesc' => $row['size_desc'],
-            ];
+                $check = [
+                    'sku' => $row['sku'],
+                ];
 
 
-            $product = Product::updateOrCreate(['sku' => $row['sku']],$data);
-            $priceData = [
-                'product_id' => $product->id,
-                'currency_amount' => $row['msrp'],
-                'currency_code' => 'USD',
-            ];
-            $price = ProductPrice::firstOrCreate($priceData);
-            for($i = 1;$i < 5;$i++){
-                if($row['image_url'.$i] != null){
-                    $name = basename($row['image_url'.$i]);
-                    $name = str_replace('?product_type=Wheels&size=500','',$name);
-                    $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
-                    if($productImage != null){
+                $data = [
+                    'upc' => $row['upc'] ?? '',
+                    'sku_type' => 'Wheel',
+                    'title' => $row['product_desc'],
+                    'brand_id' => $brand->id,
+                    'model' => $row['product_desc'],
+                    'offset' => $row['offset'],
+                    'boltPattern' => $row['bolt_pattern_metric'],
+                    'finishCode' => $row['fancy_finish_desc'],
+                    'finish' => $row['fancy_finish_desc'] ?? null,
+                    'width' => $row['width'] ?? null,
+                    'diameter' => $row['diameter'] ?? null,
+                    'centerbore' => $row['centerbore'] ?? null,
+                    'backspacing' => $row['backspacing'] ?? null,
+                    'wheelWeight' => $row['wheel_weight'] ?? null,
+                    'capPartNo' => $row['cap_part_no'] ?? null,
+                    'rivetPartNo' => $row['rivet_part_no'] ?? null,
+                    'tpmsCompatible' => $row['tpms_compatible'] ?? null,
+                    'lipDepth' => $row['lip_depth'] ?? null,
+                    'certification' => $row['certification'] ?? null,
+                    'structuralWarranty' => $row['structural_warranty'] ?? null,
+                    'finishWarranty' => $row['finish_warranty'] ?? null,
+                    'openEndCap' => $row['open_end_cap'] ?? null,
+                    'capScrewNo' => null,
+                    'otherAccessories' => $row['other_accessories'] ?? null,
+                    'loadRating' => $row['load_rating_standard'] ?? null,
+                    'sizeDesc' => $row['size_desc'],
+                ];
 
-                    }else{
-                        $content = file_get_contents($row['image_url'.$i]);
-                        $path = $directory . '/' . $name;
-                        Storage::disk('public')->put($path, $content);
-                        $productImage = new ProductImage();
-                        $productImage->product_id = $product->id;
-                        $productImage->filename = $name;
-                        $productImage->image_url = $path;
-                        $productImage->save();
+
+                $product = Product::updateOrCreate(['sku' => $row['sku']],$data);
+                $priceData = [
+                    'product_id' => $product->id,
+                    'currency_amount' => $row['msrp'],
+                    'currency_code' => 'USD',
+                ];
+                $price = ProductPrice::firstOrCreate($priceData);
+                for($i = 1;$i < 5;$i++){
+                    if($row['image_url'.$i] != null){
+                        $name = basename($row['image_url'.$i]);
+                        $name = str_replace('?product_type=Wheels&size=500','',$name);
+                        $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
+                        if($productImage != null){
+
+                        }else{
+                            $content = file_get_contents($row['image_url'.$i]);
+                            $path = $directory . '/' . $name;
+                            Storage::disk('public')->put($path, $content);
+                            $productImage = new ProductImage();
+                            $productImage->product_id = $product->id;
+                            $productImage->filename = $name;
+                            $productImage->image_url = $path;
+                            $productImage->save();
+                        }
                     }
                 }
+
+                return $product;
+            }catch (\Throwable $e){
+                \Log::error($e);
+                \Log::info($row);
             }
         }
-        dump($row['sku']);
         return $product;
     }
 
