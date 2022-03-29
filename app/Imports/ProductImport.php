@@ -15,7 +15,7 @@ use Maatwebsite\Excel\Concerns\RemembersChunkOffset;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,WithBatchInserts
+class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
 {
     use RemembersChunkOffset;
     protected $type,$total;
@@ -171,10 +171,10 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,WithBatch
         return $product;
     }
 
-    public function batchSize(): int
+   /* public function batchSize(): int
     {
         return 1000;
-    }
+    }*/
 
     public function chunkSize(): int
     {
