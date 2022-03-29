@@ -23,6 +23,6 @@ class ImportController extends Controller
 
     public function importFromCRON()
     {
-        Excel::import(new ProductImport('Wheel',1),asset('import/products.csv'));
+        Excel::import(new ProductImport('Wheel',1),storage_path('import/products.csv'));
     }
 }

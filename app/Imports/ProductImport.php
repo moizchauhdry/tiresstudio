@@ -158,6 +158,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,WithBatch
                 }
             }
         }
+        dump($row['sku']);
         return $product;
     }
 

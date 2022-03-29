@@ -149,8 +149,6 @@
                                             </div>
                                         </td>
                                     </tr>
-
-
                                 @endforeach
                             </table>
 
