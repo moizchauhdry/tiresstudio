@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('fetch:tires')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:tires Successes');})->onFailure(function (){ \Log::info('fetch:tires Faileddaily');});
         $schedule->command('fetch:vehicles')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:vehicles Successes');})->onFailure(function (){ \Log::info('fetch:vehicles Faileddaily');});
         $schedule->command('fetch:accessories')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:accessories Successes');})->onFailure(function (){ \Log::info('fetch:accessories Faileddaily');});
-        $schedule->command('import:wheels')->dailyAt('20:40')->withoutOverlapping()->onSuccess(function (){ \Log::info('import:wheels Successes');})->onFailure(function (){ \Log::info('import:wheels Faileddaily');});
+        $schedule->command('import:wheels')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('import:wheels Successes');})->onFailure(function (){ \Log::info('import:wheels Faileddaily');});
     }
 
     /**

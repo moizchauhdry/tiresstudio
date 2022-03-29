@@ -6,6 +6,7 @@ use App\Brand;
 use App\Product;
 use App\ProductImage;
 use App\ProductPrice;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -144,20 +145,25 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
                 $price = ProductPrice::firstOrCreate($priceData);
                 for($i = 1;$i < 5;$i++){
                     if($row['image_url'.$i] != null){
-                        $name = basename($row['image_url'.$i]);
-                        $name = str_replace('?product_type=Wheels&size=500','',$name);
-                        $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
-                        if($productImage != null){
+                        try {
+                            $name = basename($row['image_url'.$i]);
+                            $name = str_replace('?product_type=Wheels&size=500','',$name);
+                            $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
+                            if($productImage != null){
 
-                        }else{
-                            $content = file_get_contents($row['image_url'.$i]);
-                            $path = $directory . '/' . $name;
-                            Storage::disk('public')->put($path, $content);
-                            $productImage = new ProductImage();
-                            $productImage->product_id = $product->id;
-                            $productImage->filename = $name;
-                            $productImage->image_url = $path;
-                            $productImage->save();
+                            }else{
+                                $content = file_get_contents($row['image_url'.$i]);
+                                $path = $directory . '/' . $name;
+                                Storage::disk('public')->put($path, $content);
+                                $productImage = new ProductImage();
+                                $productImage->product_id = $product->id;
+                                $productImage->filename = $name;
+                                $productImage->image_url = $path;
+                                $productImage->save();
+                            }
+                        }catch (\Exception $e){
+                            \Log::info('image error at sku = '.$row['sku'] . ' at dateTime = '. Carbon::now());
+                            \Log::error($e);
                         }
                     }
                 }
