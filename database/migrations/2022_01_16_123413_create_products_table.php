@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('sku');
-            $table->string('upc');
+            $table->string('upc')->nullable();
             $table->string('sku_type');
             $table->string('title');
             $table->unsignedBigInteger('brand_id')->nullable();

@@ -50,6 +50,10 @@
                                     <td>{{ $vehicle->model ?? "N/A" }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Sub Model</th>
+                                    <td>{{ $vehicle->subModel ?? "N/A" }}</td>
+                                </tr>
+                                <tr>
                                     <th>Year</th>
                                     <td>{{ $vehicle->year ?? "N/A" }}</td>
                                 </tr>

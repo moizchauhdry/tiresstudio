@@ -716,4 +716,9 @@ class FetchController extends Controller
         }
     }
 
+    public function importProducts()
+    {
+
+    }
+
 }

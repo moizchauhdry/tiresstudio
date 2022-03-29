@@ -42,6 +42,7 @@
                                     <th>Pro ID</th>
                                     <th>Make</th>
                                     <th>Model</th>
+                                    <th>Sub Model</th>
                                     <th>Year</th>
                                     <th>Action</th>
                                 </tr>
@@ -82,6 +83,7 @@
                     {data: 'pro_id', name: 'pro_id'},
                     {data: 'make_id', name: 'make_id'},
                     {data: 'model', name: 'model'},
+                    {data: 'subModel', name: 'subModel'},
                     {data: 'year', name: 'year'},
                     {data: 'action', name: 'action',orderable: false, searchable: false},
                 ],

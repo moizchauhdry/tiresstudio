@@ -130,32 +130,31 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,WithBatch
                 'sizeDesc' => $row['size_desc'],
             ];
 
-            $product = Product::updateOrCreate($check,$data);
 
+            $product = Product::updateOrCreate(['sku' => $row['sku']],$data);
             $priceData = [
                 'product_id' => $product->id,
                 'currency_amount' => $row['msrp'],
                 'currency_code' => 'USD',
             ];
-
             $price = ProductPrice::firstOrCreate($priceData);
-
             for($i = 1;$i < 5;$i++){
                 if($row['image_url'.$i] != null){
                     $name = basename($row['image_url'.$i]);
                     $name = str_replace('?product_type=Wheels&size=500','',$name);
                     $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
                     if($productImage != null){
-                        return true;
+
+                    }else{
+                        $content = file_get_contents($row['image_url'.$i]);
+                        $path = $directory . '/' . $name;
+                        Storage::disk('public')->put($path, $content);
+                        $productImage = new ProductImage();
+                        $productImage->product_id = $product->id;
+                        $productImage->filename = $name;
+                        $productImage->image_url = $path;
+                        $productImage->save();
                     }
-                    $content = file_get_contents($row['image_url'.$i]);
-                    $path = $directory . '/' . $name;
-                    Storage::disk('public')->put($path, $content);
-                    $productImage = new ProductImage();
-                    $productImage->product_id = $product->id;
-                    $productImage->filename = $name;
-                    $productImage->image_url = $path;
-                    $productImage->save();
                 }
             }
         }

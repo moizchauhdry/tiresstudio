@@ -396,7 +396,7 @@
                         $('.model select').append(' <option value=""  >Select Make</option>');
 
                         response.data.forEach(function (item, index) {
-                            option = "<option value='" + item.id + "'>" + item.model + "</option>"
+                            option = "<option value='" + item.id + "'>" + item.model +  (item.subModel != null ? ' - ' + item.subModel: '' ) +"</option>"
                             $('.model select').append(option);
                         });
                     }
