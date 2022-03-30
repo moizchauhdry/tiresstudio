@@ -25,10 +25,10 @@ class FrontendController extends Controller
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->paginate(9);
         $filter = array();
         if ($request->ajax()) {
-            $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->where('sku_type', 'Wheel');
+            $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK');
             if ($request->hasAny(['year', 'model', 'make']) && (!empty($request->get('year')) || !empty($request->get('model')) || !empty($request->get('make')))) {
                 $vehicles = VehicleModel::select('*');
 
