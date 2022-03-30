@@ -15,7 +15,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $response['popular_wheels'] = Product::groupBy('model')->where('boltPattern','!=','BLANK')->take(12)->skip(1)->where('sku_type', 'Wheel')->get();
+        $response['popular_wheels'] = Product::groupBy('model')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->take(12)->skip(1)->where('sku_type', 'Wheel')->get();
         $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year', 'asc')->pluck('year')->toArray());
         rsort($response['years']);
         $response['brands'] = Brand::orderBy('description', 'asc')->take(6)->get();
@@ -25,7 +25,7 @@ class FrontendController extends Controller
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->paginate(9);
         $filter = array();
         if ($request->ajax()) {
             $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK');
