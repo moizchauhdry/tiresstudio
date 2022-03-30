@@ -29,6 +29,54 @@ class FrontendController extends Controller
         $filter = array();
         if ($request->ajax()) {
             $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->where('sku_type', 'Wheel');
+            if ($request->hasAny(['year', 'model', 'make']) && (!empty($request->get('year')) || !empty($request->get('model')) || !empty($request->get('make')))) {
+                $vehicles = VehicleModel::select('*');
+
+                if ($request->has('year') && !empty($request->get('year'))) {
+                    $vehicles->where('year', $request->year);
+                    $filter['year'] = $request->year;
+                }
+
+                if ($request->has('make') && !empty($request->get('make'))) {
+                    $vehicles->where('make_id', $request->make);
+                    $filter['make'] = $request->make;
+                }
+
+                if ($request->has('model') && !empty($request->get('model'))) {
+                    $vehicles->where('id', $request->model);
+                    $filter['model'] = $request->model;
+                }
+
+                $ids = $vehicles->pluck('id')->toArray();
+                $axles = VehicleModelAxle::whereIn('vehicle_model_id', $ids);
+                $minDiameter = $axles->orderBy('minDiameterIn', 'asc')->first();
+                $maxDiameter = $axles->orderBy('maxDiameterIn', 'asc')->first();
+                $offsetMinMm = $axles->orderBy('offsetMinMm', 'asc')->first();
+                $offsetMaxMm = $axles->orderBy('offsetMaxMm', 'asc')->first();
+                $boltPatternMm = $axles->orderBy('boltPatternMm', 'desc')->first();
+                $lugCnt = $axles->orderBy('lugCnt', 'desc')->first();
+                $maxBs = $axles->orderBy('maxBs', 'desc')->first();
+                /*dump($axles->get());
+                dump($minDiameter->minDiameterIn);
+                dump($maxDiameter->maxDiameterIn);
+                dump($offsetMinMm->offsetMinMm);
+                dump($offsetMaxMm->offsetMaxMm);
+                dump(number_format($maxBs->maxBs,2));
+                dump($centerBoreMm->centerBoreMm);
+                dump($lugCnt->lugCnt . 'X' . $boltPatternMm->boltPatternMm);
+                dd('here');*/
+
+                $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
+
+                $products->where('diameter', '>=', $minDiameter->minDiameterIn)
+                    ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
+                    ->where('offset', '>=', $offsetMinMm->offsetMinMm)
+                    ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
+                    ->where('backspacing','<=',number_format($maxBs->maxBs,2))
+                    ->where('boltPattern','LIKE',$lugCnt->lugCnt . 'X'.$boltPattern);
+            }
+
+
             if ($request->has('brand_id') && !empty($request->get('brand_id'))) {
                 $products->where('brand_id', $request->brand_id);
                 $filter['brand_id'] = $request->brand_id;
@@ -76,52 +124,6 @@ class FrontendController extends Controller
                 $filter['search'] = $search;
             }
 
-            if ($request->hasAny(['year', 'model', 'make']) && (!empty($request->get('year')) || !empty($request->get('model')) || !empty($request->get('make')))) {
-                $vehicles = VehicleModel::select('*');
-
-                if ($request->has('year') && !empty($request->get('year'))) {
-                    $vehicles->where('year', $request->year);
-                    $filter['year'] = $request->year;
-                }
-
-                if ($request->has('make') && !empty($request->get('make'))) {
-                    $vehicles->where('make_id', $request->make);
-                    $filter['make'] = $request->make;
-                }
-
-                if ($request->has('model') && !empty($request->get('model'))) {
-                    $vehicles->where('id', $request->model);
-                    $filter['model'] = $request->model;
-                }
-
-                $ids = $vehicles->pluck('id')->toArray();
-                $axles = VehicleModelAxle::whereIn('vehicle_model_id', $ids);
-                $minDiameter = $axles->orderBy('minDiameterIn', 'asc')->first();
-                $maxDiameter = $axles->orderBy('maxDiameterIn', 'asc')->first();
-                $offsetMinMm = $axles->orderBy('offsetMinMm', 'asc')->first();
-                $offsetMaxMm = $axles->orderBy('offsetMaxMm', 'asc')->first();
-                $boltPatternMm = $axles->orderBy('boltPatternMm', 'desc')->first();
-                $lugCnt = $axles->orderBy('lugCnt', 'desc')->first();
-                $maxBs = $axles->orderBy('maxBs', 'desc')->first();
-                /*dump($axles->get());
-                dump($minDiameter->minDiameterIn);
-                dump($maxDiameter->maxDiameterIn);
-                dump($offsetMinMm->offsetMinMm);
-                dump($offsetMaxMm->offsetMaxMm);
-                dump(number_format($maxBs->maxBs,2));
-                dump($centerBoreMm->centerBoreMm);
-                dump($lugCnt->lugCnt . 'X' . $boltPatternMm->boltPatternMm);
-                dd('here');*/
-
-                $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
-
-                $products->where('diameter', '>=', $minDiameter->minDiameterIn)
-                    ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
-                    ->where('offset', '>=', $offsetMinMm->offsetMinMm)
-                    ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
-                    ->where('backspacing','<=',number_format($maxBs->maxBs,2))
-                    ->where('boltPattern','LIKE',$lugCnt->lugCnt . 'X'.$boltPattern);
-            }
 
 
             $response['filter'] = $filter;
