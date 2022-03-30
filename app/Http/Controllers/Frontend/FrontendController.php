@@ -113,7 +113,7 @@ class FrontendController extends Controller
                 dump($lugCnt->lugCnt . 'X' . $boltPatternMm->boltPatternMm);
                 dd('here');*/
 
-                $boltPattern = floatval($boltPatternMm) ?? 0;
+                $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
 
                 $products->where('diameter', '>=', $minDiameter->minDiameterIn)
                     ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
@@ -173,7 +173,7 @@ class FrontendController extends Controller
             dump($lugCnt->lugCnt . 'X' . $boltPatternMm->boltPatternMm);
             dd('here');*/
 
-            $boltPattern = floatval($boltPatternMm) ?? 0;
+            $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
 
             $products = Product::groupBy('model')->where('diameter', '>=', $minDiameter->minDiameterIn)
                 ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
