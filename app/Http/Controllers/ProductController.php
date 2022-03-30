@@ -304,7 +304,8 @@ class ProductController extends Controller
                                 ->orWhere('sku', 'LIKE', "%$search%")
                                 ->orWhere('upc', 'LIKE', "%$search%")
                                 ->orWhere('sku_type', 'LIKE', "%$search%")
-                                ->orWhere('title', 'LIKE', "%$search%");
+                                ->orWhere('title', 'LIKE', "%$search%")
+                                ->orWhere('model', 'LIKE', "%$search%");
                         });
                     }
                 })
