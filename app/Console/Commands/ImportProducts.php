@@ -40,7 +40,7 @@ class ImportProducts extends Command
      */
     public function handle()
     {
-        \Log::info('Cron Job Fetch Wheels at  '.Carbon::now());
+        \Log::info('Cron Job Import Wheels at  '.Carbon::now());
         $controller = new ImportController();
         $controller->importFromCRON();
     }

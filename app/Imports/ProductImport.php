@@ -111,7 +111,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
                     'sku_type' => 'WHEEL',
                     'title' => $row['product_desc'],
                     'brand_id' => $brand->id,
-                    'model' => $row['product_desc'],
+                    'model' => $row['style'],
                     'offset' => $row['offset'],
                     'boltPattern' => $row['bolt_pattern_metric'],
                     'finishCode' => $row['fancy_finish_desc'],
