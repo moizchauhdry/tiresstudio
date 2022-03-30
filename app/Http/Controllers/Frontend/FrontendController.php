@@ -113,11 +113,8 @@ class FrontendController extends Controller
                 dump($lugCnt->lugCnt . 'X' . $boltPatternMm->boltPatternMm);
                 dd('here');*/
 
-                if (strpos($boltPatternMm->boltPatternMm, '.00') !== false) {
-                    $boltPattern = str_replace('.00','',$boltPatternMm->boltPatternMm);
-                }else{
-                    $boltPattern = 0;
-                }
+                $boltPattern = floatval($boltPatternMm) ?? 0;
+
                 $products->where('diameter', '>=', $minDiameter->minDiameterIn)
                     ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
                     ->where('offset', '>=', $offsetMinMm->offsetMinMm)
@@ -176,11 +173,7 @@ class FrontendController extends Controller
             dump($lugCnt->lugCnt . 'X' . $boltPatternMm->boltPatternMm);
             dd('here');*/
 
-            if (strpos($boltPatternMm->boltPatternMm, '.00') !== false) {
-                $boltPattern = str_replace('.00','',$boltPatternMm->boltPatternMm);
-            }else{
-                $boltPattern = 0;
-            }
+            $boltPattern = floatval($boltPatternMm) ?? 0;
 
             $products = Product::groupBy('model')->where('diameter', '>=', $minDiameter->minDiameterIn)
                 ->where('diameter', '<=', $maxDiameter->maxDiameterIn)

@@ -28,10 +28,10 @@ class Kernel extends ConsoleKernel
     {
         Log::info('A Hit by CRONJOB at '.Carbon::now());
         $schedule->command('import:wheels')->dailyAt('02:35')->withoutOverlapping()->onSuccess(function (){ \Log::info('import:wheels Successes');})->onFailure(function (){ \Log::info('import:wheels Faileddaily');});
-        $schedule->command('fetch:wheels')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:wheels Successes');})->onFailure(function (){ \Log::info('fetch:wheels Faileddaily');});
-        $schedule->command('fetch:tires')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:tires Successes');})->onFailure(function (){ \Log::info('fetch:tires Faileddaily');});
-        $schedule->command('fetch:vehicles')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:vehicles Successes');})->onFailure(function (){ \Log::info('fetch:vehicles Faileddaily');});
-        $schedule->command('fetch:accessories')->daily()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:accessories Successes');})->onFailure(function (){ \Log::info('fetch:accessories Faileddaily');});
+        $schedule->command('fetch:wheels')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:wheels Successes');})->onFailure(function (){ \Log::info('fetch:wheels Faileddaily');});
+        $schedule->command('fetch:tires')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:tires Successes');})->onFailure(function (){ \Log::info('fetch:tires Faileddaily');});
+        $schedule->command('fetch:vehicles')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:vehicles Successes');})->onFailure(function (){ \Log::info('fetch:vehicles Faileddaily');});
+        $schedule->command('fetch:accessories')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:accessories Successes');})->onFailure(function (){ \Log::info('fetch:accessories Faileddaily');});
     }
 
     /**
