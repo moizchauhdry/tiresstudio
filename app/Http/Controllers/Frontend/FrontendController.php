@@ -15,7 +15,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $response['popular_wheels'] = Product::groupBy('model')->take(12)->skip(1)->where('sku_type', 'Wheel')->get();
+        $response['popular_wheels'] = Product::groupBy('model')->where('boltPattern','!=','BLANK')->take(12)->skip(1)->where('sku_type', 'Wheel')->get();
         $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year', 'asc')->pluck('year')->toArray());
         rsort($response['years']);
         $response['brands'] = Brand::orderBy('description', 'asc')->take(6)->get();
@@ -60,7 +60,6 @@ class FrontendController extends Controller
                 $products->where('boltPattern', $request->boltPattern);
                 $filter['boltPattern'] = $request->boltPattern;
             }
-
 
             if ($request->has('search') && !empty($request->get('search'))) {
                 $search = $request->get('search');
@@ -473,7 +472,7 @@ class FrontendController extends Controller
     {
 
         if ($request->ajax()) {
-            $products = Product::where('brand_id', $id)->groupBy('model');
+            $products = Product::where('brand_id', $id)->where('boltPattern','!=','BLANK')->groupBy('model');
             $response['products'] = $products->paginate(9);
             $html = view('frontend.includes.products', compact('response'))->render();
 
