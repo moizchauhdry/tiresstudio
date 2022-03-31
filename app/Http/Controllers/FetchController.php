@@ -621,7 +621,6 @@ class FetchController extends Controller
     public function getVehicles()
     {
         $years = $this->getYears();
-        rsort($years);
         foreach ($years as $year){
             $makes = $this->getMakes($year);
             foreach ($makes as $make){

@@ -89,11 +89,13 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
         }else{
 
             try {
-                $brand = Brand::firstOrCreate([
-                    'code' => $row['brand_cd'],
-                    'description' => $row['brand_desc'],
-                    'parent' => $row['brand_desc'],
-                ]);
+                $brand = Brand::updateOrCreate(
+                    ['code' => $row['brand_cd']],
+                    [
+                        'description' => $row['brand_desc'],
+                        'parent' => $row['brand_desc'],
+                    ]
+                );
 
                 $directory = 'products/wheels/'.$brand->code;
 
