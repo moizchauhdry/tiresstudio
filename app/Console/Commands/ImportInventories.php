@@ -2,26 +2,25 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\FetchController;
 use App\Http\Controllers\ImportController;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class ImportProducts extends Command
+class ImportInventories extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:wheels';
+    protected $signature = 'import:wheel-inventories';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'import wheels by url';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -42,6 +41,7 @@ class ImportProducts extends Command
     {
         \Log::info('Cron Job Import Wheels at  '.Carbon::now());
         $controller = new ImportController();
-        $controller->importFromCRON('wheel',1);
+        $controller->importFromCRON('wheel',2);
+        return 0;
     }
 }

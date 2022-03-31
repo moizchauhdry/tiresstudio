@@ -47,6 +47,15 @@
                                 </select>
                             </div>
                             <div class="form-group col-sm-12 col-md-6">
+                                <label for="total">Import Type</label>
+                                <select name="total" id="total" class="form-control" required>
+                                    <option value="">Select Type</option>
+                                    <option value="0">Price List</option>
+                                    <option value="1">All Data</option>
+                                    <option value="2">Inventory</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6">
                                 <label for="customFile">File</label>
                                 <input type="file" class="form-control custom-image-upload" name="import_file" required>
                             </div>

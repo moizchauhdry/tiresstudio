@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Brand;
 use App\Product;
 use App\ProductImage;
+use App\ProductInventory;
 use App\ProductPrice;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -84,7 +85,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
                     }
                 }
             }
-        }else{
+        }elseif($this->total == 1){
 
             try {
                 $brand = Brand::updateOrCreate(
@@ -199,6 +200,18 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
                 \Log::error($e);
                 \Log::info($row);
             }
+        }elseif ($this->total == 2){
+
+            $product = Product::where('sku',$row['partnumber'])->first();
+            if($product == null){
+                return;
+            }
+            $inventoryData = [
+                'local_stock' => $row['totalqoh'],
+                'global_stock' => 0,
+            ];
+            $inventory = ProductInventory::updateOrCreate(['product_id' => $product->id,'type' => $row['invordertype']],$inventoryData);
+            dump('inventory ID = '.$inventory->id);
         }
         return $product;
     }
