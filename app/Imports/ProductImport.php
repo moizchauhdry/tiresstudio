@@ -177,7 +177,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
                             $name = str_replace('?product_type=Wheels&size=500','',$name);
                             $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
                             if($productImage != null){
-                                dump($productImage);
+                                dump("Multiple Image Already");
                             }else{
                                 $content = file_get_contents($row['image_url'.$i]);
                                 $path = $directory . '/' . $name;
@@ -187,8 +187,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
                                 $productImage->filename = $name;
                                 $productImage->image_url = $path;
                                 $productImage->save();
-                                dump('$productImage');
-                                dump($productImage);
+                                dump("Multiple Image NEW");
                             }
                         }catch (\Throwable $e){
                             \Log::info('image error at sku = '.$row['sku'] . ' at dateTime = '. Carbon::now());
