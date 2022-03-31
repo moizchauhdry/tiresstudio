@@ -145,6 +145,31 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
                     'currency_code' => 'USD',
                 ];
                 $price = ProductPrice::firstOrCreate($priceData);
+
+                if($row['image_url'] != null){
+                    try {
+                        $name = basename($row['image_url']);
+                        $name = str_replace('?product_type=Wheels&size=500','',$name);
+                        $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
+                        if($productImage != null){
+                            dump('Already Have Image');
+                        }else{
+                            $content = file_get_contents($row['image_url']);
+                            $path = $directory . '/' . $name;
+                            Storage::disk('public')->put($path, $content);
+                            $productImage = new ProductImage();
+                            $productImage->product_id = $product->id;
+                            $productImage->filename = $name;
+                            $productImage->image_url = $path;
+                            $productImage->save();
+                            dump('$productImage NEW');
+                        }
+                    }catch (\Throwable $e){
+                        \Log::info('image error at sku = '.$row['sku'] . ' at dateTime = '. Carbon::now());
+                        \Log::error($e);
+                    }
+                }
+
                 for($i = 1;$i < 5;$i++){
                     if($row['image_url'.$i] != null){
                         try {

@@ -115,13 +115,14 @@ class FrontendController extends Controller
                 dd('here');*/
 
                 $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
+                $boltPattern = $lugCnt->lugCnt .'X'.$boltPattern;
 
                 $products->where('diameter', '>=', $minDiameter->minDiameterIn)
                     ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
                     ->where('offset', '>=', $offsetMinMm->offsetMinMm)
                     ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
                     ->where('backspacing','<=',number_format($maxBs->maxBs,2))
-                    ->where('boltPattern','LIKE',$lugCnt->lugCnt . 'X'.$boltPattern);
+                    ->where('boltPattern','LIKE',"%$boltPattern%");
             }
 
             $response['filter'] = $filter;
@@ -174,13 +175,14 @@ class FrontendController extends Controller
             dd('here');*/
 
             $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
+            $boltPattern = $lugCnt->lugCnt.'X'.$boltPattern;
 
             $products = Product::groupBy('model')->where('diameter', '>=', $minDiameter->minDiameterIn)
                 ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
                 ->where('offset', '>=', $offsetMinMm->offsetMinMm)
                 ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
                 ->where('backspacing','<=',number_format($maxBs->maxBs,2))
-                ->where('boltPattern','LIKE',$lugCnt->lugCnt . 'X'.$boltPattern);
+                ->where('boltPattern','LIKE',"%$boltPattern%");
             $response['products'] = $products->paginate(9);
         }
 
