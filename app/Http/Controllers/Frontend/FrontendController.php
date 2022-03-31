@@ -25,7 +25,7 @@ class FrontendController extends Controller
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->paginate(9);
         $filter = array();
         if ($request->ajax()) {
             $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX');
@@ -104,6 +104,7 @@ class FrontendController extends Controller
                 $boltPatternMm = $axles->orderBy('boltPatternMm', 'desc')->first();
                 $lugCnt = $axles->orderBy('lugCnt', 'desc')->first();
                 $maxBs = $axles->orderBy('maxBs', 'desc')->first();
+                $centerBoreMm = $axles->first();
                 /*dump($axles->get());
                 dump($minDiameter->minDiameterIn);
                 dump($maxDiameter->maxDiameterIn);
@@ -122,11 +123,12 @@ class FrontendController extends Controller
                     ->where('offset', '>=', $offsetMinMm->offsetMinMm)
                     ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
                     ->where('backspacing','<=',number_format($maxBs->maxBs,2))
+                    //->where('centerbore','<=',floatval($centerBoreMm->centerBoreMm) ?? 0)
                     ->where('boltPattern','LIKE',"%$boltPattern%");
             }
 
             $response['filter'] = $filter;
-            $response['products'] = $products->groupBy('model')->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->paginate(9);
+            $response['products'] = $products->groupBy('model')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->paginate(9);
             $html = view('frontend.includes.products', compact('response'))->render();
 
             return response()->json([
@@ -177,13 +179,15 @@ class FrontendController extends Controller
             $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
             $boltPattern = $lugCnt->lugCnt.'X'.$boltPattern;
 
-            $products = Product::groupBy('model')->where('diameter', '>=', $minDiameter->minDiameterIn)
+            $products = Product::groupBy('model')
+                ->where('diameter', '>=', $minDiameter->minDiameterIn)
                 ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
                 ->where('offset', '>=', $offsetMinMm->offsetMinMm)
                 ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
                 ->where('backspacing','<=',number_format($maxBs->maxBs,2))
+                //->where('centerbore','<=',floatval($centerBoreMm->centerBoreMm) ?? 0)
                 ->where('boltPattern','LIKE',"%$boltPattern%");
-            $response['products'] = $products->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->paginate(9);
+            $response['products'] = $products->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->paginate(9);
         }
 
         $response['finishes'] = array_unique(Product::select('finishCode')->where('sku_type', 'Wheel')->pluck('finishCode')->toArray());
