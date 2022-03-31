@@ -26,12 +26,10 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
         $this->total = $total;
     }
     /**
-    * @param Collection $collection
-    */
+     * @param Collection $collection
+     */
     public function model(array $row)
     {
-        dump($row);
-
         if($this->total == 0){
             if($this->type == "TYRE"){
                 $directory = 'products/tires/';
@@ -205,10 +203,10 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading
         return $product;
     }
 
-   /* public function batchSize(): int
-    {
-        return 1000;
-    }*/
+    /* public function batchSize(): int
+     {
+         return 1000;
+     }*/
 
     public function chunkSize(): int
     {
