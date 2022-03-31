@@ -25,10 +25,10 @@ class FrontendController extends Controller
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->paginate(9);
         $filter = array();
         if ($request->ajax()) {
-            $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX');
+            $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX');
 
 
             if ($request->has('brand_id') && !empty($request->get('brand_id'))) {
@@ -126,7 +126,7 @@ class FrontendController extends Controller
             }
 
             $response['filter'] = $filter;
-            $response['products'] = $products->groupBy('model')->paginate(9);
+            $response['products'] = $products->groupBy('model')->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->paginate(9);
             $html = view('frontend.includes.products', compact('response'))->render();
 
             return response()->json([
@@ -177,13 +177,13 @@ class FrontendController extends Controller
             $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
             $boltPattern = $lugCnt->lugCnt.'X'.$boltPattern;
 
-            $products = Product::groupBy('model')->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->where('diameter', '>=', $minDiameter->minDiameterIn)
+            $products = Product::groupBy('model')->where('diameter', '>=', $minDiameter->minDiameterIn)
                 ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
                 ->where('offset', '>=', $offsetMinMm->offsetMinMm)
                 ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
                 ->where('backspacing','<=',number_format($maxBs->maxBs,2))
                 ->where('boltPattern','LIKE',"%$boltPattern%");
-            $response['products'] = $products->paginate(9);
+            $response['products'] = $products->whereHas('inventory',function ($q){ $q->where('local_stock','>',0); })->paginate(9);
         }
 
         $response['finishes'] = array_unique(Product::select('finishCode')->where('sku_type', 'Wheel')->pluck('finishCode')->toArray());
