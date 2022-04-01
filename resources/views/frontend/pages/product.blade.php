@@ -520,7 +520,7 @@
                                         <div class="form-input">
                                             <label>SIZE & OFFSET</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>{{$product->sizeDesc}}</option>
+                                                <option>{{$product->sizeDesc}} {{$product->offset}}</option>
                                             </select>
                                         </div><!-- end form-input -->
                                     </div><!-- end col -->
