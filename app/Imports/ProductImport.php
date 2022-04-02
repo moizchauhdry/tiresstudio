@@ -390,6 +390,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
 
     public function chunkSize(): int
     {
+
         return 50;
     }
 }
