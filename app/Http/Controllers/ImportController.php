@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\ProductImport;
+use App\Jobs\ImportProductJob;
 use Illuminate\Http\Request;
 use Excel;
 use Illuminate\Support\Facades\Storage;
@@ -12,11 +13,33 @@ class ImportController extends Controller
     public function importProducts(Request $request)
     {
         if($request->ajax()){
-            Excel::import(new ProductImport($request->type,$request->total),$request->file('import_file'));
+            Excel::import(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
             return response()->json(['status' => 1,'message' => 'success']);
         }else if ($request->isMethod('POST')){
-            Excel::import(new ProductImport($request->type,$request->total),$request->file('import_file'));
+
+            $validate = $request->validate([
+                'import_file' => 'required|file'
+            ]);
+
+            Excel::import(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
             return response()->json(['status' => 1,'message' => 'success']);
+
+            $data = [];
+            $directory = 'import';
+            if(!Storage::disk('public')->exists($directory)){
+                Storage::disk('public')->makeDirectory($directory);
+            }
+            $name = $request->import_file->getClientOriginalName();
+            $content = file_get_contents($request->file('import_file'));
+            $path = $directory . '/' . strtolower($name);
+            Storage::disk('public')->put($path, $content);
+            $data['path'] = $path;
+            $data['type'] = $request->type;
+            $data['request_type'] = $request->request_type;
+
+            dispatch(new ImportProductJob($data));
+
+            return response()->json(['status' => 1,'message' => 'File import has started']);
         }
         return view('admin.imports.index');
     }

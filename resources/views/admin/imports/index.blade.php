@@ -40,15 +40,15 @@
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="type">Type</label>
                                 <select name="type" id="type" class="form-control" required>
-                                    <option value="">Select Type</option>
+                                    <option value="">Select Product Type</option>
                                     <option value="WHEEL">Wheels</option>
-                                    <option value="TYRE">Tyre</option>
+                                    <option value="TIRE">Tire</option>
                                     <option value="ACC">Accessories</option>
                                 </select>
                             </div>
                             <div class="form-group col-sm-12 col-md-6">
-                                <label for="total">Import Type</label>
-                                <select name="total" id="total" class="form-control" required>
+                                <label for="request_type">Import Type</label>
+                                <select name="request_type" id="request_type" class="form-control" required>
                                     <option value="">Select Type</option>
                                     <option value="0">Price List</option>
                                     <option value="1">All Data</option>
