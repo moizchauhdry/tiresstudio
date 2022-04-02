@@ -22,9 +22,10 @@ class ImportController extends Controller
             ]);
 
             Excel::import(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
-            return response()->json(['status' => 1,'message' => 'success']);
 
-            $data = [];
+            return redirect()->back()->with('success','Importing is in process. You will be notified on completion');
+
+            /*$data = [];
             $directory = 'import';
             if(!Storage::disk('public')->exists($directory)){
                 Storage::disk('public')->makeDirectory($directory);
@@ -39,7 +40,7 @@ class ImportController extends Controller
 
             dispatch(new ImportProductJob($data));
 
-            return response()->json(['status' => 1,'message' => 'File import has started']);
+            return response()->json(['status' => 1,'message' => 'File import has started']);*/
         }
         return view('admin.imports.index');
     }
