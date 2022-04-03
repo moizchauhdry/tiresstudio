@@ -15,16 +15,16 @@ class ImportProductJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data;
+
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct()
     {
-        $this->data = $data;
+
     }
 
     /**
@@ -34,8 +34,6 @@ class ImportProductJob implements ShouldQueue
      */
     public function handle()
     {
-        dump($this->data);
-        Excel::import(new ProductImport($this->data['type'],$this->data['request_type']),storage_path('app/public/'.$this->data['path']));
         \Log::info('Job Successfully Executed');
     }
 }
