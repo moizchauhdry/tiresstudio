@@ -173,7 +173,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                             $name = str_replace('?product_type=Wheels&size=500','',$name);
                             $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
                             if($productImage != null){
-                                dump('Already Have Image');
+                                \Log::channel('queue')->info('Already Have Image');
                             }else{
                                 $content = file_get_contents($row['image_url']);
                                 $path = $directory . '/' . $name;
@@ -183,7 +183,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                                 $productImage->filename = $name;
                                 $productImage->image_url = $path;
                                 $productImage->save();
-                                dump('$productImage NEW');
+                                \Log::channel('queue')->info('$productImage NEW');
                             }
                         }catch (\Throwable $e){
                             \Log::info('image error at sku = '.$row['sku'] . ' at dateTime = '. Carbon::now());
@@ -256,7 +256,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                             $name = str_replace('?product_type=Wheels&size=500','',$name);
                             $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
                             if($productImage != null){
-                                dump('Already Have Image');
+                                \Log::channel('queue')->info('Already Have Image');
                             }else{
                                 $content = file_get_contents($row['image_url']);
                                 $path = $directory . '/' . $name;
@@ -266,7 +266,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                                 $productImage->filename = $name;
                                 $productImage->image_url = $path;
                                 $productImage->save();
-                                dump('$productImage NEW');
+                                \Log::channel('queue')->info('$productImage NEW');
                             }
                         }catch (\Throwable $e){
                             \Log::info('image error at sku = '.$row['sku'] . ' at dateTime = '. Carbon::now());
@@ -281,7 +281,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                                 $name = str_replace('?product_type=Wheels&size=500','',$name);
                                 $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
                                 if($productImage != null){
-                                    dump("Multiple Image Already");
+                                    \Log::channel('queue')->info("Multiple Image Already");
                                 }else{
                                     $content = file_get_contents($row['image_url'.$i]);
                                     $path = $directory . '/' . $name;
@@ -291,7 +291,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                                     $productImage->filename = $name;
                                     $productImage->image_url = $path;
                                     $productImage->save();
-                                    dump("Multiple Image NEW");
+                                    \Log::channel('queue')->info("Multiple Image NEW");
                                 }
                             }catch (\Throwable $e){
                                 \Log::info('image error at sku = '.$row['sku'] . ' at dateTime = '. Carbon::now());
@@ -346,7 +346,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                         $name = str_replace('?product_type=Wheels&size=500','',$name);
                         $productImage = ProductImage::where('product_id',$product->id)->where('filename',$name)->first();
                         if($productImage != null){
-                            dump('Already Have Image');
+                            \Log::channel('queue')->info('Already Have Image');
                         }else{
                             $content = file_get_contents($row['image_url']);
                             $path = $directory . '/' . $name;
@@ -356,7 +356,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                             $productImage->filename = $name;
                             $productImage->image_url = $path;
                             $productImage->save();
-                            dump('$productImage NEW');
+                            \Log::channel('queue')->info('$productImage NEW');
                         }
                     }catch (\Throwable $e){
                         \Log::info('image error at sku = '.$row['sku'] . ' at dateTime = '. Carbon::now());
@@ -371,7 +371,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
 
             $product = Product::where('sku',$row['partnumber'])->first();
             if($product == null){
-                dump('no product found with sku '.$row['partnumber']);
+                \Log::channel('queue')->info('no product found with sku '.$row['partnumber']);
                 return;
             }
             $inventoryData = [
@@ -379,7 +379,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                 'global_stock' => 0,
             ];
             $inventory = ProductInventory::updateOrCreate(['product_id' => $product->id,'type' => $row['invordertype']],$inventoryData);
-            dump('inventory ID = '.$inventory->id);
+            \Log::channel('queue')->info('inventory ID = '.$inventory->id);
         }
     }
 

@@ -13,8 +13,11 @@ class ImportController extends Controller
     public function importProducts(Request $request)
     {
         if($request->ajax()){
-            Excel::queueImport(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
-            return response()->json(['status' => 1,'message' => 'success']);
+            $validate = $request->validate([
+                'import_file' => 'required|file'
+            ]);
+
+            Excel::queueImport(new ProductImport($request->type,$request->request_type),$request->file('import_file'));return response()->json(['status' => 1,'message' => 'success']);
         }else if ($request->isMethod('POST')){
 
             $validate = $request->validate([
