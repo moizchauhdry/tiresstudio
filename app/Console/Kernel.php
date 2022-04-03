@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         Log::info('A Hit by CRONJOB at '.Carbon::now());
         if (!$this->osProcessIsRunning('queue:work')) {
             Log::info('queue:work');
-            $schedule->command('queue:work  --timeout=3600')->everyMinute();
+            $schedule->command('php artisan queue:work --timeout=3600  --daemon > storage/logs/laravel-queue.log')->everyMinute();
         }
         $schedule->command('import:wheels')->dailyAt('02:35')->withoutOverlapping()->onSuccess(function (){ \Log::info('import:wheels Successes');})->onFailure(function (){ \Log::info('import:wheels Faileddaily');});
         $schedule->command('fetch:wheels')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:wheels Successes');})->onFailure(function (){ \Log::info('fetch:wheels Faileddaily');});

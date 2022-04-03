@@ -96,13 +96,12 @@ class FetchController extends Controller
             $products = $data['results'];
             foreach ($products as $key => $product) {
                 $brandData = [
-                    'type' => 'WHEEL',
-                    'code' => $product['brand']['code'],
                     'description' => $product['brand']['description'],
                     'parent' => $product['brand']['parent'],
                 ];
 
-                $brand = Brand::firstOrCreate($brandData);
+                $brand = Brand::updateOrCreate(['type' => 'WHEEL',
+                    'code' => $product['brand']['code']],$brandData);
 
                 $ProductData = [
                     'sku_type' => $product['skuType'],
@@ -210,15 +209,15 @@ class FetchController extends Controller
             foreach ($products as $key => $product) {
 
                 $brandData = [
-                    'type' => 'TIRE',
-                    'code' => $product['brand']['code'],
                     'description' => $product['brand']['description'],
                     'parent' => $product['brand']['parent'],
                 ];
 
-                $brand = Brand::firstOrCreate($brandData);
+                $brand = Brand::updateOrCreate(['type' => 'TIRE',
+                    'code' => $product['brand']['code']],$brandData);
 
                 $ProductData = [
+                    'upc' => $product['upc'],
                     'sku_type' => $product['skuType'],
                     'title' => $product['title'],
                     'brand_id' => $brand->id,
@@ -229,8 +228,7 @@ class FetchController extends Controller
                     'wheelDiameter' => $product['properties']['wheelDiameter'],
                 ];
 
-                $product1 = Product::updateOrCreate(['sku' => $product['sku'],
-                    'upc' => $product['upc']], $ProductData);
+                $product1 = Product::updateOrCreate(['sku' => $product['sku']], $ProductData);
                 $product1->save();
 
                 try {
@@ -320,22 +318,21 @@ class FetchController extends Controller
             foreach ($products as $key => $product) {
 
                 $brandData = [
-                    'type' => 'ACC',
-                    'code' => $product['brand']['code'],
                     'description' => $product['brand']['description'],
                     'parent' => $product['brand']['parent'],
                 ];
 
-                $brand = Brand::firstOrCreate($brandData);
+                $brand = Brand::updateOrCreate(['type' => 'ACC',
+                    'code' => $product['brand']['code']],$brandData);
 
                 $ProductData = [
+                    'upc' => $product['upc'],
                     'sku_type' => $product['skuType'],
                     'title' => $product['title'],
                     'brand_id' => $brand->id,
                 ];
 
-                $product1 = Product::updateOrCreate(['sku' => $product['sku'],
-                    'upc' => $product['upc']], $ProductData);
+                $product1 = Product::updateOrCreate(['sku' => $product['sku']], $ProductData);
                 $product1->save();
 
                 try {

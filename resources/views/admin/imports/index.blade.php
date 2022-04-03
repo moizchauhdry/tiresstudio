@@ -50,7 +50,7 @@
                                 <label for="request_type">Import Type</label>
                                 <select name="request_type" id="request_type" class="form-control" required>
                                     <option value="">Select Type</option>
-                                    <option value="0">Price List</option>
+{{--                                    <option value="0">Price List</option>--}}
                                     <option value="1">All Data</option>
                                     <option value="2">Inventory</option>
                                 </select>

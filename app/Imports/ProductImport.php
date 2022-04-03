@@ -92,7 +92,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
 
             if($this->type == "TIRE"){
                 $brand = Brand::updateOrCreate(
-                    ['code' => $row['tire_manufacturer']],
+                    ['code' => $row['tire_manufacturer'],'type' => $this->type],
                     [
                         'description' => $row['tire_manufacturer'],
                         'parent' => $row['tire_manufacturer'],
@@ -194,7 +194,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
             }elseif($this->type == "WHEEL"){
                 try {
                     $brand = Brand::updateOrCreate(
-                        ['code' => $row['brand_cd']],
+                        ['code' => $row['brand_cd'],'type' => $this->type],
                         [
                             'description' => $row['brand_desc'],
                             'parent' => $row['brand_desc'],
@@ -307,7 +307,7 @@ class ProductImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQue
                 }
             }elseif($this->type == "ACC"){
                 $brand = Brand::updateOrCreate(
-                    ['code' => $row['brand_cd']],
+                    ['code' => $row['brand_cd'],'type' => $this->type],
                     [
                         'description' => $row['brand_desc'],
                         'parent' => $row['brand_desc'],

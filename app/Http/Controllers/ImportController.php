@@ -13,7 +13,7 @@ class ImportController extends Controller
     public function importProducts(Request $request)
     {
         if($request->ajax()){
-            Excel::import(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
+            Excel::queueImport(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
             return response()->json(['status' => 1,'message' => 'success']);
         }else if ($request->isMethod('POST')){
 
@@ -21,7 +21,7 @@ class ImportController extends Controller
                 'import_file' => 'required|file'
             ]);
 
-            Excel::import(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
+            Excel::queueImport(new ProductImport($request->type,$request->request_type),$request->file('import_file'));
 
             return redirect()->back()->with('success','Importing is in process. You will be notified on completion');
 
