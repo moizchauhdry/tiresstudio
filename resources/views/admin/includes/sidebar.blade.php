@@ -160,7 +160,7 @@
                     <a href="{{route('import.importProducts')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
-                            Manage Import Products
+                            Manage Import
                         </p>
                     </a>
                 </li>

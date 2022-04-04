@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{__('Products')}}</h1>
+                    <h1>{{__('Import')}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -28,10 +28,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <form action="{{route('import.importProducts')}}" method="post" {{--id="importForm"--}} enctype="multipart/form-data">
+                        <form action="{{route('import.importProducts')}}" method="post" id="importForm" enctype="multipart/form-data">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Products List (Total Products : <span id="countTotal">0</span>)
+                                Import
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -51,13 +51,20 @@
                                 <select name="request_type" id="request_type" class="form-control" required>
                                     <option value="">Select Type</option>
 {{--                                    <option value="0">Price List</option>--}}
-                                    <option value="1">All Data</option>
-                                    <option value="2">Inventory</option>
+                                    <option value="1">Stock Data</option>
+                                    <option value="2">Inventory Data</option>
                                 </select>
                             </div>
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="customFile">File</label>
                                 <input type="file" class="form-control custom-image-upload" name="import_file" required>
+                            </div>
+                            <div class="col-12">
+                                <strong>Terms And Disclaimer</strong>
+                                <ul>
+                                    <li>Choosing appropriate file according to the type and import type. If not then the import will be unsccessful</li>
+                                    <li>The file will be imported on background. and you will be notified once completed</li>
+                                </ul>
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -86,8 +93,10 @@
 @section('scripts')
     <script>
         $("#importForm").on("submit", function(event){
+            $('.import_btn').addClass('hidden');
+            $('.loading_btn').removeClass('hidden');
             // event.preventDefault();
-            $('input.is-invalid').removeClass('is-invalid');
+            {{--$('input.is-invalid').removeClass('is-invalid');
             var formData = new FormData(this);
             $.ajax({
                 method: "POST",
@@ -112,7 +121,7 @@
                     $('.loading_btn').addClass('hidden');
                     alert('Error .... please check console log');
                 }
-            });
+            });--}}
         });
     </script>
 @endsection
