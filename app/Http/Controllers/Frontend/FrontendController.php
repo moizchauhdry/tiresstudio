@@ -196,7 +196,7 @@ class FrontendController extends Controller
         $response['offset'] = array_unique(Product::select('offset')->where('sku_type', 'Wheel')->pluck('offset')->toArray());
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type', 'Wheel')->pluck('sizeDesc')->toArray());
         $response['brands'] = Brand::whereHas('products', function ($query) {
-            $query->where('sku_type', 'Wheel');
+            $query->where('sku_type', 'WHEEL');
         })->orderBy('description','asc')->get();
         $response['filter'] = $filter;
 
@@ -236,6 +236,11 @@ class FrontendController extends Controller
                 $filter['rimDiameter'] = $request->rimDiameter;
             }
 
+            if ($request->has('tireSize') && !empty($request->get('tireSize'))) {
+                $products->where('tireSize', $request->tireSize);
+                $filter['tireSize'] = $request->tireSize;
+            }
+
             if ($request->has('speedRating') && !empty($request->get('speedRating'))) {
                 $products->where('speedRating', $request->speedRating);
                 $filter['speedRating'] = $request->speedRating;
@@ -247,9 +252,8 @@ class FrontendController extends Controller
                 $products->where(function ($query) use ($search) {
                     $query->where('id', 'LIKE', "%$search%")
                         ->orWhere('width', 'LIKE', "%$search%")
-                        ->orWhere('wheelDiameter', 'LIKE', "%$search%")
+                        ->orWhere('tireSize', 'LIKE', "%$search%")
                         ->orWhere('diameter', 'LIKE', "%$search%")
-                        ->orWhere('rimDiameter', 'LIKE', "%$search%")
                         ->orWhere('speedRating', 'LIKE', "%$search%")
                         ->orWhereHas('brand', function ($qry) use ($search) {
                             $qry->where('description', 'LIKE', "%$search%");
@@ -331,11 +335,12 @@ class FrontendController extends Controller
 
         }
 
-        $response['width'] = array_unique(Product::select('width')->where('sku_type', 'Tire')->pluck('width')->toArray());
-        $response['wheelDiameter'] = array_unique(Product::select('wheelDiameter')->where('sku_type', 'Tire')->pluck('wheelDiameter')->toArray());
-        $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type', 'Tire')->pluck('diameter')->toArray());
-        $response['rimDiameter'] = array_unique(Product::select('rimDiameter')->where('sku_type', 'Tire')->pluck('rimDiameter')->toArray());
-        $response['speedRating'] = array_unique(Product::select('speedRating')->where('sku_type', 'Tire')->pluck('speedRating')->toArray());
+        $response['width'] = array_unique(Product::select('width')->where('sku_type', 'Tire')->orderBy('width','asc')->pluck('width')->toArray());
+        $response['wheelDiameter'] = array_unique(Product::select('wheelDiameter')->where('sku_type', 'Tire')->orderBy('wheelDiameter','asc')->pluck('wheelDiameter')->toArray());
+        $response['tireSize'] = array_unique(Product::select('tireSize')->where('sku_type', 'Tire')->orderBy('tireSize','asc')->pluck('tireSize')->toArray());
+        $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type', 'Tire')->orderBy('diameter','asc')->pluck('diameter')->toArray());
+        $response['rimDiameter'] = array_unique(Product::select('rimDiameter')->where('sku_type', 'Tire')->orderBy('rimDiameter','asc')->pluck('rimDiameter')->toArray());
+        $response['speedRating'] = array_unique(Product::select('speedRating')->where('sku_type', 'Tire')->orderBy('speedRating','asc')->pluck('speedRating')->toArray());
         $response['brands'] = Brand::whereHas('products', function ($query) {
             $query->where('sku_type', 'Tire');
         })->get();

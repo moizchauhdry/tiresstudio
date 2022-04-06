@@ -126,6 +126,16 @@
                                 </div><!-- end form-input -->
 
                                 <div class="form-input">
+                                    <label>Tires By Size:</label>
+                                    <select name="tireSize" id="tireSize">
+                                        <option value="">All Sizes</option>
+                                        @foreach($response['tireSize'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
+                                    </select>
+                                </div><!-- end form-input -->
+
+                                {{--<div class="form-input">
                                     <label>Tires By Wheel Diameter:</label>
                                     <select name="wheelDiameter" id="wheelDiameter">
                                         <option value="">All Wheel Diameter</option>
@@ -133,7 +143,7 @@
                                             <option value="{{$item}}">{{$item}}</option>
                                         @endforeach
                                     </select>
-                                </div><!-- end form-input -->
+                                </div>--}}<!-- end form-input -->
 
                                 <div class="form-input">
                                     <label>Tires By Diameter:</label>
@@ -147,7 +157,7 @@
                             </div><!-- end col -->
 
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="form-input">
+                                {{--<div class="form-input">
                                     <label>Tires By Rim Diameter:</label>
                                     <select name="rimDiameter" id="rimDiameter">
                                         <option value="">All Rim Diameter</option>
@@ -155,7 +165,7 @@
                                             <option value="{{$item}}">{{$item}}</option>
                                         @endforeach
                                     </select>
-                                </div><!-- end form-input -->
+                                </div>--}}<!-- end form-input -->
 
                                 <div class="form-input">
                                     <label>Tires By Speed Rating:</label>

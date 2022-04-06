@@ -91,7 +91,7 @@
         $('.car-wrapper img').lazy({
             placeholder:"{{ asset('images/placeholder.gif') }}"
         })
-        $('#brands,#width,#wheelDiameter,#diameter,#rimDiameter,#speedRating').selectpicker();
+        $('#brands,#width,#wheelDiameter,#diameter,#rimDiameter,#speedRating,#tireSize').selectpicker();
 
         function getResults(url){
             $.ajax({
@@ -105,9 +105,10 @@
                     model : $('#model').val(),
                     brand_id : $('#brands').selectpicker('val'),
                     width : $('#width').selectpicker('val'),
-                    wheelDiameter : $('#wheelDiameter').selectpicker('val'),
+                    tireSize : $('#tireSize').selectpicker('val'),
+                    /*wheelDiameter : $('#wheelDiameter').selectpicker('val'),*/
                     diameter : $('#diameter').selectpicker('val'),
-                    rimDiameter : $('#rimDiameter').selectpicker('val'),
+                    /*rimDiameter : $('#rimDiameter').selectpicker('val'),*/
                     speedRating : $('#speedRating').selectpicker('val'),
                 },
                 beforeSend:function(){
@@ -133,9 +134,10 @@
         function resetAll(){
             $('#brands').selectpicker('val','');
             $('#width').selectpicker('val','');
-            $('#wheelDiameter').selectpicker('val','');
+            $('#tireSize').selectpicker('val','');
+            /*$('#wheelDiameter').selectpicker('val','');*/
             $('#diameter').selectpicker('val','');
-            $('#rimDiameter').selectpicker('val','');
+            /*$('#rimDiameter').selectpicker('val','');*/
             $('#speedRating').selectpicker('val','');
             getResults('{{route('frontend.pages.tires')}}');
         }
