@@ -50,11 +50,10 @@
                             <div class="pull-left">
                                 <div class="form-input">
                                     <label class="">Sort by:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>Price: Highest First</option>
-                                        <option>Price: Lowest First</option>
-                                        <option>Time: End First</option>
-                                        <option>Time: First First</option>
+                                    <select name="orderby" id="orderby">
+                                        <option value="0">Recommended</option>
+                                        <option value="1">Ascending</option>
+                                        <option value="2">Descending</option>
                                     </select>
                                 </div><!-- end form-input -->
                             </div><!-- end left -->
@@ -91,7 +90,7 @@
         $('.car-wrapper img').lazy({
             placeholder:"{{ asset('images/placeholder.gif') }}"
         })
-        $('#brands,#width,#wheelDiameter,#diameter,#rimDiameter,#speedRating,#tireSize').selectpicker();
+        $('#width,#rimDiameter,#series,#orderby').selectpicker();
 
         function getResults(url){
             $.ajax({
@@ -103,13 +102,14 @@
                     year : $('#year').val(),
                     make : $('#make').val(),
                     model : $('#model').val(),
-                    brand_id : $('#brands').selectpicker('val'),
+                    /*brand_id : $('#brands').selectpicker('val'),*/
+                    orderby : $('#orderby').selectpicker('val'),
                     width : $('#width').selectpicker('val'),
-                    tireSize : $('#tireSize').selectpicker('val'),
+                    series : $('#series').selectpicker('val'),
                     /*wheelDiameter : $('#wheelDiameter').selectpicker('val'),*/
-                    diameter : $('#diameter').selectpicker('val'),
-                    /*rimDiameter : $('#rimDiameter').selectpicker('val'),*/
-                    speedRating : $('#speedRating').selectpicker('val'),
+                    /*diameter : $('#diameter').selectpicker('val'),*/
+                    rimDiameter : $('#rimDiameter').selectpicker('val'),
+                    /*speedRating : $('#speedRating').selectpicker('val'),*/
                 },
                 beforeSend:function(){
                     $('.overlay-products').show();
@@ -129,16 +129,19 @@
             });
         }
 
-
+        $('#orderby').on('changed.bs.select', function (){
+            getResults('{{ URL::current() }}');
+        });
 
         function resetAll(){
-            $('#brands').selectpicker('val','');
+            /*$('#brands').selectpicker('val','');*/
             $('#width').selectpicker('val','');
-            $('#tireSize').selectpicker('val','');
+            $('#orderby').selectpicker('val','1');
+            $('#series').selectpicker('val','');
             /*$('#wheelDiameter').selectpicker('val','');*/
-            $('#diameter').selectpicker('val','');
+            $('#rimDiameter').selectpicker('val','');
             /*$('#rimDiameter').selectpicker('val','');*/
-            $('#speedRating').selectpicker('val','');
+            /*$('#speedRating').selectpicker('val','');*/
             getResults('{{route('frontend.pages.tires')}}');
         }
 

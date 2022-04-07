@@ -50,11 +50,10 @@
                             <div class="pull-left">
                                 <div class="form-input">
                                     <label class="">Sort by:</label>
-                                    <select name="orderby" class="selectpicker">
-                                        <option>Price: Highest First</option>
-                                        <option>Price: Lowest First</option>
-                                        <option>Time: End First</option>
-                                        <option>Time: First First</option>
+                                    <select name="orderby" id="orderby">
+                                        <option value="0">Recommended</option>
+                                        <option value="1">Ascending</option>
+                                        <option value="2">Descending</option>
                                     </select>
                                 </div><!-- end form-input -->
                             </div><!-- end left -->
@@ -91,7 +90,13 @@
         $('.car-wrapper img').lazy({
             placeholder:"{{ asset('images/placeholder.gif') }}"
         })
-        $('#brands').selectpicker();
+        $('#brands,#orderby').selectpicker();
+
+
+        $('#orderby').on('changed.bs.select', function (){
+            getResults('{{ URL::current() }}');
+        });
+
 
         function getResults(url){
             $.ajax({
@@ -104,6 +109,7 @@
                     make : $('#make').val(),
                     model : $('#model').val(),*/
                     brand_id : $('#brands').selectpicker('val'),
+                    orderby : $('#orderby').selectpicker('val'),
                 },
                 beforeSend:function(){
                     $('.overlay-products').show();

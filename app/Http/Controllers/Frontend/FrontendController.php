@@ -25,10 +25,10 @@ class FrontendController extends Controller
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->inRandomOrder()->paginate(9);
         $filter = array();
         if ($request->ajax()) {
-            $products = Product::select('id', 'title', 'boltPattern', 'finishCode')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX');
+            $products = Product::select('products.id', 'products.title', 'products.boltPattern', 'products.finishCode')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); });
 
 
             if ($request->has('brand_id') && !empty($request->get('brand_id'))) {
@@ -128,7 +128,14 @@ class FrontendController extends Controller
             }
 
             $response['filter'] = $filter;
-            $response['products'] = $products->groupBy('model')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->paginate(9);
+            $order = $request->orderby;
+            if($order == 0){
+                $response['products'] = $products->groupBy('model')->inRandomOrder()->paginate(9);
+            }elseif($order == 1){
+                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','asc')->groupBy('model')->paginate(9);
+            }else{
+                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','desc')->groupBy('model')->paginate(9);
+            }
             $html = view('frontend.includes.products', compact('response'))->render();
 
             return response()->json([
@@ -187,7 +194,7 @@ class FrontendController extends Controller
                 ->where('backspacing','<=',number_format($maxBs->maxBs,2))
                 //->where('centerbore','<=',floatval($centerBoreMm->centerBoreMm) ?? 0)
                 ->where('boltPattern','LIKE',"%$boltPattern%");
-            $response['products'] = $products->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->paginate(9);
+            $response['products'] = $products->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->inRandomOrder()->paginate(9);
         }
 
         $response['finishes'] = array_unique(Product::select('finishCode')->where('sku_type', 'Wheel')->pluck('finishCode')->toArray());
@@ -206,11 +213,12 @@ class FrontendController extends Controller
     public function tires(Request $request)
     {
         $response['type'] = 'Tire';
-        $response['products'] = Product::groupBy('model')->where('sku_type', 'TIRE')->paginate(9);
+
+        $response['products'] = Product::groupBy('model')->where('sku_type', 'TIRE')->inRandomOrder()->paginate(9);
         $filter = array();
         if ($request->ajax()) {
 
-            $products = Product::select('id', 'title')->where('sku_type', 'TIRE');
+            $products = Product::select('products.id', 'products.title')->where('sku_type', 'TIRE');
             if ($request->has('brand_id') && !empty($request->get('brand_id'))) {
                 $products->where('brand_id', $request->brand_id);
                 $filter['brand_id'] = $request->brand_id;
@@ -239,6 +247,11 @@ class FrontendController extends Controller
             if ($request->has('tireSize') && !empty($request->get('tireSize'))) {
                 $products->where('tireSize', $request->tireSize);
                 $filter['tireSize'] = $request->tireSize;
+            }
+
+            if ($request->has('series') && !empty($request->get('series'))) {
+                $products->where('series', $request->series);
+                $filter['series'] = $request->series;
             }
 
             if ($request->has('speedRating') && !empty($request->get('speedRating'))) {
@@ -291,10 +304,17 @@ class FrontendController extends Controller
                 /*->where('offset','>=', $offsetMinMm->offsetMinMm)
                 ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
             }
-
+            $order = $request->orderby;
+            if($order == 0){
+                $response['products'] = $products->groupBy('model')->inRandomOrder()->paginate(9);
+            }elseif($order == 1){
+                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','asc')->groupBy('model')->paginate(9);
+            }else{
+                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','desc')->groupBy('model')->paginate(9);
+            }
 
             $response['filter'] = $filter;
-            $response['products'] = $products->groupBy('model')->paginate(9);
+            /*$response['products'] = $products->groupBy('model')->paginate(9);*/
             $html = view('frontend.includes.products', compact('response'))->render();
 
             return response()->json([
@@ -331,16 +351,22 @@ class FrontendController extends Controller
                 ->where('diameter', '<=', $maxDiameter->minDiameterIn);
             /*->where('offset','>=', $offsetMinMm->offsetMinMm)
             ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
-            $response['products'] = $products->paginate(9);
+            $response['products'] = $products->inRandomOrder->paginate(9);
 
         }
 
-        $response['width'] = array_unique(Product::select('width')->where('sku_type', 'Tire')->orderBy('width','asc')->pluck('width')->toArray());
-        $response['wheelDiameter'] = array_unique(Product::select('wheelDiameter')->where('sku_type', 'Tire')->orderBy('wheelDiameter','asc')->pluck('wheelDiameter')->toArray());
-        $response['tireSize'] = array_unique(Product::select('tireSize')->where('sku_type', 'Tire')->orderBy('tireSize','asc')->pluck('tireSize')->toArray());
-        $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type', 'Tire')->orderBy('diameter','asc')->pluck('diameter')->toArray());
-        $response['rimDiameter'] = array_unique(Product::select('rimDiameter')->where('sku_type', 'Tire')->orderBy('rimDiameter','asc')->pluck('rimDiameter')->toArray());
-        $response['speedRating'] = array_unique(Product::select('speedRating')->where('sku_type', 'Tire')->orderBy('speedRating','asc')->pluck('speedRating')->toArray());
+        $response['width'] = array_unique(Product::select('width')->where('sku_type', 'Tire')->whereNotNull('width')->pluck('width')->toArray());
+        asort($response['width']);
+        $response['wheelDiameter'] = array_unique(Product::select('wheelDiameter')->where('sku_type', 'Tire')->whereNotNull('wheelDiameter')->pluck('wheelDiameter')->toArray());
+        asort($response['wheelDiameter']);
+        $response['series'] = array_unique(Product::select('series')->where('sku_type', 'Tire')->whereNotNull('series')->pluck('series')->toArray());
+        asort($response['series']);
+        $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type', 'Tire')->whereNotNull('diameter')->pluck('diameter')->toArray());
+        asort($response['diameter']);
+        $response['rimDiameter'] = array_unique(Product::select('rimDiameter')->where('sku_type', 'Tire')->whereNotNull('rimDiameter')->pluck('rimDiameter')->toArray());
+        asort($response['rimDiameter']);
+        $response['speedRating'] = array_unique(Product::select('speedRating')->where('sku_type', 'Tire')->whereNotNull('speedRating')->pluck('speedRating')->toArray());
+        asort($response['speedRating']);
         $response['brands'] = Brand::whereHas('products', function ($query) {
             $query->where('sku_type', 'Tire');
         })->get();
@@ -351,11 +377,11 @@ class FrontendController extends Controller
     public function accessories(Request $request)
     {
         $response['type'] = 'ACC';
-        $response['products'] = Product::where('sku_type', 'ACC')->paginate(9);
+        $response['products'] = Product::where('sku_type', 'ACC')->inRandomOrder()->paginate(9);
         $filter = array();
         if ($request->ajax()) {
 
-            $products = Product::select('id', 'title')->where('sku_type', 'ACC');
+            $products = Product::select('products.id', 'products.title')->where('sku_type', 'ACC');
             if ($request->has('brand_id') && !empty($request->get('brand_id'))) {
                 $products->where('brand_id', $request->brand_id);
                 $filter['brand_id'] = $request->brand_id;
@@ -402,9 +428,15 @@ class FrontendController extends Controller
                     ->where('offset','<=', $offsetMaxMm->offsetMaxMm);
             }*/
 
-
+            $order = $request->orderby;
+            if($order == 0){
+                $response['products'] = $products->groupBy('model')->inRandomOrder()->paginate(9);
+            }elseif($order == 1){
+                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','asc')->groupBy('model')->paginate(9);
+            }else{
+                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','desc')->groupBy('model')->paginate(9);
+            }
             $response['filter'] = $filter;
-            $response['products'] = $products->paginate(9);
             $html = view('frontend.includes.products', compact('response'))->render();
 
             return response()->json([

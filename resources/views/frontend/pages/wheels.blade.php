@@ -50,11 +50,10 @@
                         <div class="pull-left">
                             <div class="form-input">
                                 <label class="">Sort by:</label>
-                                <select name="orderby" class="selectpicker">
-                                    <option>Price: Highest First</option>
-                                    <option>Price: Lowest First</option>
-                                    <option>Time: End First</option>
-                                    <option>Time: First First</option>
+                                <select name="orderby" id="orderby">
+                                    <option value="0">Recommended</option>
+                                    <option value="1">Ascending</option>
+                                    <option value="2">Descending</option>
                                 </select>
                             </div><!-- end form-input -->
                         </div><!-- end left -->
@@ -91,7 +90,7 @@
         $('.car-wrapper img').lazy({
             placeholder:"{{ asset('images/placeholder.gif') }}"
         })
-        $('#brands,#finishes,#boltPatterns,#diameter,#offset,#sizeDesc').selectpicker();
+        $('#brands,#finishes,#boltPatterns,#diameter,#offset,#sizeDesc,#orderby').selectpicker();
 
         function getResults(url){
             $.ajax({
@@ -103,6 +102,7 @@
                     year : $('#year').val(),
                     make : $('#make').val(),
                     model : $('#model').val(),
+                    orderby : $('#orderby').selectpicker('val'),
                     brand_id : $('#brands').selectpicker('val'),
                     finish : $('#finishes').selectpicker('val'),
                     diameter : $('#diameter').selectpicker('val'),
@@ -128,7 +128,9 @@
             });
         }
 
-
+        $('#orderby').on('changed.bs.select', function (){
+            getResults('{{ URL::current() }}');
+        });
 
         function resetAll(){
             $('#brands').selectpicker('val','');
@@ -150,8 +152,6 @@
                 $(target).selectpicker('refresh');
                 getResults('{{route('frontend.pages.wheels')}}');
             }
-
-
         }
     </script>
 @endsection

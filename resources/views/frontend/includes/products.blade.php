@@ -49,6 +49,21 @@
             <a href="javascript:void(0)" onclick="removeFromFilter(this)" data-target="#boltPatterns">X</a>
         </span></h3>
     @endif
+@if(isset($response['filter']['width'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+            {{ $response['filter']['width'] }}
+            <a href="javascript:void(0)" onclick="removeFromFilter(this)" data-target="#width">X</a>
+        </span></h3>
+    @endif
+@if(isset($response['filter']['rimDiameter'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+            {{ $response['filter']['rimDiameter'] }}
+            <a href="javascript:void(0)" onclick="removeFromFilter(this)" data-target="#rimDiameter">X</a>
+        </span></h3>
+    @endif
+@if(isset($response['filter']['series'])) <h3 style="margin-right: 4px"><span class="label label-danger">
+            {{ $response['filter']['series'] }}
+            <a href="javascript:void(0)" onclick="removeFromFilter(this)" data-target="#series">X</a>
+        </span></h3>
+    @endif
 
 </div>
 <div class="row grid-wrapper">

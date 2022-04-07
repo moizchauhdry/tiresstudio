@@ -105,7 +105,7 @@
                         <form class="row" action="" id="sidebarForm" onsubmit="this.preventDefault()">
                             @csrf
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="form-input">
+                                {{--<div class="form-input">
                                     <label>Tires By Brand:</label>
                                     <select name="brands" id="brands">
                                         <option value="" >All Brand</option>
@@ -113,7 +113,7 @@
                                             <option value="{{$item->id}}">{{$item->description}}</option>
                                         @endforeach
                                     </select>
-                                </div><!-- end form-input -->
+                                </div>--}}<!-- end form-input -->
 
                                 <div class="form-input">
                                     <label>Tires By Width:</label>
@@ -127,9 +127,9 @@
 
                                 <div class="form-input">
                                     <label>Tires By Size:</label>
-                                    <select name="tireSize" id="tireSize">
+                                    <select name="series" id="series">
                                         <option value="">All Sizes</option>
-                                        @foreach($response['tireSize'] as $item)
+                                        @foreach($response['series'] as $item)
                                             <option value="{{$item}}">{{$item}}</option>
                                         @endforeach
                                     </select>
@@ -145,7 +145,17 @@
                                     </select>
                                 </div>--}}<!-- end form-input -->
 
-                                <div class="form-input">
+                                    <div class="form-input">
+                                    <label>Tires By Diameter:</label>
+                                    <select name="rimDiameter" id="rimDiameter">
+                                        <option value="">All Diameter</option>
+                                        @foreach($response['rimDiameter'] as $item)
+                                            <option value="{{$item}}">{{$item}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                {{--<div class="form-input">
                                     <label>Tires By Diameter:</label>
                                     <select name="diameter" id="diameter">
                                         <option value="">All Diameter</option>
@@ -153,7 +163,7 @@
                                             <option value="{{$item}}">{{$item}}</option>
                                         @endforeach
                                     </select>
-                                </div><!-- end form-input -->
+                                </div>--}}<!-- end form-input -->
                             </div><!-- end col -->
 
                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -167,7 +177,7 @@
                                     </select>
                                 </div>--}}<!-- end form-input -->
 
-                                <div class="form-input">
+                                {{--<div class="form-input">
                                     <label>Tires By Speed Rating:</label>
                                     <select name="speedRating" id="speedRating">
                                         <option value="">All Speed Rating</option>
@@ -175,7 +185,7 @@
                                             <option value="{{$item}}">{{$item}}</option>
                                         @endforeach
                                     </select>
-                                </div><!-- end form-input -->
+                                </div>--}}<!-- end form-input -->
                             </div><!-- end col -->
 
                             <input type="text" hidden name="year" id="year" value="{{ isset($response['filter']['year']) ? $response['filter']['year'] : '' }}">
