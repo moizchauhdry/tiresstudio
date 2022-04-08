@@ -351,7 +351,7 @@ class FrontendController extends Controller
                 ->where('diameter', '<=', $maxDiameter->minDiameterIn);
             /*->where('offset','>=', $offsetMinMm->offsetMinMm)
             ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
-            $response['products'] = $products->inRandomOrder->paginate(9);
+            $response['products'] = $products->inRandomOrder()->paginate(9);
 
         }
 
