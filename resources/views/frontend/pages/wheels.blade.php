@@ -52,8 +52,8 @@
                                 <label class="">Sort by:</label>
                                 <select name="orderby" id="orderby">
                                     <option value="0">Recommended</option>
-                                    <option value="1">Ascending</option>
-                                    <option value="2">Descending</option>
+                                    <option value="1">A - Z</option>
+                                    <option value="2">Z - A</option>
                                 </select>
                             </div><!-- end form-input -->
                         </div><!-- end left -->
