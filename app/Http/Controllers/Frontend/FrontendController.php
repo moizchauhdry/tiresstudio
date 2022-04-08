@@ -16,6 +16,7 @@ class FrontendController extends Controller
     public function index()
     {
         $response['popular_wheels'] = Product::groupBy('model')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->take(12)->skip(1)->where('sku_type', 'Wheel')->get();
+        $response['popular_tires'] = Product::groupBy('model')->take(12)->skip(1)->where('sku_type', 'Tire')->get();
         $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year', 'asc')->pluck('year')->toArray());
         rsort($response['years']);
         $response['brands'] = Brand::orderBy('description', 'asc')->take(6)->get();

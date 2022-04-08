@@ -98,34 +98,39 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="section-title clearfix">
-                    <h4>Our Brands</h4>
+                    <h4>Popular Tires</h4>
                     <hr class="custom">
                 </div><!-- end section-title -->
             </div><!-- end col -->
             <div class="col-md-6">
                 <div class="section-title clearfix ">
-                    <a href="{{route('frontend.pages.brands')}}"
+                    <a href="{{route('frontend.pages.tires')}}"
                         style="float: right; margin-top: 11px; font-size:16px; font-weight: bold;">VIEW ALL
-                        BRANDS <i class="fa fa-arrow-right"></i></a>
+                        TIRES <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </div><!-- end row -->
 
         <div class="row">
-            @foreach ($response['brands'] as $brand)
-            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
-                <div class="car-wrapper deal-wrapper clearfix">
-                    <div class="post-media">
-                        <a href="{{ route('frontend.pages.brand-products',$brand->id) }}"><img src="{{ asset('images/placeholder.gif') }}" data-src="{{ isset($brand->product->product_image) ? imageURL($brand->product->product_image) :  asset('images/placeholder.png') }}" alt="" class="img-responsive"></a>
-                    </div><!-- end post-media -->
+            @foreach ($response['popular_tires'] as $tire)
+                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
 
-                    <div class="car-title clearfix text-center">
-                        <h4><a href="{{ route('frontend.pages.brand-products',$brand->id) }}">{{$brand->description}}</a></h4>
-                    </div><!-- end car-title -->
-                </div><!-- end clearfix -->
-            </div>
+                    <div class="car-wrapper clearfix">
+                        <div class="post-media entry">
+                            <a href="{{ route('frontend.pages.product',$tire->id) }}"><img
+                                    src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($tire->product_image)}}" alt="" class="img-responsive"></a>
+                        </div><!-- end post-media -->
+
+                        <div class="car-title clearfix text-center">
+                            <h4><a
+                                    href="{{ route('frontend.pages.product',$tire->id) }}">{{getProductName($tire->id)}}</a>
+                            </h4>
+                        </div><!-- end car-title -->
+                    </div><!-- end clearfix -->
+
+                </div>
             @endforeach
-        </div><!-- end row -->
+        </div>
 
         <hr class="invis">
 
