@@ -203,9 +203,7 @@ class FrontendController extends Controller
         $response['diameter'] = array_unique(Product::select('diameter')->where('sku_type', 'Wheel')->pluck('diameter')->toArray());
         $response['offset'] = array_unique(Product::select('offset')->where('sku_type', 'Wheel')->pluck('offset')->toArray());
         $response['sizeDesc'] = array_unique(Product::select('sizeDesc')->where('sku_type', 'Wheel')->pluck('sizeDesc')->toArray());
-        $response['brands'] = Brand::whereHas('products', function ($query) {
-            $query->where('sku_type', 'WHEEL');
-        })->orderBy('description','asc')->get();
+        $response['brands'] = Brand::where('type', 'WHEEL')->get();
         $response['filter'] = $filter;
 
         return view('frontend.pages.wheels', compact('response'));
@@ -368,9 +366,7 @@ class FrontendController extends Controller
         asort($response['rimDiameter']);
         $response['speedRating'] = array_unique(Product::select('speedRating')->where('sku_type', 'Tire')->whereNotNull('speedRating')->pluck('speedRating')->toArray());
         asort($response['speedRating']);
-        $response['brands'] = Brand::whereHas('products', function ($query) {
-            $query->where('sku_type', 'Tire');
-        })->get();
+        Brand::where('type', 'Tire')->get();
         $response['filter'] = $filter;
         return view('frontend.pages.tires', compact('response'));
     }
@@ -479,9 +475,7 @@ class FrontendController extends Controller
 
         }*/
 
-        $response['brands'] = Brand::whereHas('products', function ($query) {
-            $query->where('sku_type', 'ACC');
-        })->get();
+        $response['brands'] = Brand::where('type', 'ACC')->get();
         $response['filter'] = $filter;
 
         return view('frontend.pages.accessories', compact('response'));
