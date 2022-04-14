@@ -34,12 +34,17 @@
                                 <div id="myCarousel" class="carousel slide">
                                     <!-- main slider carousel items -->
                                     <div class="carousel-inner">
-                                        @foreach ($product->images as $key => $image)
+                                        @forelse($product->images as $key => $image)
                                         <div class="{{$key == 0 ? 'active' : ''}} item" data-slide-number="{{$key}}">
-                                            <img src="{{asset('storage/'.$image->image_url)}}" alt=""
+                                            <img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($image->image_url) }}" alt=""
                                                 class="img-responsive">
                                         </div>
-                                        @endforeach
+                                        @empty
+                                            <div class="active item" data-slide-number="0">
+                                                <img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL('null') }}" alt=""
+                                                     class="img-responsive">
+                                            </div>
+                                        @endforelse
                                     </div>
                                     <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
                                     <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
@@ -603,6 +608,10 @@
 
 @section('scripts')
 <script>
+    $('.carousel-inner img').lazy({
+        placeholder:"{{ asset('images/placeholder.gif') }}"
+    })
+
     function addToCart(product_id) {
         $.ajax({
             method: "POST",
