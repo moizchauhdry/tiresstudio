@@ -430,38 +430,31 @@
                                     <form class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="text" class="form-control" placeholder="Your Name *">
-                                        </div><!-- end col -->
+                                        </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="email" class="form-control" placeholder="Your Email *">
-                                        </div><!-- end col -->
+                                        </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="text" class="form-control" placeholder="Phone Number *">
-                                        </div><!-- end col -->
+                                        </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select name="orderby" class="selectpicker">
-                                                <option>Subject</option>
-                                                <option>Select Dropdown 01</option>
-                                                <option>Select Dropdown 02</option>
-                                                <option>Select Dropdown 03</option>
-                                                <option>Select Dropdown 04</option>
-                                                <option>Select Dropdown 05</option>
-                                            </select>
-                                        </div><!-- end col -->
+                                            <input type="text" class="form-control" placeholder="Subject *">
+                                        </div>
 
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <textarea class="form-control" placeholder="Your Message"></textarea>
-                                        </div><!-- end col -->
+                                        </div>
 
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <button class="btn btn-primary">SUBMIT NOW</button>
-                                        </div><!-- end col -->
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                        </div><!-- end col -->
+                        </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 m30">
                             <div class="contact-departments contact-version clearfix">
                                 <ul class="contact-widget clearfix">
@@ -498,11 +491,13 @@
                         <div class="search-tab light-tab calculator-body">
                             <div class="search-wrapper">
                                 <form class="row">
+
+                                    @if ($product->sku_type == 'WHEEL')
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-input">
                                             <label>DIAMETER</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>{{$product->diameter}}</option>
+                                                <option>{{$product->sizeDesc}}</option>
                                             </select>
                                         </div><!-- end form-input -->
                                     </div>
@@ -514,16 +509,46 @@
                                                 <option>{{$product->boltPattern}}</option>
                                             </select>
                                         </div><!-- end form-input -->
-                                    </div><!-- end col -->
+                                    </div>
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-input">
-                                            <label>SIZE & OFFSET</label>
+                                            <label>OFFSET</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>{{$product->sizeDesc}} {{$product->offset}}</option>
+                                                <option>{{$product->offset}}</option>
                                             </select>
                                         </div><!-- end form-input -->
-                                    </div><!-- end col -->
+                                    </div>
+                                    @endif
+
+                                    @if ($product->sku_type == 'TIRE')
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-input">
+                                            <label>TIRE SIZE</label>
+                                            <select name="orderby" class="selectpicker">
+                                                <option>{{$product->series}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-input">
+                                            <label>TIRE WIDTH</label>
+                                            <select name="orderby" class="selectpicker">
+                                                <option>{{$product->width}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-input">
+                                            <label>TIRE DIAMETER</label>
+                                            <select name="orderby" class="selectpicker">
+                                                <option>{{$product->rimDiameter}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @endif
 
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <hr class="invis2">
