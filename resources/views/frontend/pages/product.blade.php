@@ -36,14 +36,15 @@
                                     <div class="carousel-inner">
                                         @forelse($product->images as $key => $image)
                                         <div class="{{$key == 0 ? 'active' : ''}} item" data-slide-number="{{$key}}">
-                                            <img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($image->image_url) }}" alt=""
+                                            <img src="{{ asset('images/placeholder.gif') }}"
+                                                data-src="{{ imageURL($image->image_url) }}" alt=""
                                                 class="img-responsive">
                                         </div>
                                         @empty
-                                            <div class="active item" data-slide-number="0">
-                                                <img src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL('null') }}" alt=""
-                                                     class="img-responsive">
-                                            </div>
+                                        <div class="active item" data-slide-number="0">
+                                            <img src="{{ asset('images/placeholder.gif') }}"
+                                                data-src="{{ imageURL('null') }}" alt="" class="img-responsive">
+                                        </div>
                                         @endforelse
                                     </div>
                                     <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
@@ -529,18 +530,18 @@
                                     @if ($product->sku_type == 'TIRE')
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-input">
-                                            <label>TIRE SIZE</label>
+                                            <label>TIRE WIDTH</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>{{$product->series}}</option>
+                                                <option>{{$product->width}}</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-input">
-                                            <label>TIRE WIDTH</label>
+                                            <label>TIRE SIZE</label>
                                             <select name="orderby" class="selectpicker">
-                                                <option>{{$product->width}}</option>
+                                                <option>{{$product->series}}</option>
                                             </select>
                                         </div>
                                     </div>
