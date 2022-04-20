@@ -20,10 +20,10 @@ class FetchController extends Controller
 {
     public function authorizeAPI()
     {
-        $credentials = [
+        /*$credentials = [
             "userName" => "au.haseeb@gmail.com",
             "password" => "Shiekh!@40"
-        ];
+        ];*/
 
         $clientHeader = new \GuzzleHttp\Client(['headers' => [
             'Content-Type' => 'application/json',
