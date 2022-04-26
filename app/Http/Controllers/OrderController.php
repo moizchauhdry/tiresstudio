@@ -14,6 +14,12 @@ class OrderController extends Controller
         return view('admin.orders.index',compact('orders'));
     }
 
+    public function paymentIndex()
+    {
+        $orders = Order::orderBy('id','DESC')->get();
+        return view('admin.payments.index',compact('orders'));
+    }
+
     public function detail($id)
     {
         $order = Order::findOrFail($id);

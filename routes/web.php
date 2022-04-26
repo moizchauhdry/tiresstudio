@@ -135,6 +135,8 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 // });
 
+                Route::get('payments','OrderController@paymentIndex')->name('payment.index');
+
                 Route::group(['prefix' => 'import'],function(){
                     Route::any('/products','ImportController@importProducts')->name('import.importProducts');
                 });

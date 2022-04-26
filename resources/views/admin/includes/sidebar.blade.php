@@ -157,6 +157,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{route('payment.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Manage Payments
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('import.importProducts')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
