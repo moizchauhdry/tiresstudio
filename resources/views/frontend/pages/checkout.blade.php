@@ -191,7 +191,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '77.44' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+                            value: {{ number_format((float)Cart::getTotal(), 2, '.','')}} // Can reference variables or functions. Example: `value: document.getElementById('...').value`
                         }
                     }]
                 });
@@ -213,9 +213,11 @@
                         url: '{{route('frontend.customer.order')}}',
                         data: {
                             _token: $('meta[name="csrf-token"]').attr('content'),
+                            payment_data : orderData,
                         },
                         success: function (response) {
                             alert('SUCCESS');
+                            window.location.href = response.url;
                         }
                     });
 

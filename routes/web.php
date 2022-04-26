@@ -38,6 +38,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
     Route::post('/logout', 'Frontend\CustomerController@logout')->name('frontend.customer.logout');
     Route::get('/checkout', 'Frontend\OrderController@checkout')->name('frontend.pages.checkout');
     Route::post('/order', 'Frontend\OrderController@order')->name('frontend.customer.order');
+    Route::get('/payment-success/{id}', 'Frontend\OrderController@paymentSuccess')->name('frontend.customer.payment-success');
 });
 
 Route::group(['prefix' => 'get','as' => 'get.'],function(){

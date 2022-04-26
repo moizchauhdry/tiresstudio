@@ -13,6 +13,10 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
+        if(Auth::guard('customer')->check()){
+            return redirect()->route('frontend.pages.index');
+        }
+
         if ($request->isMethod('post') && $request->ajax()) {
 
              $rules = [

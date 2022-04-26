@@ -98,6 +98,7 @@ class OrderController extends Controller
                 'net_total' => $netTotal,
                 // 'order_notes' => $request->order_notes,
                 'payment_method' => 1,
+                'payment_data' => json_encode($request->payment_data),
                 'payment_status' => true,
             ];
 
@@ -113,12 +114,21 @@ class OrderController extends Controller
 
             Cart::clear();
 
+            $url = \URL::route('frontend.customer.payment-success',$order->id);
+
             return response()->json([
                 'status' => 1,
                 'title' => 'Order Placed!',
                 'icon' => 'success',
                 'message' => 'Thankyou, Your order have been placed successfully.',
+                'url' => $url,
             ]);
         }
+    }
+
+    public function paymentSuccess($id)
+    {
+        $order = Order::find($id);
+        return view('frontend.pages.payment-success',compact('order'));
     }
 }

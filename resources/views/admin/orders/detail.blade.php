@@ -72,13 +72,19 @@
                                     </tr>
                                     <tr>
                                         <th>Net Total</th>
-                                        <td>CHF {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
+                                        <td>USD {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
                                     </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered col-md-6">
+                                <tbody>
+
+
                                     <section>
                                         <tr class="bg-light">
-                                            <th colspan="2" class="text-center">Delivery Information</th>
+                                            <th colspan="2" class="text-center">Shipping Information</th>
                                         </tr>
-                                        <tr>
+                                        {{--<tr>
                                             <th>Delivery Date</th>
                                             <td>
                                                 {{date('M d, Y - l', strtotime($order->delivery_date))}}
@@ -89,67 +95,32 @@
                                             <td>
                                                 {{date('H:i:s', strtotime($order->delivery_time))}}
                                             </td>
-                                        </tr>
+                                        </tr>--}}
                                         <tr>
-                                            <th>Delivery Address</th>
+                                            <th>Shipping Address</th>
                                             <td>
-                                                {{isset($order->delivery_address) ? $order->delivery_address : "-"}}
+                                                @php
+                                                    $obj = json_decode($order->payment_data);
+                                                    $shipping = $obj->purchase_units[0]->shipping;
+                                                @endphp
+                                                <strong>{{ $shipping->name->full_name }}</strong>, <br>
+                                                {{ $shipping->address->address_line_1 }}, <br>
+                                                {{ $shipping->address->address_line_2 }}, <br>
+                                                {{ $shipping->address->postal_code }}, <br>
+                                                {{ $shipping->address->country_code }}
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{--<tr>
                                             <th>Delivery Phone</th>
                                             <td>
                                                 {{isset($order->delivery_phone) ? $order->delivery_phone : "-"}}
                                             </td>
-                                        </tr>
+                                        </tr>--}}
                                     </section>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered col-md-6">
-                                <tbody>
-                                    <tr class="bg-light">
-                                        <th colspan="2" class="text-center">Customer Information</th>
-                                    </tr>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <td>{{$order->user->first_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Last Name</th>
-                                        <td>{{$order->user->last_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td>{{$order->user->email}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone</th>
-                                        <td>{{$order->user->phone_no}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>House #</th>
-                                        <td>{{$order->user->home_no}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>City</th>
-                                        <td>{{$order->user->city}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address</th>
-                                        <td>{{$order->user->address}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Post code</th>
-                                        <td>{{$order->user->zip_code}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Order Notes</th>
-                                        <td>{{$order->order_notes}}</td>
-                                    </tr>
 
                                     <section>
                                         <tr class="bg-light">
-                                            <th colspan="2" class="text-center">Paymemt Information</th>
+                                            <th colspan="2" class="text-center">Payment Information</th>
                                         </tr>
                                         <tr>
                                             <th>Payment Method</th>
@@ -174,6 +145,12 @@
                                                 @endif
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <th>Transaction ID</th>
+                                            <td>
+                                                {{ $obj->purchase_units[0]->payments->captures[0]->id }}
+                                            </td>
+                                        </tr>
                                     </section>
                                 </tbody>
                             </table>
@@ -181,6 +158,10 @@
                     </div>
                     <!-- /.card-body -->
                 </div>
+
+
+
+
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
@@ -194,7 +175,7 @@
                                 <tr>
                                     <th>Sr #</th>
                                     <th>Title</th>
-                                    <th>Category</th>
+{{--                                    <th>Category</th>--}}
                                     <th>Item Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
@@ -205,11 +186,18 @@
                                 @foreach($orderItems as $item)
                                 <tr>
                                     <td>{{ $count++ }}</td>
-                                    <td>{{ $item->product->title }}</td>
+                                    <td>
+                                        <div class="media">
+                                            <img class="align-self-center mr-3" style="width:100px"  src="{{ imageURL($item->image_url) }}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                {{ $item->product->title }}
+                                            </div>
+                                        </div>
+                                    </td>
                                     {{-- <td>{{ $item->product->category->title }}</td> --}}
-                                    <td> CHF {{$item->product->price}} </td>
+                                    <td> USD {{$item->product->price}} </td>
                                     <td> x {{$item->quantity}}</td>
-                                    <td>CHF {{$item->product->price * $item->quantity}}</td>
+                                    <td>USD {{$item->product->price * $item->quantity}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
