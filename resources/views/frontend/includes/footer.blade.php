@@ -46,10 +46,10 @@
                     </div><!-- end widget-title -->
 
                     <ul class="contact-widget clearfix">
-                        <li><i class="fa fa-map-marker"></i> Rock St 12, Newyork City, USA</li>
-                        <li><i class="fa fa-phone"></i> (526) 236-895-4732</li>
-                        <li><i class="fa fa-envelope-o"></i> enginessuport@gmail.com</li>
-                        <li><i class="fa fa-fax"></i> (526) 326-985-7423</li>
+                        {{-- <li><i class="fa fa-map-marker"></i> Rock St 12, Newyork City, USA</li> --}}
+                        <li><i class="fa fa-phone"></i> 209-507-1033</li>
+                        <li><i class="fa fa-envelope-o"></i> info@tiresstudio.com</li>
+                        <li><i class="fa fa-fax"></i> 209-507-1033</li>
                         <li><a href="#">Find Us On Map</a></li>
                     </ul>
                 </div><!-- end widget -->
@@ -117,13 +117,13 @@
                     <ul class="related-post working-hours clearfix">
                         <li>
                             <h5>Sales Department:</h5>
-                            <p>Monday to Friday: 08.00 am to 18.00pm</p>
-                            <p>Saturday & Sunday: <small>Closed</small></p>
+                            <p>Monday - Sunday: 9am - 5pm</p>
+                            {{-- <p>Saturday & Sunday: <small>Closed</small></p> --}}
                         </li>
                         <li>
                             <h5>Service Department:</h5>
-                            <p>Monday to Friday: 09.00 am to 15.00pm</p>
-                            <p>Saturday & Sunday: <small>Closed</small></p>
+                            <p>Monday - Sunday: 9am - 5pm</p>
+                            {{-- <p>Saturday & Sunday: <small>Closed</small></p> --}}
                         </li>
                     </ul><!-- end related -->
                 </div><!-- end widget -->
