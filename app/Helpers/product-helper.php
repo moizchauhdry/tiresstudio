@@ -1,6 +1,12 @@
 <?php
 use App\Product;
 
+function getAdmin()
+{
+    $user = Auth::guard('admin')->user();
+    return $user;
+}
+
 function getCurrency(){
     return '$ ';
 }

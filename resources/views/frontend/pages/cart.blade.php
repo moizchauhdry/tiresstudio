@@ -35,7 +35,7 @@
                                     <tr>
                                         <th><span>Product</span></th>
                                         <th><span>Quantity</span></th>
-                                        <th><span>Avalability</span></th>
+                                        {{--<th><span>Avalability</span></th>--}}
                                         <th><span>Price</span></th>
                                         <th><span>Total</span></th>
                                         <th><span>Remove</span></th>
@@ -44,7 +44,7 @@
                                     @foreach ($products as $product)
                                     <tr>
                                         <td class="flex_item clear_fix">
-                                            <img src="{{asset('storage/'.$product->product_image)}}" alt="images"
+                                            <img src="{{ imageURL($product->product_image) }}" alt="images"
                                                 class="alignleft img-responsive">
                                             <h6 class="float_left">{{getProductName($product->id)}}</h6>
                                         </td>
@@ -52,22 +52,21 @@
                                             <input type="number" name="quantity" min="0" disabled
                                                 value="{{Cart::get($product->id)->quantity}}">
                                         </td>
-                                        <td>
+                                        {{--<td>
                                             <div class="icon_holder border_round">
                                                 <i class="fa fa-check"></i>
                                             </div>
                                             <span class="item">Item(s) <br>Avilable Now</span>
-                                        </td>
-                                        <td><span>${{$product->price}}</span></td>
+                                        </td>--}}
+                                        <td><span class="item">${{$product->price}}</span></td>
                                         <td>
                                             <span class="">
                                                 ${{$product->price * Cart::get($product->id)->quantity}}
                                             </span>
                                         </td>
                                         <td>
-                                            <input type="checkbox" style="vertical-align:-2px;"
-                                                onclick="removeItemFromCart('{{$product->id}}')"> <span
-                                                style="padding-left:7px;">Remove</span>
+                                            <a class="btn btn-primary" href="javascript:void(0)" onclick="removeItemFromCart('{{$product->id}}')">Remove</a>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -138,17 +137,20 @@
 @section('scripts')
 <script>
     function removeItemFromCart(product_id) {
-        $.ajax({
-            method: "POST",
-            url: '{{route('frontend.cart.destroy')}}',
-            data: {
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                'product_id': product_id,
-            },
-            success: function (response) {
-                location.reload();
-            }
-        });
+        let result = window.confirm('Are you sure to remove item from cart?')
+        if(result){
+            $.ajax({
+                method: "POST",
+                url: '{{route('frontend.cart.destroy')}}',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    'product_id': product_id,
+                },
+                success: function (response) {
+                    location.reload();
+                }
+            });
+        }
     }
 </script>
 @endsection

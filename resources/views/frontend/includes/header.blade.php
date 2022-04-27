@@ -12,16 +12,13 @@
             </div><!-- end col -->
 
             <div class="col-md-9 col-sm-9 col-xs-12">
+
                 <div class="header-contact clearfix">
-                    <p><i class="flaticon-pin alignleft"></i> 007 Edgar Buildings,<br>George Street, CA 03, USA
-                    </p>
-                </div>
-                <div class="header-contact clearfix">
-                    <p><i class="flaticon-icon-818 alignleft"></i> Mon - Sat 9.00 - 20.00,<br>Sunday CLOSED</p>
+                    <p><i class="flaticon-icon-818 alignleft"></i> Monday to Sunday <br>9am to 5 pm</p>
                 </div><!-- end header-contact -->
 
                 <div class="header-contact clearfix">
-                    <p><i class="flaticon-technology alignleft"></i> +1 888 122 9000<br>Call us for enquiry</p>
+                    <p><i class="flaticon-technology alignleft"></i> +1 209-507-1033<br>Call us for enquiry</p>
                 </div><!-- end header-contact -->
 
                 <div class="hidden-xs header-search clearfix text-right">

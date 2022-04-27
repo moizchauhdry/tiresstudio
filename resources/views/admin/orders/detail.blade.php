@@ -190,7 +190,7 @@
                                         <div class="media">
                                             <img class="align-self-center mr-3" style="width:100px"  src="{{ imageURL($item->image_url) }}" alt="Generic placeholder image">
                                             <div class="media-body">
-                                                {{ $item->product->title }}
+                                                <a href="{{ route('products.show',$item->product->id) }}">{{ $item->product->title }}</a>
                                             </div>
                                         </div>
                                     </td>

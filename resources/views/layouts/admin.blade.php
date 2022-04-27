@@ -121,6 +121,132 @@
         })
     </script>
 
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBFaIMNIUSVzZpt_T-VeHUrZtIuldqAsaU",
+            authDomain: "tirestudio-d6f32.firebaseapp.com",
+            projectId: "tirestudio-d6f32",
+            storageBucket: "tirestudio-d6f32.appspot.com",
+            messagingSenderId: "1002512970197",
+            appId: "1:1002512970197:web:0ca2202ca85dab3689cd5c",
+            measurementId: "G-D17ZD4079H"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        function startFCM() {
+            navigator.serviceWorker.register('{{asset('firebase-messaging-sw.js')}}')
+                .then((registration) => {
+                    messaging.useServiceWorker(registration);
+                    messaging
+                        .requestPermission()
+                        .then(function () {
+                            return messaging.getToken()
+
+                        })
+                        .then(function (response) {
+                            console.log(response)
+                            $.ajax({
+                                url: '{{ route("token.store") }}',
+                                type: 'POST',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    token: response
+                                },
+                                dataType: 'JSON',
+                                success: function (response) {
+                                    console.log('Token stored.');
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                },
+                            });
+
+                        }).catch(function (error) {
+                        console.log(error);
+                    });
+
+                });
+
+        }
+        startFCM();
+        messaging.onMessage(function (payload) {
+            const title = payload.notification.title;
+            const options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon,
+            };
+            console.log(payload);
+            new Notification(title, options);
+            getNotifications();
+        });
+
+        function getNotifications() {
+            $.ajax({
+                method: "POST",
+                url: '{{route('admin.get-notifications')}}',
+                datatype:'json',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    console.log(response)
+                    $('#top-notification').html(response.htmlView);
+
+                }
+            });
+        }
+        getNotifications();
+
+        $(document).on('click','.read-notification',function () {
+            var ele = this;
+            $.ajax({
+                method: "POST",
+                url: '{{route('admin.read-notifications')}}',
+                datatype:'json',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id : this.dataset.id,
+                },
+                success: function (response) {
+                    console.log(response)
+                    if(response.status == 1)
+                    {
+                        location.href = ele.dataset.target;
+                    }
+                }
+            });
+        })
+
+        $(document).on('click','#mark-as-read',function () {
+            var ele = this;
+            $.ajax({
+                method: "POST",
+                url: '{{route('admin.read-notifications')}}',
+                datatype:'json',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    markAsRead : true,
+                },
+                success: function (response) {
+                    console.log(response)
+                    if(response.status == 1)
+                    {
+                        location.href = ele.dataset.target;
+                    }else if(response.status == 2){
+                        $('#navAdminNotifications').remove();
+                        $('#adminNotifications').remove();
+                    }
+                }
+            });
+        })
+
+
+
+    </script>
+
     @yield('scripts')
 
 </body>

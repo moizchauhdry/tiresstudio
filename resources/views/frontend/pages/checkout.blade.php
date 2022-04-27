@@ -115,7 +115,7 @@
                                             @foreach ($products as $product)
                                             <tr>
                                                 <td class="flex_item clear_fix">
-                                                    <img src="{{asset('storage/'.$product->product_image)}}"
+                                                    <img src="{{ imageURL($product->product_image) }}"
                                                         alt="images" class="alignleft img-responsive">
                                                     <h6 class="float_left">{{getProductName($product->id)}}</h6>
                                                 </td>
@@ -225,7 +225,7 @@
             },
 
             onError: function (err) {
-                alert('PAYPAL ERROR');
+                // alert('PAYPAL ERROR');
                 // For example, redirect to a specific error page
                 console.log(err)
                 // notifyBlackToast('something went wrong');

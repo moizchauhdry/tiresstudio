@@ -75,6 +75,9 @@ Route::group(['middleware' => 'prevent-back-history'], function()
             {
                 Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
                 Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+                Route::post('/store', 'NotificationController@storeToken')->name('token.store');
+                Route::any('/get-notifications', 'NotificationController@getNotifications')->name('admin.get-notifications');
+                Route::any('/read-notifications', 'NotificationController@readNotifications')->name('admin.read-notifications');
 
                 Route::group(['middleware' => ['permission:manage-admin-users']],function(){
                     Route::group(['prefix' => 'admin-users'],function(){
