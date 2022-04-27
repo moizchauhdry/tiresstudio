@@ -215,8 +215,7 @@
                             payment_data: orderData,
                         },
                         success: function (response) {
-                            alert('SUCCESS');
-                            window.location.href = response.url;
+                            notifyBlackToastWithRedirect('Payment Success',response.url)
                         }
                     });
 

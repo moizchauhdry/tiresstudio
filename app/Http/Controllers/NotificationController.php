@@ -22,7 +22,7 @@ class NotificationController extends Controller
             {
                 $notifications = $admin->unreadNotifications;
                 $response['adminNotifications'] = $notifications;
-                $html = view('admin.include._top-notifications')->with($response)->render();
+                $html = view('admin.includes._top-notifications')->with($response)->render();
                 return response()->json(['htmlView' => $html]);
             }
         }

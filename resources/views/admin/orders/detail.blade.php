@@ -111,10 +111,18 @@
 
                                             @if(isset($shipping) && !empty($shipping))
 
-                                                {{ $shipping->address->address_line_1 }}, <br>
-                                                {{ $shipping->address->address_line_2 }}, <br>
-                                                {{ $shipping->address->postal_code }}, <br>
-                                                {{ $shipping->address->country_code }}
+                                                @if(isset($shipping->address->address_line_1))
+                                                    {{ $shipping->address->address_line_1  }}, <br>
+                                                @endif
+                                                @if(isset($shipping->address->address_line_2))
+                                                    {{ $shipping->address->address_line_2  }}, <br>
+                                                @endif
+                                                @if(isset($shipping->address->postal_code))
+                                                    {{ $shipping->address->postal_code  }}, <br>
+                                                @endif
+                                                @if($shipping->address->country_code)
+                                                    {{ $shipping->address->country_code  }}
+                                                @endif
                                             @else
                                                 N\A
                                             @endif
