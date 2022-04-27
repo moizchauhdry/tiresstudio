@@ -15,14 +15,13 @@
             <div class="row clearfix">
                 <div class="col-md-12">
                     <div class="title-area pull-left">
-                        <h2>Inventory</h2>
+                        <h2>Tires</h2>
                     </div><!-- /.pull-right -->
                     <div class="pull-right hidden-xs">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Inventory</a></li>
-                                <li class="active">Shop</li>
+                                <li><a href="{{ route('frontend.pages.index') }}">Home</a></li>
+                                <li class="active">Tires</li>
                             </ol>
                         </div><!-- end bread -->
                     </div><!-- /.pull-right -->

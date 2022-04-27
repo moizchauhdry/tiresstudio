@@ -11,9 +11,9 @@
                 <div class="pull-right hidden-xs">
                     <div class="bread">
                         <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Inventory</a></li>
+                            <li><a href="{{ route('frontend.pages.index') }}">Home</a></li>
                             <li class="active">Product</li>
+
                         </ol>
                     </div><!-- end bread -->
                 </div><!-- /.pull-right -->

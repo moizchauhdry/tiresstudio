@@ -166,4 +166,6 @@ Route::group(['prefix' => 'development'],function (){
         dd('done');
 
     });
+
+    Route::get('send-notification',"DevelopmentController@notification");
 });

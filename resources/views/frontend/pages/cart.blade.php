@@ -11,8 +11,7 @@
                 <div class="pull-right hidden-xs">
                     <div class="bread">
                         <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Shop</a></li>
+                            <li><a href="{{ route('frontend.pages.index') }}">Home</a></li>
                             <li class="active">Shop Cart</li>
                         </ol>
                     </div><!-- end bread -->
@@ -137,20 +136,32 @@
 @section('scripts')
 <script>
     function removeItemFromCart(product_id) {
-        let result = window.confirm('Are you sure to remove item from cart?')
-        if(result){
-            $.ajax({
-                method: "POST",
-                url: '{{route('frontend.cart.destroy')}}',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    'product_id': product_id,
-                },
-                success: function (response) {
-                    location.reload();
+        confirmDialog
+            .fire({
+                title: "Are you sure ?",
+                text: "You want to remove item from cart",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, remove item!",
+            })
+            .then((result) => {
+                if (result == 1) {
+                    $.ajax({
+                        method: "POST",
+                        url: '{{route('frontend.cart.destroy')}}',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            'product_id': product_id,
+                        },
+                        success: function (response) {
+                            location.reload();
+                        }
+                    });
                 }
             });
-        }
+
     }
 </script>
 @endsection

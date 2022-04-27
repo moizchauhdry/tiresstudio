@@ -12,7 +12,7 @@
                 <div class="pull-right">
                     <div class="bread">
                         <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="{{ route('frontend.pages.index') }}">Home</a></li>
                             <li class="active">Contact</li>
                         </ol>
                     </div><!-- end bread -->

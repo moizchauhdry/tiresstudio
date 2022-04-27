@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Admin;
 use App\Http\Controllers\Controller;
+use App\Notifications\AdminNotification;
 use App\Services\FirebaseService;
 use Illuminate\Http\Request;
 use Auth;
@@ -116,14 +117,17 @@ class OrderController extends Controller
 
             Cart::clear();
 
-            $admins = Admin::whereNotNull('device_token')->pluck('device_token');
+            $admins = Admin::whereNotNull('device_token')->get();
             $data = [
                 'name' => $user->name . ' has Placed an Order',
                 'message' => "Order Id is ".$order->id,
-                'url' => 'javascript:void(0)'
+                'url' => \URL::route('orders.detail',$order->id)
             ];
             $firebase = new FirebaseService();
-            $firebase->notifyAdmin($data,$admins);
+            foreach ($admins as $admin){
+                $admin->notify(new AdminNotification($data));
+                $firebase->notifyAdmin($data,$admin->device_token);
+            }
 
 
             $url = \URL::route('frontend.customer.payment-success',$order->id);

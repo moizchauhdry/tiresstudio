@@ -37,7 +37,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="row">
-                            <table class="table table-bordered col-md-6">
+                            <table class="table table-bordered col-md-12">
                                 <tbody>
                                     <tr class="bg-light">
                                         <th colspan="2" class="text-center">Order Information</th>
@@ -74,84 +74,97 @@
                                         <th>Net Total</th>
                                         <td>USD {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
                                     </tr>
+
                                 </tbody>
                             </table>
                             <table class="table table-bordered col-md-6">
                                 <tbody>
+                                <section>
+                                    @php
+                                        $obj = json_decode($order->payment_data);
+                                        $shipping = $obj->purchase_units[0]->shipping ?? '';
+                                    @endphp
+                                    <tr class="bg-light">
+                                        <th colspan="2" class="text-center">Shipping Information</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Reciever Name</th>
+                                        <td>
+                                            <strong>{{ $shipping->name->full_name ?? "NIL" }}</strong>, <br>
+                                        </td>
+                                    </tr>
+                                    {{--<tr>
+                                        <th>Delivery Date</th>
+                                        <td>
+                                            {{date('M d, Y - l', strtotime($order->delivery_date))}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Delivery Time</th>
+                                        <td>
+                                            {{date('H:i:s', strtotime($order->delivery_time))}}
+                                        </td>
+                                    </tr>--}}
+                                    <tr>
+                                        <th>Shipping Address</th>
+                                        <td>
 
+                                            @if(isset($shipping) && !empty($shipping))
 
-                                    <section>
-                                        <tr class="bg-light">
-                                            <th colspan="2" class="text-center">Shipping Information</th>
-                                        </tr>
-                                        {{--<tr>
-                                            <th>Delivery Date</th>
-                                            <td>
-                                                {{date('M d, Y - l', strtotime($order->delivery_date))}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Delivery Time</th>
-                                            <td>
-                                                {{date('H:i:s', strtotime($order->delivery_time))}}
-                                            </td>
-                                        </tr>--}}
-                                        <tr>
-                                            <th>Shipping Address</th>
-                                            <td>
-                                                @php
-                                                    $obj = json_decode($order->payment_data);
-                                                    $shipping = $obj->purchase_units[0]->shipping;
-                                                @endphp
-                                                <strong>{{ $shipping->name->full_name }}</strong>, <br>
                                                 {{ $shipping->address->address_line_1 }}, <br>
                                                 {{ $shipping->address->address_line_2 }}, <br>
                                                 {{ $shipping->address->postal_code }}, <br>
                                                 {{ $shipping->address->country_code }}
-                                            </td>
-                                        </tr>
-                                        {{--<tr>
-                                            <th>Delivery Phone</th>
-                                            <td>
-                                                {{isset($order->delivery_phone) ? $order->delivery_phone : "-"}}
-                                            </td>
-                                        </tr>--}}
-                                    </section>
-
-                                    <section>
-                                        <tr class="bg-light">
-                                            <th colspan="2" class="text-center">Payment Information</th>
-                                        </tr>
-                                        <tr>
-                                            <th>Payment Method</th>
-                                            <td>
-                                                @if ($order->payment_method == 0)
+                                            @else
+                                                N\A
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    {{--<tr>
+                                        <th>Delivery Phone</th>
+                                        <td>
+                                            {{isset($order->delivery_phone) ? $order->delivery_phone : "-"}}
+                                        </td>
+                                    </tr>--}}
+                                </section>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered col-md-6">
+                                <tbody>
+                                <section>
+                                    <tr class="bg-light">
+                                        <th colspan="2" class="text-center">Payment Information</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Payment Method</th>
+                                        <td>
+                                            @if ($order->payment_method == 0)
                                                 <span class="badge badge-primary">CASH ON DELIVERY</span>
-                                                @elseif ($order->payment_method == 1)
+                                            @elseif ($order->payment_method == 1)
                                                 <span class="badge badge-primary">PAYMENT WITH CARD</span>
-                                                @else <span class="badge badge-danger">FAIL</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Payment Status</th>
-                                            <td>
-                                                @if ($order->payment_status == 0)
+                                            @else <span class="badge badge-danger">FAIL</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Payment Status</th>
+                                        <td>
+                                            @if ($order->payment_status == 0)
                                                 <span class="badge badge-warning">PENDING</span>
-                                                @elseif ($order->payment_status == 1)
+                                            @elseif ($order->payment_status == 1)
                                                 <span class="badge badge-success">COMPLETE</span>
-                                                @else
+                                            @else
                                                 <span class="badge badge-danger">FAIL</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Transaction ID</th>
-                                            <td>
-                                                {{ $obj->purchase_units[0]->payments->captures[0]->id }}
-                                            </td>
-                                        </tr>
-                                    </section>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <td>
+                                            {{ $obj->purchase_units[0]->payments->captures[0]->id ?? 'N\A'}}
+                                        </td>
+                                    </tr>
+                                </section>
                                 </tbody>
                             </table>
                         </div>
