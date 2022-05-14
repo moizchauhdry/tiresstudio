@@ -85,10 +85,9 @@
     </script>
     <script type="text/javascript" src="{{asset('frontend/revolution/revolution.extension.migration.min.js')}}">
     </script>
+
+    <!--REV SLIDER-->
     <script type="text/javascript">
-        /* ==============================================
-    REV SLIDER -->
-    =============================================== */
         var tpj=jQuery;
         var revapi4;
         tpj(document).ready(function() {
@@ -120,9 +119,8 @@
                 }
                 );
             }
-        }
-    );
-    /*ready*/
+            }
+        );
     </script>
 
     <script src="{{asset('js/errors.js')}}"></script>
@@ -136,8 +134,36 @@
         });
     </script>
 
-    {{--<script src="{{ url(mix('js/app.js')) }}" defer></script>--}}
-
+    <script>
+        $(".contact_form").on("submit", function(event){
+            event.preventDefault();
+            $('span.text-success').remove();
+            $('span.text-danger').remove();
+            $('input.is-invalid').removeClass('is-invalid');
+            var formData = new FormData(this);
+            $.ajax({
+                method: "POST",
+                data: formData,
+                url: '{{route('frontend.pages.contact')}}',
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function(){
+                    //
+                },
+                success: function (response) {
+                if (response.status == 1) {
+                    Swal.fire( response.title, response.message, response.icon );
+                    $(".contact_form")[0].reset();
+                }
+                },
+                error : function (errors) {
+                errorsGet(errors.responseJSON.errors)
+                    //
+                }
+            });
+        });
+    </script>
     @yield('scripts')
 
 </body>

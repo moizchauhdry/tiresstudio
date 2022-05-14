@@ -13,17 +13,17 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-        if(Auth::guard('customer')->check()){
+        if (Auth::guard('customer')->check()) {
             return redirect()->route('frontend.pages.index');
         }
 
         if ($request->isMethod('post') && $request->ajax()) {
 
-             $rules = [
+            $rules = [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'phone' => ['required','unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed','max:32'],
+                'phone' => ['required', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed', 'max:32'],
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -31,7 +31,7 @@ class RegisterController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'errors' => $validator->errors(),
-                ],400);
+                ], 400);
             }
 
             $data = [
@@ -68,7 +68,7 @@ class RegisterController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'errors' => $validator->errors(),
-                ],400);
+                ], 400);
             }
 
             $user = User::where('email', $request->login_email)->first();
@@ -86,7 +86,6 @@ class RegisterController extends Controller
                         'icon' => 'success',
                         'message' => 'Thankyou, Your Tiresstudio account have been login successfully.',
                     ]);
-
                 } else {
                     $errors = [
                         'login_password' => [
@@ -97,7 +96,6 @@ class RegisterController extends Controller
                         'errors' => $errors,
                     ], 400);
                 }
-
             } else {
 
                 $errors = [
@@ -110,7 +108,6 @@ class RegisterController extends Controller
                     'errors' => $errors,
                 ], 400);
             }
-
         }
     }
 }

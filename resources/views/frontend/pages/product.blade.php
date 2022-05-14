@@ -433,54 +433,30 @@
                         <div class="col-md-8">
                             <div class="search-tab lightversion clearfix">
                                 <div class="search-wrapper">
-                                    <form class="row">
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Your Name *">
-                                        </div>
-
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="email" class="form-control" placeholder="Your Email *">
-                                        </div>
-
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Phone Number *">
-                                        </div>
-
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Subject *">
-                                        </div>
-
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <textarea class="form-control" placeholder="Your Message"></textarea>
-                                        </div>
-
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <button class="btn btn-primary">SUBMIT NOW</button>
-                                        </div>
-                                    </form>
+                                    @include('frontend.includes.contact')
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 m30">
                             <div class="contact-departments contact-version clearfix">
                                 <ul class="contact-widget clearfix">
-                                    <li>
+                                    {{-- <li>
                                         <i class="fa fa-map-marker alignleft"></i>
                                         <strong>Address:</strong> Level 13, 2 Elizabeth St,
                                         <br> Melbourne, Victoria 3000 Australia
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <i class="fa fa-envelope-o alignleft"></i>
                                         <strong>Have any questions?</strong> support@SteelThemes.com
                                     </li>
                                     <li>
                                         <i class="fa fa-phone alignleft"></i>
-                                        <strong>Call us & Hire us</strong> (526) 326-985-7423
+                                        <strong>Call us</strong> 209-507-1033
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <i class="fa fa-fax alignleft"></i>
                                         <strong>Fax</strong> (526) 326-985-7423
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div><!-- end col -->
@@ -539,7 +515,7 @@
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-input">
-                                            <label>TIRE SIZE</label>
+                                            <label>TIRE DIAMETER</label>
                                             <select name="orderby" class="selectpicker">
                                                 <option>{{$product->series}}</option>
                                             </select>
@@ -548,7 +524,7 @@
 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-input">
-                                            <label>TIRE DIAMETER</label>
+                                            <label>TIRE SIZE</label>
                                             <select name="orderby" class="selectpicker">
                                                 <option>{{$product->rimDiameter}}</option>
                                             </select>
@@ -582,8 +558,8 @@
                     </div><!-- end section-title -->
                     <div class="sidebar-testimonial">
                         <div class="testimonial clearfix">
-                            <p class="lead">They have got my project on time with competition well-organized and very
-                                experienced team of professional engineers.</p>
+                            <p class="lead">They have got my order on time with competition well-organized and very
+                                experienced team of professional.</p>
                             <div class="testi-meta">
                                 <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
                                     class="img-responsive alignleft">

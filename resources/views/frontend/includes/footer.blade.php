@@ -49,7 +49,7 @@
                         {{-- <li><i class="fa fa-map-marker"></i> Rock St 12, Newyork City, USA</li> --}}
                         <li><i class="fa fa-phone"></i> 209-507-1033</li>
                         <li><i class="fa fa-envelope-o"></i> info@tiresstudio.com</li>
-                        <li><i class="fa fa-fax"></i> 209-507-1033</li>
+                        {{-- <li><i class="fa fa-fax"></i> 209-507-1033</li> --}}
                         <li><a href="#">Find Us On Map</a></li>
                     </ul>
                 </div><!-- end widget -->
@@ -63,13 +63,14 @@
 
                     <ul class="related-post clearfix">
                         <li>
-                            <a href="#">Find latest news about our new and used car for easy to choose best
+                            <a href="#">Find latest news about our wheels & tires for easy to choose best
                                 one.</a>
-                            <small><i class="fa fa-clock-o"></i> Aug 21, 2015</small>
+                            <small><i class="fa fa-clock-o"></i> Feb 21, 2022</small>
                         </li>
                         <li>
-                            <a href="#">Car kids grill the car experts, Esspeciall intoduced for childrens.</a>
-                            <small><i class="fa fa-clock-o"></i> July 17, 2015</small>
+                            <a href="#">Find latest news about our wheels & tires for easy to choose best
+                                one.</a>
+                            <small><i class="fa fa-clock-o"></i> Feb 21, 2022</small>
                         </li>
                     </ul><!-- end related -->
                 </div><!-- end widget -->

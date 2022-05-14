@@ -14,7 +14,7 @@
                 <li class="nav-item">
                     <a href="{{route('admin.dashboard')}}"
                         class="nav-link {{(Route::currentRouteName() == 'admin.dashboard') ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Dashboard
                         </p>
@@ -26,7 +26,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'admins.create' || Route::currentRouteName() == 'admins.index'|| Route::currentRouteName() == 'admins.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
                         class="nav-link {{(Route::currentRouteName() == 'admins.create' || Route::currentRouteName() == 'admins.index' || Route::currentRouteName() == 'admins.edit' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Manage Users
                             <i class="right fas fa-angle-left"></i>
@@ -84,14 +84,6 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
-                        <li class="nav-item">
-                            <a href="{{route('brands.index')}}"
-                                class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.index' ) ? 'active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>List Brands</p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href="{{route('brands.create')}}"
                                 class="nav-link {{(Route::currentRouteName() == 'brands.create' ) ? 'active' : ''}}">
@@ -99,7 +91,13 @@
                                 <p>Add Brand</p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="{{route('brands.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.index' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Brands</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

@@ -34,32 +34,32 @@
                 <div class="contact-departments contact-version clearfix">
                     <div class="contact-carousel owl-carousel owl-theme">
                         <div>
-                            <h5 class="custom-title">Sales Department</h5>
+                            <h5 class="custom-title">Support Department</h5>
                             <ul class="contact-widget clearfix">
-                                <li>
+                                {{-- <li>
                                     <i class="fa fa-map-marker alignleft"></i>
                                     <strong>Address:</strong>
                                     Level 13, 2 Elizabeth St,<br>
                                     Melbourne, Victoria 3000 Australia
-                                </li>
+                                </li> --}}
                                 <li>
                                     <i class="fa fa-envelope-o alignleft"></i>
                                     <strong>Have any questions?</strong>
-                                    support@SteelThemes.com
+                                    info@tiresstudio.com
                                 </li>
                                 <li>
                                     <i class="fa fa-phone alignleft"></i>
-                                    <strong>Call us & Hire us</strong>
-                                    (526) 326-985-7423
+                                    <strong>Call us</strong>
+                                    209-507-1033
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <i class="fa fa-fax alignleft"></i>
                                     <strong>Fax</strong>
                                     (526) 326-985-7423
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
-                        <div>
+                        {{-- <div>
                             <h5 class="custom-title">Support Department</h5>
                             <ul class="contact-widget clearfix">
                                 <li>
@@ -71,12 +71,12 @@
                                 <li>
                                     <i class="fa fa-envelope-o alignleft"></i>
                                     <strong>Have any questions?</strong>
-                                    support@SteelThemes.com
+                                    info@tiresstudio.com
                                 </li>
                                 <li>
                                     <i class="fa fa-phone alignleft"></i>
                                     <strong>Call us & Hire us</strong>
-                                    (526) 326-985-7423
+                                    209-507-1033
                                 </li>
                                 <li>
                                     <i class="fa fa-fax alignleft"></i>
@@ -84,7 +84,7 @@
                                     (526) 326-985-7423
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div><!-- end carousel -->
                     <div class="contact-version social-icons">
                         <ul class="list-inline">
@@ -92,7 +92,7 @@
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            {{-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -107,38 +107,7 @@
                 <div class="search-tab lightversion clearfix">
                     <h5 class="custom-title">I would like to discuss:</h5>
                     <div class="search-wrapper">
-                        <form class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select name="orderby" class="selectpicker">
-                                    <option>Turnaround Consulting</option>
-                                    <option>Select Dropdown 01</option>
-                                    <option>Select Dropdown 02</option>
-                                    <option>Select Dropdown 03</option>
-                                    <option>Select Dropdown 04</option>
-                                    <option>Select Dropdown 05</option>
-                                </select>
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control" placeholder="Your Name *">
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="email" class="form-control" placeholder="Your Email *">
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control" placeholder="Phone Number *">
-                            </div><!-- end col -->
-
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <textarea class="form-control" placeholder="Your Message"></textarea>
-                            </div><!-- end col -->
-
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <button class="btn btn-primary btn-block">SUBMIT NOW</button>
-                            </div><!-- end col -->
-                        </form>
+                        @include('frontend.includes.contact')
                     </div>
                 </div>
             </div><!-- end col -->
@@ -146,7 +115,7 @@
     </div><!-- end container -->
 </div><!-- end section -->
 
-<div id="map"></div>
+{{-- <div id="map"></div> --}}
 
 @endsection
 

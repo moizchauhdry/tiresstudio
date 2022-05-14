@@ -9,24 +9,25 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\VehicleModel;
 use App\Brand;
-use Auth;
+use App\Inquiry;
+use Validator;
 
 class FrontendController extends Controller
 {
     public function index()
     {
-        $response['popular_wheels'] = Product::groupBy('model')->where('boltPattern','!=','BLANK')
-        ->where('offset','!=','XX')
-        ->where('sku_type', 'Wheel')
-        ->inRandomOrder()
-        ->take(12)
-        ->get();
+        $response['popular_wheels'] = Product::groupBy('model')->where('boltPattern', '!=', 'BLANK')
+            ->where('offset', '!=', 'XX')
+            ->where('sku_type', 'Wheel')
+            ->inRandomOrder()
+            ->take(12)
+            ->get();
 
         $response['popular_tires'] = Product::groupBy('model')
-        ->where('sku_type', 'Tire')
-        ->inRandomOrder()
-        ->take(12)
-        ->get();
+            ->where('sku_type', 'Tire')
+            ->inRandomOrder()
+            ->take(12)
+            ->get();
 
         $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year', 'asc')->pluck('year')->toArray());
         rsort($response['years']);
@@ -39,10 +40,14 @@ class FrontendController extends Controller
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->inRandomOrder()->paginate(9);
+        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern', '!=', 'BLANK')->where('offset', '!=', 'XX')->whereHas('inventory', function ($q) {
+            $q->where('local_stock', '>=', 4)->whereIn('type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
+        })->inRandomOrder()->paginate(9);
         $filter = array();
         if ($request->ajax()) {
-            $products = Product::select('products.id', 'products.title', 'products.boltPattern', 'products.finishCode')->where('sku_type', 'Wheel')->where('boltPattern','!=','BLANK')->where('offset','!=','XX')->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); });
+            $products = Product::select('products.id', 'products.title', 'products.boltPattern', 'products.finishCode')->where('sku_type', 'Wheel')->where('boltPattern', '!=', 'BLANK')->where('offset', '!=', 'XX')->whereHas('inventory', function ($q) {
+                $q->where('local_stock', '>=', 4)->whereIn('type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
+            });
 
 
             if ($request->has('brand_id') && !empty($request->get('brand_id'))) {
@@ -130,25 +135,25 @@ class FrontendController extends Controller
                 dd('here');*/
 
                 $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
-                $boltPattern = $lugCnt->lugCnt .'X'.$boltPattern;
+                $boltPattern = $lugCnt->lugCnt . 'X' . $boltPattern;
 
                 $products->where('diameter', '>=', $minDiameter->minDiameterIn)
                     ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
                     ->where('offset', '>=', $offsetMinMm->offsetMinMm)
                     ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
-                    ->where('backspacing','<=',number_format($maxBs->maxBs,2))
+                    ->where('backspacing', '<=', number_format($maxBs->maxBs, 2))
                     //->where('centerbore','<=',floatval($centerBoreMm->centerBoreMm) ?? 0)
-                    ->where('boltPattern','LIKE',"%$boltPattern%");
+                    ->where('boltPattern', 'LIKE', "%$boltPattern%");
             }
 
             $response['filter'] = $filter;
             $order = $request->orderby;
-            if($order == 0){
+            if ($order == 0) {
                 $response['products'] = $products->groupBy('model')->inRandomOrder()->paginate(9);
-            }elseif($order == 1){
-                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','asc')->groupBy('model')->paginate(9);
-            }else{
-                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','desc')->groupBy('model')->paginate(9);
+            } elseif ($order == 1) {
+                $response['products'] = $products->join('brands', 'products.brand_id', '=', 'brands.id')->orderBy('brands.description', 'asc')->groupBy('model')->paginate(9);
+            } else {
+                $response['products'] = $products->join('brands', 'products.brand_id', '=', 'brands.id')->orderBy('brands.description', 'desc')->groupBy('model')->paginate(9);
             }
             $html = view('frontend.includes.products', compact('response'))->render();
 
@@ -198,17 +203,19 @@ class FrontendController extends Controller
             dd('here');*/
 
             $boltPattern = floatval($boltPatternMm->boltPatternMm) ?? 0;
-            $boltPattern = $lugCnt->lugCnt.'X'.$boltPattern;
+            $boltPattern = $lugCnt->lugCnt . 'X' . $boltPattern;
 
             $products = Product::groupBy('model')
                 ->where('diameter', '>=', $minDiameter->minDiameterIn)
                 ->where('diameter', '<=', $maxDiameter->maxDiameterIn)
                 ->where('offset', '>=', $offsetMinMm->offsetMinMm)
                 ->where('offset', '<=', $offsetMaxMm->offsetMaxMm)
-                ->where('backspacing','<=',number_format($maxBs->maxBs,2))
+                ->where('backspacing', '<=', number_format($maxBs->maxBs, 2))
                 //->where('centerbore','<=',floatval($centerBoreMm->centerBoreMm) ?? 0)
-                ->where('boltPattern','LIKE',"%$boltPattern%");
-            $response['products'] = $products->whereHas('inventory',function ($q){ $q->where('local_stock','>=',4)->whereIn('type',['BL','BW','CS','CF','DB','IT','NW','RG','ST']); })->inRandomOrder()->paginate(9);
+                ->where('boltPattern', 'LIKE', "%$boltPattern%");
+            $response['products'] = $products->whereHas('inventory', function ($q) {
+                $q->where('local_stock', '>=', 4)->whereIn('type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
+            })->inRandomOrder()->paginate(9);
         }
 
         $response['finishes'] = array_unique(Product::select('finishCode')->where('sku_type', 'Wheel')->pluck('finishCode')->toArray());
@@ -317,12 +324,12 @@ class FrontendController extends Controller
                 ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
             }
             $order = $request->orderby;
-            if($order == 0){
+            if ($order == 0) {
                 $response['products'] = $products->groupBy('model')->inRandomOrder()->paginate(9);
-            }elseif($order == 1){
-                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','asc')->groupBy('model')->paginate(9);
-            }else{
-                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','desc')->groupBy('model')->paginate(9);
+            } elseif ($order == 1) {
+                $response['products'] = $products->join('brands', 'products.brand_id', '=', 'brands.id')->orderBy('brands.description', 'asc')->groupBy('model')->paginate(9);
+            } else {
+                $response['products'] = $products->join('brands', 'products.brand_id', '=', 'brands.id')->orderBy('brands.description', 'desc')->groupBy('model')->paginate(9);
             }
 
             $response['filter'] = $filter;
@@ -364,7 +371,6 @@ class FrontendController extends Controller
             /*->where('offset','>=', $offsetMinMm->offsetMinMm)
             ->where('offset','<=', $offsetMaxMm->offsetMaxMm);*/
             $response['products'] = $products->inRandomOrder()->paginate(9);
-
         }
 
         $response['width'] = array_unique(Product::select('width')->where('sku_type', 'Tire')->whereNotNull('width')->pluck('width')->toArray());
@@ -439,12 +445,12 @@ class FrontendController extends Controller
             }*/
 
             $order = $request->orderby;
-            if($order == 0){
+            if ($order == 0) {
                 $response['products'] = $products->groupBy('model')->inRandomOrder()->paginate(9);
-            }elseif($order == 1){
-                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','asc')->groupBy('model')->paginate(9);
-            }else{
-                $response['products'] = $products->join('brands', 'products.brand_id', '=','brands.id')->orderBy('brands.description','desc')->groupBy('model')->paginate(9);
+            } elseif ($order == 1) {
+                $response['products'] = $products->join('brands', 'products.brand_id', '=', 'brands.id')->orderBy('brands.description', 'asc')->groupBy('model')->paginate(9);
+            } else {
+                $response['products'] = $products->join('brands', 'products.brand_id', '=', 'brands.id')->orderBy('brands.description', 'desc')->groupBy('model')->paginate(9);
             }
             $response['filter'] = $filter;
             $html = view('frontend.includes.products', compact('response'))->render();
@@ -523,7 +529,7 @@ class FrontendController extends Controller
     {
 
         if ($request->ajax()) {
-            $products = Product::where('brand_id', $id)->where('boltPattern','!=','BLANK')->groupBy('model');
+            $products = Product::where('brand_id', $id)->where('boltPattern', '!=', 'BLANK')->groupBy('model');
             $response['products'] = $products->paginate(9);
             $html = view('frontend.includes.products', compact('response'))->render();
 
@@ -613,8 +619,44 @@ class FrontendController extends Controller
         return view('frontend.pages.accessories', compact('response'));
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
+        if ($request->isMethod('post') && $request->ajax()) {
+
+            $rules = [
+                'subject' => ['required', 'string', 'max:100'],
+                'name' => ['required', 'string', 'max:100'],
+                'email' => ['required', 'string', 'email', 'max:100'],
+                'phone' => ['required', 'max:100'],
+                'message' => ['required', 'max:5000'],
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => $validator->errors(),
+                ], 400);
+            }
+
+            $data = [
+                'subject' => $request->subject,
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'message' => $request->message,
+            ];
+
+            Inquiry::create($data);
+
+            return response()->json([
+                'status' => 1,
+                'title' => 'Submit Successfully',
+                'icon' => 'success',
+                'message' => 'Thankyou, Your inquiry have been sent successfully. We will contact you as soon as possible',
+            ]);
+        }
+
         return view('frontend.pages.contact');
     }
 
