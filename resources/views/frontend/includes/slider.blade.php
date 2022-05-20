@@ -11,8 +11,9 @@
                         data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_01.jpg'
                         data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
                         <!-- MAIN IMAGE -->
-                        <img src="{{asset('frontend/images/banner-3.jpg')}}" alt="image" data-bgposition="center center"
+                        <img src="{{asset('frontend/images/banner-1.png')}}" alt="image" data-bgposition="center center"
                             data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg">
+                        {{--
                         <!-- LAYERS -->
                         <!-- LAYER NR. 1 -->
                         <div class="tp-caption tp-resizeme hidden-xs" data-x="['left','left','left','left']"
@@ -71,7 +72,7 @@
                             data-transform_out="auto:auto;s:1000;e:Power2.easeInOut;" data-start="2500"
                             data-splitin="none" data-splitout="none" data-responsive_offset="on">
                             <a href="#" class="btn btn-default our_service">Our Services</a>
-                        </div>
+                        </div> --}}
                     </li>
                     {{-- <li data-index='rs-376' data-transition='curtain-1' data-slotamount='default'
                         data-easein='default' data-easeout='default' data-masterspeed='default'
