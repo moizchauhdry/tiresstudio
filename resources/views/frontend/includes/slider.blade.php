@@ -11,7 +11,7 @@
                         data-easeout='default' data-masterspeed='default' data-thumb='uploads/slider_01.jpg'
                         data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description=''>
                         <!-- MAIN IMAGE -->
-                        <img src="{{asset('frontend/images/banner-1.png')}}" alt="image" data-bgposition="center center"
+                        <img src="{{asset('frontend/images/banner-2.png')}}" alt="image" data-bgposition="center center"
                             data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg">
                         {{--
                         <!-- LAYERS -->
