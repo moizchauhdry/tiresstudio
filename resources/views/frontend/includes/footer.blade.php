@@ -11,7 +11,7 @@
                     </div><!-- end widget-title -->
                     <div class="about-widget">
                         <p>It is a long established fact that a reader will be distracted by the readable.</p>
-                        <a href="#" class="readmore">Know More</a>
+                        <a href="{{route('frontend.pages.about')}}" class="readmore">Know More</a>
                     </div><!-- end about-widget -->
                 </div><!-- end widget -->
             </div><!-- end col -->
@@ -20,7 +20,7 @@
                 <div class="widget clearfix">
                     <div class="twitter-carousel owl-carousel owl-theme">
                         <div class="twitter-widget clearfix">
-                            <p><i class="flaticon-social-media alignleft"></i> <a href="#">@Designing
+                            <p><i class="flaticon-social-media alignleft"></i> <a href="javascript:void(0)">@Designing
                                     Themes</a>, Engines website expound the actual teachings sed of the great
                                 explorer seds off the truth, the master builder of human happiness of every
                                 customers satisfaction. <small>3hrs ago</small></p>
@@ -50,7 +50,7 @@
                         <li><i class="fa fa-phone"></i> 209-507-1033</li>
                         <li><i class="fa fa-envelope-o"></i> info@tiresstudio.com</li>
                         {{-- <li><i class="fa fa-fax"></i> 209-507-1033</li> --}}
-                        <li><a href="#">Find Us On Map</a></li>
+                        {{-- <li><a href="javascript:void(0)">Find Us On Map</a></li> --}}
                     </ul>
                 </div><!-- end widget -->
             </div><!-- end col -->
@@ -63,12 +63,14 @@
 
                     <ul class="related-post clearfix">
                         <li>
-                            <a href="#">Find latest news about our wheels & tires for easy to choose best
+                            <a href="javascript:void(0)">Find latest news about our wheels & tires for easy to choose
+                                best
                                 one.</a>
                             <small><i class="fa fa-clock-o"></i> Feb 21, 2022</small>
                         </li>
                         <li>
-                            <a href="#">Find latest news about our wheels & tires for easy to choose best
+                            <a href="javascript:void(0)">Find latest news about our wheels & tires for easy to choose
+                                best
                                 one.</a>
                             <small><i class="fa fa-clock-o"></i> Feb 21, 2022</small>
                         </li>
@@ -83,11 +85,11 @@
                     </div><!-- end widget-title -->
 
                     <ul class="tags list-inline">
-                        <li><a href="#">New</a></li>
-                        <li><a href="#">Used</a></li>
-                        <li><a href="#">Wheels</a></li>
-                        <li><a href="#">Tires</a></li>
-                        <li><a href="#">Tiresstudio</a></li>
+                        <li><a href="javascript:void(0)">New</a></li>
+                        <li><a href="javascript:void(0)">Used</a></li>
+                        <li><a href="javascript:void(0)">Wheels</a></li>
+                        <li><a href="javascript:void(0)">Tires</a></li>
+                        <li><a href="javascript:void(0)">Tiresstudio</a></li>
                     </ul><!-- end tags -->
                 </div><!-- end widget -->
 

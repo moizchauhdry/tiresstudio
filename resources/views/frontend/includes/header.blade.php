@@ -134,10 +134,10 @@
                     <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="social-header"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li class="social-header"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li class="social-header"><a href="#"><i class="fa fa-skype"></i></a></li>
-                    {{-- <li class="social-header"><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
+                    <li class="social-header"><a href="https://www.facebook.com/Tire-Studio-101850355652222"
+                            target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li class="social-header"><a href="https://www.instagram.com/tire_studio/" target="_blank"><i
+                                class="fa fa-instagram"></i></a></li>
                     <li class="navbar-cart"><a href="{{route('frontend.cart')}}">Cart <i
                                 class="fa fa-shopping-cart"></i>
                             <small id="cart_items_count">{{ Cart::getContent()->count() }}</small></a></li>

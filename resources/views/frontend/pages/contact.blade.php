@@ -89,10 +89,11 @@
                     <div class="contact-version social-icons">
                         <ul class="list-inline">
                             <li><strong>We Are Social:</strong></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            {{-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
+                            <li><a href="https://www.facebook.com/Tire-Studio-101850355652222" target="_blank"><i
+                                        class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/tire_studio/" target="_blank"><i
+                                        class="fa fa-instagram"></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>

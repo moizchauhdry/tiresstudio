@@ -9,6 +9,9 @@
 
     <title>{{__('Tiresstudio - Dashboard')}}</title>
 
+    <link rel="shortcut icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/x-icon">
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('admin/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->

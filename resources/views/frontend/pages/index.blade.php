@@ -34,7 +34,8 @@
                 <div class="car-wrapper clearfix">
                     <div class="post-media entry">
                         <a href="{{ route('frontend.pages.product',$wheel->id) }}"><img
-                                src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($wheel->product_image)}}" alt="" class="img-responsive"></a>
+                                src="{{ asset('images/placeholder.gif') }}"
+                                data-src="{{ imageURL($wheel->product_image)}}" alt="" class="img-responsive"></a>
                     </div><!-- end post-media -->
 
                     <div class="car-title clearfix text-center">
@@ -61,29 +62,29 @@
             <div class="col-md-3 col-sm-3 col-xs-12 wow fadeIn">
                 <div class="stat-wrap">
                     <i class="flaticon-car"></i>
-                    <p class="stat_count">2545</p>
-                    <small>New Cars For Sale</small>
-                </div><!-- end stat-wrap -->
-            </div><!-- end col -->
-            <div class="col-md-3 col-sm-3 col-xs-12 wow fadeIn">
-                <div class="stat-wrap">
-                    <i class="flaticon-profile"></i>
-                    <p class="stat_count">2545</p>
-                    <small>Satisfied Customers</small>
+                    <p class="stat_count">58840</p>
+                    <small>Wheels</small>
                 </div><!-- end stat-wrap -->
             </div><!-- end col -->
             <div class="col-md-3 col-sm-3 col-xs-12 wow fadeIn">
                 <div class="stat-wrap">
                     <i class="flaticon-vehicle"></i>
-                    <p class="stat_count">2545</p>
-                    <small>Dealer Branches</small>
+                    <p class="stat_count">2244</p>
+                    <small>Tires</small>
                 </div><!-- end stat-wrap -->
             </div><!-- end col -->
             <div class="col-md-3 col-sm-3 col-xs-12 wow fadeIn">
                 <div class="stat-wrap">
                     <i class="flaticon-signs"></i>
-                    <p class="stat_count">1008</p>
-                    <small>Certifications Hold</small>
+                    <p class="stat_count">80</p>
+                    <small>Brands</small>
+                </div><!-- end stat-wrap -->
+            </div><!-- end col -->
+            <div class="col-md-3 col-sm-3 col-xs-12 wow fadeIn">
+                <div class="stat-wrap">
+                    <i class="flaticon-profile"></i>
+                    <p class="stat_count">5000</p>
+                    <small>Customers</small>
                 </div><!-- end stat-wrap -->
             </div><!-- end col -->
         </div><!-- end row -->
@@ -113,22 +114,22 @@
 
         <div class="row">
             @foreach ($response['popular_tires'] as $tire)
-                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
 
-                    <div class="car-wrapper clearfix">
-                        <div class="post-media entry">
-                            <a href="{{ route('frontend.pages.product',$tire->id) }}"><img
-                                    src="{{ asset('images/placeholder.gif') }}" data-src="{{ imageURL($tire->product_image)}}" alt="" class="img-responsive"></a>
-                        </div><!-- end post-media -->
+                <div class="car-wrapper clearfix">
+                    <div class="post-media entry">
+                        <a href="{{ route('frontend.pages.product',$tire->id) }}"><img
+                                src="{{ asset('images/placeholder.gif') }}"
+                                data-src="{{ imageURL($tire->product_image)}}" alt="" class="img-responsive"></a>
+                    </div><!-- end post-media -->
 
-                        <div class="car-title clearfix text-center">
-                            <h4><a
-                                    href="{{ route('frontend.pages.product',$tire->id) }}">{{getProductName($tire->id)}}</a>
-                            </h4>
-                        </div><!-- end car-title -->
-                    </div><!-- end clearfix -->
+                    <div class="car-title clearfix text-center">
+                        <h4><a href="{{ route('frontend.pages.product',$tire->id) }}">{{getProductName($tire->id)}}</a>
+                        </h4>
+                    </div><!-- end car-title -->
+                </div><!-- end clearfix -->
 
-                </div>
+            </div>
             @endforeach
         </div>
 
@@ -137,15 +138,13 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 wow fadeInUp">
                 <div class="post-media">
-                    <a href="#"><img src="{{asset('frontend/uploads/banner_01.jpg')}}" alt=""
-                            class="img-responsive"></a>
+                    <a href="#"><img src="{{asset('frontend/images/banner-3.jpg')}}" alt="" class="img-responsive"></a>
                 </div><!-- end post-media -->
             </div><!-- end col -->
 
             <div class="col-md-6 col-sm-6 wow fadeInUp">
                 <div class="post-media">
-                    <a href="#"><img src="{{asset('frontend/uploads/banner_02.jpg')}}" alt=""
-                            class="img-responsive"></a>
+                    <a href="#"><img src="{{asset('frontend/images/banner-5.jpg')}}" alt="" class="img-responsive"></a>
                 </div><!-- end post-media -->
             </div><!-- end col -->
         </div><!-- end row -->
