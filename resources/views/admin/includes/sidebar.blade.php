@@ -171,98 +171,14 @@
                         </p>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{route('gallery.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
-                            Manage Inquiries
+                            Manage Gallery
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Configuration
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Banners
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Blog
-                        </p>
-                    </a>
-                </li> --}}
-                {{--<li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Surveys
-                        </p>
-                    </a>
-                </li>--}}
-                {{-- <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Complaints
-                        </p>
-                    </a>
-                </li> --}}
-                {{--<li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Appointments
-                        </p>
-                    </a>
-                </li>--}}
-                {{-- <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage CMS Pages
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Manage Reports
-                        </p>
-                    </a>
-                </li> --}}
-                {{--<li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Top customer
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>
-                            Top orders
-                        </p>
-                    </a>
-                </li>--}}
-
-
-
-
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

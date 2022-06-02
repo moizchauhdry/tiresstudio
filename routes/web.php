@@ -139,6 +139,15 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                 Route::group(['prefix' => 'import'], function () {
                     Route::any('/products', 'ImportController@importProducts')->name('import.importProducts');
                 });
+
+                Route::group(['prefix' => 'gallery'], function () {
+                    Route::get('/', 'GalleryController@index')->name('gallery.index');
+                    Route::get('/create', 'GalleryController@create')->name('gallery.create');
+                    Route::post('/store', 'GalleryController@store')->name('gallery.store');
+                    Route::get('/edit/{id}', 'GalleryController@edit')->name('gallery.edit');
+                    Route::post('/update/{id}', 'GalleryController@update')->name('gallery.update');
+                    Route::post('/destroy', 'GalleryController@destroy')->name('gallery.destroy');
+                });
             });
         });
     });

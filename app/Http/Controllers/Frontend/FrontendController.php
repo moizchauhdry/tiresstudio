@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\VehicleModel;
 use App\Brand;
+use App\Gallery;
 use App\Inquiry;
 use Validator;
 
@@ -667,8 +668,8 @@ class FrontendController extends Controller
 
     public function gallery()
     {
-        // return view('frontend.pages.gallery');
-        return view('frontend.pages.under-construction');
+        $gallery = Gallery::where('status', 1)->paginate(12);
+        return view('frontend.pages.gallery', compact('gallery'));
     }
 
     public function getMakesByYear(Request $request)
