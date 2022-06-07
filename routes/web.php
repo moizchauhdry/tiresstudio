@@ -148,6 +148,15 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                     Route::post('/update/{id}', 'GalleryController@update')->name('gallery.update');
                     Route::post('/destroy', 'GalleryController@destroy')->name('gallery.destroy');
                 });
+
+                Route::group(['prefix' => 'pages'], function () {
+                    Route::get('/', 'PageController@index')->name('pages.index');
+                    Route::get('/create', 'PageController@create')->name('pages.create');
+                    Route::post('/store', 'PageController@store')->name('pages.store');
+                    Route::get('/edit/{id}', 'PageController@edit')->name('pages.edit');
+                    Route::post('/update/{id}', 'PageController@update')->name('pages.update');
+                    Route::post('/destroy', 'PageController@destroy')->name('pages.destroy');
+                });
             });
         });
     });

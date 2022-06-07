@@ -18,8 +18,8 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        $adminUsers= Admin::where('id','!=',Auth::guard('admin')->user()->id)->where('id','!=','1')->get();
-        return view('admin.adminusers.index',compact('adminUsers'));
+        $adminUsers = Admin::where('id', '!=', Auth::guard('admin')->user()->id)->where('id', '!=', '1')->get();
+        return view('admin.adminusers.index', compact('adminUsers'));
     }
 
     /**
@@ -30,7 +30,7 @@ class AdminUserController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view ('admin.adminusers.create',compact('permissions'));
+        return view('admin.adminusers.create', compact('permissions'));
     }
 
     /**
@@ -44,7 +44,7 @@ class AdminUserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:50',
             'email' => 'required|string|email|max:50|unique:admins',
-            'phone' => 'required|numeric|digits_between:10,15',
+            'phone' => 'required|string',
             'password' => 'required|string|min:6|confirmed|max:32',
             'permissions' => 'required',
         ]);
@@ -57,7 +57,7 @@ class AdminUserController extends Controller
         ];
 
         $adminUser = Admin::create($adminUserData);
-        
+
         if ($request->has('permissions')) {
             $permissions = Permission::whereIn('id', $request->permissions)->get();
             $adminUser->permissions()->attach($permissions);
@@ -90,7 +90,7 @@ class AdminUserController extends Controller
             return redirect()->back()->with('error', 'No Record Found.');
         }
         $permissions = Permission::all();
-        return view('admin.adminusers.edit',compact('admin','permissions'));
+        return view('admin.adminusers.edit', compact('admin', 'permissions'));
     }
 
     /**
@@ -109,7 +109,7 @@ class AdminUserController extends Controller
 
         $rules = [
             'name' => 'required|string|max:150',
-            'email' => 'required|email|unique:admins,email,'.$admin->id,
+            'email' => 'required|email|unique:admins,email,' . $admin->id,
             'phone' => 'required',
             'permissions' => 'required|array'
         ];
@@ -117,7 +117,7 @@ class AdminUserController extends Controller
         if (!empty($request->password) || !empty($request->password_confirmation)) {
             $rules['password'] = 'required|string|min:6|max:32|confirmed';
         }
-       
+
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
