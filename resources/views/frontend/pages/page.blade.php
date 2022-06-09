@@ -31,7 +31,9 @@
                         <h4>{{$page->title}}</h4>
                         <hr class="custom">
                     </div>
-                    {!!$page->description!!}
+                    <div style="color: black !important">
+                        {!!$page->description!!}
+                    </div>
                 </div>
             </div>
         </div>
