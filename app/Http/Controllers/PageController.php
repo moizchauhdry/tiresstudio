@@ -41,11 +41,11 @@ class PageController extends Controller
         $admin = Auth::guard('admin')->user();
 
         $data = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'required|string|max:5000',
-            'meta_title' => 'string|max:100',
-            'meta_description' => 'max:5000',
-            'meta_keywords' => 'max:5000',
+            'title' => 'required|max:100',
+            'description' => 'required|max:5000',
+            'meta_title' => 'nullable|max:100',
+            'meta_description' => 'nullable|max:5000',
+            'meta_keywords' => 'nullable|max:5000',
             'status' => 'required|in:0,1',
         ]);
 
@@ -96,11 +96,11 @@ class PageController extends Controller
         $page = Page::findOrFail($id);
 
         $data = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'required|string|max:5000',
-            'meta_title' => 'string|max:100',
-            'meta_description' => 'max:5000',
-            'meta_keywords' => 'max:5000',
+            'title' => 'required|max:100',
+            'description' => 'required|max:5000',
+            'meta_title' => 'nullable|max:100',
+            'meta_description' => 'nullable|max:5000',
+            'meta_keywords' => 'nullable|max:5000',
             'status' => 'required|in:0,1',
         ]);
 
