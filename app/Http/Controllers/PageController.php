@@ -42,7 +42,7 @@ class PageController extends Controller
 
         $data = $request->validate([
             'title' => 'required|max:100',
-            'description' => 'required|max:5000',
+            'description' => 'required',
             'meta_title' => 'nullable|max:100',
             'meta_description' => 'nullable|max:5000',
             'meta_keywords' => 'nullable|max:5000',
@@ -97,7 +97,7 @@ class PageController extends Controller
 
         $data = $request->validate([
             'title' => 'required|max:100',
-            'description' => 'required|max:5000',
+            'description' => 'required',
             'meta_title' => 'nullable|max:100',
             'meta_description' => 'nullable|max:5000',
             'meta_keywords' => 'nullable|max:5000',
