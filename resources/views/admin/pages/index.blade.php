@@ -40,9 +40,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Page Title</th>
-                                    <th>Page Description</th>
                                     <th>Status</th>
-                                    <th>Added By</th>
+                                    <th>Author</th>
                                     <th class="no-sort">Action</th>
                                 </tr>
                             </thead>
@@ -51,7 +50,6 @@
                                 <tr>
                                     <td>{{$page->id}}</td>
                                     <td>{{$page->title}}</td>
-                                    <td>{{$page->description}}</td>
                                     <td>
                                         @if ($page->status == 1)
                                         <span class="badge badge-success">Active</span>
@@ -66,17 +64,17 @@
                                         Updated at: {{$page->created_at}} <br>
                                     </td>
                                     <td>
-                                        <a href="{{ route('pages.edit', $page->id) }}" class="btn btn-sm btn-primary">
+                                        <a href="{{ route('pages.edit', $page->id) }}" class="btn btn-xs btn-primary">
                                             <i class="fa fa-edit" aria-hidden="true"></i> Edit
                                         </a>
 
-                                        <a @if ($page->creater->role != 'SUPER-ADMIN')
+                                        {{-- <a @if ($page->creater->role != 'SUPER-ADMIN')
                                             href="javascript:void(0);" onclick="deletePage('{{$page->id}}');"
                                             class="btn btn-sm btn-danger"
                                             @else class="btn btn-sm btn-danger disabled"
                                             @endif >
                                             <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                                        </a>
+                                        </a> --}}
                                     </td>
 
                                 </tr>

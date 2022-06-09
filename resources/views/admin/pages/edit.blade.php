@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('styles')
+<link rel="stylesheet" href="{{URL::asset('admin/plugins/summernote/summernote-bs4.css')}}">
+@endsection
+
 @section('content')
 
 <!-- Content Header (Page header) -->
@@ -37,29 +41,32 @@
                         <div class="card-body">
                             <div class="row">
 
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <label>Page Title <span class="required-star">*</span></label>
                                     <input type="text" name="title" id="title" class="form-control"
                                         value="{{$page->title}}">
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <label>Meta Title <span class="required-star">*</span></label>
+
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <label>Page Description <span class="required-star">*</span></label>
+                                    <textarea type="text" name="description" id="description"
+                                        class="form-control text-area" rows="10">{{$page->description}}</textarea>
+                                </div>
+
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <label>Meta Title </label>
                                     <input type="text" name="meta_title" id="meta_title" class="form-control"
                                         value="{{$page->meta_title}}">
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <label>Page Description <span class="required-star">*</span></label>
-                                    <textarea type="text" name="description" id="description" class="form-control"
-                                        rows="10">{{$page->description}}</textarea>
-                                </div>
 
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <label>Meta Description <span class="required-star">*</span></label>
+                                    <label>Meta Description </label>
                                     <textarea type="text" name="meta_description" id="meta_description"
                                         class="form-control" rows="10">{{$page->meta_description}}</textarea>
                                 </div>
+
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <label>Meta Keywords <span class="required-star">*</span> <small>(Keywords must be
+                                    <label>Meta Keywords <small>(Keywords must be
                                             comma seprated e.g: wheels, tires, accessories)</small></label>
                                     <textarea type="text" name="meta_keywords" id="meta_keywords" class="form-control"
                                         rows="10">{{$page->meta_keywords}}</textarea>
@@ -102,7 +109,20 @@
 
 
 @section('scripts')
+
+<!-- Summernote -->
+<script src="{{URL::asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script>
-    //
+    $(function () {
+    // Summernote
+    $('.text-area').summernote(
+        {
+        placeholder: 'Page Description',
+        tabsize: 2,
+        height: 500
+        }
+    )
+  })
 </script>
+
 @endsection

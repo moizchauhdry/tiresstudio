@@ -149,8 +149,11 @@
             <div class="col-md-6 col-sm-6 col-xs-12 text-right">
                 <ul class="list-inline">
                     <li><a href="{{route('frontend.pages.index')}}">Home</a></li>
-                    <li><a href="{{route('frontend.pages.about')}}">About</a></li>
-                    <li><a href="{{route('frontend.pages.about')}}">Policies</a></li>
+                    {{-- <li><a href="{{route('frontend.pages.about')}}">About</a></li> --}}
+                    @foreach ($pages as $page)
+                    <li><a href="{{route('frontend.pages.page', $page->id)}}">{{$page->title}}</a></li>
+                    @endforeach
+                    <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>
                     <li><a href="{{route('frontend.pages.wheels')}}">Wheels</a></li>
                     <li><a href="{{route('frontend.pages.tires')}}">Tires</a></li>
                     <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>

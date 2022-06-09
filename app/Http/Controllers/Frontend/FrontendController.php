@@ -11,6 +11,7 @@ use App\VehicleModel;
 use App\Brand;
 use App\Gallery;
 use App\Inquiry;
+use App\Page;
 use Validator;
 
 class FrontendController extends Controller
@@ -659,6 +660,12 @@ class FrontendController extends Controller
         }
 
         return view('frontend.pages.contact');
+    }
+
+    public function page($id)
+    {
+        $page = Page::find($id);
+        return view('frontend.pages.page', compact('page'));
     }
 
     public function about()

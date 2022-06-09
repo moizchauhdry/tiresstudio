@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use App\Brand;
+use App\Page;
 use DB;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,9 +29,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        if(Schema::hasTable('brands')){
+        if (Schema::hasTable('brands')) {
             $brands = Brand::select('*')->groupBy('parent')->get();
             View::share(['brands' => $brands]);
+        }
+        if (Schema::hasTable('pages')) {
+            $pages = Page::orderBy('title', 'asc')->get();
+            View::share(['pages' => $pages]);
         }
     }
 }

@@ -125,10 +125,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">About <span class="fa fa-angle-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('frontend.pages.about')}}">About Tiresstudio</a></li>
-                            <li><a href="{{route('frontend.pages.about')}}">News & Blogs</a></li>
+                            {{-- <li><a href="{{route('frontend.pages.about')}}">About Tiresstudio</a></li>
+                            <li><a href="{{route('frontend.pages.about')}}">News & Blogs</a></li> --}}
                             {{-- <li><a href="#">Warranty</a></li>
                             <li><a href="#">FAQ's</a></li> --}}
+                            @foreach ($pages as $page)
+                            <li><a href="{{route('frontend.pages.page', $page->id)}}">{{$page->title}}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>

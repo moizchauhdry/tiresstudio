@@ -43,9 +43,9 @@ class PageController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:100',
             'description' => 'required|string|max:5000',
-            'meta_title' => 'required|string|max:100',
-            'meta_description' => 'required|max:5000',
-            'meta_keywords' => 'required|max:5000',
+            'meta_title' => 'string|max:100',
+            'meta_description' => 'max:5000',
+            'meta_keywords' => 'max:5000',
             'status' => 'required|in:0,1',
         ]);
 
@@ -98,9 +98,9 @@ class PageController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:100',
             'description' => 'required|string|max:5000',
-            'meta_title' => 'required|string|max:100',
-            'meta_description' => 'required|max:5000',
-            'meta_keywords' => 'required|max:5000',
+            'meta_title' => 'string|max:100',
+            'meta_description' => 'max:5000',
+            'meta_keywords' => 'max:5000',
             'status' => 'required|in:0,1',
         ]);
 

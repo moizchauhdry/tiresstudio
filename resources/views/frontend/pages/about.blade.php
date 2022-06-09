@@ -2,29 +2,25 @@
 
 @section('content')
 
-<!-- ******************************************
-        PAGE TITLE
-        ********************************************** -->
-
 <div class="section page-title">
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="title-area pull-left">
                     <h2>About Us</h2>
-                </div><!-- /.pull-right -->
+                </div>
                 <div class="pull-right">
                     <div class="bread">
                         <ol class="breadcrumb">
                             <li><a href="#">Home</a></li>
                             <li class="active">About Us</li>
                         </ol>
-                    </div><!-- end bread -->
-                </div><!-- /.pull-right -->
-            </div><!-- end col -->
-        </div><!-- end page-title -->
-    </div><!-- end container -->
-</div><!-- end section -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ******************************************
         PAGE WRAPPER

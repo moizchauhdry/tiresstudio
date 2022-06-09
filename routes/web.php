@@ -16,6 +16,7 @@ Route::get('/product/{id}', 'Frontend\FrontendController@product')->name('fronte
 Route::any('/brands', 'Frontend\FrontendController@brand')->name('frontend.pages.brands');
 Route::any('/brands/{id}', 'Frontend\FrontendController@brandProducts')->name('frontend.pages.brand-products');
 Route::any('/shop', 'Frontend\FrontendController@shop')->name('frontend.pages.shop');
+Route::any('/page/{id}', 'Frontend\FrontendController@page')->name('frontend.pages.page');
 
 
 Route::prefix('cart')->group(function () {
