@@ -32,13 +32,13 @@ Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pa
 
 Route::any('/register', 'Frontend\RegisterController@register')->name('frontend.pages.register');
 Route::any('/login', 'Frontend\RegisterController@login')->name('frontend.pages.login');
+Route::get('/checkout', 'Frontend\OrderController@checkout')->name('frontend.pages.checkout');
+Route::post('/order', 'Frontend\OrderController@order')->name('frontend.customer.order');
 
 Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
     Route::get('/dashboard', 'Frontend\CustomerController@dashboard')->name('frontend.customer.dashboard');
     Route::any('/profile', 'Frontend\CustomerController@profile')->name('frontend.customer.profile');
     Route::post('/logout', 'Frontend\CustomerController@logout')->name('frontend.customer.logout');
-    Route::get('/checkout', 'Frontend\OrderController@checkout')->name('frontend.pages.checkout');
-    Route::post('/order', 'Frontend\OrderController@order')->name('frontend.customer.order');
     Route::get('/payment-success/{id}', 'Frontend\OrderController@paymentSuccess')->name('frontend.customer.payment-success');
 });
 

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone'
+        'name', 'email', 'password', 'phone'
     ];
 
     /**
@@ -40,11 +40,16 @@ class User extends Authenticatable
 
     public function billing()
     {
-        return $this->hasOne(Address::class)->where('type','BILLING');
+        return $this->hasOne(Address::class)->where('type', 'BILLING');
     }
 
     public function shipping()
     {
-        return $this->hasOne(Address::class)->where('type','SHIPPING');
+        return $this->hasOne(Address::class)->where('type', 'SHIPPING');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

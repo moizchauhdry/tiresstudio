@@ -229,6 +229,17 @@
   font-size: 1.6rem;
 }
 
+.swal2-popup.swal2-modal.swal2-icon-warning.swal2-show {
+  font-size: 1.6rem;
+}
+
+.swal2-popup.swal2-modal.swal2-icon-error.swal2-show {
+  font-size: 1.6rem;
+}
+
 /* .rev_slider_wrapper { height: 100vh !important; background: #fff; }
 .rev_slider { height: 100vh !important; }
 .rev_slider_wrapper .tp-bgimg.defaultimg { background-size: 92% !important; } */
+
+/* .rev_slider_wrapper { height: 100vh !important; }
+.rev_slider { height: 100vh !important;} */
