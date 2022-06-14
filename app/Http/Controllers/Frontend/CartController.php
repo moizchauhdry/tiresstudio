@@ -13,14 +13,15 @@ class CartController extends Controller
     {
         if ($request->isMethod('post') && $request->ajax()) {
 
-            $product = Product::where('id',$request->product_id)->first();
+            $product = Product::where('id', $request->product_id)->first();
             $cart = Cart::add(
                 array(
                     'id' => $product->id,
                     'name' => $product->title,
                     'quantity' => 1,
                     'price' => $product->price,
-                ));
+                )
+            );
 
             $count = Cart::getContent()->count();
 
@@ -32,10 +33,11 @@ class CartController extends Controller
             $products[] = Product::where('id', $cart->id)->first();
         }
 
-        return view('frontend.pages.cart',compact('products'));
+        return view('frontend.pages.cart', compact('products'));
     }
 
-    public function increment(Request $request) {
+    public function increment(Request $request)
+    {
 
         $id = $request->product_id;
         $cart = Cart::update($id, array('quantity' => 1));
@@ -43,15 +45,16 @@ class CartController extends Controller
         return $quantity;
     }
 
-    public function decrement(Request $request) {
+    public function decrement(Request $request)
+    {
         $id = $request->product_id;
         Cart::update($id, array('quantity' => -1));
         $quantity = Cart::get($id)->quantity;
         return $quantity;
     }
 
-    public function destroy(Request $request) {
-        $id = $request->product_id;
-        Cart::remove($id);
+    public function destroy(Request $request)
+    {
+        Cart::remove($request->product_id);
     }
 }

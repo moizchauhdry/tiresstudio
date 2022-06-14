@@ -64,7 +64,8 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" href="javascript:void(0)" onclick="removeItemFromCart('{{$product->id}}')">Remove</a>
+                                            <a class="btn btn-primary" href="javascript:void(0)"
+                                                onclick="removeItemFromCart('{{$product->id}}')">Remove</a>
 
                                         </td>
                                     </tr>
@@ -147,7 +148,7 @@
                 confirmButtonText: "Yes, remove item!",
             })
             .then((result) => {
-                if (result == 1) {
+                if (result.value == true) {
                     $.ajax({
                         method: "POST",
                         url: '{{route('frontend.cart.destroy')}}',
