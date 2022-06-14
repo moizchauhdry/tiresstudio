@@ -7,11 +7,11 @@
             <div class="col-md-4 col-sm-12">
                 <div class="widget clearfix">
                     <div class="widget-title">
-                        <h4>About Tiresstudio</h4>
+                        <h4>About Tire Studio</h4>
                     </div><!-- end widget-title -->
                     <div class="about-widget">
                         <p>It is a long established fact that a reader will be distracted by the readable.</p>
-                        <a href="{{route('frontend.pages.about')}}" class="readmore">Know More</a>
+                        <a href="{{route('frontend.pages.about')}}" class="readmore">Learn More</a>
                     </div><!-- end about-widget -->
                 </div><!-- end widget -->
             </div><!-- end col -->
@@ -20,16 +20,18 @@
                 <div class="widget clearfix">
                     <div class="twitter-carousel owl-carousel owl-theme">
                         <div class="twitter-widget clearfix">
-                            <p><i class="flaticon-social-media alignleft"></i> <a href="javascript:void(0)">@Designing
-                                    Themes</a>, Engines website expound the actual teachings sed of the great
-                                explorer seds off the truth, the master builder of human happiness of every
-                                customers satisfaction. <small>3hrs ago</small></p>
+                            <p><i class="flaticon-social-media alignleft"></i> <a href="javascript:void(0)">@John
+                                    Bravo</a>, Second time using Tire Studio and have been pleased with the available
+                                selection and customer service. Items are shipped
+                                on time. Will continue using Tire Studio for my needs.</p>
                         </div><!-- end testimonial -->
 
                         <div class="twitter-widget clearfix">
-                            <p>They have got my project on time with the competition with a highly skilled,
-                                well-organized and experienced team of professional team mates how all this
-                                mistaken idea of and praising a complete account of the system.</p>
+                            <p>A friend told me about Tire Studio. I decided to get all four of my tires replaced and
+                                wanted a new brand of tires this
+                                year. Tire Studio was knowledgeable and very professional. They made it easy to find
+                                which tires were best for my car
+                                and budget. Now they have a new and loyal customer!</p>
                         </div><!-- end testimonial -->
                     </div><!-- end carousel -->
                 </div><!-- end widget -->
@@ -42,7 +44,7 @@
             <div class="col-md-3 col-sm-12">
                 <div class="widget clearfix">
                     <div class="widget-title">
-                        <h4>Get In Contact</h4>
+                        <h4>Contact</h4>
                     </div><!-- end widget-title -->
 
                     <ul class="contact-widget clearfix">
@@ -81,14 +83,14 @@
             <div class="col-md-3 col-sm-12">
                 <div class="widget clearfix">
                     <div class="widget-title">
-                        <h4>Usefull Tags</h4>
+                        <h4>Useful Tags</h4>
                     </div><!-- end widget-title -->
 
                     <ul class="tags list-inline">
-                        <li><a href="javascript:void(0)">New</a></li>
-                        <li><a href="javascript:void(0)">Used</a></li>
+                        <li><a href="javascript:void(0)">Wheels</a></li>
                         <li><a href="javascript:void(0)">Wheels</a></li>
                         <li><a href="javascript:void(0)">Tires</a></li>
+                        <li><a href="javascript:void(0)">Accessories</a></li>
                         <li><a href="javascript:void(0)">Tiresstudio</a></li>
                     </ul><!-- end tags -->
                 </div><!-- end widget -->
@@ -114,18 +116,18 @@
             <div class="col-md-3 col-sm-12">
                 <div class="widget clearfix">
                     <div class="widget-title">
-                        <h4>Working Hours</h4>
+                        <h4>Operating Hours</h4>
                     </div><!-- end widget-title -->
 
                     <ul class="related-post working-hours clearfix">
                         <li>
-                            <h5>Sales Department:</h5>
-                            <p>Monday - Sunday: 9am - 5pm</p>
+                            <h5>Sales Department</h5>
+                            <p>Open Daily: 9am - 5pm</p>
                             {{-- <p>Saturday & Sunday: <small>Closed</small></p> --}}
                         </li>
                         <li>
-                            <h5>Service Department:</h5>
-                            <p>Monday - Sunday: 9am - 5pm</p>
+                            <h5>Service Department</h5>
+                            <p>Open Daily: 9am - 5pm</p>
                             {{-- <p>Saturday & Sunday: <small>Closed</small></p> --}}
                         </li>
                     </ul><!-- end related -->

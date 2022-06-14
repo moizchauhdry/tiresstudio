@@ -10,6 +10,11 @@
     .check_out_form form input {
         margin-bottom: 5px;
     }
+
+    .cart_table .table-1 tbody tr td.flex_item h6 {
+        font-size: 14px;
+        padding: 20px 0 0 27px;
+    }
 </style>
 @endsection
 @section('content')
@@ -124,10 +129,9 @@
                                         <thead>
                                             <tr>
                                                 <th><span>Product</span></th>
-                                                <th style="padding-left:0"><span>Quantity</span></th>
-                                                <th><span style="margin-left: 9px;">Total</span></th>
+                                                <th><span>Total</span></th>
                                             </tr>
-                                        </thead> <!-- /thead -->
+                                        </thead>
                                         <tbody>
 
                                             @foreach ($products as $product)
@@ -135,11 +139,16 @@
                                                 <td class="flex_item clear_fix">
                                                     <img src="{{ imageURL($product->product_image) }}" alt="images"
                                                         class="alignleft img-responsive">
-                                                    <h6 class="float_left">{{getProductName($product->id)}}</h6>
+                                                    <h6 class="float_left">
+                                                        <a href="{{route('frontend.pages.product', $product->id)}}">
+                                                            {{getProductName($product->id)}}</a> <br>
+                                                    </h6>
+                                                    <h5><b>Quantity:</b> x {{Cart::get($product->id)->quantity}} <br>
+                                                        <b>Price:</b> {{$product->price}} $
+                                                    </h5>
                                                 </td>
-                                                <td><input type="number" name="quantity" min="0" disabled
-                                                        value="{{Cart::get($product->id)->quantity}}"></td>
-                                                <td><span>${{$product->price}}</span></td>
+                                                <td><span>${{$product->price *
+                                                        Cart::get($product->id)->quantity}}</span></td>
                                             </tr>
                                             @endforeach
 
@@ -181,70 +190,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="cart_table">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <div class="table-responsive">
-                                    <table class="table table-1">
-                                        <thead>
-                                            <tr>
-                                                <th><span>Product</span></th>
-                                                <th style="padding-left:0"><span>Quantity</span></th>
-                                                <th><span style="margin-left: 9px;">Total</span></th>
-                                            </tr>
-                                        </thead> <!-- /thead -->
-                                        <tbody>
-
-                                            @foreach ($products as $product)
-                                            <tr>
-                                                <td class="flex_item clear_fix">
-                                                    <img src="{{ imageURL($product->product_image) }}" alt="images"
-                                                        class="alignleft img-responsive">
-                                                    <h6 class="float_left">{{getProductName($product->id)}}</h6>
-                                                </td>
-                                                <td><input type="number" name="quantity" min="0" disabled
-                                                        value="{{Cart::get($product->id)->quantity}}"></td>
-                                                <td><span>${{$product->price}}</span></td>
-                                            </tr>
-                                            @endforeach
-
-                                        </tbody> <!-- /tbody -->
-                                    </table>
-                                </div> <!-- /table-responsive -->
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <h3>Checkout & Cart Totals</h3>
-                                <div class="table-responsive">
-                                    <table class="table table-2">
-                                        <tbody>
-                                            <tr>
-                                                <td><span>Cart Subtotal</span></td>
-                                                <td><span>${{ number_format((float)Cart::getSubTotal(), 2, '.',
-                                                        '')}}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><span>Shipping and Handling</span></td>
-                                                <td><span>Free Shipping</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span>Order Total</span></td>
-                                                <td><span>${{ number_format((float)Cart::getTotal(), 2, '.',
-                                                        '')}}</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- /table-responsive -->
-                                <div class="payment_system">
-                                    <div class="pay1">
-                                        <div id="paypal-button-container"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </form>
             </div>
         </div>

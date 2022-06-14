@@ -126,7 +126,7 @@ class OrderController extends Controller
 
             return response()->json([
                 'status' => 1,
-                'title' => 'Order Placed!',
+                'title' => 'Payment Confirmation!',
                 'icon' => 'warning',
                 'message' => 'Thankyou, Your order have been placed successfully. Please note that we still await your payment to complete the process',
                 'url' => $url,

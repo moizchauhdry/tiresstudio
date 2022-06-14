@@ -14,11 +14,11 @@
             <div class="col-md-9 col-sm-9 col-xs-12">
 
                 <div class="header-contact clearfix">
-                    <p><i class="flaticon-icon-818 alignleft"></i> Monday to Sunday <br>9am to 5pm</p>
+                    <p><i class="flaticon-icon-818 alignleft"></i> Open Daily <br>9am - 5pm</p>
                 </div><!-- end header-contact -->
 
                 <div class="header-contact clearfix">
-                    <p><i class="flaticon-technology alignleft"></i> 209-507-1033<br>Call us for enquiry</p>
+                    <p><i class="flaticon-technology alignleft"></i> 209-507-1033<br>Questions?</p>
                 </div><!-- end header-contact -->
 
                 <div class="hidden-xs header-search clearfix text-right">
