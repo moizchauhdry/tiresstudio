@@ -37,6 +37,42 @@
                                 <h5>Dashboard</h5>
                                 <hr class="custom">
                             </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="blog-wrapper">
+                                    <div class="post-media entry text-center">
+                                        <h4 class="text-primary">Total Orders</h1>
+                                            <h1 class="text-dark">
+                                                {{Auth::guard('customer')->user()->orders->count() ?? 0}}
+                                            </h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="blog-wrapper">
+                                    <div class="post-media entry text-center">
+                                        <h4 class="text-primary">Pending Orders</h1>
+                                            <h1 class="text-dark">
+                                                {{Auth::guard('customer')->user()->orders
+                                                ->where('order_status', 0)->count() ?? 0}}
+                                            </h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="blog-wrapper">
+                                    <div class="post-media entry text-center">
+                                        <h4 class="text-primary">Completed Orders</h1>
+                                            <h1 class="text-dark">
+                                                {{Auth::guard('customer')->user()->orders
+                                                ->where('order_status', 3)->count() ?? 0}}
+                                            </h1>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

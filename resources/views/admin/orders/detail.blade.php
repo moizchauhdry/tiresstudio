@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Order Detail</h1>
+                <h1>Manage Orders</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -29,33 +29,23 @@
             <div class="col-12">
                 <div class="card col-md-12">
                     <div>
-                        <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary btn-sm float-right mt-3 mr-4" data-toggle="modal"
                             data-target="#editOrderDetailModal"> <i class="far fa-edit" aria-hidden="true"></i> Edit
                         </button>
                     </div>
-                    <!-- /.card-header -->
                     <div class="card-body">
                         <div class="row">
-                            <table class="table table-bordered col-md-12">
+                            <table class="table table-bordered col-md-6">
                                 <tbody>
                                     <tr class="bg-light">
-                                        <th colspan="2" class="text-center">Order Information</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <td>{{str_pad($order->id, 3, '0', STR_PAD_LEFT)}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Order Date</th>
-                                        <td>
-                                            {{date('M d, Y - l', strtotime($order->created_at))}}
-                                        </td>
+                                        <th colspan="2" class="text-center text-lg">Order #{{str_pad($order->id, 3, '0',
+                                            STR_PAD_LEFT)}}</th>
                                     </tr>
                                     <tr>
                                         <th>Order Time</th>
                                         <td>
-                                            {{date('H:i:s', strtotime($order->created_at))}}
+                                            {{date('M d, Y - l', strtotime($order->created_at))}} | {{date('H:i:s A',
+                                            strtotime($order->created_at))}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -74,159 +64,131 @@
                                         <th>Net Total</th>
                                         <td>USD {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
                                     </tr>
-
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered col-md-6">
-                                <tbody>
-                                <section>
-                                    @php
-                                        $obj = json_decode($order->payment_data);
-                                        $shipping = $obj->purchase_units[0]->shipping ?? '';
-                                    @endphp
-                                    <tr class="bg-light">
-                                        <th colspan="2" class="text-center">Shipping Information</th>
-                                    </tr>
                                     <tr>
-                                        <th>Reciever Name</th>
-                                        <td>
-                                            <strong>{{ $shipping->name->full_name ?? "NIL" }}</strong>, <br>
-                                        </td>
-                                    </tr>
-                                    {{--<tr>
-                                        <th>Delivery Date</th>
-                                        <td>
-                                            {{date('M d, Y - l', strtotime($order->delivery_date))}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Delivery Time</th>
-                                        <td>
-                                            {{date('H:i:s', strtotime($order->delivery_time))}}
-                                        </td>
-                                    </tr>--}}
-                                    <tr>
-                                        <th>Shipping Address</th>
-                                        <td>
-
-                                            @if(isset($shipping) && !empty($shipping))
-
-                                                @if(isset($shipping->address->address_line_1))
-                                                    {{ $shipping->address->address_line_1  }}, <br>
-                                                @endif
-                                                @if(isset($shipping->address->address_line_2))
-                                                    {{ $shipping->address->address_line_2  }}, <br>
-                                                @endif
-                                                @if(isset($shipping->address->postal_code))
-                                                    {{ $shipping->address->postal_code  }}, <br>
-                                                @endif
-                                                @if($shipping->address->country_code)
-                                                    {{ $shipping->address->country_code  }}
-                                                @endif
-                                            @else
-                                                N\A
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    {{--<tr>
-                                        <th>Delivery Phone</th>
-                                        <td>
-                                            {{isset($order->delivery_phone) ? $order->delivery_phone : "-"}}
-                                        </td>
-                                    </tr>--}}
-                                </section>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered col-md-6">
-                                <tbody>
-                                <section>
-                                    <tr class="bg-light">
-                                        <th colspan="2" class="text-center">Payment Information</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Payment Method</th>
+                                        <th>Payment</th>
                                         <td>
                                             @if ($order->payment_method == 0)
-                                                <span class="badge badge-primary">CASH ON DELIVERY</span>
+                                            <span class="badge badge-primary">CASH ON DELIVERY</span>
                                             @elseif ($order->payment_method == 1)
-                                                <span class="badge badge-primary">PAYMENT WITH CARD</span>
+                                            <span class="badge badge-primary">PAYMENT WITH CARD</span>
                                             @else <span class="badge badge-danger">FAIL</span>
                                             @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Payment Status</th>
-                                        <td>
+
                                             @if ($order->payment_status == 0)
-                                                <span class="badge badge-warning">PENDING</span>
+                                            <span class="badge badge-warning">PENDING</span>
                                             @elseif ($order->payment_status == 1)
-                                                <span class="badge badge-success">COMPLETE</span>
+                                            <span class="badge badge-success">COMPLETE</span>
                                             @else
-                                                <span class="badge badge-danger">FAIL</span>
+                                            <span class="badge badge-danger">FAIL</span>
                                             @endif
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Transaction ID</th>
                                         <td>
-                                            {{ $obj->purchase_units[0]->payments->captures[0]->id ?? 'N\A'}}
+                                            {{ $obj->purchase_units[0]->payments->captures[0]->id ?? '-'}}
                                         </td>
                                     </tr>
-                                </section>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered col-md-6">
+                                <tbody>
+                                    <section>
+                                        @php
+                                        $obj = json_decode($order->payment_data);
+                                        $shipping = $obj->purchase_units[0]->shipping ?? '';
+                                        @endphp
+                                        <tr class="bg-light">
+                                            <th colspan="2" class="text-center text-lg">Customer Information</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Name</th>
+                                            <td>
+                                                <strong>{{ $order->user->shipping->name ?? "-" }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping Address</th>
+                                            <td>
+
+                                                @if(isset($order->user->shipping) && !empty($order->user->shipping))
+
+                                                @if(isset($order->user->shipping->address_1))
+                                                {{ $order->user->shipping->address_1 }}, <br>
+                                                @endif
+
+                                                @if(isset($order->user->shipping->address_2))
+                                                {{ $order->user->shipping->address_2 }}, <br>
+                                                @endif
+
+                                                @if(isset($order->user->shipping->city))
+                                                {{ $order->user->shipping->city }}, <br>
+                                                @endif
+
+                                                @if(isset($order->user->shipping->postal_code))
+                                                {{ $order->user->shipping->postal_code }}, <br>
+                                                @endif
+
+                                                @if(isset($order->user->shipping->country))
+                                                {{ $order->user->shipping->country }}, <br>
+                                                @endif
+
+                                                @if(isset($order->user->shipping->email))
+                                                {{ $order->user->shipping->email }}, <br>
+                                                @endif
+
+                                                @if(isset($order->user->shipping->phone))
+                                                {{ $order->user->shipping->phone }}<br>
+                                                @endif
+
+
+                                                @else
+                                                N\A
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </section>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered col-md-6">
+                                <thead>
+                                    <tr class="bg-light text-center text-lg">
+                                        <th colspan="5">Order Items : {{$orderProductsCount}}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Sr #</th>
+                                        <th>Title</th>
+                                        <th>Item Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php $count=1; @endphp
+                                    @foreach($orderItems as $item)
+                                    <tr>
+                                        <td>{{ $count++ }}</td>
+                                        <td>
+                                            <div class="media">
+                                                <img class="align-self-center mr-3" style="width:100px"
+                                                    src="{{ imageURL($item->image_url) }}"
+                                                    alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <a href="{{ route('products.show',$item->product->id) }}">{{
+                                                        $item->product->title }}</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td> USD {{$item->product->price}} </td>
+                                        <td> x {{$item->quantity}}</td>
+                                        <td>USD {{$item->product->price * $item->quantity}}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-
-
-
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            Total Order Items : {{$orderProductsCount}}
-                        </h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Sr #</th>
-                                    <th>Title</th>
-{{--                                    <th>Category</th>--}}
-                                    <th>Item Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $count=1; @endphp
-                                @foreach($orderItems as $item)
-                                <tr>
-                                    <td>{{ $count++ }}</td>
-                                    <td>
-                                        <div class="media">
-                                            <img class="align-self-center mr-3" style="width:100px"  src="{{ imageURL($item->image_url) }}" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <a href="{{ route('products.show',$item->product->id) }}">{{ $item->product->title }}</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    {{-- <td>{{ $item->product->category->title }}</td> --}}
-                                    <td> USD {{$item->product->price}} </td>
-                                    <td> x {{$item->quantity}}</td>
-                                    <td>USD {{$item->product->price * $item->quantity}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
             </div>
             <!-- /.col -->
         </div>
