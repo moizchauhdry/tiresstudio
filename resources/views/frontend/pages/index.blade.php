@@ -164,9 +164,7 @@
                     </div><!-- end col -->
                     <div class="col-md-10">
                         <h3>Looking For Buy a Wheel?</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem expedita consequuntur
-                            asperiores. Eveniet, magni delectus enim est nihil mollitia! Libero dignissimos impedit
-                            autem et id, ipsum quam! </p>
+                        <p>Choose from over 50,000 wheels to customize the look of your vehicle.</p>
 
                         <a href="{{route('frontend.pages.wheels')}}" class="btn btn-default">BUY A WHEEL</a>
                     </div><!-- end col -->
@@ -180,9 +178,7 @@
                     </div><!-- end col -->
                     <div class="col-md-10">
                         <h3>Looking For Buy a Tire?</h3>
-                        <p>Now is a good time to buy a car, Engines provide you new and used car in good
-                            conditions, after full car checkup only we deleiverd your car to you with fully
-                            completed documentations. </p>
+                        <p>Choose from over 2,000 tires to create the look you want and the traction you need.</p>
 
                         <a href="{{route('frontend.pages.tires')}}" class="btn btn-default">BUY A TIRE</a>
                     </div><!-- end col -->
@@ -195,11 +191,9 @@
                         <i class="flaticon-two"></i>
                     </div><!-- end col -->
                     <div class="col-md-10">
-                        <h3>Lorem ipsum dolor sit amet.</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque recusandae veritatis cum
-                            nobis maxime ad accusantium, libero iste ex officiis nisi officia reiciendis quidem quo quam
-                            adipisci sed voluptatibus omnis! </p>
-                        <a href="#" class="btn btn-default">KNOW MORE</a>
+                        <h3>Looking for Accessories?</h3>
+                        <p>Choose from over 14,000 accessories to maximize the look of your vehicle.</p>
+                        <a href="{{route('frontend.pages.accessories')}}" class="btn btn-default">BUY ACCESSORIES</a>
                     </div><!-- end col -->
                 </div><!-- end messahe box -->
             </div><!-- emd col -->
@@ -225,30 +219,32 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="service-box clearfix">
                     <i class="flaticon-people alignleft"></i>
-                    <h4>Auto Loan Facility</h4>
-                    <small>Easy Finance</small>
-                    <p>How all this mistakens idea off ut denouncing pleasures and praisings ut pain was born
-                        and will give you a completed by account.</p>
+                    <h4>Selection</h4>
+                    {{-- <small>Easy Finance</small> --}}
+                    <p>Tire Studio offers over 70,000 products from a multitude of brands for you to choose from making
+                        us a “one stop shop”
+                        for your tire, wheel, and accessory needs.</p>
                 </div><!-- end service-box -->
             </div><!-- end col -->
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="service-box clearfix">
                     <i class="flaticon-tool alignleft"></i>
-                    <h4>Free Documentation</h4>
-                    <small>No Hidden Charges</small>
-                    <p>Denouncing pleasures and ut praisings pains was born work will gives you a completed uts
-                        seds account human happiness.</p>
+                    <h4>Pricing</h4>
+                    {{-- <small>No Hidden Charges</small> --}}
+                    <p>Our prices are competitive and fair. There are no surprise costs or fees. That’s how we would
+                        like to be treated, and
+                        that is how we will treat you.</p>
                 </div><!-- end service-box -->
             </div><!-- end col -->
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="service-box clearfix">
                     <i class="flaticon-interface alignleft"></i>
-                    <h4>Cutomer Support</h4>
-                    <small>24/7 Online Support</small>
-                    <p>Idea of denouncing pleasure ut and praisings pain was born and ut will give you a
-                        complete account of the system and expound.</p>
+                    <h4>Shipping</h4>
+                    {{-- <small>24/7 Online Support</small> --}}
+                    <p>We offer free shipping within the 48 contiguous United States and will package and handle your
+                        items with care.</p>
                 </div><!-- end service-box -->
             </div><!-- end col -->
         </div><!-- end row -->
@@ -269,11 +265,12 @@
                         <hr class="custom">
                     </div><!-- end section-title -->
 
-                    <p>How all this mistaken idea of denouncing pleasure and praising pain was born and I will
-                        give you a complete account of the system, and expound the ut actual of the great
-                        explorer of the truth.</p>
+                    <p>Tire Studio exists today because of you, the customer. Whether you are an enthusiast or simply
+                        need new tires, Tire
+                        Studio is here for you. Here are what some of our customers have to say about the experience
+                        that Tire Studio provides.</p>
 
-                    <a href="#" class="readmore">Know More</a>
+                    {{-- <a href="#" class="readmore">Know More</a> --}}
 
                 </div><!-- end about-widget -->
             </div><!-- end col -->
@@ -281,13 +278,15 @@
             <div class="col-md-8 col-sm-12">
                 <div class="testi-carousel owl-carousel owl-theme">
                     <div class="testimonial clearfix">
-                        <p class="lead">They have got my project on time with the competition with a highly
-                            skilled, well-organized and experienced team of professional team mates how all this
-                            mistaken idea of and praising a complete account of the system.</p>
+                        <p class="lead">A friend told me about Tire Studio. I decided to get all four of my tires
+                            replaced and wanted a new brand of tires this
+                            year. Tire Studio was knowledgeable and very professional. They made it easy to find which
+                            tires were best for my car
+                            and budget. Now they have a new and loyal customer!</p>
                         <div class="testi-meta">
                             <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
                                 class="img-responsive alignleft">
-                            <h4>James Fernando <small>- Manager of Racer</small></h4>
+                            <h4>James Fernando <small></small></h4>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -299,13 +298,16 @@
                     </div><!-- end testimonial -->
 
                     <div class="testimonial clearfix">
-                        <p class="lead">They have got my project on time with the competition with a highly
-                            skilled, well-organized and experienced team of professional team mates how all this
-                            mistaken idea of and praising a complete account of the system.</p>
+                        <p class="lead">Wow, Tire Studio delivered my tire and wheel sets practically overnight! From
+                            the time I ordered my items online to the
+                            expected delivery date, the tires were delivered two days ahead of the scheduled delivery
+                            date! Because of Tire Studio’s
+                            exceptional service I was able to get back on the road earlier than expected. Thank you Tire
+                            Studio!</p>
                         <div class="testi-meta">
                             <img src="{{asset('frontend/uploads/testi_01.png')}}" alt=""
                                 class="img-responsive alignleft">
-                            <h4>James Fernando <small>- Manager of Racer</small></h4>
+                            <h4>James Fernando <small></small></h4>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
