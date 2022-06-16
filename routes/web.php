@@ -32,7 +32,7 @@ Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('frontend.pa
 
 Route::any('/register', 'Frontend\RegisterController@register')->name('frontend.pages.register');
 Route::any('/login', 'Frontend\RegisterController@login')->name('frontend.pages.login');
-Route::get('/checkout', 'Frontend\OrderController@checkout')->name('frontend.pages.checkout');
+Route::any('/checkout', 'Frontend\OrderController@checkout')->name('frontend.pages.checkout');
 Route::post('/order', 'Frontend\OrderController@order')->name('frontend.customer.order');
 
 Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {

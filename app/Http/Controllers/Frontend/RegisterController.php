@@ -80,8 +80,15 @@ class RegisterController extends Controller
 
                     Auth::guard('customer')->login($user);
 
+                    if (empty($request->session()->get('redirect_url'))) {
+                        $request->session()->put('redirect_url', route('frontend.pages.index'));
+                    }
+
+                    $redirect_url = $request->session()->get('redirect_url');
+
                     return response()->json([
                         'status' => true,
+                        'redirect_url' => $redirect_url,
                         'title' => 'Login Successfully',
                         'icon' => 'success',
                         'message' => 'Thankyou, Your Tiresstudio account have been login successfully.',

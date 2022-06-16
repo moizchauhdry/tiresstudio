@@ -181,8 +181,8 @@
                                     </table>
                                 </div>
                                 <div class="payment_system">
-                                    <button class="btn btn-block btn-success btn-lg" type="submit"
-                                        id="order_btn">Continue For Payment</button>
+                                    <button class="btn btn-block btn-default" type="submit" id="order_btn">Proceed to
+                                        Payment</button>
                                     <div class="pay1 hidden">
                                         <div id="paypal-button-container"></div>
                                     </div>

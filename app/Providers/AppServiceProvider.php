@@ -35,7 +35,11 @@ class AppServiceProvider extends ServiceProvider
         }
         if (Schema::hasTable('pages')) {
             $pages = Page::orderBy('title', 'asc')->get();
-            View::share(['pages' => $pages]);
+            $about = Page::orderBy('title', 'asc')->where('id', '7')->first();
+            View::share([
+                'pages' => $pages,
+                'about' => $about,
+            ]);
         }
     }
 }

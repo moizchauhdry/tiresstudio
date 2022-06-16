@@ -20,6 +20,19 @@
     .cart .shop_cart_table .table-1 tr td {
         padding-top: 89px;
     }
+
+    .cart .shop_cart_table button {
+        padding: 10px 14px;
+    }
+
+    .modal-header {
+        padding: 8px;
+        border-bottom: none;
+    }
+
+    .modal-content {
+        border-radius: 1px;
+    }
 </style>
 @endsection
 
@@ -29,7 +42,7 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="title-area pull-left">
-                    <h2>Shop Cart</h2>
+                    <h2>Shopping Cart</h2>
                 </div><!-- /.pull-right -->
                 <div class="pull-right hidden-xs">
                     <div class="bread">
@@ -85,7 +98,36 @@
                     </div>
 
                     <div class="row shipping_address">
+                        @if (!Auth::guard('customer')->check())
+                        <button type="button" class="btn btn-default" data-toggle="modal"
+                            data-target="#checkout_confirmation">
+                            Proceed to Checkout
+                        </button>
+                        <div class="modal fade" id="checkout_confirmation" tabindex="-1"
+                            aria-labelledby="checkout_confirmation_label" aria-hidden="true" style="top: 20%;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <button type="button" class="btn btn-block" id="signin_btn"
+                                            onclick="confirmation('signin')"
+                                            style="background: #e73d30 !important; color:white">Continue to sign
+                                            in</button>
+                                        <button type="button" class="btn btn-block" id="guest_btn"
+                                            onclick="confirmation('guest')">Continue as
+                                            guest</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @else
                         <a href="{{route('frontend.pages.checkout')}}" class="btn btn-default">Proceed to Checkout</a>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -133,7 +175,27 @@
                     });
                 }
             });
+    }
 
+    function confirmation(checkout_as){
+        if (checkout_as == 'signin') {
+            $("#signin_btn").attr("disabled", "disabled");
+        }
+        if (checkout_as == 'guest') {
+            $("#guest_btn").attr("disabled", "disabled");
+        }
+
+        $.ajax({
+            method: "POST",
+            url: '{{route('frontend.pages.checkout')}}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                'checkout_as': checkout_as,
+            },
+            success: function (response) {
+               location.href = response.url;
+            }
+        });
     }
 </script>
 @endsection

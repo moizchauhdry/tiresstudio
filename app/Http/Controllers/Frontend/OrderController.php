@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Notifications\AdminNotification;
 use App\Services\FirebaseService;
 use Illuminate\Http\Request;
-use Auth;
 use Validator;
 use App\Product;
 use App\Address;
@@ -17,10 +16,11 @@ use App\User;
 use Carbon\Carbon;
 use Cart;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class OrderController extends Controller
 {
-    public function checkout()
+    public function checkout(Request $request)
     {
         $user = Auth::guard('customer')->user();
 
@@ -29,6 +29,31 @@ class OrderController extends Controller
             $products[] = Product::where('id', $cart->id)->first();
         }
 
+        if ($request->isMethod('post') && $request->ajax()) {
+            $checkout_as = $request->checkout_as;
+
+            if ($checkout_as == 'signin') {
+
+                $request->session()->forget('redirect_url');
+                if (empty($request->session()->get('redirect_url'))) {
+                    $request->session()->put('redirect_url', route('frontend.pages.checkout'));
+                }
+
+                return response()->json([
+                    'status' => true, 'message' => 'success', 'url' => route('frontend.pages.register')
+                ]);
+            } else if ($checkout_as == 'guest') {
+                return response()->json([
+                    'status' => true, 'message' => 'success', 'url' => route('frontend.pages.checkout')
+                ]);
+            } else {
+                return response()->json([
+                    'status' => true, 'message' => 'success', 'url' => route('frontend.pages.cart')
+                ]);
+            }
+        }
+
+        $request->session()->forget('redirect_url');
         return view('frontend.pages.checkout', compact('user', 'products'));
     }
 

@@ -208,7 +208,7 @@
                     // $("#login_form")[0].reset();
                     $("#login_btn").removeClass('hidden');
                     $("#login_loading_btn").addClass('hidden');
-                    window.location.href = '{{url()->previous()}}';
+                    window.location.href = response.redirect_url;
                 }
             },
             error : function (errors) {
