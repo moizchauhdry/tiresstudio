@@ -128,7 +128,7 @@ class OrderController extends Controller
                 'status' => 1,
                 'title' => 'Payment Confirmation!',
                 'icon' => 'warning',
-                'message' => 'Thankyou, Your order have been placed successfully. Please note that we still await your payment to complete the process',
+                'message' => 'Please note that we still await your payment to complete the process',
                 'url' => $url,
             ]);
         }
