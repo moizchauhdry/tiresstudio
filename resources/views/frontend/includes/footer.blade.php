@@ -10,8 +10,10 @@
                         <h4>About Tire Studio</h4>
                     </div><!-- end widget-title -->
                     <div class="about-widget">
-                        <p>It is a long established fact that a reader will be distracted by the readable.</p>
-                        <a href="{{route('frontend.pages.about')}}" class="readmore">Learn More</a>
+                        <p>Tire Store was created by car enthusiasts for car enthusiasts with a goal of providing a
+                            single destination for
+                            customers to easily locate all items pertaining to their wheel and tire needs.</p>
+                        {{-- <a href="{{route('frontend.pages.about')}}" class="readmore">Learn More</a> --}}
                     </div><!-- end about-widget -->
                 </div><!-- end widget -->
             </div><!-- end col -->
@@ -155,7 +157,6 @@
                     @foreach ($pages as $page)
                     <li><a href="{{route('frontend.pages.page', $page->id)}}">{{$page->title}}</a></li>
                     @endforeach
-                    <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>
                     <li><a href="{{route('frontend.pages.wheels')}}">Wheels</a></li>
                     <li><a href="{{route('frontend.pages.tires')}}">Tires</a></li>
                     <li><a href="{{route('frontend.pages.contact')}}">Contact</a></li>

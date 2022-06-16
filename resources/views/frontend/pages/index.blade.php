@@ -163,7 +163,7 @@
                         <i class="flaticon-transport"></i>
                     </div><!-- end col -->
                     <div class="col-md-10">
-                        <h3>Looking For Buy a Wheel?</h3>
+                        <h3>Looking to Buy a Wheel?</h3>
                         <p>Choose from over 50,000 wheels to customize the look of your vehicle.</p>
 
                         <a href="{{route('frontend.pages.wheels')}}" class="btn btn-default">BUY A WHEEL</a>
@@ -177,7 +177,7 @@
                         <i class="flaticon-vehicle"></i>
                     </div><!-- end col -->
                     <div class="col-md-10">
-                        <h3>Looking For Buy a Tire?</h3>
+                        <h3>Looking to Buy a Tire?</h3>
                         <p>Choose from over 2,000 tires to create the look you want and the traction you need.</p>
 
                         <a href="{{route('frontend.pages.tires')}}" class="btn btn-default">BUY A TIRE</a>

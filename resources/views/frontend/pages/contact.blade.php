@@ -101,7 +101,7 @@
 
             <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="section-title clearfix">
-                    <h5>Send Message Us</h5>
+                    <h5>Send Us a Message</h5>
                     <hr class="custom">
                 </div><!-- end section-title -->
 
