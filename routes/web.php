@@ -35,7 +35,7 @@ Route::any('/login', 'Frontend\RegisterController@login')->name('frontend.pages.
 Route::any('/checkout', 'Frontend\OrderController@checkout')->name('frontend.pages.checkout');
 Route::post('/order', 'Frontend\OrderController@order')->name('frontend.customer.order');
 Route::post('/payment', 'Frontend\OrderController@payment')->name('frontend.customer.payment');
-Route::get('/payment-success/{id?}', 'Frontend\OrderController@paymentSuccess')->name('frontend.customer.payment-success');
+Route::get('/payment-success', 'Frontend\OrderController@paymentSuccess')->name('frontend.customer.payment-success');
 
 Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
     Route::get('/dashboard', 'Frontend\CustomerController@dashboard')->name('frontend.customer.dashboard');

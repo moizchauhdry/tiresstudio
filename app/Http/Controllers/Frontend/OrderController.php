@@ -115,18 +115,12 @@ class OrderController extends Controller
                 $request->session()->put('address', $address);
             }
 
-            $grossTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
-            $netTotal = number_format((float)Cart::getTotal(), 2, '.', '');
-
             $order_data = [
                 'user_id' => $user->id ?? 0,
                 'tracking_id' => random_int(100000, 999999) + strtotime(Carbon::now()),
-                'gross_total' => $grossTotal,
-                'net_total' => $netTotal,
+                'gross_total' => getCart()['sub_total'],
+                'net_total' => getCart()['total'],
                 'order_notes' => $request->order_notes,
-                'payment_method' => 1,
-                'payment_data' => json_encode($request->payment_data),
-                'payment_status' => false,
             ];
 
             $request->session()->forget('order');
@@ -143,8 +137,11 @@ class OrderController extends Controller
         }
     }
 
-    public function payment()
+    public function payment(Request $request)
     {
+        $request->session()->forget('payment');
+        $request->session()->put('payment', json_encode($request->payment_data));
+
         $url = route('frontend.customer.payment-success');
 
         return response()->json([
@@ -154,7 +151,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function paymentSuccess($id = null)
+    public function paymentSuccess()
     {
         if (Auth::guard('customer')->check()) {
             $address = Address::where('user_id', Auth::guard('customer')->user()->id)->first();
@@ -168,7 +165,10 @@ class OrderController extends Controller
 
         $order->update([
             'address_id' => $address->id,
+            'address_id' => $address->id,
             'payment_status' => true,
+            'payment_method' => 1,
+            'payment_data' => FacadesSession::get('payment'),
         ]);
 
         foreach (Cart::getContent() as $item) {

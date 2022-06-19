@@ -167,18 +167,20 @@
                                         <tbody>
                                             <tr>
                                                 <td><span>Cart Subtotal</span></td>
-                                                <td><span>${{ number_format((float)Cart::getSubTotal(), 2, '.',
-                                                        '')}}</span>
+                                                <td><span>${{ getCart()['sub_total']}}</span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><span>Shipping and Handling</span></td>
-                                                <td><span>Free Shipping</span></td>
+                                                <td><span>Shipping Charges</span></td>
+                                                <td><span>Free</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Paypal Charges</span></td>
+                                                <td><span>${{ getCart()['paypal_charges']}}</span></td>
                                             </tr>
                                             <tr>
                                                 <td><span>Order Total</span></td>
-                                                <td><span>${{ number_format((float)Cart::getTotal(), 2, '.',
-                                                        '')}}</span>
+                                                <td><span>${{ getCart()['total']}}</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -259,7 +261,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: {{ number_format((float)Cart::getTotal(), 2, '.','')}} // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+                            value:'{{getCart()['total']}}'
                         }
                     }]
                 });
