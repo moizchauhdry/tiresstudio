@@ -15,6 +15,10 @@
         font-size: 14px;
         padding: 20px 0 0 27px;
     }
+
+    /* #shipToBillingAddress {
+        display: none !important;
+    } */
 </style>
 @endsection
 @section('content')
@@ -54,34 +58,34 @@
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                 <span>Name *</span>
                                 <input type="text" name="shipping_name"
-                                    value="{{isset($user->name) ? $user->name: ''}}">
+                                    value="{{isset($address->name) ? $address->name: (isset($user->name) ? $user->name : '')}}">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <span>Address</span>
                                 <input type="text" name="shipping_address_1"
-                                    value="{{isset($user->shipping->address_1) ? $user->shipping->address_1: ''}}">
+                                    value="{{isset($address->address_1) ? $address->address_1: ''}}">
                                 <input type="text" name="shipping_address_2"
-                                    value="{{isset($user->shipping->address_2) ? $user->shipping->address_2: ''}}">
+                                    value="{{isset($address->address_2) ? $address->address_2: ''}}">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <span>Country *</span>
                                 <input type="text" name="shipping_country"
-                                    value="{{isset($user->shipping->country) ? $user->shipping->country: ''}}">
+                                    value="{{isset($address->country) ? $address->country: ''}}">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <span>Town / City *</span>
                                 <input type="text" name="shipping_city"
-                                    value="{{isset($user->shipping->city) ? $user->shipping->city: ''}}">
+                                    value="{{isset($address->city) ? $address->city: ''}}">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <span>Phone *</span>
                                 <input type="text" name="shipping_phone"
-                                    value="{{isset($user->phone) ? $user->phone: ''}}">
+                                    value="{{isset($address->phone) ? $address->phone: (isset($user->phone) ? $user->phone : '')}}">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <span>Email *</span>
                                 <input type="email" name="shipping_email"
-                                    value="{{isset($user->email) ? $user->email: ''}}">
+                                    value="{{isset($address->email) ? $address->email: (isset($user->email) ? $user->email : '')}}">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <span>Order Notes</span>
@@ -218,6 +222,7 @@
         success: function (response) {
             if (response.status == 1) {
                 Swal.fire(response.title, response.message, response.icon);
+                // location.href= response.url
                 // $("#checkout_form")[0].reset();
                 $("input").attr("disabled", "disabled");
                 $("textarea").attr("disabled", "disabled");
@@ -234,8 +239,11 @@
     });
 </script>
 
+{{-- <script
+    src="https://www.paypal.com/sdk/js?client-id=AZKXMPfJscqaryDzTCEnfpzP7CUT6rXYvS6EdQiX2FkCcSodMhqjYBmgBZvJLbRLonXetJ4BQClbYsJM&currency=USD"
+    data-sdk-integration-source="button-factory"></script> --}}
 <script
-    src="https://www.paypal.com/sdk/js?client-id=AZKXMPfJscqaryDzTCEnfpzP7CUT6rXYvS6EdQiX2FkCcSodMhqjYBmgBZvJLbRLonXetJ4BQClbYsJM&enable-funding=venmo&currency=USD"
+    src="https://www.paypal.com/sdk/js?client-id=AVbBpNs3ZM08GKZ_0Z27t1w0yeLD8ZUW4gWPjWiml0mXPW_6h5UmDKL_qCB-omMY0BlX5JyE35XVk2ix&currency=USD"
     data-sdk-integration-source="button-factory"></script>
 
 <script>
@@ -273,12 +281,14 @@
 
                     $.ajax({
                         method: "POST",
-                        url: '{{route('frontend.customer.order')}}',
+                        url: '{{route('frontend.customer.payment')}}',
                         data: {
                             _token: $('meta[name="csrf-token"]').attr('content'),
                             payment_data: orderData,
                         },
                         success: function (response) {
+                            // alert('payment - success');
+                            // console.log(response);
                             notifyBlackToastWithRedirect('Payment Success',response.url)
                         }
                     });

@@ -10,19 +10,25 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Product;
 use App\Address;
+use App\Mail\InvoiceMail;
 use App\Order;
 use App\OrderItem;
-use App\User;
 use Carbon\Carbon;
 use Cart;
-use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session as FacadesSession;
 
 class OrderController extends Controller
 {
     public function checkout(Request $request)
     {
         $user = Auth::guard('customer')->user();
+        if (Auth::guard('customer')->check()) {
+            $address = Address::where('user_id', $user->id)->first();
+        } else {
+            $address = $request->session()->get('address');
+        }
 
         $products = [];
         foreach (Cart::getContent() as $key => $cart) {
@@ -54,13 +60,14 @@ class OrderController extends Controller
         }
 
         $request->session()->forget('redirect_url');
-        return view('frontend.pages.checkout', compact('user', 'products'));
+        return view('frontend.pages.checkout', compact('user', 'products', 'address'));
     }
 
     public function order(Request $request)
     {
         if ($request->isMethod('post') && $request->ajax()) {
 
+            $user = Auth::guard('customer')->user();
 
             $rules = [
                 'shipping_name' => ['required', 'string', 'max:255'],
@@ -81,38 +88,38 @@ class OrderController extends Controller
                 ], 400);
             }
 
-            if (!Auth::guard('customer')->user()) {
-                $user = User::create([
-                    'name' => $request->shipping_name,
-                    'email' => $request->shipping_email,
-                    'phone' => $request->shipping_phone,
-                    'password' => Hash::make('guest_user_password'),
-                ]);
-            } else {
-                $user = Auth::guard('customer')->user();
-            }
-
-            Address::where('user_id', $user->id)->where('type', 'SHIPPING')->first();
-
             $shipping_data = [
-                'user_id' => $user->id,
+                'user_id' => $user->id ?? 0,
                 'type' => 'SHIPPING',
                 'name' => $request->shipping_name,
                 'country' => $request->shipping_country,
                 'city' => $request->shipping_city,
                 'address_1' => $request->shipping_address_1,
                 'address_2' => $request->shipping_address_2,
-                'email' => $user->email,
-                'phone' => $user->phone,
+                'email' => $request->shipping_email,
+                'phone' => $request->shipping_phone,
             ];
 
-            Address::updateOrCreate(['user_id' => $user->id], $shipping_data);
+            if (Auth::guard('customer')->check()) {
+                $request->session()->forget('address');
+                $address = Address::where('user_id', $user->id)->where('type', 'SHIPPING')->first();
+                if ($address == NULL) {
+                    Address::create($shipping_data);
+                } else {
+                    $address->update($shipping_data);
+                }
+            } else {
+                $request->session()->forget('address');
+                $address = new Address();
+                $address->fill($shipping_data);
+                $request->session()->put('address', $address);
+            }
 
             $grossTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
             $netTotal = number_format((float)Cart::getTotal(), 2, '.', '');
 
-            $orderData = [
-                'user_id' => $user->id,
+            $order_data = [
+                'user_id' => $user->id ?? 0,
                 'tracking_id' => random_int(100000, 999999) + strtotime(Carbon::now()),
                 'gross_total' => $grossTotal,
                 'net_total' => $netTotal,
@@ -122,21 +129,62 @@ class OrderController extends Controller
                 'payment_status' => false,
             ];
 
-            $order = Order::updateOrCreate($orderData);
+            $request->session()->forget('order');
+            $order = new Order();
+            $order->fill($order_data);
+            $request->session()->put('order', $order);
 
-            foreach (Cart::getContent() as $item) {
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $item->id,
-                    'quantity' => $item->quantity,
-                ]);
-            }
+            return response()->json([
+                'status' => 1,
+                'title' => 'Payment Confirmation!',
+                'icon' => 'warning',
+                'message' => 'Please note that we still await your payment to complete the process',
+            ]);
+        }
+    }
 
-            // Cart::clear();
+    public function payment()
+    {
+        $url = route('frontend.customer.payment-success');
 
+        return response()->json([
+            'status' => 1,
+            'message' => 'success',
+            'url' => $url,
+        ]);
+    }
+
+    public function paymentSuccess($id = null)
+    {
+        if (Auth::guard('customer')->check()) {
+            $address = Address::where('user_id', Auth::guard('customer')->user()->id)->first();
+        } else {
+            $address = FacadesSession::get('address');
+            $address->save();
+        }
+
+        $order = FacadesSession::get('order');
+        $order->save();
+
+        $order->update([
+            'address_id' => $address->id,
+            'payment_status' => true,
+        ]);
+
+        foreach (Cart::getContent() as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item->id,
+                'quantity' => $item->quantity,
+            ]);
+        }
+
+        Cart::clear();
+
+        try {
             $admins = Admin::whereNotNull('device_token')->get();
             $data = [
-                'name' => $user->name . ' has Placed an Order',
+                'name' => $address->name . ' has Placed an Order',
                 'message' => "Order Id is " . $order->id,
                 'url' => \URL::route('orders.detail', $order->id)
             ];
@@ -146,22 +194,11 @@ class OrderController extends Controller
                 $firebase->notifyAdmin($data, $admin->device_token);
             }
 
-
-            $url = \URL::route('frontend.customer.payment-success', $order->id);
-
-            return response()->json([
-                'status' => 1,
-                'title' => 'Payment Confirmation!',
-                'icon' => 'warning',
-                'message' => 'Please note that we still await your payment to complete the process',
-                'url' => $url,
-            ]);
+            Mail::to($address->email)->send(new InvoiceMail(['order' => $order, 'address' => $address]));
+        } catch (\Throwable $th) {
+            //throw $th;
         }
-    }
 
-    public function paymentSuccess($id)
-    {
-        $order = Order::find($id);
         return view('frontend.pages.payment-success', compact('order'));
     }
 }

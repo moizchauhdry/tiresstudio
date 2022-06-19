@@ -46,7 +46,7 @@
                                     <th>Net Total</th>
                                     <th>Payment Method</th>
                                     <th>Payment Status</th>
-                                     <th>Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,7 +55,7 @@
                                 <tr>
                                     <td>{{$count ++}}</td>
                                     <td> {{str_pad($order->id, 3, '0', STR_PAD_LEFT)}}</td>
-                                    <td>{{isset($order->user->name) ? $order->user->name : ''}}</td>
+                                    <td>{{$order->address->name ?? '-'}}</td>
                                     <td>{{date('d-m-Y', strtotime($order->created_at))}}</td>
                                     <td>
                                         @if ($order->order_status == 0) Pending
@@ -82,7 +82,7 @@
                                         <span class="badge badge-danger">FAILED</span>
                                         @endif
                                     </td>
-                                     <td>
+                                    <td>
                                         <a href="{{route('orders.detail',$order->id)}}" class="btn btn-primary btn-xs">
                                             <i class="fas fa-eye mr-1" aria-hidden="true"></i> View
                                         </a>

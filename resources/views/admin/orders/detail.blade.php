@@ -104,41 +104,41 @@
                                         <tr>
                                             <th>Name</th>
                                             <td>
-                                                <strong>{{ $order->user->shipping->name ?? "-" }}</strong>
+                                                <strong>{{ $order->address->name ?? "-" }}</strong>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Shipping Address</th>
                                             <td>
 
-                                                @if(isset($order->user->shipping) && !empty($order->user->shipping))
+                                                @if(isset($order->address) && !empty($order->address))
 
-                                                @if(isset($order->user->shipping->address_1))
-                                                {{ $order->user->shipping->address_1 }}, <br>
+                                                @if(isset($order->address->address_1))
+                                                {{ $order->address->address_1 }}, <br>
                                                 @endif
 
-                                                @if(isset($order->user->shipping->address_2))
-                                                {{ $order->user->shipping->address_2 }}, <br>
+                                                @if(isset($order->address->address_2))
+                                                {{ $order->address->address_2 }}, <br>
                                                 @endif
 
-                                                @if(isset($order->user->shipping->city))
-                                                {{ $order->user->shipping->city }}, <br>
+                                                @if(isset($order->address->city))
+                                                {{ $order->address->city }}, <br>
                                                 @endif
 
-                                                @if(isset($order->user->shipping->postal_code))
-                                                {{ $order->user->shipping->postal_code }}, <br>
+                                                @if(isset($order->address->postal_code))
+                                                {{ $order->address->postal_code }}, <br>
                                                 @endif
 
-                                                @if(isset($order->user->shipping->country))
-                                                {{ $order->user->shipping->country }}, <br>
+                                                @if(isset($order->address->country))
+                                                {{ $order->address->country }}, <br>
                                                 @endif
 
-                                                @if(isset($order->user->shipping->email))
-                                                {{ $order->user->shipping->email }}, <br>
+                                                @if(isset($order->address->email))
+                                                {{ $order->address->email }}, <br>
                                                 @endif
 
-                                                @if(isset($order->user->shipping->phone))
-                                                {{ $order->user->shipping->phone }}<br>
+                                                @if(isset($order->address->phone))
+                                                {{ $order->address->phone }}<br>
                                                 @endif
 
 
