@@ -43,6 +43,10 @@
         @include('frontend.includes.footer')
     </div><!-- end wrapper -->
 
+    <div class="custom-loader hidden">
+        <img src="{{asset('images/loader.gif')}}" style="width:50px;height:50px">
+    </div>
+
     <!-- ******************************************
     /END SITE
     ********************************************** -->

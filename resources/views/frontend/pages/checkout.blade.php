@@ -239,9 +239,6 @@
     });
 </script>
 
-{{-- <script
-    src="https://www.paypal.com/sdk/js?client-id=AZKXMPfJscqaryDzTCEnfpzP7CUT6rXYvS6EdQiX2FkCcSodMhqjYBmgBZvJLbRLonXetJ4BQClbYsJM&currency=USD"
-    data-sdk-integration-source="button-factory"></script> --}}
 <script
     src="https://www.paypal.com/sdk/js?client-id=AVbBpNs3ZM08GKZ_0Z27t1w0yeLD8ZUW4gWPjWiml0mXPW_6h5UmDKL_qCB-omMY0BlX5JyE35XVk2ix&currency=USD"
     data-sdk-integration-source="button-factory"></script>
@@ -286,10 +283,12 @@
                             _token: $('meta[name="csrf-token"]').attr('content'),
                             payment_data: orderData,
                         },
+                        beforeSend: function () {
+                            $(".custom-loader").removeClass('hidden');
+                        },
                         success: function (response) {
-                            // alert('payment - success');
-                            // console.log(response);
-                            notifyBlackToastWithRedirect('Payment Success',response.url)
+                            $(".custom-loader").removeClass('hidden');
+                            notifyBlackToastWithRedirect('Redirecting ... ',response.url)
                         }
                     });
 
