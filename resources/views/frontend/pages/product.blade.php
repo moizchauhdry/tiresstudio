@@ -447,7 +447,7 @@
                                     </li> --}}
                                     <li>
                                         <i class="fa fa-envelope-o alignleft"></i>
-                                        <strong>Have any questions?</strong> support@SteelThemes.com
+                                        <strong>Have any questions?</strong> info@tiresstudio.com
                                     </li>
                                     <li>
                                         <i class="fa fa-phone alignleft"></i>
