@@ -33,6 +33,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/custom.css')}}">
 
     @yield('styles')
+
+    @include('frontend.includes.meta')
 </head>
 
 <body class="{{Route::currentRouteName()=='frontend.cart' ? 'cart' : '' }}">
