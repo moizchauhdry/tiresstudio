@@ -532,18 +532,28 @@
                                     </div>
                                     @endif
 
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>QUANTITY</b></label>
+                                        <input type="number" name="cart_qty" id="cart_qty" class="form-control"
+                                            value="{{Cart::get($product->id) ? Cart::get($product->id)->quantity : '1'}}"
+                                            min="1" @if (Cart::get($product->id)) disabled @endif
+                                        oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ?
+                                        Math.abs(this.value) : '1'">
+                                    </div>
+
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <hr class="invis2">
-                                        {{-- <h5>Monthly Payment:</h5>
-                                        <label>$21906.66</label>
-                                        <hr class="invis2">
-                                        <h5>Total Interest to Pay:</h5>
-                                        <label>$25759.84</label>
-                                        <hr class="invis2"> --}}
                                         <h5>Total Amount:</h5>
                                         <label class="totalpay"><b>${{$product->price}}</b></label>
                                         <hr class="invis2">
-                                        @include('frontend.includes.cart')
+                                        {{-- @include('frontend.includes.cart') --}}
+                                        @if (Cart::get($product->id))
+                                        <a href="{{route('frontend.cart')}}" class="btn btn-default btn-block"
+                                            id="view_in_cart">VIEW IN CART</a>
+                                        @else
+                                        <button class="btn btn-default btn-block" id="add_to_cart" type="button"
+                                            onclick="addToCart('{{$product->id}}')">ADD TO CART</button>
+                                        @endif
                                     </div><!-- end col -->
                                 </form>
                             </div><!-- end search wrapper -->
@@ -590,19 +600,34 @@
     })
 
     function addToCart(product_id) {
+        var cart_qty = $("#cart_qty").val();
         $.ajax({
             method: "POST",
             url: '{{route('frontend.cart')}}',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 'product_id': product_id,
+                'cart_qty': cart_qty,
+            },
+            beforeSend: function(){
+                $("#add_to_cart").attr("disabled", "disabled");
             },
             success: function (response) {
-                $('#add_to_cart_'+product_id).addClass('hidden');
-                $('#success_'+product_id).removeClass('hidden');
-                $("#qty_"+product_id).empty();
-                $("#qty_"+product_id).append(1);
+                swal.fire({
+                title: 'Added in Cart!',
+                icon:'success',
+                text: response.message,
+                type: "success"
+                }).then(function() {
+                    $(".custom-loader").removeClass('hidden');
+                    notifyBlackToast('Redirecting ... ')
+                    window.location.href = '{{route('frontend.cart')}}';
+                });
                 $("#cart_items_count").html(response.cart_count);
+            },
+
+            error : function (errors) {
+                location.reload();
             }
         });
     }

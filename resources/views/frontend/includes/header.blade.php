@@ -119,7 +119,7 @@
                             </div>
                         </ul>
                     </li>
-                    <li><a href="{{ route('frontend.pages.shop') }}">Shop</a></li>
+                    {{-- <li><a href="{{ route('frontend.pages.shop') }}">Shop</a></li> --}}
                     <li><a href="{{ route('frontend.pages.gallery') }}">Gallery</a></li>
                     <li class="dropdown hasmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

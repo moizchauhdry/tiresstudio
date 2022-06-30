@@ -12,20 +12,28 @@ class CartController extends Controller
     public function cart(Request $request)
     {
         if ($request->isMethod('post') && $request->ajax()) {
+            try {
+                $product = Product::where('id', $request->product_id)->first();
 
-            $product = Product::where('id', $request->product_id)->first();
-            $cart = Cart::add(
-                array(
-                    'id' => $product->id,
-                    'name' => $product->title,
-                    'quantity' => 1,
-                    'price' => $product->price,
-                )
-            );
+                $cart = Cart::add(
+                    array(
+                        'id' => $product->id,
+                        'name' => $product->title,
+                        'quantity' => $request->cart_qty,
+                        'price' => $product->price,
+                    )
+                );
 
-            $count = Cart::getContent()->count();
+                $count = Cart::getContent()->count();
 
-            return response()->json(['status' => 1, 'message' => 'success', 'cart_count' => $count]);
+                return response()->json([
+                    'status' => 1,
+                    'cart_count' => $count,
+                    'message' => $product->title . '-' . getProductName($product->id),
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json(['status' => 1, 'message' => 'invalid'], 401);
+            }
         }
 
         $products = [];
