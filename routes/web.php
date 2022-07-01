@@ -48,6 +48,8 @@ Route::group(['prefix' => 'get', 'as' => 'get.'], function () {
     Route::post('/modelByMakes', 'Frontend\FrontendController@getModelsByMakes')->name("model-by-makes");
 });
 
+Route::post('/subscribe-us', 'Frontend\FrontendController@subscribe')->name('frontend.subscribe');
+
 /**
  *****************************************************************************
  ************************** ADMIN PANEL ROUTES *******************************

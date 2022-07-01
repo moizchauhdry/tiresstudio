@@ -103,14 +103,15 @@
                     </div><!-- end widget-title -->
 
                     <div class="footer-newsletter clearfix">
-                        <div class="input-group col-md-12">
-                            <input type="text" class="form-control input-lg" placeholder="Email Address...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary btn-lg" type="button">
-                                    Go
-                                </button>
-                            </span>
-                        </div>
+                        <form action="#" method="post" class="subscribe_form"> @csrf
+                            <div class="input-group col-md-12">
+                                <input type="email" class="form-control input-lg" name="subscribe_email"
+                                    placeholder="Email Address..." required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-lg" type="submit">Go</button>
+                                </span>
+                            </div>
+                        </form>
                     </div>
                 </div><!-- end widget -->
             </div><!-- end col -->

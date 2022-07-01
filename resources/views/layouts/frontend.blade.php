@@ -162,6 +162,35 @@
                 }
             });
         });
+        $(".subscribe_form").on("submit", function(event){
+            event.preventDefault();
+            $('span.text-success').remove();
+            $('span.text-danger').remove();
+            $('input.is-invalid').removeClass('is-invalid');
+            var formData = new FormData(this);
+            $.ajax({
+                method: "POST",
+                data: formData,
+                url: '{{route('frontend.subscribe')}}',
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function(){
+                    $("button[type=submit]").attr("disabled", true);
+                },
+                success: function (response) {
+                if (response.status == 1) {
+                    Swal.fire( response.title, response.message, response.icon );
+                    $(".subscribe_form")[0].reset();
+                    $("button[type=submit]").attr("disabled", false);
+                }
+                },
+                error : function (errors) {
+                errorsGet(errors.responseJSON.errors)
+                    //
+                }
+            });
+        });
     </script>
     @yield('scripts')
 

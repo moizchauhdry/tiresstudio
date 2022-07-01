@@ -11,6 +11,7 @@ use App\VehicleModel;
 use App\Brand;
 use App\Gallery;
 use App\Inquiry;
+use App\NewsSubscribe;
 use App\Page;
 use Validator;
 
@@ -721,5 +722,43 @@ class FrontendController extends Controller
             'status' => true,
             'data' => $models,
         ]);
+    }
+
+    public function subscribe(Request $request)
+    {
+        if ($request->isMethod('post') && $request->ajax()) {
+
+            $rules = [
+                'subscribe_email' => ['required', 'string', 'email', 'max:100'],
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            // if ($validator->fails()) {
+            //     return response()->json([
+            //         'errors' => $validator->errors(),
+            //     ], 400);
+            // }
+
+            $news = NewsSubscribe::where('email', $request->subscribe_email)->first();
+
+            if (isset($news)) {
+                return response()->json([
+                    'status' => 1,
+                    'title' => 'Subscribe Already',
+                    'icon' => 'warning',
+                    'message' => 'Thankyou, You have already been subscribe to tiresstudio.com. We share our best online products, and exclusive discounts in an email.',
+                ]);
+            }
+
+            NewsSubscribe::updateOrCreate(['email' => $request->subscribe_email]);
+
+            return response()->json([
+                'status' => 1,
+                'title' => 'Subscribe Successfully',
+                'icon' => 'success',
+                'message' => 'Thankyou, You have been subscribe to tiresstudio.com successfully. We share our best online products, and exclusive discounts in an email.',
+            ]);
+        }
     }
 }
