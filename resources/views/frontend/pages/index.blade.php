@@ -28,7 +28,7 @@
         </div><!-- end row -->
 
         <div class="row">
-            @foreach ($response['popular_wheels'] as $wheel)
+            @foreach ($wheels as $wheel)
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
 
                 <div class="car-wrapper clearfix">
@@ -113,7 +113,7 @@
         </div><!-- end row -->
 
         <div class="row">
-            @foreach ($response['popular_tires'] as $tire)
+            @foreach ($tires as $tire)
             <div class="col-md-4 col-sm-6 col-xs-12 wow fadeIn">
 
                 <div class="car-wrapper clearfix">

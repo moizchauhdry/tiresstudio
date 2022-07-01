@@ -25,8 +25,8 @@
                                 </div>
                                 <select name="year" class="year" id="year">
                                     <option value="">Year</option>
-                                    @isset($response['years'])
-                                    @foreach($response['years'] as $year)
+                                    @isset($years)
+                                    @foreach($years as $year)
                                     <option value="{{ $year }}">{{ $year }}</option>
                                     @endforeach
                                     @endisset
@@ -80,10 +80,10 @@
                                 </div>
                                 <select name="yearTire" class="yearTire" id="yearTire">
                                     <option value="">Year</option>
-                                    @isset($response['years'])
-                                        @foreach($response['years'] as $year)
-                                            <option value="{{ $year }}">{{ $year }}</option>
-                                        @endforeach
+                                    @isset($years)
+                                    @foreach($years as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                    @endforeach
                                     @endisset
                                 </select>
                             </div><!-- end col -->
@@ -114,7 +114,8 @@
                                 </select>
                             </div><!-- end col -->
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <button type="button" id="tire_btn_search" class="btn btn-primary btn-block">SEARCH</button>
+                                <button type="button" id="tire_btn_search"
+                                    class="btn btn-primary btn-block">SEARCH</button>
                             </div><!-- end col -->
                         </form><!-- end row -->
                     </div><!-- end search-wrapper -->

@@ -18,38 +18,59 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $response['popular_wheels'] = Product::groupBy('model')->where('boltPattern', '!=', 'BLANK')
+        $wheels = Product::select('id', 'sku_type')
+            ->where('boltPattern', '!=', 'BLANK')
             ->where('offset', '!=', 'XX')
             ->where('sku_type', 'Wheel')
+            ->groupBy('model')
             ->inRandomOrder()
-            ->take(12)
-            ->get();
+            ->paginate(12);
 
-        $response['popular_tires'] = Product::groupBy('model')
+        $tires = Product::select('id', 'sku_type')
             ->where('sku_type', 'Tire')
+            ->groupBy('model')
             ->inRandomOrder()
-            ->take(12)
-            ->get();
+            ->paginate(12);
 
-        $response['years'] = array_unique(VehicleModel::select('year')->orderBy('year', 'asc')->pluck('year')->toArray());
-        rsort($response['years']);
+        $years = array_unique(VehicleModel::select('year')->orderBy('year', 'asc')->pluck('year')->toArray());
+        rsort($years);
 
         $response['brands'] = Brand::orderBy('description', 'asc')->inRandomOrder()->take(6)->get();
 
-        return view('frontend.pages.index', compact('response'));
+        return view('frontend.pages.index', compact('years', 'wheels', 'tires'));
     }
 
     public function wheels(Request $request)
     {
         $response['type'] = 'Wheel';
-        $response['products'] = Product::groupBy('model')->where('sku_type', 'Wheel')->where('boltPattern', '!=', 'BLANK')->where('offset', '!=', 'XX')->whereHas('inventory', function ($q) {
-            $q->where('local_stock', '>=', 4)->whereIn('type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
-        })->inRandomOrder()->paginate(9);
+
+        $response['products'] = Product::select('products.id', 'products.title', 'products.boltPattern', 'products.finishCode')
+            ->groupBy('model')
+            ->where('sku_type', 'Wheel')
+            ->where('boltPattern', '!=', 'BLANK')
+            ->where('offset', '!=', 'XX')
+            ->join('product_inventories', 'products.id', '=', 'product_inventories.product_id')
+            ->where('product_inventories.local_stock', '>=', 4)
+            ->whereIn('product_inventories.type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST'])
+            // ->whereHas('inventory', function ($q) {
+            //     $q->where('local_stock', '>=', 4)->whereIn('type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
+            // })
+            ->inRandomOrder()
+            ->paginate(9);
+
         $filter = array();
+
         if ($request->ajax()) {
-            $products = Product::select('products.id', 'products.title', 'products.boltPattern', 'products.finishCode')->where('sku_type', 'Wheel')->where('boltPattern', '!=', 'BLANK')->where('offset', '!=', 'XX')->whereHas('inventory', function ($q) {
-                $q->where('local_stock', '>=', 4)->whereIn('type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
-            });
+            $products = Product::select('products.id', 'products.title', 'products.boltPattern', 'products.finishCode')
+                ->where('sku_type', 'Wheel')
+                ->where('boltPattern', '!=', 'BLANK')
+                ->where('offset', '!=', 'XX')
+                ->join('product_inventories', 'products.id', '=', 'product_inventories.product_id')
+                ->where('product_inventories.local_stock', '>=', 4)
+                ->whereIn('product_inventories.type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
+            // ->whereHas('inventory', function ($q) {
+            //     $q->where('local_stock', '>=', 4)->whereIn('type', ['BL', 'BW', 'CS', 'CF', 'DB', 'IT', 'NW', 'RG', 'ST']);
+            // });
 
 
             if ($request->has('brand_id') && !empty($request->get('brand_id'))) {
