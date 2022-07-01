@@ -49,7 +49,7 @@ class RegisterController extends Controller
             try {
                 Mail::to($user->email)->send(new RegisterMail(['user' => $user]));
             } catch (\Throwable $th) {
-                //throw $th;
+                throw $th;
             }
 
             return response()->json([
