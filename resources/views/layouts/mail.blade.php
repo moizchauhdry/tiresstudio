@@ -196,7 +196,7 @@
                                             <tr style="background: black;">
                                                 <td class="header center" width="100%">
                                                     <img style=" height: 80px"
-                                                        src="https://www.tiresstudio.com/frontend/images/logo-white.png">
+                                                        src="https://www.tiresstudio.com/images/logo/1.png">
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -129,7 +129,7 @@
                                 <div class="clear_fix">
                                     <div class="single_checkbox float_left">
                                         <input type="checkbox" name="terms" id="terms">
-                                        <label for="terms">I agree the term’s & conditions</label>
+                                        <label for="terms">I agree the term’s & conditions</label> <br>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" id="register_btn">Create Account</button>

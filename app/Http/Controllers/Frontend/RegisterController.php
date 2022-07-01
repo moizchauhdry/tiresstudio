@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RegisterMail;
 use Illuminate\Http\Request;
 use App\User;
 use Validator;
 use Hash;
 use Auth;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -24,6 +26,7 @@ class RegisterController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'phone' => ['required', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed', 'max:32'],
+                'terms' => ['required'],
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -42,6 +45,12 @@ class RegisterController extends Controller
             ];
 
             $user = User::create($data);
+
+            try {
+                Mail::to($user->email)->send(new RegisterMail(['user' => $user]));
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 
             return response()->json([
                 'status' => 1,
