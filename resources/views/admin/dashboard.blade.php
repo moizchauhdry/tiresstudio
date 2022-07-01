@@ -3,25 +3,24 @@
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Dashboard</h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div><!-- /.container -->
 </div>
 <!-- /.content-header -->
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-info">
                     <div class="inner">
                         <h3>{{ $products ?? '0' }}</h3>
-                        {{--<h3>12000</h3>--}}
                         <p>Total Products</p>
                     </div>
                     <div class="icon">
@@ -33,7 +32,6 @@
                 <div class="small-box bg-gradient-success">
                     <div class="inner">
                         <h3>{{ $wheels ?? '0' }}</h3>
-                        {{--<h3>10000</h3>--}}
                         <p>Total Wheels</p>
                     </div>
                     <div class="icon">
@@ -45,7 +43,6 @@
                 <div class="small-box bg-gradient-warning">
                     <div class="inner">
                         <h3>{{ $tires ?? '0' }}</h3>
-                        {{--<h3>2000</h3>--}}
                         <p>Total Tires</p>
                     </div>
                     <div class="icon">
@@ -57,7 +54,6 @@
                 <div class="small-box bg-gradient-teal">
                     <div class="inner">
                         <h3>{{ $accessories ?? '0' }}</h3>
-                        {{--<h3>2000</h3>--}}
                         <p>Total Accessories</p>
                     </div>
                     <div class="icon">
@@ -110,52 +106,8 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="col-lg-3 col-6">
-                <div class="small-box bg-gradient-indigo">
-                    <div class="inner">
-                        <h3>{{ $payments ?? '$ 0.00' }}</h3>
-                        <p>Total Payments</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-gradient-maroon">
-                    <div class="inner">
-                        <h3>{{ $surveys ?? '0' }}</h3>
-                        <p>Total Surveys</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-gradient-navy">
-                    <div class="inner">
-                        <h3>{{ $inquiries ?? '0' }}</h3>
-                        <p>Total Inquiries</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                </div>
-            </div>--}}
-{{--            <div class="col-lg-3 col-6">
-                <div class="small-box bg-gradient-olive">
-                    <div class="inner">
-                        <h3>{{ $appointments ?? '0' }}</h3>
-                        <p>Total Appointments</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                </div>
-            </div>--}}
-
         </div>
+
         {{--<div class="row">
             <div class="col-12 col-md-6">
                 <div class="card">
@@ -172,26 +124,35 @@
                                 <span>Sales Over Time</span>
                             </p>
                             <p class="ml-auto d-flex flex-column text-right">
-                    <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 33.1%
-                    </span>
+                                <span class="text-success">
+                                    <i class="fas fa-arrow-up"></i> 33.1%
+                                </span>
                                 <span class="text-muted">Since last month</span>
                             </p>
                         </div>
                         <!-- /.d-flex -->
 
-                        <div class="position-relative mb-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="sales-chart" height="200" style="display: block; width: 487px; height: 200px;" width="487" class="chartjs-render-monitor"></canvas>
+                        <div class="position-relative mb-4">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            <canvas id="sales-chart" height="200" style="display: block; width: 487px; height: 200px;"
+                                width="487" class="chartjs-render-monitor"></canvas>
                         </div>
 
                         <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This year
-                  </span>
+                            <span class="mr-2">
+                                <i class="fas fa-square text-primary"></i> This year
+                            </span>
 
                             <span>
-                    <i class="fas fa-square text-gray"></i> Last year
-                  </span>
+                                <i class="fas fa-square text-gray"></i> Last year
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -212,26 +173,36 @@
                                 <span>Visitors Over Time</span>
                             </p>
                             <p class="ml-auto d-flex flex-column text-right">
-                    <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 12.5%
-                    </span>
+                                <span class="text-success">
+                                    <i class="fas fa-arrow-up"></i> 12.5%
+                                </span>
                                 <span class="text-muted">Since last week</span>
                             </p>
                         </div>
                         <!-- /.d-flex -->
 
-                        <div class="position-relative mb-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="visitors-chart" height="200" width="487" style="display: block; width: 487px; height: 200px;" class="chartjs-render-monitor"></canvas>
+                        <div class="position-relative mb-4">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            <canvas id="visitors-chart" height="200" width="487"
+                                style="display: block; width: 487px; height: 200px;"
+                                class="chartjs-render-monitor"></canvas>
                         </div>
 
                         <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This Week
-                  </span>
+                            <span class="mr-2">
+                                <i class="fas fa-square text-primary"></i> This Week
+                            </span>
 
                             <span>
-                    <i class="fas fa-square text-gray"></i> Last Week
-                  </span>
+                                <i class="fas fa-square text-gray"></i> Last Week
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -249,9 +220,11 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <a href="{{ route('fetch.wheels') }}" class="btn btn-outline-primary w-100 mb-2">Fetch Wheels</a>
+                        <a href="{{ route('fetch.wheels') }}" class="btn btn-outline-primary w-100 mb-2">Fetch
+                            Wheels</a>
                         <a href="{{ route('fetch.tires') }}" class="btn btn-outline-info w-100 mb-2">Fetch Tires</a>
-                        <a href="{{ route('fetch.vehicles') }}" class="btn btn-outline-warning w-100 mb-2">Fetch Vehicles</a>
+                        <a href="{{ route('fetch.vehicles') }}" class="btn btn-outline-warning w-100 mb-2">Fetch
+                            Vehicles</a>
                     </div>
                     <!-- /.card-body -->
 
@@ -264,8 +237,8 @@
 @endsection
 
 @section('scripts')
-    <script>
-        /* global Chart:false */
+<script>
+    /* global Chart:false */
 
         $(function () {
             'use strict'
@@ -413,5 +386,5 @@
 
         // lgtm [js/unused-local-variable]
 
-    </script>
+</script>
 @endsection
