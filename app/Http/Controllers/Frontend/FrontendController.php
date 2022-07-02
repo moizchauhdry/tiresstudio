@@ -11,8 +11,10 @@ use App\VehicleModel;
 use App\Brand;
 use App\Gallery;
 use App\Inquiry;
+use App\Mail\NewsSubscribeMail;
 use App\NewsSubscribe;
 use App\Page;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class FrontendController extends Controller
@@ -734,11 +736,14 @@ class FrontendController extends Controller
 
             $validator = Validator::make($request->all(), $rules);
 
-            // if ($validator->fails()) {
-            //     return response()->json([
-            //         'errors' => $validator->errors(),
-            //     ], 400);
-            // }
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 1,
+                    'title' => 'Validation Error !',
+                    'icon' => 'warning',
+                    'message' => 'The date you have entered is invalid or incorrect.',
+                ]);
+            }
 
             $news = NewsSubscribe::where('email', $request->subscribe_email)->first();
 
@@ -751,7 +756,16 @@ class FrontendController extends Controller
                 ]);
             }
 
-            NewsSubscribe::updateOrCreate(['email' => $request->subscribe_email]);
+            NewsSubscribe::updateOrCreate([
+                'email' => $request->subscribe_email,
+                'status' => true
+            ]);
+
+            try {
+                Mail::to($request->subscribe_email)->send(new NewsSubscribeMail(['data' => null]));
+            } catch (\Throwable $th) {
+                throw $th;
+            }
 
             return response()->json([
                 'status' => 1,

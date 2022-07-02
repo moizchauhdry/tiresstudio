@@ -28,9 +28,11 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('admin/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
-
     <!-- Bootstrap Toggel -->
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/sweetalert2/sweetalert2.min.css')}}">
+
     <!-- Custom CSS -->
     <link rel=" stylesheet" href="{{asset('admin/custom.css')}}">
 
@@ -99,8 +101,10 @@
 
     <!-- Select2 -->
     <script src="{{asset('admin/plugins/select2/js/select2.full.min.js')}}"></script>
-
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 
     <!-- OPTIONAL SCRIPTS -->
     <script src="{{asset('admin/plugins/chart.js/Chart.bundle.js')}}"></script>

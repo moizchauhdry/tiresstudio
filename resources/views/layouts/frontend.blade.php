@@ -162,6 +162,7 @@
                 }
             });
         });
+
         $(".subscribe_form").on("submit", function(event){
             event.preventDefault();
             $('span.text-success').remove();

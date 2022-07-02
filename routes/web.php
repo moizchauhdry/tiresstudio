@@ -56,9 +56,9 @@ Route::post('/subscribe-us', 'Frontend\FrontendController@subscribe')->name('fro
  *****************************************************************************
  */
 
-Route::get('/getSessions', function () {
-    dd(Session::all());
-});
+// Route::get('/getSessions', function () {
+//     dd(Session::all());
+// });
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
     Route::get('/admin/dashboard', function () {
@@ -160,6 +160,11 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                     Route::get('/edit/{id}', 'PageController@edit')->name('pages.edit');
                     Route::post('/update/{id}', 'PageController@update')->name('pages.update');
                     Route::post('/destroy', 'PageController@destroy')->name('pages.destroy');
+                });
+
+                Route::group(['prefix' => 'subscribers'], function () {
+                    Route::get('/', 'NewsSubscribeController@index')->name('subscribers.index');
+                    Route::post('/update', 'NewsSubscribeController@update')->name('subscribers.update');
                 });
             });
         });
