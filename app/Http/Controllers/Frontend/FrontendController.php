@@ -11,6 +11,7 @@ use App\VehicleModel;
 use App\Brand;
 use App\Gallery;
 use App\Inquiry;
+use App\Mail\InquiryMail;
 use App\Mail\NewsSubscribeMail;
 use App\NewsSubscribe;
 use App\Page;
@@ -674,6 +675,19 @@ class FrontendController extends Controller
             ];
 
             Inquiry::create($data);
+
+            try {
+                Mail::to($request->email)->send(new InquiryMail([
+                    'data' => $data,
+                    'is_admin' => false,
+                ]));
+                Mail::to('info@tiresstudio.com')->send(new InquiryMail([
+                    'data' => $data,
+                    'is_admin' => true,
+                ]));
+            } catch (\Throwable $th) {
+                throw $th;
+            }
 
             return response()->json([
                 'status' => 1,

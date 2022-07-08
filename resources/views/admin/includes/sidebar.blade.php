@@ -79,7 +79,7 @@
                         class="nav-link {{(Route::currentRouteName() == 'brands.index' || Route::currentRouteName() == 'brands.show' || Route::currentRouteName() == 'brands.create'|| Route::currentRouteName() == 'brands.edit' ) ? 'active' : ''}}">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
-                            Brands
+                            Manage Brands
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -107,7 +107,7 @@
                         class="nav-link {{(Route::currentRouteName() == 'vehicle.indexMake' || Route::currentRouteName() == 'vehicle.showMake' || Route::currentRouteName() == 'vehicle.indexMake' ) ? 'active' : ''}}">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
-                            Makes
+                            Manage Makes
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -129,7 +129,7 @@
                         class="nav-link {{(Route::currentRouteName() == 'vehicle.index' || Route::currentRouteName() == 'vehicle.show' || Route::currentRouteName() == 'vehicle.index' ) ? 'active' : ''}}">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
-                            Vehicles
+                            Manage Vehicles
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

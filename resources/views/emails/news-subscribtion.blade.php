@@ -11,8 +11,8 @@
                             <td class="left">Dear <b>Tiresstudio User</b>,</td>
                         </tr>
                         <tr>
-                            <td class="left">Thankyou, You have been subscribe to tiresstudio.com successfully. We share
-                                our best online products, and exclusive discounts in an email.</td>
+                            <td class="left">Thankyou, Your inquiry have been sent successfully. We will contact you as
+                                soon as possible</td>
                         </tr>
                     </tbody>
                 </table>

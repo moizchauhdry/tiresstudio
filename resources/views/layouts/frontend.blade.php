@@ -148,17 +148,21 @@
                 contentType: false,
                 cache: false,
                 beforeSend: function(){
-                    //
+                    $("button[type=submit]").attr("disabled", true);
+                    $(".custom-loader").removeClass('hidden');
                 },
                 success: function (response) {
-                if (response.status == 1) {
-                    Swal.fire( response.title, response.message, response.icon );
-                    $(".contact_form")[0].reset();
-                }
+                    if (response.status == 1) {
+                        Swal.fire( response.title, response.message, response.icon );
+                        $(".contact_form")[0].reset();
+                        $("button[type=submit]").attr("disabled", false);
+                        $(".custom-loader").addClass('hidden');
+                    }
                 },
                 error : function (errors) {
-                errorsGet(errors.responseJSON.errors)
-                    //
+                    errorsGet(errors.responseJSON.errors)
+                    $("button[type=submit]").attr("disabled", false);
+                    $(".custom-loader").addClass('hidden');
                 }
             });
         });
@@ -187,8 +191,8 @@
                 }
                 },
                 error : function (errors) {
-                errorsGet(errors.responseJSON.errors)
-                    //
+                    errorsGet(errors.responseJSON.errors)
+                    $("button[type=submit]").attr("disabled", true);
                 }
             });
         });
