@@ -9,7 +9,7 @@
                     @if ($data['is_admin'] == 1)
                     <tbody>
                         <tr>
-                            <td class="left" colspan="2">To <b>Admin Tiresstudio</b>,</td>
+                            <td class="left" colspan="2">To <b>Tiresstudio.com</b>,</td>
                         </tr>
                         <tr>
                             <td class="left" colspan="2"><br></td>
