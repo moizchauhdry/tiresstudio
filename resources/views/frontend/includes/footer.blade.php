@@ -38,10 +38,6 @@
                             <h5>Sales Department</h5>
                             <p>Open Daily: 9am - 5pm</p>
                         </li>
-                        <li>
-                            <h5>Service Department</h5>
-                            <p>Open Daily: 9am - 5pm</p>
-                        </li>
                     </ul>
                 </div>
             </div>
