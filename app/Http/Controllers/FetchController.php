@@ -134,9 +134,9 @@ class FetchController extends Controller
                 //     \Log::info($e);
                 // }
 
-                // if (!empty($product['images'])) {
-                //     $this->uploadImage($product, $product1->id, 'products/wheels/' . $brand->code);
-                // }
+                if (!empty($product['images'])) {
+                    $this->uploadImage($product, $product1->id, 'products/wheels/' . $brand->code);
+                }
 
                 if ($product['prices']['msrp'] != NULL) {
                     foreach ($product['prices']['msrp'] as $productPrice) {
@@ -379,29 +379,32 @@ class FetchController extends Controller
     {
         if (!empty($product['images'])) {
             foreach ($product['images'] as $image) {
-                try {
-                    $productImage = ProductImage::where('product_id', $id)->where('filename', $image['fileName'])->first();
-                    if ($productImage != null) {
-                        return true;
-                    }
-                    $content = file_get_contents($image['imageUrl']);
-                    $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
-                    $name = $image['fileName'];
-                    $path = $directory . '/' . $name;
-                    $resizedName = 'resized_' . $name;
-                    $resizedPath = $directory . '/' . $resizedName;
-                    Storage::disk('public')->put($path, $content);
-                    Storage::disk('public')->put($resizedPath, $resizedImageUrlContent);
-                    $productImage = new ProductImage();
-                    $productImage->product_id = $id;
-                    $productImage->filename = $name;
-                    $productImage->image_url = $path;
-                    $productImage->resized_image_url = $resizedPath;
-                    $productImage->save();
-                } catch (\Throwable $e) {
-                    Log::info('Error Logged at ' . Carbon::now() . ' from images loop');
-                    Log::info($e);
+
+                // try {
+                $productImage = ProductImage::where('product_id', $id)->where('filename', $image['imageUrlLarge'])->first();
+                if ($productImage != null) {
+                    return true;
                 }
+                $content = file_get_contents($image['imageUrlLarge']);
+                $resizedImageUrlContent = file_get_contents($image['imageUrlLarge']);
+                $name = $image['imageUrlLarge'];
+                $path = $directory . '/' . $name;
+                $resizedName = 'resized_' . $name;
+                $resizedPath = $directory . '/' . $resizedName;
+
+                $productImage = new ProductImage();
+                $productImage->product_id = $id;
+                $productImage->filename = $name;
+                $productImage->image_url = $path;
+                $productImage->resized_image_url = $resizedPath;
+                $productImage->save();
+
+                Storage::disk('public')->put($path, $content);
+                Storage::disk('public')->put($resizedPath, $resizedImageUrlContent);
+                // } catch (\Throwable $e) {
+                //     Log::info('Error Logged at ' . Carbon::now() . ' from images loop');
+                //     Log::info($e);
+                // }
             }
         }
         return true;
