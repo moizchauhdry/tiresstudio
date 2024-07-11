@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
             [
                 'name' =>'Admin',
                 'email' =>'admin@tiresstudio.com',
-                'password'=>Hash::make('password'),
+                'password'=>Hash::make('12345678'),
                 'phone'=>'03204650584',
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now(),

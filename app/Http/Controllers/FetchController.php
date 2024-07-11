@@ -20,15 +20,17 @@ class FetchController extends Controller
 {
     public function authorizeAPI()
     {
-        /*$credentials = [
+        $credentials = [
             "userName" => "au.haseeb@gmail.com",
             "password" => "Shiekh!@40"
-        ];*/
+        ];
 
-        $clientHeader = new \GuzzleHttp\Client(['headers' => [
-            'Content-Type' => 'application/json',
-        ],
-            'body' => json_encode($credentials)]);
+        $clientHeader = new \GuzzleHttp\Client([
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'body' => json_encode($credentials)
+        ]);
 
         $result = $clientHeader->request('post', 'https://api.wheelpros.com/auth/v1/authorize');
         $resultData = json_decode($result->getBody()->getContents(), true);
@@ -53,113 +55,113 @@ class FetchController extends Controller
     public function fetchProducts()
     {
         if (Session::has('authorization')) {
-            dump('hasSession');
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
-            dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
-
 
         $client = new \GuzzleHttp\Client(['headers' => [
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
 
+        // $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?page=1');
+        // $data = json_decode($res->getBody()->getContents(), true);
 
-        $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel');
-        $data = json_decode($res->getBody()->getContents(), true);
+        // $dataCount = (int)$data['totalCount'];
+        // $dataCount = 100;
+        // dd($dataCount);
 
-        $dataCount = (int)$data['totalCount'];
+        // $iteration = round($dataCount / 50, 1);
 
-        $iteration = round($dataCount/50,1);
+        // for ($i = 1; $i <= $iteration; $i++) {
 
-
-        for($i = 1; $i <= $iteration ; $i++){
-
-            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
-                dump('newKey');
-                $authorization = $this->authorizeAPI();
-                $client = $this->setClient($authorization);
-
-            }
-
-            $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page='.$i);
-            $data = json_decode($res->getBody()->getContents(), true);
-            $products = $data['results'];
-            foreach ($products as $key => $product) {
-                $brandData = [
-                    'description' => $product['brand']['description'],
-                    'parent' => $product['brand']['parent'],
-                ];
-
-                $brand = Brand::updateOrCreate(['type' => 'WHEEL',
-                    'code' => $product['brand']['code']],$brandData);
-
-                $ProductData = [
-                    'sku_type' => $product['skuType'],
-                    'title' => $product['title'],
-                    'brand_id' => $brand->id,
-                    // Properties
-                    'model' => $product['properties']['model'],
-                    'offset' => $product['properties']['offset'],
-                    'boltPattern' => $product['properties']['boltPattern'],
-                    'finishCode' => $product['properties']['finishCode'],
-                    'finish' => $product['properties']['finish'],
-                    'width' => $product['properties']['width'],
-                    'diameter' => $product['properties']['diameter'],
-                    'centerbore' => $product['properties']['centerbore'],
-                ];
-
-                $product1 = Product::updateOrCreate(['sku' => $product['sku'],
-                    'upc' => $product['upc']], $ProductData);
-                $product1->save();
-
-                try {
-                    $productDetail = $this->getProductDetails($product['sku']);
-                    $product1->update($productDetail['properties']);
-                }catch(\Throwable  $e){
-                    \Log::info($e);
-                }
-
-                if(!empty($product['images'])){
-                    $this->uploadImage($product,$product1->id,'products/wheels/'.$brand->code);
-                }
-
-                if ($product['prices']['msrp'] != NULL) {
-                    foreach ($product['prices']['msrp'] as $productPrice) {
-                        $priceData = [
-                            'product_id' => $product1->id,
-                            'currency_amount' => $productPrice['currencyAmount'],
-                            'currency_code' => $productPrice['currencyCode'],
-                        ];
-
-                        $price = ProductPrice::firstOrCreate($priceData);
-
-                    }
-                }
-
-                if ($product['inventory'] != NULL) {
-                    $inventoryData = [
-                        'product_id' => $product1->id,
-                        'type' => $product['inventory']['type'],
-                        'local_stock' => $product['inventory']['localStock'],
-                        'global_stock' => $product['inventory']['globalStock'],
-                    ];
-                    $inventory = ProductInventory::firstOrCreate($inventoryData);
-                }
-
-            }
-            dump('Iteration = '. ($i) . ' executed.');
+        if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
+            dump('newKey');
+            $authorization = $this->authorizeAPI();
+            $client = $this->setClient($authorization);
         }
 
+        // $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page=' . $i);
+        $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page=1');
+        $data = json_decode($res->getBody()->getContents(), true);
+        $products = $data['results'];
+        foreach ($products as $key => $product) {
+            $brandData = [
+                'description' => $product['brand']['description'],
+                'parent' => $product['brand']['parent'],
+            ];
+
+            $brand = Brand::updateOrCreate([
+                'type' => 'WHEEL',
+                'code' => $product['brand']['code']
+            ], $brandData);
+
+            $ProductData = [
+                'sku_type' => $product['skuType'],
+                'title' => $product['title'],
+                'brand_id' => $brand->id,
+                // Properties
+                'model' => $product['properties']['model'],
+                'offset' => $product['properties']['offset'],
+                'boltPattern' => $product['properties']['boltPattern'],
+                'finishCode' => $product['properties']['finishCode'],
+                'finish' => $product['properties']['finish'],
+                'width' => $product['properties']['width'],
+                'diameter' => $product['properties']['diameter'],
+                'centerbore' => $product['properties']['centerbore'],
+
+                'updated_at' => Carbon::now(),
+            ];
+
+            $product1 = Product::updateOrCreate([
+                'sku' => $product['sku'],
+                'upc' => $product['upc']
+            ], $ProductData);
+            $product1->save();
+
+            // try {
+            //     $productDetail = $this->getProductDetails($product['sku']);
+            //     $product1->update($productDetail['properties']);
+            // } catch (\Throwable  $e) {
+            //     \Log::info($e);
+            // }
+
+            // if (!empty($product['images'])) {
+            //     $this->uploadImage($product, $product1->id, 'products/wheels/' . $brand->code);
+            // }
+
+            if ($product['prices']['msrp'] != NULL) {
+                foreach ($product['prices']['msrp'] as $productPrice) {
+                    $priceData = [
+                        'product_id' => $product1->id,
+                        'currency_amount' => $productPrice['currencyAmount'],
+                        'currency_code' => $productPrice['currencyCode'],
+                    ];
+
+                    $price = ProductPrice::firstOrCreate($priceData);
+                }
+            }
+
+            if ($product['inventory'] != NULL) {
+                $inventoryData = [
+                    'product_id' => $product1->id,
+                    'type' => $product['inventory']['type'],
+                    'local_stock' => $product['inventory']['localStock'],
+                    'global_stock' => $product['inventory']['globalStock'],
+                ];
+                $inventory = ProductInventory::firstOrCreate($inventoryData);
+            }
+        }
+
+        // dump('Iteration = ' . ($i) . ' executed.');
+        dump('Iteration = executed.');
+        // }
     }
 
     public function fetchTireProducts()
@@ -170,13 +172,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -191,19 +191,18 @@ class FetchController extends Controller
 
         $dataCount = (int)$data['totalCount'];
 
-        $iteration = round($dataCount/50,1);
+        $iteration = round($dataCount / 50, 1);
 
 
-        for($i = 1; $i <= $iteration ; $i++){
+        for ($i = 1; $i <= $iteration; $i++) {
 
             if ($authorization['expiryTime'] < strtotime(Carbon::now())) {
                 dump('newKey');
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
 
-            $res = $client->request('GET', $url.'?pageSize=50&page='.$i);
+            $res = $client->request('GET', $url . '?pageSize=50&page=' . $i);
             $data = json_decode($res->getBody()->getContents(), true);
             $products = $data['results'];
             foreach ($products as $key => $product) {
@@ -213,8 +212,10 @@ class FetchController extends Controller
                     'parent' => $product['brand']['parent'],
                 ];
 
-                $brand = Brand::updateOrCreate(['type' => 'TIRE',
-                    'code' => $product['brand']['code']],$brandData);
+                $brand = Brand::updateOrCreate([
+                    'type' => 'TIRE',
+                    'code' => $product['brand']['code']
+                ], $brandData);
 
                 $ProductData = [
                     'upc' => $product['upc'],
@@ -234,12 +235,12 @@ class FetchController extends Controller
                 try {
                     $productDetail = $this->getProductDetails($product['sku']);
                     $product1->update($productDetail['properties']);
-                }catch(\Throwable  $e){
+                } catch (\Throwable  $e) {
                     \Log::info($e);
                 }
 
-                if(!empty($product['images'])){
-                    $this->uploadImage($product,$product1->id,'products/tires/'.$product1->id);
+                if (!empty($product['images'])) {
+                    $this->uploadImage($product, $product1->id, 'products/tires/' . $product1->id);
                 }
 
                 if ($product['prices']['msrp'] != NULL) {
@@ -251,7 +252,6 @@ class FetchController extends Controller
                         ];
 
                         $price = ProductPrice::firstOrCreate($priceData);
-
                     }
                 }
 
@@ -264,11 +264,9 @@ class FetchController extends Controller
                     ];
                     $inventory = ProductInventory::firstOrCreate($inventoryData);
                 }
-
             }
-            dump('Iteration = '. ($i) . ' executed.');
+            dump('Iteration = ' . ($i) . ' executed.');
         }
-
     }
 
     public function fetchAccessories()
@@ -280,13 +278,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -301,10 +297,10 @@ class FetchController extends Controller
 
         $dataCount = (int)$data['totalCount'];
 
-        $iteration = round($dataCount/50,1);
+        $iteration = round($dataCount / 50, 1);
 
 
-        for($i = 1; $i <= $iteration ; $i++){
+        for ($i = 1; $i <= $iteration; $i++) {
 
             if ($authorization['expiryTime'] < strtotime(Carbon::now())) {
                 dump('newKey');
@@ -312,7 +308,7 @@ class FetchController extends Controller
                 $client = $this->setClient($authorization);
             }
 
-            $res = $client->request('GET', $url.'?pageSize=50&page='.$i);
+            $res = $client->request('GET', $url . '?pageSize=50&page=' . $i);
             $data = json_decode($res->getBody()->getContents(), true);
             $products = $data['results'];
             foreach ($products as $key => $product) {
@@ -322,8 +318,10 @@ class FetchController extends Controller
                     'parent' => $product['brand']['parent'],
                 ];
 
-                $brand = Brand::updateOrCreate(['type' => 'ACC',
-                    'code' => $product['brand']['code']],$brandData);
+                $brand = Brand::updateOrCreate([
+                    'type' => 'ACC',
+                    'code' => $product['brand']['code']
+                ], $brandData);
 
                 $ProductData = [
                     'upc' => $product['upc'],
@@ -338,7 +336,7 @@ class FetchController extends Controller
                 try {
                     $productDetail = $this->getProductDetails($product['sku']);
                     $product1->update($productDetail['properties']);
-                }catch(\Throwable  $e){
+                } catch (\Throwable  $e) {
                     \Log::info('No Entry');
                 }
 
@@ -355,7 +353,6 @@ class FetchController extends Controller
                         ];
 
                         $price = ProductPrice::firstOrCreate($priceData);
-
                     }
                 }
 
@@ -366,28 +363,26 @@ class FetchController extends Controller
                     ];
                     $inventory = ProductInventory::firstOrCreate($inventoryData);
                 }
-
             }
-            dump('Iteration = '. ($i) . ' executed.');
+            dump('Iteration = ' . ($i) . ' executed.');
         }
-
     }
 
 
-    public function uploadImage($product,$id,$directory)
+    public function uploadImage($product, $id, $directory)
     {
-        if(!empty($product['images'])){
+        if (!empty($product['images'])) {
             foreach ($product['images'] as $image) {
                 try {
-                    $productImage = ProductImage::where('product_id',$id)->where('filename',$image['fileName'])->first();
-                    if($productImage != null){
+                    $productImage = ProductImage::where('product_id', $id)->where('filename', $image['fileName'])->first();
+                    if ($productImage != null) {
                         return true;
                     }
                     $content = file_get_contents($image['imageUrl']);
                     $resizedImageUrlContent = file_get_contents($image['resizedImageUrl']);
                     $name = $image['fileName'];
                     $path = $directory . '/' . $name;
-                    $resizedName = 'resized_'.$name;
+                    $resizedName = 'resized_' . $name;
                     $resizedPath = $directory . '/' . $resizedName;
                     Storage::disk('public')->put($path, $content);
                     Storage::disk('public')->put($resizedPath, $resizedImageUrlContent);
@@ -397,8 +392,8 @@ class FetchController extends Controller
                     $productImage->image_url = $path;
                     $productImage->resized_image_url = $resizedPath;
                     $productImage->save();
-                }catch(\Throwable $e){
-                    Log::info('Error Logged at '.Carbon::now(). ' from images loop');
+                } catch (\Throwable $e) {
+                    Log::info('Error Logged at ' . Carbon::now() . ' from images loop');
                     Log::info($e);
                 }
             }
@@ -414,13 +409,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -428,7 +421,7 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/products/v1/details/'.$sku;
+        $url = 'https://api.wheelpros.com/products/v1/details/' . $sku;
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
@@ -444,13 +437,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -474,13 +465,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -488,7 +477,7 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/vehicles/v1/years/'.$year.'/makes';
+        $url = 'https://api.wheelpros.com/vehicles/v1/years/' . $year . '/makes';
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
@@ -496,7 +485,7 @@ class FetchController extends Controller
         return $data;
     }
 
-    public function getModels($year,$make)
+    public function getModels($year, $make)
     {
         if (Session::has('authorization')) {
             dump('hasSession');
@@ -504,13 +493,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -518,7 +505,7 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/vehicles/v1/years/'.$year.'/makes/'.$make.'/models';
+        $url = 'https://api.wheelpros.com/vehicles/v1/years/' . $year . '/makes/' . $make . '/models';
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
@@ -526,7 +513,7 @@ class FetchController extends Controller
         return $data;
     }
 
-    public function getModelInfo($year,$make,$model)
+    public function getModelInfo($year, $make, $model)
     {
         if (Session::has('authorization')) {
             dump('hasSession');
@@ -534,13 +521,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -548,7 +533,7 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/vehicles/v1/years/'.$year.'/makes/'.$make.'/models/'.$model;
+        $url = 'https://api.wheelpros.com/vehicles/v1/years/' . $year . '/makes/' . $make . '/models/' . $model;
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
@@ -556,7 +541,7 @@ class FetchController extends Controller
         return $data;
     }
 
-    public function getSubModels($year,$make,$model)
+    public function getSubModels($year, $make, $model)
     {
         if (Session::has('authorization')) {
             dump('hasSession  sub models');
@@ -564,13 +549,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -578,14 +561,14 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/vehicles/v1/years/'.$year.'/makes/'.$make.'/models/'.str_replace(' ','%20',$model).'/submodels';
+        $url = 'https://api.wheelpros.com/vehicles/v1/years/' . $year . '/makes/' . $make . '/models/' . str_replace(' ', '%20', $model) . '/submodels';
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
 
         return $data;
     }
 
-    public function getSubModelInfo($year,$make,$model,$subModel)
+    public function getSubModelInfo($year, $make, $model, $subModel)
     {
         if (Session::has('authorization')) {
             dump('hasSession');
@@ -593,13 +576,11 @@ class FetchController extends Controller
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
-
             }
         } else {
             dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
-
         }
 
 
@@ -607,7 +588,7 @@ class FetchController extends Controller
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
             'Content-Type' => 'application/json',
         ]]);
-        $url = 'https://api.wheelpros.com/vehicles/v1/years/'.$year.'/makes/'.$make.'/models/'.$model.'/submodels/'.$subModel;
+        $url = 'https://api.wheelpros.com/vehicles/v1/years/' . $year . '/makes/' . $make . '/models/' . $model . '/submodels/' . $subModel;
 
         $res = $client->request('GET', $url);
         $data = json_decode($res->getBody()->getContents(), true);
@@ -618,38 +599,36 @@ class FetchController extends Controller
     public function getVehicles()
     {
         $years = $this->getYears();
-        foreach ($years as $year){
+        foreach ($years as $year) {
             $makes = $this->getMakes($year);
-            foreach ($makes as $make){
+            foreach ($makes as $make) {
                 dump($make);
                 $makeData = Make::updateOrCreate(['name' => $make]);
-                $models = $this->getModels($year,$make);
-                foreach ($models as $model){
+                $models = $this->getModels($year, $make);
+                foreach ($models as $model) {
                     dump($model);
                     try {
-                        $subModels = $this->getSubModels($year,$make,$model);
+                        $subModels = $this->getSubModels($year, $make, $model);
                         dump($subModels);
-                        foreach ($subModels as $subModel){
-                            $info = $this->getSubModelInfo($year,$make,$model,$subModel);
-                            $this->saveAxleData($info,$makeData);
+                        foreach ($subModels as $subModel) {
+                            $info = $this->getSubModelInfo($year, $make, $model, $subModel);
+                            $this->saveAxleData($info, $makeData);
                         }
-                    }catch (\Throwable $error){
+                    } catch (\Throwable $error) {
                         try {
-                            $infoModel = $this->getModelInfo($year,$make,$model);
-                            $this->saveAxleData($infoModel,$makeData);
-                        }catch(\Throwable $error){
+                            $infoModel = $this->getModelInfo($year, $make, $model);
+                            $this->saveAxleData($infoModel, $makeData);
+                        } catch (\Throwable $error) {
                             Log::info('No Data On Both Info');
                             Log::info($error);
                         }
-
                     }
-
                 }
             }
         }
     }
 
-    public function saveAxleData($infoModel,$makeData)
+    public function saveAxleData($infoModel, $makeData)
     {
         $modelData = VehicleModel::updateOrCreate(
             [
@@ -664,7 +643,7 @@ class FetchController extends Controller
             ]
         );
 
-        foreach ($infoModel['axles'] as $key => $axle){
+        foreach ($infoModel['axles'] as $key => $axle) {
             $axleData = VehicleModelAxle::updateOrCreate(
                 [
                     'placement' => $key,
@@ -714,7 +693,5 @@ class FetchController extends Controller
 
     public function importProducts()
     {
-
     }
-
 }

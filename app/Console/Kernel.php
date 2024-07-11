@@ -26,16 +26,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        Log::info('A Hit by CRONJOB at '.Carbon::now());
-        if (!$this->osProcessIsRunning('queue:work')) {
-            Log::info('queue:work');
-            $schedule->command('php artisan queue:work --timeout=3600  --daemon > storage/logs/laravel-queue.log')->everyMinute();
-        }
-        $schedule->command('import:wheels')->dailyAt('02:35')->withoutOverlapping()->onSuccess(function (){ \Log::info('import:wheels Successes');})->onFailure(function (){ \Log::info('import:wheels Faileddaily');});
-        $schedule->command('fetch:wheels')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:wheels Successes');})->onFailure(function (){ \Log::info('fetch:wheels Faileddaily');});
-        $schedule->command('fetch:tires')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:tires Successes');})->onFailure(function (){ \Log::info('fetch:tires Faileddaily');});
-        $schedule->command('fetch:vehicles')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:vehicles Successes');})->onFailure(function (){ \Log::info('fetch:vehicles Faileddaily');});
-        $schedule->command('fetch:accessories')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:accessories Successes');})->onFailure(function (){ \Log::info('fetch:accessories Faileddaily');});
+        // Log::info('A Hit by CRONJOB at '.Carbon::now());
+        
+        // if (!$this->osProcessIsRunning('queue:work')) {
+        //     Log::info('queue:work');
+        //     $schedule->command('php artisan queue:work --timeout=3600  --daemon > storage/logs/laravel-queue.log')->everyMinute();
+        // }
+        // $schedule->command('import:wheels')->dailyAt('02:35')->withoutOverlapping()->onSuccess(function (){ \Log::info('import:wheels Successes');})->onFailure(function (){ \Log::info('import:wheels Faileddaily');});
+        // $schedule->command('fetch:wheels')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:wheels Successes');})->onFailure(function (){ \Log::info('fetch:wheels Faileddaily');});
+        // $schedule->command('fetch:tires')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:tires Successes');})->onFailure(function (){ \Log::info('fetch:tires Faileddaily');});
+        // $schedule->command('fetch:vehicles')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:vehicles Successes');})->onFailure(function (){ \Log::info('fetch:vehicles Faileddaily');});
+        // $schedule->command('fetch:accessories')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:accessories Successes');})->onFailure(function (){ \Log::info('fetch:accessories Faileddaily');});
+
+        $schedule->command('fetch:wheels')->everyMinute();
     }
 
     /**
@@ -45,7 +48,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
@@ -56,7 +59,7 @@ class Kernel extends ConsoleKernel
         exec('ps aux -ww', $process_status);
 
         // search $needle in process status
-        $result = array_filter($process_status, function($var) use ($needle) {
+        $result = array_filter($process_status, function ($var) use ($needle) {
             return strpos($var, $needle);
         });
 
