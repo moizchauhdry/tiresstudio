@@ -8,6 +8,7 @@ use App\Product;
 use App\ProductImage;
 use App\ProductInventory;
 use App\ProductPrice;
+use App\ScriptLog;
 use App\VehicleModel;
 use App\VehicleModelAxle;
 use Carbon\Carbon;
@@ -54,114 +55,119 @@ class FetchController extends Controller
 
     public function fetchProducts()
     {
-        if (Session::has('authorization')) {
-            $authorization = Session::get('authorization');
-            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
+        $script_log = ScriptLog::where('api_type', 'WHEEL')->first();
+
+        if ($script_log->current_page <= $script_log->total_page) {
+            if (Session::has('authorization')) {
+                $authorization = Session::get('authorization');
+                if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
+                    $authorization = $this->authorizeAPI();
+                    $client = $this->setClient($authorization);
+                }
+            } else {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
             }
-        } else {
-            $authorization = $this->authorizeAPI();
-            $client = $this->setClient($authorization);
-        }
 
-        $client = new \GuzzleHttp\Client(['headers' => [
-            'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
-            'Content-Type' => 'application/json',
-        ]]);
+            $client = new \GuzzleHttp\Client(['headers' => [
+                'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
+                'Content-Type' => 'application/json',
+            ]]);
 
-        // $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?page=1');
-        // $data = json_decode($res->getBody()->getContents(), true);
+            $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?page=1');
+            $data = json_decode($res->getBody()->getContents(), true);
 
-        // $dataCount = (int)$data['totalCount'];
-        // $dataCount = 100;
-        // dd($dataCount);
+            $data_count = (int)$data['totalCount'];
+            // dd($dataCount);
 
-        // $iteration = round($dataCount / 50, 1);
+            // $iteration = round($dataCount / 50, 1);
 
-        // for ($i = 1; $i <= $iteration; $i++) {
+            // for ($i = 1; $i <= $iteration; $i++) {
 
-        if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
-            dump('newKey');
-            $authorization = $this->authorizeAPI();
-            $client = $this->setClient($authorization);
-        }
+            if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
+                dump('newKey');
+                $authorization = $this->authorizeAPI();
+                $client = $this->setClient($authorization);
+            }
 
-        // $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page=' . $i);
-        $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page=1');
-        $data = json_decode($res->getBody()->getContents(), true);
-        $products = $data['results'];
-        foreach ($products as $key => $product) {
-            $brandData = [
-                'description' => $product['brand']['description'],
-                'parent' => $product['brand']['parent'],
-            ];
+            $res = $client->request('GET', 'https://api.wheelpros.com/products/v1/search/wheel?pageSize=50&page=' . $script_log->current_page);
+            $data = json_decode($res->getBody()->getContents(), true);
+            $products = $data['results'];
+            foreach ($products as $key => $product) {
+                $brandData = [
+                    'description' => $product['brand']['description'],
+                    'parent' => $product['brand']['parent'],
+                ];
 
-            $brand = Brand::updateOrCreate([
-                'type' => 'WHEEL',
-                'code' => $product['brand']['code']
-            ], $brandData);
+                $brand = Brand::updateOrCreate([
+                    'type' => 'WHEEL',
+                    'code' => $product['brand']['code']
+                ], $brandData);
 
-            $ProductData = [
-                'sku_type' => $product['skuType'],
-                'title' => $product['title'],
-                'brand_id' => $brand->id,
-                // Properties
-                'model' => $product['properties']['model'],
-                'offset' => $product['properties']['offset'],
-                'boltPattern' => $product['properties']['boltPattern'],
-                'finishCode' => $product['properties']['finishCode'],
-                'finish' => $product['properties']['finish'],
-                'width' => $product['properties']['width'],
-                'diameter' => $product['properties']['diameter'],
-                'centerbore' => $product['properties']['centerbore'],
+                $ProductData = [
+                    'sku_type' => $product['skuType'],
+                    'title' => $product['title'],
+                    'brand_id' => $brand->id,
+                    // Properties
+                    'model' => $product['properties']['model'],
+                    'offset' => $product['properties']['offset'],
+                    'boltPattern' => $product['properties']['boltPattern'],
+                    'finishCode' => $product['properties']['finishCode'],
+                    'finish' => $product['properties']['finish'],
+                    'width' => $product['properties']['width'],
+                    'diameter' => $product['properties']['diameter'],
+                    'centerbore' => $product['properties']['centerbore'],
 
-                'updated_at' => Carbon::now(),
-            ];
+                    'updated_at' => Carbon::now(),
+                ];
 
-            $product1 = Product::updateOrCreate([
-                'sku' => $product['sku'],
-                'upc' => $product['upc']
-            ], $ProductData);
-            $product1->save();
+                $product1 = Product::updateOrCreate([
+                    'sku' => $product['sku'],
+                    'upc' => $product['upc']
+                ], $ProductData);
+                $product1->save();
 
-            // try {
-            //     $productDetail = $this->getProductDetails($product['sku']);
-            //     $product1->update($productDetail['properties']);
-            // } catch (\Throwable  $e) {
-            //     \Log::info($e);
-            // }
+                // try {
+                //     $productDetail = $this->getProductDetails($product['sku']);
+                //     $product1->update($productDetail['properties']);
+                // } catch (\Throwable  $e) {
+                //     \Log::info($e);
+                // }
 
-            // if (!empty($product['images'])) {
-            //     $this->uploadImage($product, $product1->id, 'products/wheels/' . $brand->code);
-            // }
+                // if (!empty($product['images'])) {
+                //     $this->uploadImage($product, $product1->id, 'products/wheels/' . $brand->code);
+                // }
 
-            if ($product['prices']['msrp'] != NULL) {
-                foreach ($product['prices']['msrp'] as $productPrice) {
-                    $priceData = [
+                if ($product['prices']['msrp'] != NULL) {
+                    foreach ($product['prices']['msrp'] as $productPrice) {
+                        $priceData = [
+                            'product_id' => $product1->id,
+                            'currency_amount' => $productPrice['currencyAmount'],
+                            'currency_code' => $productPrice['currencyCode'],
+                        ];
+
+                        $price = ProductPrice::firstOrCreate($priceData);
+                    }
+                }
+
+                if ($product['inventory'] != NULL) {
+                    $inventoryData = [
                         'product_id' => $product1->id,
-                        'currency_amount' => $productPrice['currencyAmount'],
-                        'currency_code' => $productPrice['currencyCode'],
+                        'type' => $product['inventory']['type'],
+                        'local_stock' => $product['inventory']['localStock'],
+                        'global_stock' => $product['inventory']['globalStock'],
                     ];
-
-                    $price = ProductPrice::firstOrCreate($priceData);
+                    $inventory = ProductInventory::firstOrCreate($inventoryData);
                 }
             }
 
-            if ($product['inventory'] != NULL) {
-                $inventoryData = [
-                    'product_id' => $product1->id,
-                    'type' => $product['inventory']['type'],
-                    'local_stock' => $product['inventory']['localStock'],
-                    'global_stock' => $product['inventory']['globalStock'],
-                ];
-                $inventory = ProductInventory::firstOrCreate($inventoryData);
-            }
+            ScriptLog::updateOrCreate(['api_type' => 'WHEEL'], [
+                'api_type' => 'WHEEL',
+                'total_count' => $data_count,
+                'current_page' => $script_log->current_page + 1,
+                'total_page' => 5,
+            ]);
         }
-
-        // dump('Iteration = ' . ($i) . ' executed.');
-        dump('Iteration = executed.');
-        // }
     }
 
     public function fetchTireProducts()

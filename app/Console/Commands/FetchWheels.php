@@ -47,6 +47,6 @@ class FetchWheels extends Command
         $controller = new FetchController();
         $controller->fetchProducts();
 
-        return "success";
+        dd('success');
     }
 }
