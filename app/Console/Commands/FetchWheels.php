@@ -42,11 +42,7 @@ class FetchWheels extends Command
     {
         $start_message = 'Cron Job Fetch Wheels at  ' . Carbon::now();
         Log::info($start_message);
-        dump($start_message);
-
         $controller = new FetchController();
         $controller->fetchProducts();
-
-        dd('success');
     }
 }
