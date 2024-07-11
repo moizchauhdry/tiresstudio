@@ -380,27 +380,37 @@ class FetchController extends Controller
         if (!empty($product['images'])) {
             foreach ($product['images'] as $image) {
 
+                $filename = explode('https://media.wheelpros.com/m/',$image['imageUrlLarge'])[1];
+
                 // try {
-                $productImage = ProductImage::where('product_id', $id)->where('filename', $image['imageUrlLarge'])->first();
+                $productImage = ProductImage::where('product_id', $id)->where('filename', $filename)->first();
                 if ($productImage != null) {
                     return true;
                 }
                 $content = file_get_contents($image['imageUrlLarge']);
-                $resizedImageUrlContent = file_get_contents($image['imageUrlLarge']);
-                $name = $image['imageUrlLarge'];
+
+                if ($content === FALSE) {
+                    dump('unable to fetch image');
+                }
+
+                // $resizedImageUrlContent = file_get_contents($image['imageUrlLarge']);
+                $name = $filename;
                 $path = $directory . '/' . $name;
-                $resizedName = 'resized_' . $name;
-                $resizedPath = $directory . '/' . $resizedName;
+                // $resizedName = 'resized_' . $name;
+                // $resizedPath = $directory . '/' . $resizedName;
 
                 $productImage = new ProductImage();
                 $productImage->product_id = $id;
                 $productImage->filename = $name;
                 $productImage->image_url = $path;
-                $productImage->resized_image_url = $resizedPath;
+                // $productImage->resized_image_url = $resizedPath;
                 $productImage->save();
 
                 Storage::disk('public')->put($path, $content);
-                Storage::disk('public')->put($resizedPath, $resizedImageUrlContent);
+
+                \dump('image fetched');
+
+                // Storage::disk('public')->put($resizedPath, $resizedImageUrlContent);
                 // } catch (\Throwable $e) {
                 //     Log::info('Error Logged at ' . Carbon::now() . ' from images loop');
                 //     Log::info($e);
