@@ -67,3 +67,9 @@ function getCart()
         'total' => $total,
     ];
 }
+
+
+function fetchProduct()
+{
+    
+}

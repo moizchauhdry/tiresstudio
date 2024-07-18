@@ -380,7 +380,7 @@ class FetchController extends Controller
         if (!empty($product['images'])) {
             foreach ($product['images'] as $image) {
 
-                $filename = explode('https://media.wheelpros.com/m/',$image['imageUrlLarge'])[1];
+                $filename = explode('https://media.wheelpros.com/m/', $image['imageUrlLarge'])[1];
 
                 // try {
                 $productImage = ProductImage::where('product_id', $id)->where('filename', $filename)->first();
@@ -423,18 +423,15 @@ class FetchController extends Controller
     public function getProductDetails($sku)
     {
         if (Session::has('authorization')) {
-            dump('hasSession');
             $authorization = Session::get('authorization');
             if ($authorization['expiryTime'] <= strtotime(Carbon::now())) {
                 $authorization = $this->authorizeAPI();
                 $client = $this->setClient($authorization);
             }
         } else {
-            dump('noSession');
             $authorization = $this->authorizeAPI();
             $client = $this->setClient($authorization);
         }
-
 
         $client = new \GuzzleHttp\Client(['headers' => [
             'Authorization' => $authorization['tokenType'] . ' ' . $authorization['accessToken'],
