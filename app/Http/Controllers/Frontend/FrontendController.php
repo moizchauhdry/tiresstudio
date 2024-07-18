@@ -533,42 +533,46 @@ class FrontendController extends Controller
     {
         $product = Product::find($id);
 
-        $fetchController = new FetchController();
-        $product_response = $fetchController->getProductDetails($product->sku);
+        try {
+            $fetchController = new FetchController();
+            $product_response = $fetchController->getProductDetails($product->sku);
 
-        if (!$product->fetched) {
-            $product->update([
-                'upc' => $product_response['upc'],
-                'sku_type' => $product_response['skuType'],
-                'title' => $product_response['title'],
-                // 'brand'=> $product_response['brand'],
-                'model' => $product_response['properties']['model'],
-                'offset' => $product_response['properties']['offset'],
-                'boltPattern' => $product_response['properties']['boltPattern'],
-                'finishCode' => $product_response['properties']['finishCode'],
-                'finish' => $product_response['properties']['finish'],
-                'diameter' => $product_response['properties']['diameter'],
-                'centerbore' => $product_response['properties']['centerbore'],
-                'backspacing' => $product_response['properties']['backspacing'],
-                'wheelWeight' => $product_response['properties']['wheelWeight'],
-                'capPartNo' => $product_response['properties']['capPartNo'],
-                'rivetPartNo' => $product_response['properties']['rivetPartNo'],
-                'tpmsCompatible' => $product_response['properties']['tpmsCompatible'],
-                'lipDepth' => $product_response['properties']['lipDepth'],
-                'certification' => $product_response['properties']['certification'],
-                'structuralWarranty' => $product_response['properties']['structuralWarranty'],
-                'finishWarranty' => $product_response['properties']['finishWarranty'],
-                'openEndCap' => $product_response['properties']['openEndCap'],
-                'capScrewNo' => $product_response['properties']['capScrewNo'],
-                'otherAccessories' => $product_response['properties']['otherAccessories'],
-                'additionalAccessories' => $product_response['properties']['additionalAccessories'],
-                'catalogPage' => $product_response['properties']['catalogPage'],
-                'loadRating' => $product_response['properties']['loadRating'],
-                'sizeDesc' => $product_response['properties']['sizeDesc'],
+            if (!$product->fetched) {
+                $product->update([
+                    'upc' => $product_response['upc'],
+                    'sku_type' => $product_response['skuType'],
+                    'title' => $product_response['title'],
+                    // 'brand'=> $product_response['brand'],
+                    'model' => $product_response['properties']['model'],
+                    'offset' => $product_response['properties']['offset'],
+                    'boltPattern' => $product_response['properties']['boltPattern'],
+                    'finishCode' => $product_response['properties']['finishCode'],
+                    'finish' => $product_response['properties']['finish'],
+                    'diameter' => $product_response['properties']['diameter'],
+                    'centerbore' => $product_response['properties']['centerbore'],
+                    'backspacing' => $product_response['properties']['backspacing'],
+                    'wheelWeight' => $product_response['properties']['wheelWeight'],
+                    'capPartNo' => $product_response['properties']['capPartNo'],
+                    'rivetPartNo' => $product_response['properties']['rivetPartNo'],
+                    'tpmsCompatible' => $product_response['properties']['tpmsCompatible'],
+                    'lipDepth' => $product_response['properties']['lipDepth'],
+                    'certification' => $product_response['properties']['certification'],
+                    'structuralWarranty' => $product_response['properties']['structuralWarranty'],
+                    'finishWarranty' => $product_response['properties']['finishWarranty'],
+                    'openEndCap' => $product_response['properties']['openEndCap'],
+                    'capScrewNo' => $product_response['properties']['capScrewNo'],
+                    'otherAccessories' => $product_response['properties']['otherAccessories'],
+                    'additionalAccessories' => $product_response['properties']['additionalAccessories'],
+                    'catalogPage' => $product_response['properties']['catalogPage'],
+                    'loadRating' => $product_response['properties']['loadRating'],
+                    'sizeDesc' => $product_response['properties']['sizeDesc'],
 
-                // 'fetched' => true,
-                // 'fetched_at' => Carbon::now(),
-            ]);
+                    // 'fetched' => true,
+                    // 'fetched_at' => Carbon::now(),
+                ]);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
         return view('frontend.pages.product', compact('product'));
