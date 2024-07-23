@@ -7,7 +7,7 @@ crontab -l > crontab.bak
 five_min_cron_regex='^\s*\*/5\s'
 
 # Temporary file for modified crontab
-temp_crontab=" "
+temp_crontab=""
 
 while read line; do
   if [[ ! $line =~ $five_min_cron_regex ]]; then
