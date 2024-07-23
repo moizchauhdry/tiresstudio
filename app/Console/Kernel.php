@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Log::info('A Hit by CRONJOB at '.Carbon::now());
-        
+
         // if (!$this->osProcessIsRunning('queue:work')) {
         //     Log::info('queue:work');
         //     $schedule->command('php artisan queue:work --timeout=3600  --daemon > storage/logs/laravel-queue.log')->everyMinute();
@@ -39,6 +39,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('fetch:accessories')->weekly()->withoutOverlapping()->onSuccess(function (){ \Log::info('fetch:accessories Successes');})->onFailure(function (){ \Log::info('fetch:accessories Faileddaily');});
 
         $schedule->command('fetch:wheels')->everyMinute();
+        $schedule->command('cron:restart')->monthly();
     }
 
     /**

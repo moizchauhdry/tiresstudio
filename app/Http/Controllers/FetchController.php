@@ -168,6 +168,11 @@ class FetchController extends Controller
                 'total_page' => 5,
             ]);
         }
+        else{
+            \Log::info("executing shell");
+            $output = shell_exec('sh public/shell-scripts/cron-delete-script.sh');
+            \Log::info($output);
+        }
     }
 
     public function fetchTireProducts()
